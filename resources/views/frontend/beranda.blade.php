@@ -100,10 +100,10 @@
             @endforeach
         @else
             <div class="item img-fluid">
-                <img src="{{ asset('images/bg/bg-sawah-hijau.jpeg') }}" class="img-fluid" alt="banner">
+                <img src="{{ asset('image/bg/bg-slide-1.jpg') }}" class="img-fluid" alt="banner">
             </div>
             <div class="item img-fluid">
-                <img src="{{ asset('images/bg/bg-sawah-kering.jpg') }}" class="img-fluid" alt="banner">
+                <img src="{{ asset('image/bg/bg-slide-2.jpg') }}" class="img-fluid" alt="banner">
             </div>
         @endif
     </div>
