@@ -15,7 +15,7 @@
             width: 0;
             max-width: 100%;
             height: 3px;
-            background: #01bc8c;
+            background: #fff;
         }
 
         #progressBar {
