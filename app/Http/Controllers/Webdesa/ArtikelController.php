@@ -41,7 +41,7 @@ class ArtikelController extends Controller
             ->orderBy('artikels.id', 'desc')
             ->paginate($limit);
         $title = 'Artikel';
-        return view('pages.v3.artikel.index', compact('title', 'artikel'));
+        return view('backend.artikel.index', compact('title', 'artikel'));
     }
 
     /**
@@ -51,7 +51,7 @@ class ArtikelController extends Controller
     {
         $title = 'Artikel';
         $categories = Category::where('slug', 'not like', '%galeri%')->where('slug', 'not like', 'perpusdes')->get();
-        return view('pages.v3.artikel.create', compact('title', 'categories'));
+        return view('backend.artikel.create', compact('title', 'categories'));
     }
 
     /**
@@ -154,7 +154,7 @@ class ArtikelController extends Controller
     {
         $categories = Category::where('slug', 'not like', '%galeri%')->where('slug', 'not like', 'perpusdes')->get();
         $title = 'Edit Artikel';
-        return view('pages.v3.artikel.edit', compact('title', 'categories', 'artikel'));
+        return view('backend.artikel.edit', compact('title', 'categories', 'artikel'));
     }
 
     /**

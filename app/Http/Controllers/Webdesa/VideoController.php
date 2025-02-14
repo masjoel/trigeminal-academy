@@ -40,7 +40,7 @@ class VideoController extends Controller
             ->orderBy('artikels.id', 'desc')
             ->paginate($limit);
         $title = 'Galeri Video';
-        return view('pages.v3.galeri-video.index', compact('title', 'artikel'));
+        return view('backend.galeri-video.index', compact('title', 'artikel'));
     }
 
     /**
@@ -50,7 +50,7 @@ class VideoController extends Controller
     {
         $title = 'Galeri Video';
         $category_id = Category::where('slug', '=', 'galeri-video')->first()->id;
-        return view('pages.v3.galeri-video.create', compact('title', 'category_id'));
+        return view('backend.galeri-video.create', compact('title', 'category_id'));
     }
 
     /**
@@ -120,7 +120,7 @@ class VideoController extends Controller
     public function edit(Artikel $galeri_video)
     {
         $title = 'Edit Video';
-        return view('pages.v3.galeri-video.edit', compact('title', 'galeri_video'));
+        return view('backend.galeri-video.edit', compact('title', 'galeri_video'));
     }
 
     /**

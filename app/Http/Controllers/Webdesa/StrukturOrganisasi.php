@@ -40,7 +40,7 @@ class StrukturOrganisasi extends Controller
             ->orderBy('id', 'desc')
             ->paginate($limit);
         $title = 'Struktur Organisasi';
-        return view('pages.v3.admin-struktur-organisasi.index', compact('title', 'artikel'));
+        return view('backend.admin-struktur-organisasi.index', compact('title', 'artikel'));
     }
 
     /**
@@ -50,7 +50,7 @@ class StrukturOrganisasi extends Controller
     {
         $title = 'Struktur Organisasi';
         $category_id = Category::where('slug', '=', 'struktur-organisasi')->first()->id ?? null;
-        return view('pages.v3.admin-struktur-organisasi.create', compact('title', 'category_id'));
+        return view('backend.admin-struktur-organisasi.create', compact('title', 'category_id'));
     }
 
     /**
@@ -118,7 +118,7 @@ class StrukturOrganisasi extends Controller
     public function edit(Artikel $admin_struktur_organisasi)
     {
         $title = 'Struktur Organisasi';
-        return view('pages.v3.admin-struktur-organisasi.edit', compact('title', 'admin_struktur_organisasi'));
+        return view('backend.admin-struktur-organisasi.edit', compact('title', 'admin_struktur_organisasi'));
     }
 
     /**

@@ -33,7 +33,7 @@ class DashboardController extends Controller
         $dataArtikel = Artikel::where('jenis', 'post')->limit(5)->latest()->get();
         // $dataBuku = Artikel::where('idkategori', 'perpusdes')->limit(5)->latest()->get();
         $title = 'Dashboard';
-        return view('pages.v3.dashboard-sid', compact('title', 'statistics', 'statmutasi',  'wn', 'dataArtikel'));
+        return view('backend.dashboard-sid', compact('title', 'statistics', 'statmutasi',  'wn', 'dataArtikel'));
     }
     public function webdesa_dashboard(Request $request)
     {
@@ -48,6 +48,6 @@ class DashboardController extends Controller
         $dataArtikel = Artikel::where('jenis', 'post')->limit(5)->latest()->get();
         $dataBuku = Artikel::where('idkategori', 'perpusdes')->limit(5)->latest()->get();
 
-        return view('pages.v3.dashboard-webdesa', compact('title', 'dataArtikel', 'dataBuku'));
+        return view('backend.dashboard-webdesa', compact('title', 'dataArtikel', 'dataBuku'));
     }
 }

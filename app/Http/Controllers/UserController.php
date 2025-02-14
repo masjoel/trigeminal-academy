@@ -38,8 +38,7 @@ class UserController extends Controller
                 ->orWhere('role', 'like', '%' . $search . '%');
         })->paginate(10);
         $title = 'User';
-        return view('pages.v3.user.index', compact('users', 'title'));
-        
+        return view('backend.user.index', compact('users', 'title'));
     }
 
     /**
@@ -49,7 +48,7 @@ class UserController extends Controller
     {
         $title = 'New User';
         $roles = Role::all();
-        return view('pages.v3.user.create', compact('title', 'roles'));
+        return view('backend.user.create', compact('title', 'roles'));
     }
 
     /**
@@ -103,7 +102,7 @@ class UserController extends Controller
     {
         $roles = Role::all();
         $title = 'Edit User';
-        return view('pages.v3.user.edit', compact('title', 'roles', 'user'));
+        return view('backend.user.edit', compact('title', 'roles', 'user'));
     }
     public function permission(User $user)
     {
@@ -117,7 +116,7 @@ class UserController extends Controller
         }
         $permissionUsers = $user->getPermissionNames()->toArray();
         $title = 'User Permission';
-        return view('pages.v3.user.permission', compact('title', 'roles', 'user', 'permissions', 'permissionChilds', 'permissionUsers'));
+        return view('backend.user.permission', compact('title', 'roles', 'user', 'permissions', 'permissionChilds', 'permissionUsers'));
     }
     public function permissionError(User $user)
     {

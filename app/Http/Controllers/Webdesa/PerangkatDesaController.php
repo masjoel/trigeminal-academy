@@ -44,7 +44,7 @@ class PerangkatDesaController extends Controller
         })
             ->paginate($limit);
         $title = 'Anggota Pengurus';
-        return view('pages.v3.admin-pengurus.index', compact('title', 'aparat'));
+        return view('backend.admin-pengurus.index', compact('title', 'aparat'));
     }
 
     public function absensi(Request $request)
@@ -67,7 +67,7 @@ class PerangkatDesaController extends Controller
             ->paginate($limit);
         // dd($aparat);
         $title = 'Absensi Kehadiran';
-        return view('pages.v3.admin-pengurus.absensi', compact('title', 'aparat'));
+        return view('backend.admin-pengurus.absensi', compact('title', 'aparat'));
     }
     public function datatableAbsensi(Request $request)
     {
@@ -119,7 +119,7 @@ class PerangkatDesaController extends Controller
     {
         $absensi = Attendance::with('perangkatDesa')->findOrFail($id);
         $title = 'Detail Absensi Kehadiran';
-        return view('pages.v3.admin-pengurus.absensi-detail', compact('title', 'absensi'));
+        return view('backend.admin-pengurus.absensi-detail', compact('title', 'absensi'));
     }
 
     /**
@@ -130,7 +130,7 @@ class PerangkatDesaController extends Controller
         $title = 'Anggota Pengurus';
         $jabatan = ['Ketua', 'Sekretaris', 'Sekretaris 2', 'Bendahara', 'Bendahara 2', 'Pejabat lainnya'];
         $penduduk = AdpddInduk::all();
-        return view('pages.v3.admin-pengurus.create', compact('title', 'jabatan', 'penduduk'));
+        return view('backend.admin-pengurus.create', compact('title', 'jabatan', 'penduduk'));
     }
 
     /**
@@ -198,7 +198,7 @@ class PerangkatDesaController extends Controller
         $penduduk = AdpddInduk::all();
         // $jsonString = json_encode($penduduk);
         // $penduduk = json_decode($jsonString);
-        return view('pages.v3.admin-pengurus.edit', compact('title', 'admin_penguru', 'jabatan', 'penduduk'));
+        return view('backend.admin-pengurus.edit', compact('title', 'admin_penguru', 'jabatan', 'penduduk'));
     }
 
     /**

@@ -23,11 +23,11 @@ class BackupDataController extends Controller
     {
         $recs = BackupData::where('jenis', 'B')->orderBy('id', 'desc')->when($request->input('search'), function ($query, $search) {
             $query->where('name', 'like', '%' . $search . '%')
-            ->orWhere('created_at', 'like', '%' . $search . '%')
-            ->orWhere('username', 'like', '%' . $search . '%');
+                ->orWhere('created_at', 'like', '%' . $search . '%')
+                ->orWhere('username', 'like', '%' . $search . '%');
         })->paginate(10);
         $title = 'Backup Data';
-        return view('pages.v3.utilities.backup', compact('title', 'recs'));
+        return view('backend.utilities.backup', compact('title', 'recs'));
     }
 
     /**
@@ -96,9 +96,9 @@ class BackupDataController extends Controller
         $title = 'Restore Data';
         $recs = BackupData::where('jenis', 'R')->orderBy('id', 'desc')->when($request->input('search'), function ($query, $search) {
             $query->where('name', 'like', '%' . $search . '%')
-            ->orWhere('created_at', 'like', '%' . $search . '%')
-            ->orWhere('username', 'like', '%' . $search . '%');
+                ->orWhere('created_at', 'like', '%' . $search . '%')
+                ->orWhere('username', 'like', '%' . $search . '%');
         })->paginate(10);
-        return view('pages.v3.utilities.restore', compact('title', 'recs'));
+        return view('backend.utilities.restore', compact('title', 'recs'));
     }
 }

@@ -67,7 +67,7 @@ class ProfilBisnisController extends Controller
             return redirect(route('login'));
         }
         $medsos = LinkExternal::where('tipe', 'medsos')->get();
-        return view('pages.v3.profile.edit')->with(['profilBisnis' => $profil_bisni, 'title' => 'Profil', 'medsos' => $medsos]);
+        return view('backend.profile.edit')->with(['profilBisnis' => $profil_bisni, 'title' => 'Profil', 'medsos' => $medsos]);
     }
 
     /**

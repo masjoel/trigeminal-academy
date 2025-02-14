@@ -41,7 +41,7 @@ class HalamanController extends Controller
             ->orderBy('id', 'desc')
             ->paginate($limit);
         $title = 'Halaman';
-        return view('pages.v3.halaman.index', compact('title', 'artikel'));
+        return view('backend.halaman.index', compact('title', 'artikel'));
     }
 
     /**
@@ -62,7 +62,7 @@ class HalamanController extends Controller
             // "perangkat" => "Perangkat Desa",
             // "lembaga" => "Lembaga Desa",
         ];
-        return view('pages.v3.halaman.create', compact('title', 'kategori'));
+        return view('backend.halaman.create', compact('title', 'kategori'));
     }
 
     /**
@@ -142,7 +142,7 @@ class HalamanController extends Controller
             // "perangkat" => "Perangkat Desa",
             // "lembaga" => "Lembaga Desa",
         ];
-        return view('pages.v3.halaman.edit')->with(['artikel' => $halaman, 'title' => 'Edit Halaman', 'kategori' => $kategori]);
+        return view('backend.halaman.edit')->with(['artikel' => $halaman, 'title' => 'Edit Halaman', 'kategori' => $kategori]);
     }
 
     /**

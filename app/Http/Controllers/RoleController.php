@@ -28,7 +28,7 @@ class RoleController extends Controller
             $query->where('name', 'like', '%' . $search . '%');
         })->paginate(10);
         $title = 'Roles';
-        return view('pages.v3.roles.index', compact('roles', 'title'));
+        return view('backend.roles.index', compact('roles', 'title'));
     }
 
     /**
@@ -37,7 +37,7 @@ class RoleController extends Controller
     public function create()
     {
         $title = 'Role';
-        return view('pages.v3.roles.create', compact('title'));
+        return view('backend.roles.create', compact('title'));
     }
 
     /**
@@ -70,7 +70,7 @@ class RoleController extends Controller
         $title = 'Role';
         $permissions = PermissionManagement::where('name', 'not like', '%.%')->get();
         $permissionChilds = PermissionManagement::where('name', 'like', '%.%')->get();
-        return view('pages.v3.roles.edit', compact('title', 'role', 'permissions', 'permissionChilds'));
+        return view('backend.roles.edit', compact('title', 'role', 'permissions', 'permissionChilds'));
     }
 
     /**

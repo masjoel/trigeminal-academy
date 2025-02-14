@@ -28,7 +28,7 @@ class PermissionController extends Controller
             $query->where('name', 'like', '%' . $search . '%');
         })->paginate(10);
         $title = 'Permissions';
-        return view('pages.v3.permissions.index', compact('permissions', 'title'));
+        return view('backend.permissions.index', compact('permissions', 'title'));
     }
 
     /**
@@ -37,7 +37,7 @@ class PermissionController extends Controller
     public function create()
     {
         $title = 'Permissions';
-        return view('pages.v3.permissions.create', compact('title'));
+        return view('backend.permissions.create', compact('title'));
     }
 
     /**
@@ -68,7 +68,7 @@ class PermissionController extends Controller
     public function edit(PermissionManagement $permission)
     {
         $title = 'Permissions';
-        return view('pages.v3.permissions.edit', compact('title', 'permission'));
+        return view('backend.permissions.edit', compact('title', 'permission'));
     }
 
     /**

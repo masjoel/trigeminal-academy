@@ -33,8 +33,8 @@ class DesaController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:seting-lsm')->only(['index', 'show']);
-        $this->middleware('can:seting-lsm.edit')->only(['edit', 'update', 'destroy']);
+        $this->middleware('can:seting-profil-bisnis')->only(['index', 'show']);
+        $this->middleware('can:seting-profil-bisnis.edit')->only(['edit', 'update', 'destroy']);
     }
     /**
      * Display a listing of the resource.
@@ -48,11 +48,11 @@ class DesaController extends Controller
             $request->session()->regenerateToken();
             return redirect(route('login'));
         }
-        $lsm = Desa::first();
-        $title = 'LSM';
-        $latitude = $lsm->latitude;
-        $longitude = $lsm->longitude;
-        return view('sid.v3.desa.index', compact('title', 'lsm', 'latitude', 'longitude'));
+        $profil_bisni = Desa::first();
+        $title = 'Profil Bisnis';
+        $latitude = $profil_bisni->latitude;
+        $longitude = $profil_bisni->longitude;
+        return view('backend.desa.index', compact('title', 'profil_bisni', 'latitude', 'longitude'));
     }
 
     /**
@@ -74,7 +74,7 @@ class DesaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Desa $lsm)
+    public function show(Desa $profil_bisni)
     {
         //
     }
@@ -82,26 +82,26 @@ class DesaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Desa $lsm)
+    public function edit(Desa $profil_bisni)
     {
-        $title = 'LSM';
+        $title = 'Profil Bisnis';
         $provinsi = Provinsi::all();
-        $kabupaten = Kabupaten::where('provinsi_id', $lsm->provinsi_id)->get();
-        $kecamatan = Kecamatan::where('kabupaten_id', $lsm->kabupaten_id)->get();
-        $kelurahan = Kelurahan::where('kecamatan_id', $lsm->kecamatan_id)->get();
-        return view('sid.v3.desa.edit', compact('title', 'lsm', 'provinsi', 'kabupaten', 'kecamatan', 'kelurahan'));
+        $kabupaten = Kabupaten::where('provinsi_id', $profil_bisni->provinsi_id)->get();
+        $kecamatan = Kecamatan::where('kabupaten_id', $profil_bisni->kabupaten_id)->get();
+        $kelurahan = Kelurahan::where('kecamatan_id', $profil_bisni->kecamatan_id)->get();
+        return view('backend.desa.edit', compact('title', 'profil_bisni', 'provinsi', 'kabupaten', 'kecamatan', 'kelurahan'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDesaReq $request, Desa $lsm)
+    public function update(UpdateDesaReq $request, Desa $profil_bisni)
     {
         DB::beginTransaction();
         $validate = $request->validated();
-        $photoPath = $lsm->photo;
-        $logoPath = $lsm->logo;
-        $image_iconPath = $lsm->image_icon;
+        $photoPath = $profil_bisni->photo;
+        $logoPath = $profil_bisni->logo;
+        $image_iconPath = $profil_bisni->image_icon;
         if ($request->hasFile('logo')) {
             $logo = $request->file('logo');
             $extFile = $logo->getClientOriginalExtension();
@@ -174,20 +174,10 @@ class DesaController extends Controller
             $smallthumbnailpath = public_path('storage/thumbs/desa/' . $nameFile);
             ImageResize::createThumbnail($smallthumbnailpath, 64, 64);
         }
-        // $provinsi = Provinsi::find($request->provinsi_id);
-        // $kabupaten = Kabupaten::find($request->kabupaten_id);
-        // $kecamatan = Kecamatan::find($request->kecamatan_id);
-        // $kelurahan = Kelurahan::find($request->kelurahan_id);
-
-        // $validate['provinsi'] = $provinsi != null ? $provinsi->name : null;
-        // $validate['kabupaten'] = $kabupaten != null ? $kabupaten->name : null;
-        // $validate['kecamatan'] = $kecamatan != null ? $kecamatan->name : null;
-        // $validate['nama_client'] = $kelurahan != null ? $kelurahan->name : $request->nama_client;
-        // $validate['kodedesa'] = $kelurahan != null ? $kelurahan->full_code : $request->kodedesa;
         $validate['photo'] = $photoPath;
         $validate['logo'] = $logoPath;
         $validate['image_icon'] = $image_iconPath;
-        $lsm->update($validate);
+        $profil_bisni->update($validate);
         $desa = ProfilBisnis::first();
         $desa->update([
             'nama_client' => $request->nama_client,
@@ -202,13 +192,13 @@ class DesaController extends Controller
             'footnot' => $request->footnot,
         ]);
         DB::commit();
-        return redirect()->route('lsm.index')->with('success', 'Edit Successfully');
+        return redirect()->route('profil-bisnis.index')->with('success', 'Edit Successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Desa $lsm)
+    public function destroy(Desa $profil_bisni)
     {
         //
     }

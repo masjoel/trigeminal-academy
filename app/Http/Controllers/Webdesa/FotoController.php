@@ -41,7 +41,7 @@ class FotoController extends Controller
             ->orderBy('artikels.id', 'desc')
             ->paginate($limit);
         $title = 'Galeri Foto';
-        return view('pages.v3.galeri-foto.index', compact('title', 'artikel'));
+        return view('backend.galeri-foto.index', compact('title', 'artikel'));
     }
 
     /**
@@ -51,7 +51,7 @@ class FotoController extends Controller
     {
         $title = 'Galeri Foto';
         $category_id = Category::where('slug', '=', 'galeri-foto')->first()->id ?? null;
-        return view('pages.v3.galeri-foto.create', compact('title', 'category_id'));
+        return view('backend.galeri-foto.create', compact('title', 'category_id'));
     }
 
     /**
@@ -154,7 +154,7 @@ class FotoController extends Controller
     public function edit(Artikel $galeri_foto)
     {
         $title = 'Edit Foto';
-        return view('pages.v3.galeri-foto.edit', compact('title', 'galeri_foto'));
+        return view('backend.galeri-foto.edit', compact('title', 'galeri_foto'));
     }
 
     /**

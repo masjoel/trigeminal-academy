@@ -39,7 +39,7 @@ class CategoryController extends Controller
             ->orderBy('id', 'desc')
             ->paginate($limit);
         $title = 'Kategori';
-        return view('pages.v3.category.index', compact('title', 'categories'));
+        return view('backend.category.index', compact('title', 'categories'));
     }
 
     /**
@@ -48,7 +48,7 @@ class CategoryController extends Controller
     public function create()
     {
         $title = 'Kategori';
-        return view('pages.v3.category.create', compact('title'));
+        return view('backend.category.create', compact('title'));
     }
 
     /**
@@ -86,7 +86,7 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         $title = 'Edit Kategori';
-        return view('pages.v3.category.edit', compact('title', 'category'));
+        return view('backend.category.edit', compact('title', 'category'));
     }
 
     /**

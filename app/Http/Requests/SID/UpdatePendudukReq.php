@@ -21,19 +21,19 @@ class UpdatePendudukReq extends FormRequest
      */
     public function rules(): array
     {
-        $wargaId = $this->route('admin_anggotum');
+        $wargaId = $this->route('admin_member');
         return [
             'nama' => 'required',
-            'nik' => 'required|numeric|unique:adpdd_induks,nik,'. $wargaId->id,
+            'nik' => 'nullable|numeric|unique:adpdd_induks,nik,'. $wargaId->id,
             'id_ktp' => 'nullable|unique:adpdd_induks,id_ktp,'. $wargaId->id,
             'kk' => 'nullable|numeric',
-            'tgl_lahir' => 'required',
-            'tempat_lahir' => 'required',
+            'tgl_lahir' => 'nullable',
+            'tempat_lahir' => 'nullable',
             'telpon' => 'nullable|numeric',
             'alamat' => 'required',
             'rt' => 'nullable|numeric',
             'rw' => 'nullable|numeric',
-            'agama' => 'required',
+            'agama' => 'nullable',
             'pendidikan' => 'required',
             'pekerjaan' => 'nullable',
             'status_kawin' => 'nullable',

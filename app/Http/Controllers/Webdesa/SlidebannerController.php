@@ -37,7 +37,7 @@ class SlidebannerController extends Controller
         })
             ->paginate($limit);
         $title = 'Slide Banner';
-        return view('pages.v3.banner.index', compact('title', 'slidebanners'));
+        return view('backend.banner.index', compact('title', 'slidebanners'));
     }
 
     /**
@@ -46,7 +46,7 @@ class SlidebannerController extends Controller
     public function create()
     {
         $title = 'Banner';
-        return view('pages.v3.banner.create', compact('title'));
+        return view('backend.banner.create', compact('title'));
     }
 
     /**
@@ -119,7 +119,7 @@ class SlidebannerController extends Controller
     public function edit(Slidebanner $slidebanner)
     {
         $title = 'Edit Banner';
-        return view('pages.v3.banner.edit', compact('title', 'slidebanner'));
+        return view('backend.banner.edit', compact('title', 'slidebanner'));
     }
 
     /**
