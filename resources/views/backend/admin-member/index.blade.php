@@ -32,9 +32,9 @@
                         <div class="card">
                             <div class="card-header header-elements">
                                 {{-- @can('admin-member.create') --}}
-                                <a href="{{ route('admin-member.create') }}" class="btn btn-primary me-2"><i
+                                {{-- <a href="{{ route('admin-member.create') }}" class="btn btn-primary me-2"><i
                                         class="fas fa-plus me-2"></i>
-                                    {{ $title }}</a>
+                                    {{ $title }}</a> --}}
                                 {{-- @endcan --}}
                                 <div class="card-header-elements ms-auto">
                                     <form method="GET" action="{{ route('admin-member.index') }}">
