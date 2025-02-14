@@ -69,6 +69,41 @@
         </ul>
     </li>
 @endif --}}
+{{-- @if (Str::contains(Auth::user()->getPermissionNames(), 'lapak-desa')) --}}
+    {{-- <li class="menu-item {{ Request::is('lapak-desa*') ? 'active open' : '' }}"> --}}
+    <li class="menu-item active">
+        <a href="#" class="menu-link menu-toggle"><i class="menu-icon ti ti-shopping-cart"></i><div>Order</div></a>
+        <ul class="menu-sub">
+            {{-- <li class="menu-item {{ Request::is('lapak-desa-dashboard') ? 'active' : '' }}"> --}}
+            <li class="menu-item">
+                <a href="#" class="menu-link "><div>Monitoring</div></a>
+            </li>
+            {{-- @can('lapak-desa-produk') --}}
+                {{-- <li class="menu-item {{ Request::is('lapak-desa-produk*') ? 'active' : '' }}"> --}}
+                    <li class="menu-item">
+                        <a href="#" class="menu-link "><div>e-Course</div></a>
+                </li>
+            {{-- @endcan
+            @can('lapak-desa-kategori') --}}
+            {{-- <li class="menu-item {{ Request::is('lapak-desa-kategori*') ? 'active' : '' }}"> --}}
+            <li class="menu-item">
+                    <a href="#" class="menu-link "><div>Kategori </div></a>
+                </li>
+            {{-- @endcan
+            @can('lapak-desa-order') --}}
+                <li class="menu-item">
+                    <a href="#" class="menu-link "><div>Order</div></a>
+                </li>
+            {{-- @endcan
+            @can('lapak-desa-report') --}}
+                {{-- <li class="menu-item">
+                    <a href="#" class="menu-link "><div>Report</div></a>
+                </li> --}}
+            {{-- @endcan --}}
+        </ul>
+    </li>
+{{-- @endif --}}
+
 
 @can('slide-banner')
     <li class="menu-item {{ Request::is('slidebanner*') ? 'active' : '' }}">
