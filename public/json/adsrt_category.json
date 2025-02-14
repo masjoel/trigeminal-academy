@@ -1,0 +1,32 @@
+[
+  {
+    "id": 3,
+    "kode": "30",
+    "awal": 1,
+    "inisial": "DS.KLP",
+    "kategori": "Surat Pernyataan",
+    "user_id": null,
+    "created_at": "2024-04-14 21:13:38",
+    "updated_at": "2024-07-29 15:37:00"
+  },
+  {
+    "id": 6,
+    "kode": "20",
+    "awal": 1,
+    "inisial": "DS.KLP",
+    "kategori": "Surat Pengantar",
+    "user_id": null,
+    "created_at": "2024-04-14 21:14:42",
+    "updated_at": "2024-07-29 15:36:55"
+  },
+  {
+    "id": 10,
+    "kode": "10",
+    "awal": 1,
+    "inisial": "DS.KLP",
+    "kategori": "Surat Keterangan",
+    "user_id": null,
+    "created_at": "2024-04-14 21:15:28",
+    "updated_at": "2024-07-29 15:36:50"
+  }
+]

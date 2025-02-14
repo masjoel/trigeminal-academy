@@ -1,0 +1,350 @@
+[
+  {
+    "name": "dashboard",
+    "guard_name": "web",
+    "created_at": "2024-09-11 01:15:37",
+    "updated_at": "2024-09-11 10:19:38"
+  },
+  {
+    "name": "dashboard.create",
+    "guard_name": "web",
+    "created_at": "2024-09-11 01:15:42",
+    "updated_at": "2024-09-11 10:19:44"
+  },
+  {
+    "name": "seting-profil-bisnis",
+    "guard_name": "web",
+    "created_at": "2024-07-08 11:41:34",
+    "updated_at": "2024-07-08 11:41:34"
+  },
+  {
+    "name": "seting-profil-bisnis.create",
+    "guard_name": "web",
+    "created_at": "2024-07-08 11:41:34",
+    "updated_at": "2024-07-08 11:41:34"
+  },
+  {
+    "name": "seting-profil-bisnis.edit",
+    "guard_name": "web",
+    "created_at": "2024-07-08 11:41:34",
+    "updated_at": "2024-07-08 11:41:34"
+  },
+  {
+    "name": "seting-user",
+    "guard_name": "web",
+    "created_at": "2024-07-08 11:41:34",
+    "updated_at": "2024-07-08 11:41:34"
+  },
+  {
+    "name": "seting-user.create",
+    "guard_name": "web",
+    "created_at": "2024-07-08 11:41:34",
+    "updated_at": "2024-07-08 11:41:34"
+  },
+  {
+    "name": "seting-user.edit",
+    "guard_name": "web",
+    "created_at": "2024-07-08 11:41:34",
+    "updated_at": "2024-07-08 11:41:34"
+  },
+  {
+    "name": "seting-user.delete",
+    "guard_name": "web",
+    "created_at": "2024-07-08 11:41:34",
+    "updated_at": "2024-07-08 11:41:34"
+  },
+  {
+    "name": "seting-backup",
+    "guard_name": "web",
+    "created_at": "2024-07-08 11:41:34",
+    "updated_at": "2024-07-08 11:41:34"
+  },
+  {
+    "name": "seting-restore",
+    "guard_name": "web",
+    "created_at": "2024-07-08 11:41:34",
+    "updated_at": "2024-07-08 11:41:34"
+  },
+  {
+    "name": "seting-roles",
+    "guard_name": "web",
+    "created_at": "2024-07-08 11:41:34",
+    "updated_at": "2024-07-08 11:41:34"
+  },
+  {
+    "name": "seting-roles.create",
+    "guard_name": "web",
+    "created_at": "2024-07-08 11:41:34",
+    "updated_at": "2024-07-08 11:41:34"
+  },
+  {
+    "name": "seting-roles.edit",
+    "guard_name": "web",
+    "created_at": "2024-07-08 11:41:34",
+    "updated_at": "2024-07-08 11:41:34"
+  },
+  {
+    "name": "seting-roles.delete",
+    "guard_name": "web",
+    "created_at": "2024-07-08 11:41:34",
+    "updated_at": "2024-07-08 11:41:34"
+  },
+  {
+    "name": "seting-permissions",
+    "guard_name": "web",
+    "created_at": "2024-07-08 11:41:34",
+    "updated_at": "2024-07-08 11:41:34"
+  },
+  {
+    "name": "seting-permissions.create",
+    "guard_name": "web",
+    "created_at": "2024-07-08 11:41:34",
+    "updated_at": "2024-07-08 11:41:34"
+  },
+  {
+    "name": "seting-permissions.edit",
+    "guard_name": "web",
+    "created_at": "2024-07-08 11:41:34",
+    "updated_at": "2024-07-08 11:41:34"
+  },
+  {
+    "name": "seting-permissions.delete",
+    "guard_name": "web",
+    "created_at": "2024-07-08 11:41:34",
+    "updated_at": "2024-07-08 11:41:34"
+  },
+  {
+    "name": "adm-member",
+    "guard_name": "web",
+    "created_at": "2024-07-08 11:41:34",
+    "updated_at": "2024-07-08 11:41:34"
+  },
+  {
+    "name": "adm-member.create",
+    "guard_name": "web",
+    "created_at": "2024-07-08 11:41:34",
+    "updated_at": "2024-07-08 11:41:34"
+  },
+  {
+    "name": "adm-member.edit",
+    "guard_name": "web",
+    "created_at": "2024-07-08 11:41:34",
+    "updated_at": "2024-07-08 11:41:34"
+  },
+  {
+    "name": "adm-member.delete",
+    "guard_name": "web",
+    "created_at": "2024-07-08 11:41:34",
+    "updated_at": "2024-07-08 11:41:34"
+  },
+  {
+    "name": "profil-bisnis",
+    "guard_name": "web",
+    "created_at": "2024-07-16 20:34:51",
+    "updated_at": "2024-07-16 20:35:33"
+  },
+  {
+    "name": "profil-bisnis.create",
+    "guard_name": "web",
+    "created_at": "2024-07-16 20:34:51",
+    "updated_at": "2024-07-16 20:35:41"
+  },
+  {
+    "name": "profil-bisnis.edit",
+    "guard_name": "web",
+    "created_at": "2024-07-16 20:34:51",
+    "updated_at": "2024-07-16 20:35:49"
+  },
+  {
+    "name": "slide-banner",
+    "guard_name": "web",
+    "created_at": "2024-07-16 20:50:48",
+    "updated_at": "2024-07-16 20:50:48"
+  },
+  {
+    "name": "slide-banner.create",
+    "guard_name": "web",
+    "created_at": "2024-07-16 20:50:57",
+    "updated_at": "2024-07-16 20:50:57"
+  },
+  {
+    "name": "slide-banner.edit",
+    "guard_name": "web",
+    "created_at": "2024-07-16 20:51:00",
+    "updated_at": "2024-07-16 20:51:00"
+  },
+  {
+    "name": "slide-banner.delete",
+    "guard_name": "web",
+    "created_at": "2024-07-16 20:51:06",
+    "updated_at": "2024-07-16 20:51:06"
+  },
+  {
+    "name": "admin-struktur-organisasi",
+    "guard_name": "web",
+    "created_at": "2024-07-16 20:58:43",
+    "updated_at": "2024-07-16 21:01:47"
+  },
+  {
+    "name": "admin-struktur-organisasi.create",
+    "guard_name": "web",
+    "created_at": "2024-07-16 20:58:47",
+    "updated_at": "2024-07-16 21:01:39"
+  },
+  {
+    "name": "admin-struktur-organisasi.edit",
+    "guard_name": "web",
+    "created_at": "2024-07-16 20:58:55",
+    "updated_at": "2024-07-16 21:01:31"
+  },
+  {
+    "name": "admin-struktur-organisasi.delete",
+    "guard_name": "web",
+    "created_at": "2024-07-16 20:59:00",
+    "updated_at": "2024-07-16 21:01:24"
+  },
+  {
+    "name": "admin-pengurus",
+    "guard_name": "web",
+    "created_at": "2024-07-16 20:59:13",
+    "updated_at": "2024-07-16 21:01:07"
+  },
+  {
+    "name": "admin-pengurus.create",
+    "guard_name": "web",
+    "created_at": "2024-07-16 20:59:18",
+    "updated_at": "2024-07-16 21:01:02"
+  },
+  {
+    "name": "admin-pengurus.edit",
+    "guard_name": "web",
+    "created_at": "2024-07-16 20:59:23",
+    "updated_at": "2024-07-16 21:00:58"
+  },
+  {
+    "name": "admin-pengurus.delete",
+    "guard_name": "web",
+    "created_at": "2024-07-16 20:59:28",
+    "updated_at": "2024-07-16 21:00:54"
+  },
+  {
+    "name": "galeri-foto",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:04:52",
+    "updated_at": "2024-07-16 21:04:52"
+  },
+  {
+    "name": "galeri-foto.create",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:04:57",
+    "updated_at": "2024-07-16 21:04:57"
+  },
+  {
+    "name": "galeri-foto.edit",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:05:01",
+    "updated_at": "2024-07-16 21:05:01"
+  },
+  {
+    "name": "galeri-foto.delete",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:05:06",
+    "updated_at": "2024-07-16 21:05:06"
+  },
+  {
+    "name": "galeri-video",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:05:14",
+    "updated_at": "2024-07-16 21:05:14"
+  },
+  {
+    "name": "galeri-video.create",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:05:18",
+    "updated_at": "2024-07-16 21:05:18"
+  },
+  {
+    "name": "galeri-video.edit",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:05:23",
+    "updated_at": "2024-07-16 21:05:23"
+  },
+  {
+    "name": "galeri-video.delete",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:05:32",
+    "updated_at": "2024-07-16 21:05:32"
+  },
+  {
+    "name": "category-artikel",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:11:09",
+    "updated_at": "2024-07-16 21:11:09"
+  },
+  {
+    "name": "category-artikel.create",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:11:15",
+    "updated_at": "2024-07-16 21:11:15"
+  },
+  {
+    "name": "category-artikel.edit",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:11:20",
+    "updated_at": "2024-07-16 21:11:20"
+  },
+  {
+    "name": "category-artikel.delete",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:11:24",
+    "updated_at": "2024-07-16 21:11:24"
+  },
+  {
+    "name": "artikel",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:11:43",
+    "updated_at": "2024-07-16 21:11:43"
+  },
+  {
+    "name": "artikel.create",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:11:47",
+    "updated_at": "2024-07-16 21:11:47"
+  },
+  {
+    "name": "artikel.edit",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:11:57",
+    "updated_at": "2024-07-16 21:11:57"
+  },
+  {
+    "name": "artikel.delete",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:12:03",
+    "updated_at": "2024-07-16 21:12:03"
+  },
+  {
+    "name": "halaman",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:12:11",
+    "updated_at": "2024-07-16 21:12:11"
+  },
+  {
+    "name": "halaman.create",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:12:15",
+    "updated_at": "2024-07-16 21:12:15"
+  },
+  {
+    "name": "halaman.edit",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:12:19",
+    "updated_at": "2024-07-16 21:12:19"
+  },
+  {
+    "name": "halaman.delete",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:12:23",
+    "updated_at": "2024-07-16 21:12:23"
+  }
+]
