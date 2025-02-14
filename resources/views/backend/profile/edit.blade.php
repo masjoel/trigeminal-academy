@@ -301,7 +301,6 @@
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     {{-- <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script> --}}
 
-    {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtYsdRWWefWWL5FDJQjlUI3DxQZ1Rbb7w&callback=initialize" async defer></script> --}}
     <script>
         $(document).on("change", "#image-upload", function(e) {
             e.preventDefault()

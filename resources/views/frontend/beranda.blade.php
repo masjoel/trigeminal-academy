@@ -283,7 +283,7 @@
                                     <div class="sports-post-content">
                                         {{-- <a href="/blog/category/{{ $berita->category->slug }}" class="post-tag-four">{{ $berita->category->kategori }}</a> --}}
                                         <h4 class="post-title bold-underline"><a
-                                                href="/blog/{{ $berita->slug }}">{{ Str::lower($berita->title) }}</a>
+                                                href="/blog/{{ $berita->slug }}">{{ $berita->title }}</a>
                                         </h4>
                                         <div class="blog-post-meta">
                                             <ul class="list-wrap">
@@ -317,7 +317,7 @@
                                         <div class="horizontal-post-content-four">
                                             {{-- <a href="blog.html" class="post-tag-four">basket Ball</a> --}}
                                             <h4 class="post-title"><a
-                                                    href="/blog/{{ $bt3->slug }}">{{ Str::lower($bt3->title) }}</a>
+                                                    href="/blog/{{ $bt3->slug }}">{{ $bt3->title }}</a>
                                             </h4>
                                             <div class="blog-post-meta">
                                                 <ul class="list-wrap">
@@ -414,7 +414,7 @@
                             </div>
                             <div class="editor-post-content-three">
                                 <h2 class="post-title"><a href="{{ $v->excerpt }}"
-                                        target="_blank">{{ Str::lower($v->title) }}</a></h2>
+                                        target="_blank">{{ $v->title }}</a></h2>
                                 <div class="blog-post-meta">
                                     <ul class="list-wrap">
                                         <li style="font-size: 10px"><i
