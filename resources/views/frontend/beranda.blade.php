@@ -81,7 +81,10 @@
             right: -12px;
             top: 14px;
         }
-
+        
+        .post-title{
+            text-transform: none !important;
+        }
         #owl-demo .item img {
             /* display: block; */
             width: 100% !important;

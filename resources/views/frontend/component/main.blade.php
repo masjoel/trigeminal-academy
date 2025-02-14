@@ -149,6 +149,10 @@
         .copyright-text p {
             color: white !important;
         }
+        .footer-link-wrap .list-wrap li a {
+            text-transform: none !important;
+        }
+
     </style>
 </head>
 
