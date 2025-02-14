@@ -1,0 +1,117 @@
+@extends('layouts.dashboard')
+
+@section('title', 'All ' . $title . 's')
+
+@push('style')
+@endpush
+
+@section('main')
+    <div class="main-content">
+        <section class="section">
+            <div class="card mb-4">
+                <div class="card-header header-elements">
+                    <h3 class="mb-0 me-2">{{ $title }}</h3>
+                    <div class="card-header-elements ms-auto">
+                        <span class="text text-muted d-flex">
+                            <small>
+                                @include('backend.permissions.breadcrumb')
+                            </small>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="section-body">
+
+                <div class="row">
+                    <div class="col-12">
+                        @include('layouts.alert')
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-12">
+                        @include('backend.utilities.menu-utility')
+                        <div class="card">
+                            <div class="card-header header-elements">
+                                @if (Auth::user()->username == 'admin' || Auth::user()->username == 'superadmin')
+                                    <a href="{{ route('permissions.create') }}" class="btn btn-primary"><i
+                                            class="fas fa-plus me-2"></i>
+                                        {{ $title }}</a>
+                                @endif
+                                <div class="card-header-elements ms-auto">
+                                    <form method="GET" action="{{ route('permissions.index') }}">
+                                        <div class="input-group">
+                                            <input type="text" name="search" class="form-control" placeholder="Cari..."
+                                                aria-describedby="button-addon2" />
+                                            <button class="btn btn-primary" type="submit" id="button-addon2"><i
+                                                    class="ti ti-search"></i></button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="clearfix mb-3"></div>
+
+                                <div class="table-responsive">
+                                    <table class="table-striped table" id="main-table">
+                                        <tr>
+
+                                            <th>Name</th>
+                                            <th>Created At</th>
+                                            @if (Auth::user()->username == 'admin' || Auth::user()->username == 'superadmin')
+                                                <th width="150">Action</th>
+                                            @endif
+                                        </tr>
+                                        @foreach ($permissions as $role)
+                                            @if ($role->permissions !== 'superadmin')
+                                                <tr>
+                                                    <td>{{ $role->name }}</td>
+                                                    <td>{{ $role->created_at }}</td>
+                                                    @if (Auth::user()->username == 'admin' || Auth::user()->permissions == 'superadmin')
+                                                        <td>
+                                                            <div class="d-flex justify-content-center">
+                                                                <a href='{{ route('permissions.edit', $role->id) }}'
+                                                                    class="btn btn-sm btn-info waves-effect waves-light mx-1"
+                                                                    id="edit-data" title="Edit"><i
+                                                                        class="fas fa-edit me-2"></i> Edit</a>
+                                                                <button
+                                                                    class="ml-2 btn btn-sm btn-danger btn-icon confirm-delete"
+                                                                    id="delete" data-id="{{ $role->id }}"
+                                                                    title="Hapus" data-toggle="tooltip">
+                                                                    <i class="fas fa-trash-alt"></i>
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    @endif
+                                                </tr>
+                                            @endif
+                                        @endforeach
+                                    </table>
+                                </div>
+                                <div class="mt-5">
+                                    {{ $permissions->withQueryString()->links() }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+@endsection
+
+@push('scripts')
+    <!-- JS Libraies -->
+    <script src="{{ asset('library/sweetalert2/sweetalert2.min.js') }}"></script>
+
+    <!-- Page Specific JS File -->
+    <script src="{{ asset('js/page/features-posts.js') }}"></script>
+    <script>
+        $(document).on("click", "button#delete", function(e) {
+            e.preventDefault();
+            let id = $(this).data('id');
+            showDeletePopup(BASE_URL + '/permissions/' + id, '{{ csrf_token() }}', '', '',
+                BASE_URL + '/permissions');
+        });
+    </script>
+@endpush
