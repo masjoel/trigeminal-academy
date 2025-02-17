@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Webdesa;
+namespace App\Http\Controllers\Frontend;
 
 use App\Models\Provinsi;
 use App\Models\Attendance;
@@ -268,6 +268,6 @@ class AttendanceController extends Controller
     }
     public function encrypt()
     {
-        echo hash('sha256', '8203202002960001').'<br>';
+        echo hash('sha256', '8203202002960001') . '<br>';
     }
 }

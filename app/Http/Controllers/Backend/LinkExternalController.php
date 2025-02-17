@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\SID;
+namespace App\Http\Controllers\Backend;
 
 use App\Models\LinkExternal;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\SID\StoreLinkExternalReq;
+use App\Http\Requests\Backend\StoreLinkExternalReq;
 
 class LinkExternalController extends Controller
 {

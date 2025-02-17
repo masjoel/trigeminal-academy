@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Webdesa;
+namespace App\Http\Controllers\Frontend;
 
 use App\Models\SetingDesa;
 use Illuminate\Http\Request;

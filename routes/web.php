@@ -6,23 +6,23 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\Api\NikController;
-use App\Http\Controllers\SID\DesaController;
+use App\Http\Controllers\Backend\DesaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AutoNumberController;
 use App\Http\Controllers\BackupDataController;
 use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\Webdesa\FotoController;
+use App\Http\Controllers\Frontend\FotoController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Webdesa\VideoController;
-use App\Http\Controllers\Webdesa\ArtikelController;
-use App\Http\Controllers\Webdesa\HalamanController;
-use App\Http\Controllers\SID\LinkExternalController;
-use App\Http\Controllers\Webdesa\BukuTamuController;
-use App\Http\Controllers\Webdesa\CategoryController;
-use App\Http\Controllers\Webdesa\StrukturOrganisasi;
-use App\Http\Controllers\Webdesa\SlidebannerController;
-use App\Http\Controllers\Webdesa\ProfilBisnisController;
-use App\Http\Controllers\Webdesa\PerangkatDesaController;
+use App\Http\Controllers\Frontend\VideoController;
+use App\Http\Controllers\Frontend\ArtikelController;
+use App\Http\Controllers\Frontend\HalamanController;
+use App\Http\Controllers\Backend\LinkExternalController;
+use App\Http\Controllers\Frontend\BukuTamuController;
+use App\Http\Controllers\Frontend\CategoryController;
+use App\Http\Controllers\Frontend\StrukturOrganisasi;
+use App\Http\Controllers\Frontend\SlidebannerController;
+use App\Http\Controllers\Frontend\ProfilBisnisController;
+use App\Http\Controllers\Frontend\PerangkatDesaController;
 
 /*
 |--------------------------------------------------------------------------

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\SID;
+namespace App\Http\Requests\Backend;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePendudukReq extends FormRequest
+class UpdatePendudukReq extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,11 +21,11 @@ class StorePendudukReq extends FormRequest
      */
     public function rules(): array
     {
-
+        $wargaId = $this->route('admin_member');
         return [
             'nama' => 'required',
-            'nik' => 'nullable|numeric|unique:adpdd_induks',
-            'id_ktp' => 'nullable|unique:adpdd_induks',
+            'nik' => 'nullable|numeric|unique:adpdd_induks,nik,' . $wargaId->id,
+            'id_ktp' => 'nullable|unique:adpdd_induks,id_ktp,' . $wargaId->id,
             'kk' => 'nullable|numeric',
             'tgl_lahir' => 'nullable',
             'tempat_lahir' => 'nullable',

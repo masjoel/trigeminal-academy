@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\SID;
+namespace App\Http\Controllers\Backend;
 
 use App\Models\DdkKk;
 use App\Models\Provinsi;
@@ -8,7 +8,6 @@ use App\Models\AdpddInduk;
 use App\Models\AdpddMutasi;
 use App\Models\DdkPersonil;
 use App\Exports\IndukExport;
-use App\Imports\IndukImport;
 use Illuminate\Http\Request;
 use App\Models\AdprofAnggota;
 use App\Models\PerangkatDesa;
@@ -16,10 +15,10 @@ use App\Models\AdsrtPermohonan;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Http\Requests\SID\StorePendudukReq;
-use Illuminate\Support\Facades\RateLimiter;
-use App\Http\Requests\SID\UpdatePendudukReq;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\RateLimiter;
+use App\Http\Requests\Backend\StorePendudukReq;
+use App\Http\Requests\Backend\UpdatePendudukReq;
 
 class AdpddIndukController extends Controller
 {
@@ -81,10 +80,10 @@ class AdpddIndukController extends Controller
                 $query->where('hubungan', '=', $searchHubungan);
             })
             ->paginate($limit);
-            // $encryptedFields = ['id_ktp', 'nik', 'kk'];
+        // $encryptedFields = ['id_ktp', 'nik', 'kk'];
 
-            // $penduduks = decryptFields($qryPenduduks, $encryptedFields);
-            
+        // $penduduks = decryptFields($qryPenduduks, $encryptedFields);
+
         // $users = DB::table('users')->select('data')->get();
         // $penduduks = $qryPenduduks->map(function ($penduduk) {
         //     try {
@@ -309,61 +308,61 @@ class AdpddIndukController extends Controller
     }
 
     // -- Import  --
-    public function importExcel(Request $request)
-    {
-        try {
-            // 1. Validasi file
-            $request->validate([
-                'file' => 'required|mimes:xlsx,xls',
-            ]);
-            $userId = auth()->user()->id;
-            $key = 'import_excel_' . $userId;
-            // 2. Cek rate limiting
-            if (RateLimiter::tooManyAttempts($key, 1)) {
-                $seconds = RateLimiter::availableIn($key);
-                return response()->json([
-                    'status' => 'error',
-                    // 'message' => "Mohon tunggu " . ceil($seconds / 60) . " menit sebelum melakukan import lagi"
-                    'message' => "Mohon tunggu " . $seconds . " detik sebelum melakukan import lagi"
-                ]);
-            }
-            // 3. Hitung jumlah baris terlebih dahulu
-            $path = $request->file('file')->getRealPath();
-            $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($path);
-            $worksheet = $spreadsheet->getActiveSheet();
-            $highestRow = $worksheet->getHighestDataRow();
-            // Kurangi 1 untuk header
-            $dataRows = $highestRow - 1;
-            // 4. Validasi jumlah baris
-            if ($dataRows > batasRowImport()) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => "Maksimal " . batasRowImport() . " baris. File Anda memiliki " . $dataRows . " baris."
-                ]);
-            }
-            // 5. Jika lolos validasi, lakukan import
-            $import = new IndukImport();
-            Excel::import($import, $request->file('file'));
-            $errors = $import->getErrors();
-            if (!empty($errors)) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => $errors,
-                ]);
-            }
-            // 6. Set rate limiting setelah berhasil import
-            RateLimiter::hit($key, waktuDelayImport());
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Data berhasil diimpor'
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Terjadi kesalahan saat impor data: ' . $e->getMessage()
-            ]);
-        }
-    }
+    // public function importExcel(Request $request)
+    // {
+    //     try {
+    //         // 1. Validasi file
+    //         $request->validate([
+    //             'file' => 'required|mimes:xlsx,xls',
+    //         ]);
+    //         $userId = auth()->user()->id;
+    //         $key = 'import_excel_' . $userId;
+    //         // 2. Cek rate limiting
+    //         if (RateLimiter::tooManyAttempts($key, 1)) {
+    //             $seconds = RateLimiter::availableIn($key);
+    //             return response()->json([
+    //                 'status' => 'error',
+    //                 // 'message' => "Mohon tunggu " . ceil($seconds / 60) . " menit sebelum melakukan import lagi"
+    //                 'message' => "Mohon tunggu " . $seconds . " detik sebelum melakukan import lagi"
+    //             ]);
+    //         }
+    //         // 3. Hitung jumlah baris terlebih dahulu
+    //         $path = $request->file('file')->getRealPath();
+    //         $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($path);
+    //         $worksheet = $spreadsheet->getActiveSheet();
+    //         $highestRow = $worksheet->getHighestDataRow();
+    //         // Kurangi 1 untuk header
+    //         $dataRows = $highestRow - 1;
+    //         // 4. Validasi jumlah baris
+    //         if ($dataRows > batasRowImport()) {
+    //             return response()->json([
+    //                 'status' => 'error',
+    //                 'message' => "Maksimal " . batasRowImport() . " baris. File Anda memiliki " . $dataRows . " baris."
+    //             ]);
+    //         }
+    //         // 5. Jika lolos validasi, lakukan import
+    //         $import = new IndukImport();
+    //         Excel::import($import, $request->file('file'));
+    //         $errors = $import->getErrors();
+    //         if (!empty($errors)) {
+    //             return response()->json([
+    //                 'status' => 'error',
+    //                 'message' => $errors,
+    //             ]);
+    //         }
+    //         // 6. Set rate limiting setelah berhasil import
+    //         RateLimiter::hit($key, waktuDelayImport());
+    //         return response()->json([
+    //             'status' => 'success',
+    //             'message' => 'Data berhasil diimpor'
+    //         ]);
+    //     } catch (\Exception $e) {
+    //         return response()->json([
+    //             'status' => 'error',
+    //             'message' => 'Terjadi kesalahan saat impor data: ' . $e->getMessage()
+    //         ]);
+    //     }
+    // }
     // -- Export Excel --
     public function exportToExcel(Request $request)
     {
@@ -385,13 +384,14 @@ class AdpddIndukController extends Controller
             'ipaddr' => $clientIP,
         ];
         DB::table('userlog')->insert($log);
-        $cekMutasi = AdpddMutasi::where('adpdd_induk_id', $adm_penduduk_induk->id)->first();
-        $cekAgtLembaga = AdprofAnggota::where('adpdd_induk_id', $adm_penduduk_induk->id)->first();
-        $cekDdk = DdkKk::where('adpdd_induk_id', $adm_penduduk_induk->id)->first();
-        $cekDdkPersonil = DdkPersonil::where('adpdd_induk_id', $adm_penduduk_induk->id)->first();
-        $cekSurket = AdsrtPermohonan::where('nik', $adm_penduduk_induk->nik)->first();
+        // $cekMutasi = AdpddMutasi::where('adpdd_induk_id', $adm_penduduk_induk->id)->first();
+        // $cekAgtLembaga = AdprofAnggota::where('adpdd_induk_id', $adm_penduduk_induk->id)->first();
+        // $cekDdk = DdkKk::where('adpdd_induk_id', $adm_penduduk_induk->id)->first();
+        // $cekDdkPersonil = DdkPersonil::where('adpdd_induk_id', $adm_penduduk_induk->id)->first();
+        // $cekSurket = AdsrtPermohonan::where('nik', $adm_penduduk_induk->nik)->first();
         $cekPerangkat = PerangkatDesa::where('nik', $adm_penduduk_induk->nik)->first();
-        if ($cekMutasi || $cekAgtLembaga || $cekDdk || $cekDdkPersonil || $cekSurket || $cekPerangkat) {
+        // if ($cekMutasi || $cekAgtLembaga || $cekDdk || $cekDdkPersonil || $cekSurket || $cekPerangkat) {
+        if ( $cekPerangkat) {
             $status = 'error';
             $msg = 'Data tidak dapat dihapus karena sudah terhubung dengan database lain';
         } else {

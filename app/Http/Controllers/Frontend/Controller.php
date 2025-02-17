@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Webdesa;
+namespace App\Http\Controllers\Frontend;
 
 abstract class Controller
 {
