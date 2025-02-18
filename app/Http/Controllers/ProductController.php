@@ -10,9 +10,18 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $page = $request->input('page', 1);
+        $limit = $request->input('limit', 12);
+        $nomor = ($page - 1) * $limit + 1;
+        $qry = Product::orderBy('id', 'desc');
+
+        $products = $qry->when($request->input('search'), function ($query, $search) {
+            $query->where('name', 'like', '%' . $search . '%');
+        })->paginate($limit);
+        $title = 'Course';
+        return view('backend.lapak-desa.product.index', compact('products', 'nomor', 'title'));
     }
 
     /**

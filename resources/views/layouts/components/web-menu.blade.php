@@ -81,7 +81,7 @@
             {{-- @can('lapak-desa-produk') --}}
                 {{-- <li class="menu-item {{ Request::is('lapak-desa-produk*') ? 'active' : '' }}"> --}}
                     <li class="menu-item">
-                        <a href="#" class="menu-link "><div>e-Course</div></a>
+                        <a href="{{ route('course.index') }}" class="menu-link "><div>e-Course</div></a>
                 </li>
             {{-- @endcan
             @can('lapak-desa-kategori') --}}

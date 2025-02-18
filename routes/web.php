@@ -23,6 +23,7 @@ use App\Http\Controllers\Frontend\StrukturOrganisasi;
 use App\Http\Controllers\Frontend\SlidebannerController;
 use App\Http\Controllers\Frontend\ProfilBisnisController;
 use App\Http\Controllers\Frontend\PerangkatDesaController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,6 +90,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('admin-pengurus', PerangkatDesaController::class);
     // Route::resource('admin-anggota', AnggotaController::class);
     Route::resource('admin-member', AnggotaController::class);
+    Route::resource('course', ProductController::class);
 });
 Route::post('aktivasi', [DesaController::class, 'aktivasi'])->name('aktivasi');
 Route::get('/buku-tamu/cek-nik', [BukuTamuController::class, 'cekNik'])->name('buku-tamu.cek-nik');

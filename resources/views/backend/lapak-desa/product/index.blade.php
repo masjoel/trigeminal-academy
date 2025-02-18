@@ -31,8 +31,8 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header header-elements">
-                                @can('lapak-desa-produk.create')
-                                    <a href="{{ route('lapak-desa-produk.create') }}" class="btn btn-primary"><i
+                                @can('course.create')
+                                    <a href="{{ route('course.create') }}" class="btn btn-primary"><i
                                             class="fas fa-plus me-2"></i>
                                         {{ $title }}</a>
                                 @endcan
@@ -59,7 +59,7 @@
                                             <th scope="col">Kategori</th>
                                             <th scope="col">Suplier</th>
                                             <th scope="col">Status</th>
-                                            @can(['lapak-desa-produk.edit', 'lapak-desa-produk.delete'])
+                                            @can(['course.edit', 'course.delete'])
                                                 <th class="text-center" scope="col" width="120">Action</th>
                                             @endcan
                                         </tr>
@@ -89,16 +89,16 @@
                                                 <td class="text-center" width="120"><span
                                                         class="badge bg-{{ $item->publish == 0 ? 'secondary' : 'primary' }}">{{ $item->publish == 0 ? 'Draft' : 'Published' }}</span>
                                                 </td>
-                                                @can(['lapak-desa-produk.edit', 'lapak-desa-produk.delete'])
+                                                @can(['course.edit', 'course.delete'])
                                                     <td>
                                                         <div class="d-flex justify-content-center">
-                                                            @can('lapak-desa-produk.edit')
-                                                                <a href="{{ route('lapak-desa-produk.edit', $item->id) }}"
+                                                            @can('course.edit')
+                                                                <a href="{{ route('course.edit', $item->id) }}"
                                                                     class="btn btn-sm btn-info waves-effect waves-light mx-1"
                                                                     id="edit-data" title="Edit"><i class="fas fa-edit me-2"></i>
                                                                     Edit</a>
                                                             @endcan
-                                                            @can('lapak-desa-produk.delete')
+                                                            @can('course.delete')
                                                                 <a href="#" class="ml-2 btn btn-sm btn-danger"
                                                                     id="delete-data" data-id="{{ $item->id }}" title="Hapus"
                                                                     data-toggle="tooltip"><i class="fa fa-trash-alt"></i></a>
@@ -127,8 +127,8 @@
         $(document).on("click", "a#delete-data", function(e) {
             e.preventDefault();
             let id = $(this).data('id');
-            showDeletePopup('{{ url('') }}/lapak-desa-produk/' + id, '{{ csrf_token() }}',
-                '{{ url('') }}/lapak-desa-produk');
+            showDeletePopup('{{ url('') }}/course/' + id, '{{ csrf_token() }}',
+                '{{ url('') }}/course');
         });
 
         function showDeletePopup(url, token, reload) {

@@ -26,8 +26,7 @@
             <div class="section-body">
 
                 <div class="card">
-                    <form id="fileForm" action="{{ route('lapak-desa-produk.store') }}" method="POST"
-                        enctype="multipart/form-data">
+                    <form id="fileForm" action="{{ route('course.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
                             <div class="row">

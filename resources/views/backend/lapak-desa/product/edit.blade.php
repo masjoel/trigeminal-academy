@@ -26,7 +26,7 @@
             <div class="section-body">
 
                 <div class="card">
-                    <form id="fileForm" action="{{ route('lapak-desa-produk.update', $product) }}" method="POST"
+                    <form id="fileForm" action="{{ route('course.update', $product) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
