@@ -346,5 +346,53 @@
     "guard_name": "web",
     "created_at": "2024-07-16 21:12:23",
     "updated_at": "2024-07-16 21:12:23"
+  },
+  {
+    "name": "course",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:12:11",
+    "updated_at": "2024-07-16 21:12:11"
+  },
+  {
+    "name": "course.create",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:12:15",
+    "updated_at": "2024-07-16 21:12:15"
+  },
+  {
+    "name": "course.edit",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:12:19",
+    "updated_at": "2024-07-16 21:12:19"
+  },
+  {
+    "name": "course.delete",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:12:23",
+    "updated_at": "2024-07-16 21:12:23"
+  },
+  {
+    "name": "orders",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:12:11",
+    "updated_at": "2024-07-16 21:12:11"
+  },
+  {
+    "name": "orders.create",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:12:15",
+    "updated_at": "2024-07-16 21:12:15"
+  },
+  {
+    "name": "orders.edit",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:12:19",
+    "updated_at": "2024-07-16 21:12:19"
+  },
+  {
+    "name": "orders.delete",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:12:23",
+    "updated_at": "2024-07-16 21:12:23"
   }
 ]

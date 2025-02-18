@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
-use App\Models\ProductCategory;
+use App\Models\OrderItem;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
-class ProductCategoryController extends Controller
+class OrderItemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +35,7 @@ class ProductCategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ProductCategory $productCategory)
+    public function show(OrderItem $orderItem)
     {
         //
     }
@@ -42,7 +43,7 @@ class ProductCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ProductCategory $productCategory)
+    public function edit(OrderItem $orderItem)
     {
         //
     }
@@ -50,7 +51,7 @@ class ProductCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ProductCategory $productCategory)
+    public function update(Request $request, OrderItem $orderItem)
     {
         //
     }
@@ -58,7 +59,7 @@ class ProductCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProductCategory $productCategory)
+    public function destroy(OrderItem $orderItem)
     {
         //
     }

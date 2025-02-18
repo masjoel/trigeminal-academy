@@ -1,12 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:course')->only(['index', 'show']);
+        $this->middleware('can:course.create')->only(['create', 'store']);
+        $this->middleware('can:course.edit')->only(['edit', 'update']);
+        $this->middleware('can:course.delete')->only(['destroy']);
+    }
     /**
      * Display a listing of the resource.
      */

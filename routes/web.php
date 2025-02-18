@@ -2,28 +2,28 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\Api\NikController;
-use App\Http\Controllers\Backend\DesaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AutoNumberController;
 use App\Http\Controllers\BackupDataController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\Backend\DesaController;
 use App\Http\Controllers\Frontend\FotoController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Frontend\VideoController;
+use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Frontend\ArtikelController;
 use App\Http\Controllers\Frontend\HalamanController;
-use App\Http\Controllers\Backend\LinkExternalController;
 use App\Http\Controllers\Frontend\BukuTamuController;
 use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\Frontend\StrukturOrganisasi;
+use App\Http\Controllers\Backend\LinkExternalController;
 use App\Http\Controllers\Frontend\SlidebannerController;
 use App\Http\Controllers\Frontend\ProfilBisnisController;
 use App\Http\Controllers\Frontend\PerangkatDesaController;
-use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------

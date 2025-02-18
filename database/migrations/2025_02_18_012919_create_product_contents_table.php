@@ -13,13 +13,16 @@ return new class extends Migration
     {
         Schema::create('product_contents', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('product_id');
+            $table->integer('parent')->nullable();
             $table->string('title');
-            $table->integer('chapter_id')->nullable();
             $table->string('file_type')->nullable()->default('video');
             $table->string('video_url')->nullable();
             $table->double('duration')->nullable();
             $table->string('description')->nullable();
             $table->timestamps();
+            // cascade
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 
