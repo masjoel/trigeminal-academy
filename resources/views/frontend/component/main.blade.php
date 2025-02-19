@@ -35,7 +35,7 @@
         rel="apple-touch-icon">
 
     <!-- CSS here -->
-    {{-- @production
+    @production
         @php
             $manifest = json_decode(file_get_contents(public_path('build/manifest.json')), true);
         @endphp
@@ -43,7 +43,7 @@
         <script type="module" src="{{ asset('build/' . $manifest['resources/js/app.js']['file']) }}"></script>
     @else
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @endproduction --}}
+    @endproduction
 
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/animate.min.css') }}">
