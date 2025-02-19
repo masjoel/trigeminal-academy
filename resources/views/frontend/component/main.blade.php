@@ -35,6 +35,16 @@
         rel="apple-touch-icon">
 
     <!-- CSS here -->
+    {{-- @production
+        @php
+            $manifest = json_decode(file_get_contents(public_path('build/manifest.json')), true);
+        @endphp
+        <link rel="stylesheet" href="{{ asset('build/' . $manifest['resources/css/app.css']['file']) }}">
+        <script type="module" src="{{ asset('build/' . $manifest['resources/js/app.js']['file']) }}"></script>
+    @else
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @endproduction --}}
+
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/animate.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/magnific-popup.css') }}">
@@ -45,6 +55,7 @@
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/default.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/responsive.css') }}">
+
     @stack('style')
     <style>
         @media print {
@@ -154,6 +165,7 @@
         }
 
     </style>
+
 </head>
 
 <body>
