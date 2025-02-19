@@ -30,6 +30,7 @@ return new class extends Migration
             $table->boolean('publish')->default(true);
             $table->string('level')->nullable()->default('pemula');
             $table->string('image_url')->nullable();
+            $table->string('storage_type')->nullable();
             $table->string('video_url')->nullable();
             $table->integer('video_duration')->nullable();
             $table->string('download_url')->nullable();

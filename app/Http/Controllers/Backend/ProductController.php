@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\Instructor;
 use App\Models\Product;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -37,7 +39,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $category = ProductCategory::orderBy('name', 'asc')->get();
+        $instruktur = Instructor::orderBy('nama', 'asc')->get();
+        $title = 'Course';
+        return view('backend.lapak-desa.product.create', compact('category', 'instruktur', 'title'));
     }
 
     /**

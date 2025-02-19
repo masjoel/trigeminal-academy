@@ -4,12 +4,12 @@
             <a href="{{ route('dashboard') }}">Dashboard</a>
         </li>
         <li class="breadcrumb-item">
-            <a href="{{ route('course.index') }}">Produk</a>
+            <a href="{{ route('course.index') }}">{{ $title }}</a>
         </li>
         @if (Request::is('*create'))
-            <li class="breadcrumb-item active">Add Produk</li>
+            <li class="breadcrumb-item active">Add {{ $title }}</li>
         @elseif (Request::is('*edit'))
-            <li class="breadcrumb-item active">Edit Produk</li>
+            <li class="breadcrumb-item active">Edit {{ $title }}</li>
         @else
             <li class="breadcrumb-item d-none"></li>
         @endif

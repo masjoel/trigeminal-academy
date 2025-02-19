@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('product_id');
             $table->integer('parent')->nullable();
             $table->string('title');
-            $table->string('file_type')->nullable()->default('video');
+            $table->string('storage_type')->nullable()->default('youtube');
             $table->string('video_url')->nullable();
             $table->double('duration')->nullable();
             $table->string('description')->nullable();
