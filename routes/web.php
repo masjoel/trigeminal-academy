@@ -21,9 +21,11 @@ use App\Http\Controllers\Frontend\BukuTamuController;
 use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\Frontend\StrukturOrganisasi;
 use App\Http\Controllers\Backend\LinkExternalController;
+use App\Http\Controllers\Backend\ProductCategoryController;
 use App\Http\Controllers\Frontend\SlidebannerController;
 use App\Http\Controllers\Frontend\ProfilBisnisController;
 use App\Http\Controllers\Frontend\PerangkatDesaController;
+use App\Http\Controllers\InstructorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,6 +93,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     // Route::resource('admin-anggota', AnggotaController::class);
     Route::resource('admin-member', AnggotaController::class);
     Route::resource('course', ProductController::class);
+    Route::resource('kategori-kursus', ProductCategoryController::class);
+    Route::resource('instruktur', InstructorController::class);
 });
 Route::post('aktivasi', [DesaController::class, 'aktivasi'])->name('aktivasi');
 Route::get('/buku-tamu/cek-nik', [BukuTamuController::class, 'cekNik'])->name('buku-tamu.cek-nik');

@@ -394,5 +394,53 @@
     "guard_name": "web",
     "created_at": "2024-07-16 21:12:23",
     "updated_at": "2024-07-16 21:12:23"
+  },
+  {
+    "name": "instruktur",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:12:11",
+    "updated_at": "2024-07-16 21:12:11"
+  },
+  {
+    "name": "instruktur.create",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:12:15",
+    "updated_at": "2024-07-16 21:12:15"
+  },
+  {
+    "name": "instruktur.edit",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:12:19",
+    "updated_at": "2024-07-16 21:12:19"
+  },
+  {
+    "name": "instruktur.delete",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:12:23",
+    "updated_at": "2024-07-16 21:12:23"
+  },
+  {
+    "name": "kategori-kursus",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:12:11",
+    "updated_at": "2024-07-16 21:12:11"
+  },
+  {
+    "name": "kategori-kursus.create",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:12:15",
+    "updated_at": "2024-07-16 21:12:15"
+  },
+  {
+    "name": "kategori-kursus.edit",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:12:19",
+    "updated_at": "2024-07-16 21:12:19"
+  },
+  {
+    "name": "kategori-kursus.delete",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:12:23",
+    "updated_at": "2024-07-16 21:12:23"
   }
 ]

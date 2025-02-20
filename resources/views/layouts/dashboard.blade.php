@@ -40,6 +40,22 @@
             color: #333;
             border: 1px solid #ccc;
         }
+        .note-editor.note-frame.fullscreen,
+        .note-editor.note-airframe.fullscreen {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100vh !important;
+            z-index: 9999 !important;
+        }
+
+        .note-editor.note-frame.fullscreen .note-editable,
+        .note-editor.note-airframe.fullscreen .note-editable {
+            height: calc(100vh - 50px) !important;
+            background-color: #f5f5f5 !important; /* Ganti dengan warna yang diinginkan */
+            color: #161414 !important; /* Warna teks agar kontras */
+        }
     </style>
 </head>
 

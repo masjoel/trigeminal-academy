@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('slug')->nullable();
             $table->double('size')->nullable();
-            $table->text('description')->nullable();
+            $table->string('excerpt')->nullable();
+            $table->mediumText('description')->nullable();
             $table->double('budget')->nullable();
             $table->double('price')->nullable();
             $table->double('discount')->nullable();

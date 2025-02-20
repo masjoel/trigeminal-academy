@@ -7,6 +7,7 @@ use App\Models\Desa;
 use App\Models\User;
 use Ramsey\Uuid\Uuid;
 use App\Models\Category;
+use App\Models\Instructor;
 use App\Models\ProfilBisnis;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -49,6 +50,17 @@ class DatabaseSeeder extends Seeder
             'photo' => 'image/icon-foto.png',
             'image_icon' => 'image/icon-lkp2mpd.png',
             'apikey' => Uuid::uuid1()->getHex(),
+        ]);
+        Instructor::create([
+            'user_id' => '1',
+            'nama' => 'Zhakiah',
+            'slug' => 'zhakiah',
+            'alamat' => 'Semarang',
+            'telpon' => '08123456789',
+            'email' => 'admin@email.com',
+            'keterangan' => 'Instruktur Trigeminal Academy',
+            'approval' => 'approved',
+            'kategori' => 'umum',
         ]);
         $this->call([
             UserSeeder::class,

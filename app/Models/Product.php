@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
@@ -23,9 +24,9 @@ class Product extends Model
     {
         return $this->belongsTo(ProductCategory::class, 'category_id');
     }
-    public function lapakSuplier()
+    public function instruktur()
     {
-        return $this->belongsTo(LapakSuplier::class, 'lapak_suplier_id');
+        return $this->belongsTo(Instructor::class, 'instructor_id');
     }
 
     public function user()
@@ -34,7 +35,7 @@ class Product extends Model
     }
     public function orderitems(): HasMany
     {
-        return $this->hasMany(LapakOrderItem::class);
+        return $this->hasMany(OrderItem::class);
     }
 
 }
