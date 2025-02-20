@@ -48,64 +48,6 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                {{-- <div class="table-responsive">
-                                    <table class="table-striped table">
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Cover</th>
-                                            <th scope="col">Title</th>
-                                            <th scope="col">Foto</th>
-                                            <th scope="col">Status</th>
-                                            @if (Auth::user()->roles == 'superadmin' || Auth::user()->username == 'admin')
-                                                <th class="text-center" scope="col" width="120">Action</th>
-                                            @endif
-                                        </tr>
-                                        @foreach ($artikel as $index => $item)
-                                            <tr>
-                                                <td width="50" nowrap>{{ $index + $artikel->firstItem() }}
-                                                    @if ($item->feature == 'y')
-                                                        <i class="fa fa-star" style="color:gold"></i>
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    @if ($item->foto_unggulan !== null)
-                                                        <img class="rounded-circle mr-3" width="50" height="50"
-                                                            src="{{ Storage::url('thumb/' . $item->foto_unggulan) }}"
-                                                            alt="avatar">
-                                                    @else
-                                                        <img class="rounded-circle mr-3" width="50"
-                                                            src="{{ asset('img/example-image-50.jpg') }}" alt="avatar">
-                                                    @endif
-                                                </td>
-                                                <td nowrap>{{ $item->title }}</td>
-                                                <td>
-                                                    @if ($item->meta_tags !== null)
-                                                        <img width="50" height="50" src="{{ Storage::url($item->meta_tags) }}" alt="avatar">
-                                                    @else
-                                                        <i class="fa fa-camera"></i>
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    <span
-                                                        class="badge badge-{{ $item->tampil == 'published' ? 'success' : 'danger' }}">{{ $item->tampil }}</span>
-                                                </td>
-                                                @if (Auth::user()->roles == 'superadmin' || Auth::user()->username == 'admin')
-                                                    <td>
-                                                        <div class="d-flex justify-content-end">
-                                                            <a href="{{ route('galeri-foto.edit', $item->slug) }}"
-                                                                class="btn btn-sm btn-info text-nowrap" id="edit-data"
-                                                                title="Edit"><i class="fa fa-edit"></i> Edit</a>
-                                                            <a href="#" class="ml-2 btn btn-sm btn-danger"
-                                                                id="delete-data" data-id="{{ $item->slug }}"
-                                                                title="Hapus" data-toggle="tooltip"><i
-                                                                    class="fa fa-trash-alt"></i></a>
-                                                        </div>
-                                                    </td>
-                                                @endif
-                                            </tr>
-                                        @endforeach
-                                    </table>
-                                </div> --}}
                                 <div class="row">
                                     @foreach ($artikel as $item)
                                         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 mb-3">

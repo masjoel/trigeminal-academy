@@ -13,6 +13,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreProductReq;
+use App\Models\Order;
 use Illuminate\Support\Facades\Storage;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 
@@ -20,7 +21,7 @@ class ProductController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:course')->only(['index', 'show']);
+        $this->middleware('can:course')->only(['index']);
         $this->middleware('can:course.create')->only(['create', 'store']);
         $this->middleware('can:course.edit')->only(['edit', 'update']);
         $this->middleware('can:course.delete')->only(['destroy']);
@@ -138,9 +139,11 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public function show(Product $course)
     {
-        //
+        $title = 'Course';
+        $totStudent = Order::where('customer_id', $course->id)->count();
+        return view('backend.e-commerce.product.show', compact('title', 'course', 'totStudent'));
     }
 
     /**

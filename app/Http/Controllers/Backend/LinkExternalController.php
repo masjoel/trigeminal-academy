@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\LinkExternal;
+use App\Models\ProfilBisnis;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
@@ -10,11 +11,11 @@ use App\Http\Requests\Backend\StoreLinkExternalReq;
 
 class LinkExternalController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('can:seting-lsm')->only(['index', 'show']);
-        $this->middleware('can:seting-lsm.edit')->only(['edit', 'update', 'destroy']);
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('can:seting-lsm')->only(['index', 'show']);
+    //     $this->middleware('can:seting-lsm.edit')->only(['edit', 'update', 'destroy']);
+    // }
 
     public function index(Request $request)
     {
@@ -31,13 +32,13 @@ class LinkExternalController extends Controller
                 ->orWhere('tipe', $tipe);
         })->paginate(10);
         $title = 'Link External';
-        return view('sid.v3.link.index', compact('title', 'link'));
+        return view('backend.link.index', compact('title', 'link'));
     }
 
     public function create()
     {
         $title = 'Link External';
-        return view('sid.v3.link.create', compact('title'));
+        return view('backend.link.create', compact('title'));
     }
 
     public function store(StoreLinkExternalReq $request)
@@ -60,6 +61,26 @@ class LinkExternalController extends Controller
                 $tipe = 'medsos';
                 $icon = $iconData;
             }
+            if (str_contains($validate['url_ext'], 'facebook')) {
+                ProfilBisnis::where('id', '!=', null)->update([
+                    'facebook' => $validate['url_ext']
+                ]);
+            }
+            if (str_contains($validate['url_ext'], 'twitter')) {
+                ProfilBisnis::where('id', '!=', null)->update([
+                    'twitter' => $validate['url_ext']
+                ]);
+            }
+            if (str_contains($validate['url_ext'], 'instagram')) {
+                ProfilBisnis::where('id', '!=', null)->update([
+                    'instagram' => $validate['url_ext']
+                ]);
+            }
+            if (str_contains($validate['url_ext'], 'youtube')) {
+                ProfilBisnis::where('id', '!=', null)->update([
+                    'youtube' => $validate['url_ext']
+                ]);
+            }
         }
 
         $validate['user_id'] = auth()->user()->id;
@@ -79,7 +100,7 @@ class LinkExternalController extends Controller
     public function edit(LinkExternal $link)
     {
         $title = "Link External";
-        return view('sid.v3.link.edit', compact('title', 'link'));
+        return view('backend.link.edit', compact('title', 'link'));
     }
 
     public function update(StoreLinkExternalReq $request, LinkExternal $link)
@@ -100,6 +121,26 @@ class LinkExternalController extends Controller
         foreach ($medsos as $dts => $iconData) {
             if (str_contains($validate['url_ext'], $dts)) {
                 $tipe = 'medsos';
+            }
+            if (str_contains($validate['url_ext'], 'facebook')) {
+                ProfilBisnis::where('id', '!=', null)->update([
+                    'facebook' => $validate['url_ext']
+                ]);
+            }
+            if (str_contains($validate['url_ext'], 'twitter')) {
+                ProfilBisnis::where('id', '!=', null)->update([
+                    'twitter' => $validate['url_ext']
+                ]);
+            }
+            if (str_contains($validate['url_ext'], 'instagram')) {
+                ProfilBisnis::where('id', '!=', null)->update([
+                    'instagram' => $validate['url_ext']
+                ]);
+            }
+            if (str_contains($validate['url_ext'], 'youtube')) {
+                ProfilBisnis::where('id', '!=', null)->update([
+                    'youtube' => $validate['url_ext']
+                ]);
             }
         }
         $validate['tipe'] = $tipe;

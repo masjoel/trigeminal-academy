@@ -3,6 +3,7 @@
 @section('title', $title)
 
 @push('style')
+    <link rel="stylesheet" href="{{ asset('v3/libs/select2/select2.css') }}" />
 @endpush
 
 @section('main')
@@ -38,6 +39,17 @@
                                             </div>
                                         @enderror
                                     </div>
+                                    <div class="form-group mb-2">
+                                        <label>Colour</label>
+                                        <select name="warna" class="form-control select2">
+                                            <option value="primary" selected>Primary</option>
+                                            <option value="secondary">Secondary</option>
+                                            <option value="success">Success</option>
+                                            <option value="danger">Danger</option>
+                                            <option value="warning">Warning</option>
+                                            <option value="info">Info</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -54,4 +66,6 @@
 @endsection
 
 @push('scripts')
+    <script src="{{ asset('js/scripts.js') }}"></script>
+    <script src="{{ asset('v3/libs/select2/select2.js') }}"></script>
 @endpush

@@ -446,9 +446,22 @@ class CustomHelper
     $list = '';
     foreach ($data as $dt) {
       if ($dt === $data->last()) {
-        $list .= '<a href="' . htmlentities($dt->url_ext, ENT_QUOTES, 'UTF-8') . '" target="_blank" title="' . htmlentities($dt->keterangan, ENT_QUOTES, 'UTF-8') . '"><i class="' . htmlentities($dt->icon, ENT_QUOTES, 'UTF-8') . ' fa-2x"></i></a>';
+        $list .= '<a href="' . htmlentities($dt->url_ext, ENT_QUOTES, 'UTF-8') . '" target="_blank" title="' . htmlentities($dt->keterangan, ENT_QUOTES, 'UTF-8') . '"><i class="' . htmlentities($dt->icon, ENT_QUOTES, 'UTF-8') . ' text-white fa-2x"></i></a>';
       } else {
-        $list .= '<a href="' . htmlentities($dt->url_ext, ENT_QUOTES, 'UTF-8') . '" target="_blank" style="margin-right: 10px" title="' . htmlentities($dt->keterangan, ENT_QUOTES, 'UTF-8') . '"><i class="' . htmlentities($dt->icon, ENT_QUOTES, 'UTF-8') . ' fa-2x"></i></a>';
+        $list .= '<a href="' . htmlentities($dt->url_ext, ENT_QUOTES, 'UTF-8') . '" target="_blank" style="margin-right: 10px" title="' . htmlentities($dt->keterangan, ENT_QUOTES, 'UTF-8') . '"><i class="' . htmlentities($dt->icon, ENT_QUOTES, 'UTF-8') . ' text-white fa-2x"></i></a>';
+      }
+    }
+    return $list;
+  }
+  public static function linkMedsosTop()
+  {
+    $data = LinkExternal::where('tipe', 'medsos')->orderBy('id', 'asc')->get();
+    $list = '';
+    foreach ($data as $dt) {
+      if ($dt === $data->last()) {
+        $list .= '<a href="' . htmlentities($dt->url_ext, ENT_QUOTES, 'UTF-8') . '" target="_blank" title="' . htmlentities($dt->keterangan, ENT_QUOTES, 'UTF-8') . '"><i class="' . htmlentities($dt->icon, ENT_QUOTES, 'UTF-8') . ' text-white"></i></a>';
+      } else {
+        $list .= '<a href="' . htmlentities($dt->url_ext, ENT_QUOTES, 'UTF-8') . '" target="_blank" style="margin-right: 10px" title="' . htmlentities($dt->keterangan, ENT_QUOTES, 'UTF-8') . '"><i class="' . htmlentities($dt->icon, ENT_QUOTES, 'UTF-8') . ' text-white"></i></a>';
       }
     }
     return $list;

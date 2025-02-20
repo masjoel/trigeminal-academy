@@ -60,7 +60,6 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@email.com',
             'keterangan' => 'Instruktur Trigeminal Academy',
             'approval' => 'approved',
-            'kategori' => 'umum',
         ]);
         $this->call([
             UserSeeder::class,

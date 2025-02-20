@@ -6,6 +6,9 @@
 @endpush
 
 @section('main')
+    @php
+        use App\Models\Student;
+    $user = Student::where('user_id', auth()->user()->id)->first(); @endphp
     <div class="main-content">
         <section class="section">
             <div class="card mb-4">
@@ -142,6 +145,16 @@
                                                     </div>
                                                 @enderror
                                             </div>
+                                            @if ($user)
+                                                <div class="form-group mb-4">
+                                                    <label>Alamat</label>
+                                                    <textarea name="alamat" class="form-control" data-height="40">{{ old('alamat', $user->alamat) }}</textarea>
+                                                </div>
+                                                <div class="form-group mb-4">
+                                                    <label>Catatan</label>
+                                                    <textarea name="keterangan" class="form-control" data-height="60">{{ old('keterangan', $user->keterangan) }}</textarea>
+                                                </div>
+                                            @endif
                                         </div>
                                         <div class="col-md-6 col-12">
                                             <div class="form-group mb-4 mb-2">

@@ -26,6 +26,7 @@ use App\Http\Controllers\Frontend\SlidebannerController;
 use App\Http\Controllers\Frontend\ProfilBisnisController;
 use App\Http\Controllers\Frontend\PerangkatDesaController;
 use App\Http\Controllers\InstructorController;
+use App\Http\Controllers\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,7 +65,7 @@ Route::get('autonumbers', [AutoNumberController::class, 'get']);
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('profile-edit', function () {
+    Route::get('x', function () {
         return view('backend.profile');
     })->name('profile.edit');
     Route::resource('user', UserController::class);
@@ -91,7 +92,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('admin-struktur-organisasi', StrukturOrganisasi::class);
     Route::resource('admin-pengurus', PerangkatDesaController::class);
     // Route::resource('admin-anggota', AnggotaController::class);
-    Route::resource('admin-member', AnggotaController::class);
+    Route::resource('student', StudentController::class);
     Route::resource('course', ProductController::class);
     Route::resource('kategori-kursus', ProductCategoryController::class);
     Route::resource('instruktur', InstructorController::class);

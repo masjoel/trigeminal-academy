@@ -115,7 +115,7 @@
         <div class="container">
             <div class="row mb-4">
                 <div class="mb-5 col-md-12 col-sm-12  col-lg-4 wow zoomIn" data-wow-duration="2s">
-                    <img src="{{ infodesa('photo') == 'image/icon-foto.png' ? infodesa('photo') : Storage::url(infodesa('photo')) }}"
+                    <img src="{{ infodesa('logo') == 'image/icon-foto.png' ? infodesa('logo') : Storage::url(infodesa('logo')) }}"
                         style="height:200px;width:100%;object-fit:contain;" alt="slider-image" class="img-fluid">
                 </div>
                 <div class="col-md-7 col-sm-12  col-md-12 col-lg-8 wow bounceInLeft" data-wow-duration="2s">

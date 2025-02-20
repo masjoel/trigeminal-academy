@@ -4,17 +4,20 @@
         <div>Dashboard</div>
     </a>
 </li>
-<li class="menu-item {{ Request::is('admin-member*') ? 'active' : '' }}">
-    <a href="{{ route('admin-member.index') }}" class="menu-link "><i class="menu-icon ti ti-users"></i>
-        <div>Member</div>
-    </a>
-</li>
-<li class="menu-item {{ Request::is('instruktur*') ? 'active' : '' }}">
-    <a href="{{ route('instruktur.index') }}" class="menu-link "><i class="menu-icon ti ti-users"></i>
-        <div>Instruktur</div>
-    </a>
-</li>
-{{-- @endcan --}}
+@can('student')
+    <li class="menu-item {{ Request::is('student*') ? 'active' : '' }}">
+        <a href="{{ route('student.index') }}" class="menu-link "><i class="menu-icon ti ti-users"></i>
+            <div>Student</div>
+        </a>
+    </li>
+@endcan
+@can('instruktur')
+    <li class="menu-item {{ Request::is('instruktur*') ? 'active' : '' }}">
+        <a href="{{ route('instruktur.index') }}" class="menu-link "><i class="menu-icon ti ti-users"></i>
+            <div>Instruktur</div>
+        </a>
+    </li>
+@endcan
 @if (Str::contains(Auth::user()->getPermissionNames(), 'halaman') ||
         Str::contains(Auth::user()->getPermissionNames(), 'artikel') ||
         Str::contains(Auth::user()->getPermissionNames(), 'category-artikel'))

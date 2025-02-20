@@ -17,7 +17,6 @@ Route::group(['middleware' => config('fortify.middleware', ['web']), 'namespace'
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
 });
-
 Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])
     ->middleware(['guest', 'web'])
     ->name('password.request');

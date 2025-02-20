@@ -26,6 +26,7 @@ class StoreProductCatReq extends FormRequest
             'description' => 'nullable|string|max:200',
             'thumbnail' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg,webp|max:2048',
             'user_id' => 'nullable',
+            'warna' => 'nullable',
         ];
     }
 

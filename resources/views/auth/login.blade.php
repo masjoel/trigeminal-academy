@@ -18,7 +18,7 @@
                         <div class="app-brand justify-content-center mb-9">
                             <a title="Logo" href="{{ route('home') }}" class="site__brand__logo">
                                 @if (infodesa('logo') == null)
-                                    Desaku
+                                    Trigeminal Academy
                                 @else
                                     <img src="{{ infodesa('logo') == 'image/icon-lkp2mpd.png' ? klien('logo') : Storage::url(infodesa('logo')) }}"
                                         style="max-height:80px; height:auto; max-width:350px"
@@ -33,7 +33,7 @@
                                     class="text-primary"><b>{{ substr(strtoupper(md5($mcad)), 0, 9) }}</b></span>
                                 via
                                 SMS/WA
-                                ke nomor: <strong>0813 2487 9254</strong>
+                                ke nomor: <strong>0852907248904</strong>
                                 untuk mendapatkan <i>
                                     <span class="text-danger">KODE AKTIVASI</span>
                                 </i> <br>
@@ -80,12 +80,17 @@
                                 <div class="my-4">
                                     <button class="btn btn-primary d-grid w-100" type="submit">Login</button>
                                 </div>
-                                <div class="mb-6">
+                                <div class="mb-4">
                                     <div class="d-flex justify-content-between">
                                         <a href="{{ route('password.request') }}">
                                             <p class="mb-0">Lupa Password ?</p>
                                         </a>
                                     </div>
+                                </div>
+                                <div class="mb-6">
+                                    <a href="{{ route('register') }}">
+                                        <p class="mb-0">Belum punya Akun ? REGISTER dulu </p>
+                                    </a>
                                 </div>
                             </form>
                         @endif
