@@ -37,6 +37,7 @@ use App\Http\Controllers\Frontend\PerangkatDesaController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/example-product-detail', [HomeController::class, 'exampleProductDetail'])->name('example-product-detail');
 // Route::get('/login', [HomeController::class, 'login']);
 Route::get('about', [HomeController::class, 'about'])->name('about');
 Route::get('kontak', [HomeController::class, 'kontak'])->name('kontak');
