@@ -398,6 +398,38 @@
                 </div>
             </div>
             <div class="row gutter-40 editor-post-active-two">
+                @foreach ($courses as $v)
+                    <div class="col-lg-3 wow bounceInRight" data-wow-duration="3s">
+                        <div class="editor-post-three">
+                            <div class="editor-post-thumb-three">
+                                @if ($v->image_url != null)
+                                    <img src="{{ Storage::url('thumb/' . $v->image_url) }}"
+                                        alt="{{ $v->title }}" class="w-100" style="min-height: 205px">
+                                @else
+                                    <img src="{{ asset('img/example-image.jpg') }}" class="img-fluid"
+                                        alt="{{ $v->title }}">
+                                @endif
+                                <a href="{{ Storage::url($v->image_url) }}" class="paly-btn popup-video"><i class="fas fa-camera"></i>
+                                </a>
+                            </div>
+                            <div class="editor-post-content-three">
+                                <h2 class="post-title"><a href="{{ $v->excerpt }}"
+                                        target="_blank">{{ $v->title }}</a></h2>
+                                <div class="blog-post-meta">
+                                    <ul class="list-wrap">
+                                        <li style="font-size: 10px"><i
+                                                class="flaticon-calendar"></i>{{ kal($v->created_at) }} </li>
+                                        <li style="font-size: 10px"><i
+                                                class="flaticon-history"></i>{{ $v->created_at->diffForHumans() }}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            {{-- <div class="row gutter-40 editor-post-active-two">
                 @foreach ($foto as $v)
                     <div class="col-lg-3 wow bounceInRight" data-wow-duration="3s">
                         <div class="editor-post-three">
@@ -428,7 +460,7 @@
                         </div>
                     </div>
                 @endforeach
-            </div>
+            </div> --}}
         </div>
     </section>
 
