@@ -44,12 +44,22 @@
                                     <div class="card academy-content shadow-none border">
                                         <div class="p-2">
                                             @if ($course->video_url)
-                                                <video class="w-100" poster="{{ asset('storage/' . $course->image_url) }}"
-                                                    id="plyr-video-player" playsinline controls controlsList="nodownload">
-                                                    <source
-                                                        src="{{ $course->storage_type == 'youtube' ? $course->video_url : asset('storage/' . $course->video_url) }}"
-                                                        type="video/mp4" />
-                                                </video>
+                                                @if ($course->storage_type == 'youtube')
+                                                    <iframe class="w-100" height="360" src="{{ $course->video_url }}"
+                                                        title="YouTube video player" frameborder="0"
+                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                        referrerpolicy="strict-origin-when-cross-origin"
+                                                        allowfullscreen></iframe>
+                                                @else
+                                                    <video class="w-100"
+                                                        poster="{{ asset('storage/' . $course->image_url) }}"
+                                                        id="plyr-video-player" playsinline controls
+                                                        controlsList="nodownload">
+                                                        <source
+                                                            src="{{ $course->storage_type == 'youtube' ? $course->video_url : asset('storage/' . $course->video_url) }}"
+                                                            type="video/mp4" />
+                                                    </video>
+                                                @endif
                                             @endif
                                         </div>
                                         <div class="card-body pt-4">

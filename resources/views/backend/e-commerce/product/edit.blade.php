@@ -204,13 +204,23 @@
                                     <div class="form-group mb-2">
                                         <div class="cursor-pointer">
                                             @if ($course->video_url)
-                                                <video class="w-100"
-                                                    poster="{{ asset('storage/' . $course->image_url) }}"
-                                                    id="plyr-video-player" playsinline controls controlsList="nodownload">
-                                                    <source
-                                                        src="{{ $course->storage_type == 'youtube' ? $course->video_url : asset('storage/' . $course->video_url) }}"
-                                                        type="video/mp4" />
-                                                </video>
+                                                @if ($course->storage_type == 'youtube')
+                                                    <iframe class="w-100" height="200" src="{{ $course->video_url }}" title="YouTube video player"
+                                                        frameborder="0"
+                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                        referrerpolicy="strict-origin-when-cross-origin"
+                                                        allowfullscreen></iframe>
+                                                @else
+                                                    <video class="w-100"
+                                                        poster="{{ asset('storage/' . $course->image_url) }}"
+                                                        id="plyr-video-player" playsinline controls
+                                                        controlsList="nodownload">
+                                                        <source
+                                                            src="{{ $course->storage_type == 'youtube' ? $course->video_url : asset('storage/' . $course->video_url) }}"
+                                                            type="video/mp4" />
+                                                    </video>
+                                                @endif
+                                                {{-- https://www.youtube.com/embed/0hS47NtMlGA?si=0NGtE_GuE1VRw0qR --}}
                                             @endif
                                         </div>
                                     </div>
