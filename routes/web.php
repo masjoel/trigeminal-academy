@@ -27,6 +27,7 @@ use App\Http\Controllers\Frontend\ProfilBisnisController;
 use App\Http\Controllers\Frontend\PerangkatDesaController;
 use App\Http\Controllers\Backend\InstructorController;
 use App\Http\Controllers\Backend\StudentController;
+use App\Http\Controllers\Frontend\ProductFrontendController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,9 @@ use App\Http\Controllers\Backend\StudentController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/example-product-detail', [HomeController::class, 'exampleProductDetail'])->name('example-product-detail');
+Route::get('/course/{slug}', [ProductFrontendController::class, 'show'])->name('product.show');
+Route::get('/courses', [ProductFrontendController::class, 'index'])->name('product.index');
+
 // Route::get('/login', [HomeController::class, 'login']);
 Route::get('about', [HomeController::class, 'about'])->name('about');
 Route::get('kontak', [HomeController::class, 'kontak'])->name('kontak');

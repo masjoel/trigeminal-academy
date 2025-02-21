@@ -121,14 +121,14 @@ $courseData = [
 <section id="detail-class">
     <!-- Hero Section -->
     <div class="tw-relative tw-w-full tw-h-[300px] md:tw-h-[400px] tw-bg-gray-900">
-        <img src="{{ $courseData['cover_image'] }}" alt="Course Cover" class="tw-w-full tw-h-full tw-object-cover tw-opacity-50">
+        <img src="{{ Storage::url('thumb/',$course->image_url) }}" alt="Course Cover" class="tw-w-full tw-h-full tw-object-cover tw-opacity-50">
         <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-t tw-from-gray-900/80 tw-to-transparent"></div>
 
         <!-- Course Title & Category -->
         <div class="tw-absolute tw-bottom-0 tw-left-0 tw-right-0 tw-p-6 md:tw-p-10">
             <div class="tw-container tw-mx-auto">
                 <span class="tw-bg-[#4A1B7F]/10 tw-text-white tw-px-4 tw-py-1.5 tw-rounded-full tw-text-sm tw-font-medium tw-mb-4 tw-inline-block">
-                    {{ $courseData['category'] }}
+                    {{ $course->productCategory->category }}
                 </span>
                 <h1 class="tw-text-2xl md:tw-text-4xl tw-font-bold tw-text-white tw-mb-2">
                     {{ $courseData['title'] }}
@@ -202,7 +202,9 @@ $courseData = [
                         </div>
                     </div>
                 </div>
+
             </div>
+
             <!-- Sidebar -->
             <div class="tw-col-span-1">
                 <div class="tw-bg-white tw-rounded-xl tw-shadow-md tw-border tw-border-[#4A1B7F]-100 tw-p-6 tw-sticky tw-top-4">

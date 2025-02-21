@@ -115,7 +115,7 @@
     {{-- Mulai Konten tailwindcss --}}
         <section id="tw-sec-1" class="tw-container tw-mx-auto tw-px-4 tw-py-12 md:tw-py-16">
             <div class="tw-flex tw-flex-col-reverse md:tw-flex-row tw-items-center tw-justify-between tw-gap-8">
-                <!-- Left Content -->
+                {{-- Left Content --}}
                 <div class="tw-flex-1 md:tw-text-left tw-text-center">
                     <h1 class="tw-text-4xl md:tw-text-5xl tw-font-bold tw-text-[#4A1B7F]">Trigeminal Academy</h1>
                     <h2 class="tw-text-2xl md:tw-text-3xl tw-text-gray-800 tw-mt-4">Upskilling and Reskilling Platform</h2>
@@ -134,16 +134,16 @@
                     </div>
                 </div>
 
-                <!-- Right Content - Hero Image -->
+                {{-- Right Content - Hero Image --}}
                 <div class="tw-flex-1 tw-relative tw-w-full">
                     <div class="tw-relative">
-                        <!-- Main Image Container -->
+                        {{-- Main Image Container --}}
                         <div class="tw-rounded-[2.5rem] shadow-1 shadow-gray-300 tw-overflow-hidden tw-relative">
                             <img src="https://images.pexels.com/photos/572056/pexels-photo-572056.jpeg?auto=compress&cs=tinysrgb&w=600"
                                 alt="Students Learning"
                                 class="tw-w-full md:tw-max-w-[600px] tw-mx-auto tw-h-auto tw-object-cover tw-rounded-[2.5rem]">
                         </div>
-                        <!-- Purple Glow Effect -->
+                        {{-- Purple Glow Effect --}}
                         <div class="tw-absolute tw-inset-0 tw-bg-purple-300 tw-opacity-20 tw-blur-3xl tw-rounded-full tw--z-10">
                         </div>
                     </div>
@@ -151,10 +151,10 @@
             </div>
         </section>
 
-        <!-- Program Categories Section -->
+        {{-- Program Categories Section --}}
         <section class="tw-container tw-mx-auto tw-px-4 tw-py-12">
             <div class="tw-grid tw-grid-cols-2 lg:tw-grid-cols-4 tw-gap-4 md:tw-gap-6">
-                <!-- C-Suite Programs -->
+                {{-- C-Suite Programs --}}
                 <div class="tw-relative tw-overflow-hidden tw-group tw-h-[90px] md:tw-h-[140px]">
                     <div class="tw-bg-[#4A1B7F] tw-h-full tw-relative" style="border-radius: 34px 40px 80px 5px;">
                         <img src="https://cdn.pixabay.com/photo/2017/08/01/13/36/computer-2565478_1280.jpg"
@@ -167,7 +167,7 @@
                     </div>
                 </div>
 
-                <!-- Senior Executive Programs -->
+                {{-- Senior Executive Programs --}}
                 <div class="tw-relative tw-overflow-hidden tw-group tw-h-[90px] md:tw-h-[140px]">
                     <div class="tw-bg-[#831843] tw-h-full tw-relative" style="border-radius: 34px 40px 80px 5px;">
                         <img src="https://cdn.pixabay.com/photo/2017/03/28/12/11/chairs-2181960_640.jpg"
@@ -180,7 +180,7 @@
                     </div>
                 </div>
 
-                <!-- Junior Executive Programs -->
+                {{-- Junior Executive Programs --}}
                 <div class="tw-relative tw-overflow-hidden tw-group tw-h-[90px] md:tw-h-[140px]">
                     <div class="tw-bg-[#92400E] tw-h-full tw-relative" style="border-radius: 34px 40px 80px 5px;">
                         <img src="https://cdn.pixabay.com/photo/2017/03/28/12/07/bricks-2181920_640.jpg"
@@ -193,7 +193,7 @@
                     </div>
                 </div>
 
-                <!-- Student Programs -->
+                {{-- Student Programs --}}
                 <div class="tw-relative tw-overflow-hidden tw-group tw-h-[90px] md:tw-h-[140px]">
                     <div class="tw-bg-[#A21CAF] tw-h-full tw-relative" style="border-radius: 34px 40px 80px 5px;">
                         <img src="https://cdn.pixabay.com/photo/2015/01/08/18/26/man-593333_640.jpg" alt="Student Programs"
@@ -210,8 +210,8 @@
 
         {{-- Section Kelas tailwindcss --}}
 
-        @php
-            $courses = [
+        {{-- @php
+            $dts = [
                 [
                     'title' => 'Web Development Fundamentals',
                     'description' => 'Pelajari dasar-dasar pengembangan web modern dari awal hingga mahir dengan studi kasus yang komprehensif.',
@@ -367,7 +367,7 @@
                     'category' => 'Blockchain'
                 ],
             ];
-        @endphp
+        @endphp --}}
         <section class="top-news-post-area pt-50 pb-70">
             <div class="container">
                 <div class="row justify-content-center">
@@ -379,66 +379,66 @@
                             <div class="section-title-line"></div>
                         </div>
 
-                        <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-4 tw-gap-6">
-                            @foreach($courses as $idx => $course)
-                                <a href="{{ route('example-product-detail') }}" class="tw-block">
+                        <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-6">
+                            @foreach($courses as $dt)
+                                <a href="{{ route('product.show', $dt->slug) }}" class="tw-block">
                                     <div class="tw-bg-white tw-rounded-xl tw-shadow-lg tw-overflow-hidden tw-h-full tw-transition-all tw-duration-300 hover:tw-brightness-95">
                                         <div class="tw-relative tw-h-48">
-                                            <img src="https://picsum.photos/1200/1200?random={{ $idx }}"
-                                                alt="{{ $course['title'] }}"
+                                            <img src="https://picsum.photos/1200/1200?random={{ $dt->idx }}"
+                                                alt="{{ $dt->name }}"
                                                 class="tw-w-full tw-h-full tw-object-cover">
 
-                                            <!-- Status Badges -->
-                                            <div class="tw-absolute tw-top-4 tw-right-4 tw-flex tw-items-center tw-gap-2">
-                                                @if($course['isNew'])
+                                            {{-- Status Badges --}}
+                                            {{-- <div class="tw-absolute tw-top-4 tw-right-4 tw-flex tw-items-center tw-gap-2">
+                                                @if($dt['isNew'])
                                                     <div class="tw-bg-green-500 tw-text-white tw-px-3 tw-py-1 tw-rounded-full tw-text-sm tw-whitespace-nowrap">
                                                         Baru
                                                     </div>
                                                 @endif
-                                                @if($course['isPopular'])
+                                                @if($dt['isPopular'])
                                                     <div class="tw-bg-[#4A1B7F] tw-text-white tw-px-3 tw-py-1 tw-rounded-full tw-text-sm tw-whitespace-nowrap">
                                                         Populer
                                                     </div>
                                                 @endif
-                                            </div>
+                                            </div> --}}
                                         </div>
 
                                         <div class="tw-p-6 tw-pt-6 tw-flex tw-flex-col tw-h-[calc(100%-192px)]">
-                                            <!-- Category Badge -->
+                                            {{-- Category Badge --}}
                                             <div class="tw-mb-3">
                                                 <span class="tw-bg-[#4A1B7F]/10 tw-text-[#4A1B7F] tw-px-3 tw-py-1 tw-rounded-full tw-text-sm tw-font-medium">
-                                                    {{ $course['category'] }}
+                                                    {{ $dt->productCategory->name }}
                                                 </span>
                                             </div>
 
-                                            <h3 class="tw-text-xl tw-font-bold tw-text-gray-800 tw-mb-2">{{ $course['title'] }}</h3>
+                                            <h3 class="tw-text-xl tw-font-bold tw-text-gray-800 tw-mb-2">{{ $dt->name }}</h3>
 
-                                            <p class="tw-text-gray-600 tw-mb-4 tw-line-clamp-2">{{ $course['description'] }}</p>
+                                            <p class="tw-text-gray-600 tw-mb-4 tw-line-clamp-2">{{ Str::words($dt->description, 15, '...') }}</p>
 
                                             <div class="tw-flex tw-flex-wrap tw-gap-4 tw-mb-4">
                                                 <div class="tw-flex tw-items-center">
                                                     <i class="flaticon-history tw-text-[#4A1B7F] tw-mr-2"></i>
-                                                    <span class="tw-text-sm tw-text-gray-600">{{ $course['duration'] }} Jam</span>
+                                                    <span class="tw-text-sm tw-text-gray-600">{{ $dt->video_duration }} Jam</span>
                                                 </div>
                                                 <div class="tw-flex tw-items-center">
                                                     <i class="flaticon-calendar tw-text-[#4A1B7F] tw-mr-2"></i>
-                                                    <span class="tw-text-sm tw-text-gray-600">{{ $course['materials'] }} Materi</span>
+                                                    <span class="tw-text-sm tw-text-gray-600">{{ $dt->productContent->count() }} Materi</span>
                                                 </div>
                                             </div>
 
                                             <div class="tw-mt-auto">
                                                 <div class="tw-mb-4">
-                                                    @if($course['discount'])
+                                                    @if($dt['discount'])
                                                         <div class="tw-flex tw-items-center tw-gap-2 tw-mb-1">
-                                                            <span class="tw-text-gray-500 tw-line-through">Rp {{ number_format($course['price'], 0, ',', '.') }}</span>
-                                                            <span class="tw-bg-red-100 tw-text-red-600 tw-px-2 tw-py-1 tw-rounded tw-text-xs">{{ $course['discount'] }}% OFF</span>
+                                                            <span class="tw-text-gray-500 tw-line-through">Rp {{ number_format($dt->price, 0, ',', '.') }}</span>
+                                                            <span class="tw-bg-red-100 tw-text-red-600 tw-px-2 tw-py-1 tw-rounded tw-text-xs">{{ $dt->discount }}% OFF</span>
                                                         </div>
                                                         <div class="tw-text-[#4A1B7F] tw-font-bold tw-text-2xl">
-                                                            Rp {{ number_format($course['price'] * (1 - $course['discount']/100), 0, ',', '.') }}
+                                                            Rp {{ number_format($dt->price * (1 - $dt->discount/100), 0, ',', '.') }}
                                                         </div>
                                                     @else
                                                         <div class="tw-text-[#4A1B7F] tw-font-bold tw-text-2xl">
-                                                            Rp {{ number_format($course['price'], 0, ',', '.') }}
+                                                            Rp {{ number_format($dt->price, 0, ',', '.') }}
                                                         </div>
                                                     @endif
                                                 </div>
@@ -451,6 +451,12 @@
                                     </div>
                                 </a>
                             @endforeach
+                        </div>
+                        <div class="tw-mt-8 tw-flex tw-justify-center">
+                            <a href="{{ route('product.index') }}" class="tw-bg-[#4A1B7F] tw-text-white tw-px-6 tw-py-3 tw-rounded-lg tw-text-lg tw-font-medium
+                                hover:tw-bg-[#3A1560] hover:tw-text-white tw-transition-all tw-duration-300 tw-cursor-pointer tw-shadow-lg">
+                                Lihat Kelas Lainnya
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -731,6 +737,7 @@
             </div>
         </div>
     </section> --}}
+
     <section class="editor-post-area-three pt-30" style="padding: 30px">
         <div class="container">
             <div class="row justify-content-left">
@@ -745,7 +752,7 @@
                 </div>
             </div>
             <div class="row gutter-40 editor-post-active-two">
-                @foreach ($courses as $v)
+                {{-- @foreach ($dts as $v)
                     <div class="col-lg-3 wow bounceInRight" data-wow-duration="3s">
                         <div class="editor-post-three">
                             <div class="editor-post-thumb-three">
@@ -774,7 +781,7 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+                @endforeach --}}
             </div>
             {{-- <div class="row gutter-40 editor-post-active-two">
                 @foreach ($foto as $v)

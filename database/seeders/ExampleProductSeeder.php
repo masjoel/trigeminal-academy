@@ -16,94 +16,112 @@ class ExampleProductSeeder extends Seeder
 {
     public function run()
     {
-        $faker = Faker::create('id_ID');
-
-        // Nonaktifkan foreign key checks
-        Schema::disableForeignKeyConstraints();
-        // Kosongkan tabel sebelum seeding
-        DB::table('product_contents')->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
         DB::table('products')->truncate();
+        DB::table('product_contents')->truncate();
         DB::table('product_categories')->truncate();
         DB::table('instructors')->truncate();
+        DB::table('students')->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
+        $faker = Faker::create('id_ID');
 
-         // Kosongkan tabel
-         Product::truncate();
-         ProductContent::truncate();
-         ProductCategory::truncate();
-         Instructor::truncate();
-
-         // Aktifkan kembali foreign key checks
-         Schema::enableForeignKeyConstraints();
-
-        // Buat kategori
-        $categories = [];
+        // Seeding product_categories
         for ($i = 0; $i < 5; $i++) {
-            $categories[] = ProductCategory::create([
-                'user_id' => 1,
+            DB::table('product_categories')->insert([
+                'user_id' => null,
                 'name' => $faker->word,
                 'description' => $faker->sentence,
-                'thumbnail' => $faker->imageUrl(200, 200, 'business'),
+                'thumbnail' => $faker->imageUrl(640, 480, 'business'),
+                'warna' => $faker->hexColor,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
 
-        // Buat instruktur
-        $instructors = [];
+        // Seeding instructors
         for ($i = 0; $i < 5; $i++) {
-            $instructors[] = Instructor::create([
-                'user_id' => 1,
+            DB::table('instructors')->insert([
+                'user_id' => null,
                 'nama' => $faker->name,
-                'slug' => Str::slug($faker->name),
+                'slug' => $faker->slug,
                 'alamat' => $faker->address,
                 'telpon' => $faker->phoneNumber,
                 'email' => $faker->email,
-                'photo' => $faker->imageUrl(200, 200, 'people'),
+                'photo' => $faker->imageUrl(640, 480, 'people'),
                 'keterangan' => $faker->sentence,
+                'ktp' => $faker->numerify('##############'),
+                'npwp' => $faker->numerify('##.###.###.#-###.###'),
+                'bank' => $faker->company,
+                'rekening' => $faker->bankAccountNumber,
                 'approval' => $faker->randomElement(['pending', 'approved']),
-                'kategori' => $faker->randomElement(['muslim', 'umum']),
-                'saldo' => $faker->randomFloat(2, 100000, 5000000),
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
 
-        // Buat produk
-        for ($i = 0; $i < 20; $i++) {
-            $category = $faker->randomElement($categories);
-            $instructor = $faker->randomElement($instructors);
+        // Seeding students
+        for ($i = 0; $i < 10; $i++) {
+            DB::table('students')->insert([
+                'user_id' => null,
+                'nama' => $faker->name,
+                'slug' => $faker->slug,
+                'alamat' => $faker->address,
+                'telpon' => $faker->phoneNumber,
+                'email' => $faker->email,
+                'photo' => $faker->imageUrl(640, 480, 'people'),
+                'keterangan' => $faker->sentence,
+                'ktp' => $faker->numerify('##############'),
+                'npwp' => $faker->numerify('##.###.###.#-###.###'),
+                'bank' => $faker->company,
+                'rekening' => $faker->bankAccountNumber,
+                'approval' => $faker->randomElement(['pending', 'approved']),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
 
-            $product = Product::create([
-                'user_id' => 1,
-                'category_id' => $category->id,
-                'instructor_id' => $instructor->id,
-                'instructor' => $instructor->nama,
-                'name' => $faker->sentence(3),
-                'slug' => Str::slug($faker->sentence(3)),
-                'size' => $faker->randomFloat(2, 1, 50),
+        // Seeding products
+        for ($i = 0; $i < 10; $i++) {
+            $productId = DB::table('products')->insertGetId([
+                'user_id' => null,
+                'category_id' => rand(1, 5),
+                'instructor_id' => rand(1, 5),
+                'instructor' => $faker->name,
+                'name' => $faker->word,
+                'slug' => $faker->slug,
+                'size' => $faker->randomFloat(2, 1, 100),
+                'excerpt' => $faker->sentence,
                 'description' => $faker->paragraph,
-                'budget' => $faker->randomFloat(2, 100000, 5000000),
-                'price' => $faker->randomFloat(2, 50000, 2000000),
+                'budget' => $faker->randomFloat(2, 10000, 500000),
+                'price' => $faker->randomFloat(2, 10000, 1000000),
                 'discount' => $faker->randomFloat(2, 0, 50),
                 'stock' => $faker->numberBetween(1, 100),
-                'stock_min' => $faker->numberBetween(1, 5),
-                'in_stock' => true,
-                'publish' => true,
+                'stock_min' => $faker->numberBetween(1, 10),
+                'in_stock' => $faker->boolean,
+                'publish' => $faker->boolean,
                 'level' => $faker->randomElement(['pemula', 'menengah', 'mahir']),
-                'image_url' => $faker->imageUrl(640, 480, 'business'),
-                'storage_type' => 'local',
-                'video_url' => 'https://www.youtube.com/watch?v=' . Str::random(10),
-                'video_duration' => $faker->numberBetween(60, 300),
+                'image_url' => $faker->imageUrl(640, 480, 'products'),
+                'storage_type' => $faker->randomElement(['local', 'cloud']),
+                'video_url' => $faker->url,
+                'video_duration' => $faker->numberBetween(60, 3600),
                 'download_url' => $faker->url,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
 
-            // Buat konten untuk produk
-            for ($j = 0; $j < rand(2, 5); $j++) {
-                ProductContent::create([
-                    'product_id' => $product->id,
+            // Seeding product_contents
+            for ($j = 0; $j < rand(1, 5); $j++) {
+                DB::table('product_contents')->insert([
+                    'product_id' => $productId,
                     'parent' => null,
                     'title' => $faker->sentence,
-                    'storage_type' => 'youtube',
-                    'video_url' => 'https://www.youtube.com/watch?v=' . Str::random(10),
-                    'duration' => $faker->numberBetween(60, 600),
+                    'storage_type' => $faker->randomElement(['youtube', 'local']),
+                    'video_url' => $faker->url,
+                    'duration' => $faker->randomFloat(2, 5, 120),
                     'description' => $faker->sentence,
+                    'created_at' => now(),
+                    'updated_at' => now(),
                 ]);
             }
         }
