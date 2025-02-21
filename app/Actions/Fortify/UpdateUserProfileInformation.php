@@ -4,6 +4,7 @@ namespace App\Actions\Fortify;
 
 use App\Models\User;
 use Ramsey\Uuid\Uuid;
+use App\Models\Student;
 use App\Models\ImageResize;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\UploadedFile;
@@ -41,7 +42,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             // $originalName = $avatar->getClientOriginalName();
             // $extension = $avatar->getClientOriginalExtension();
             // $filenameWithoutExtension = pathinfo($originalName, PATHINFO_FILENAME);
-    
+
             $extFile = $avatar->getClientOriginalExtension();
             $nameFile = Uuid::uuid1()->getHex() . '.' . $extFile;
             if ($avatarPath != null) {
@@ -64,11 +65,11 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             ImageResize::createThumbnail($smallthumbnailpath, 100, 100);
             // Simpan file atau lakukan operasi lain
             // $avatarPath = $avatar->store('avatars');
-    
+
             // Simpan informasi ini ke database atau log
             // Misalnya:
             // $user->avatar = $avatarPath;
-            
+
             // Debugging output to ensure correct values
             // dd([
             //     'originalName' => $originalName,
@@ -79,8 +80,10 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
         }
         // dd($input['avatar']);
 
-        if ($input['email'] !== $user->email &&
-            $user instanceof MustVerifyEmail) {
+        if (
+            $input['email'] !== $user->email &&
+            $user instanceof MustVerifyEmail
+        ) {
             $this->updateVerifiedUser($user, $input);
         } else {
             $user->forceFill([
@@ -89,6 +92,18 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 'phone' => $input['phone'],
                 'avatar' => $avatarPath,
             ])->save();
+            // cek Student
+            $cekStudent = Student::where('user_id', $user->id)->first();
+            if ($cekStudent) {
+                Student::where('user_id', $user->id)->update([
+                    'nama' => $input['name'],
+                    'email' => $input['email'],
+                    'telpon' => $input['phone'],
+                    'alamat' => $input['alamat'],
+                    'keterangan' => $input['keterangan'],
+                    'photo' => $avatarPath,
+                ]);
+            }
         }
     }
 

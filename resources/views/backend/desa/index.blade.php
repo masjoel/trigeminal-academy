@@ -34,8 +34,8 @@
                             <div class="card-header header-elements">
                                 <h5 class="mb-0 me-2">Detail</h5>
                                 <div class="card-header-elements ms-auto">
-                                    {{-- <a href="{{ route('link.index') }}" class="btn btn-info waves-effect waves-light"><i
-                                            class="ti ti-link me-2"></i>Medsos & Link eksternal</a> --}}
+                                    <a href="{{ route('link.index') }}" class="btn btn-info waves-effect waves-light"><i
+                                            class="ti ti-link me-2"></i>Medsos & Link eksternal</a>
                                     <a href="{{ route('profil-bisnis.edit', infodesa('id')) }}"
                                         class="btn btn-warning waves-effect waves-light"><i
                                             class="ti ti-edit me-2"></i>Edit</a>

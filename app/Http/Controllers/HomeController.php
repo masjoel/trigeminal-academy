@@ -6,6 +6,7 @@ use Ramsey\Uuid\Uuid;
 use App\Models\Anggota;
 use App\Models\Artikel;
 use App\Models\Halaman;
+use App\Models\Product;
 use App\Models\Provinsi;
 use App\Models\ImageResize;
 use App\Models\Slidebanner;
@@ -86,9 +87,11 @@ class HomeController extends Controller
             ->select('artikels.*')
             ->latest()->limit(9)->get();
 
-        $title = klien('nama_client') == null ? 'Desa Klampok' : klien('nama_client');
+        $title = klien('nama_client') == null ? 'LMS' : klien('nama_client');
+        $courses = Product::with('productCategory', 'instruktur')->where('publish', '1')->limit(3)->latest()->get();
 
-        return view('frontend.beranda', compact('title', 'profil_usaha', 'artikel', 'banner', 'halaman', 'sid', 'tentang_kami', 'kontak_kami', 'feature', 'berita', 'berita2', 'berita3', 'pengumuman', 'pengumuman3', 'top_stories', 'video', 'agenda', 'agenda3', 'galeries', 'perangkatdesa', 'foto'));
+
+        return view('frontend.beranda', compact('title', 'profil_usaha', 'artikel', 'banner', 'halaman', 'sid', 'tentang_kami', 'kontak_kami', 'feature', 'berita', 'berita2', 'berita3', 'pengumuman', 'pengumuman3', 'top_stories', 'video', 'agenda', 'agenda3', 'galeries', 'perangkatdesa', 'foto', 'courses'));
     }
 
     function exampleProductDetail(Request $request)
@@ -167,7 +170,7 @@ class HomeController extends Controller
 
     public function about()
     {
-        $title = 'Tentang ' . klien('nama_client') == null ? 'Desa Klampok' : klien('nama_client');;
+        $title = 'Tentang ' . klien('nama_client') == null ? 'LMS' : klien('nama_client');;
         $halaman = Halaman::where('jenis', 'page')->where('status', 'published')->where('idkategori', 'about')->latest()->first();
         return view('frontend.hlm', compact('title', 'halaman'));
     }

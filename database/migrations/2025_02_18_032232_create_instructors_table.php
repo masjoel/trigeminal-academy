@@ -25,15 +25,7 @@ return new class extends Migration
             $table->string('npwp', 100)->nullable();
             $table->string('bank', 100)->nullable();
             $table->string('rekening', 100)->nullable();
-            $table->dateTime('jam')->nullable();
             $table->enum('approval', ['pending', 'approved'])->nullable();
-            $table->enum('kategori', ['muslim', 'umum'])->nullable();
-            $table->bigInteger('idapr')->nullable();
-            $table->text('ketapr')->nullable();
-            $table->dateTime('tgapr')->nullable();
-            $table->double('saldo')->nullable();
-            $table->double('saldoawal')->nullable();
-            $table->string('sessi', 50)->nullable();
             $table->timestamps();
         });
     }

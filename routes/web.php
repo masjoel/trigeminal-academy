@@ -21,9 +21,12 @@ use App\Http\Controllers\Frontend\BukuTamuController;
 use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\Frontend\StrukturOrganisasi;
 use App\Http\Controllers\Backend\LinkExternalController;
+use App\Http\Controllers\Backend\ProductCategoryController;
 use App\Http\Controllers\Frontend\SlidebannerController;
 use App\Http\Controllers\Frontend\ProfilBisnisController;
 use App\Http\Controllers\Frontend\PerangkatDesaController;
+use App\Http\Controllers\Backend\InstructorController;
+use App\Http\Controllers\Backend\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,7 +66,7 @@ Route::get('autonumbers', [AutoNumberController::class, 'get']);
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('profile-edit', function () {
+    Route::get('x', function () {
         return view('backend.profile');
     })->name('profile.edit');
     Route::resource('user', UserController::class);
@@ -90,8 +93,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('admin-struktur-organisasi', StrukturOrganisasi::class);
     Route::resource('admin-pengurus', PerangkatDesaController::class);
     // Route::resource('admin-anggota', AnggotaController::class);
-    Route::resource('admin-member', AnggotaController::class);
+    Route::resource('student', StudentController::class);
     Route::resource('course', ProductController::class);
+    Route::resource('kategori-kursus', ProductCategoryController::class);
+    Route::resource('instruktur', InstructorController::class);
 });
 Route::post('aktivasi', [DesaController::class, 'aktivasi'])->name('aktivasi');
 Route::get('/buku-tamu/cek-nik', [BukuTamuController::class, 'cekNik'])->name('buku-tamu.cek-nik');

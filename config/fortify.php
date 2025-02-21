@@ -130,7 +130,7 @@ return [
     |
     */
 
-    'views' => false, //defaultnya true, dibuat false karena mengganti route login dengan route adminpanel
+    'views' => true, //defaultnya true, dibuat false karena mengganti route login dengan route adminpanel
 
     /*
     |--------------------------------------------------------------------------
