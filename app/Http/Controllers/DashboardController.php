@@ -45,19 +45,4 @@ class DashboardController extends Controller
         $halaman = Auth::user()->role == 'user' ? 'dashboard-student' : 'dashboard';
         return view('backend.' . $halaman, compact('title', 'statistics', 'dataArtikel', 'courses', 'totalCourses', 'dataStudent', 'myCourses'));
     }
-    public function webdesa_dashboard(Request $request)
-    {
-        $title = 'Dashboard';
-        $cek1 = cekAktivasi()['cek1'];
-        $cek2 = cekAktivasi()['cek2'];
-        if ($cek1 == 0 || $cek2 == 0) {
-            $request->session()->invalidate();
-            $request->session()->regenerateToken();
-            return redirect(route('login'));
-        }
-        $dataArtikel = Artikel::where('jenis', 'post')->limit(5)->latest()->get();
-        $dataBuku = Artikel::where('idkategori', 'perpusdes')->limit(5)->latest()->get();
-
-        return view('backend.dashboard-webdesa', compact('title', 'dataArtikel', 'dataBuku'));
-    }
 }

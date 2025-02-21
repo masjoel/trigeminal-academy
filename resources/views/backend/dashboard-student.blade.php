@@ -43,17 +43,19 @@
                                         <div class="card-body p-4 pt-2">
                                             <div class="d-flex justify-content-between align-items-center mb-4">
                                                 <span
-                                                    class="badge bg-label-primary">{{ $item->product->productCategory->name }}</span>
+                                                    class="badge bg-label-{{ $item->product->productCategory->warna }}">{{ $item->product->productCategory->name }}</span>
                                                 <p
                                                     class="d-flex align-items-center justify-content-center fw-medium gap-1 mb-0">
                                                     <span class="text-warning">
                                                         @if ($item->product->discount > 0)
-                                                            <span class="fw-normal">disc. {{ $item->product->discount }}%</span>
+                                                            <span class="fw-normal">disc.
+                                                                {{ $item->product->discount }}%</span>
                                                         @endif
                                                     </span>
                                                 </p>
                                             </div>
-                                            <a href="app-academy-course-details.html" class="h5">{{ $item->product->name }}</a>
+                                            <a href="app-academy-course-details.html"
+                                                class="h5">{{ $item->product->name }}</a>
                                             <p class="mt-1">{{ $item->product->excerpt }}</p>
                                             <p class="d-flex align-items-center mb-1">
                                                 Harga :
@@ -116,7 +118,7 @@
                                         <th>Durasi</th>
                                         <th>Harga</th>
                                         <th>Disc.</th>
-                                        <th>Total</th>
+                                        <th>Status</th>
                                         <th>Join at</th>
                                     </tr>
                                 </thead>
@@ -133,13 +135,24 @@
                                                         src="{{ asset('img/example-image-50.jpg') }}" alt="image">
                                                 @endif
                                             </td>
-                                            <td><a href="{{ route('course.show', $item->product->id) }}">{{ $item->product->name }}</a></td>
+                                            <td><a
+                                                    href="{{ route('course.show', $item->product->id) }}">{{ $item->product->name }}</a>
+                                            </td>
                                             <td>{{ $item->product->instruktur->nama }}</td>
                                             <td>{{ ucwords($item->product->level) }}</td>
                                             <td>{{ $item->product->video_duration }} menit</td>
                                             <td>{{ number_format($item->product->price) }}</td>
                                             <td>{{ number_format($item->product->discount) }} %</td>
-                                            <td>{{ number_format($item->product->price - ($item->product->price * $item->product->discount) / 100) }}
+                                            <td>
+                                                @if ($item->payment_status == '1')
+                                                    <span class="badge bg-warning">Pending</span>
+                                                @elseif($item->payment_status == '4')
+                                                    <span class="badge bg-success">Success</span>
+                                                @else
+                                                    <span class="badge bg-danger">Batal</span>
+                                                @endif
+                                            </td>
+                                            {{-- <td>{{ number_format($item->product->price - ($item->product->price * $item->product->discount) / 100) }} --}}
                                             </td>
                                             <td>{{ $item->created_at->diffForHumans() }}</td>
                                         </tr>

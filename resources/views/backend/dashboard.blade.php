@@ -69,7 +69,7 @@
                                     </div>
                                     <div class="card-body p-4 pt-2">
                                         <div class="d-flex justify-content-between align-items-center mb-4">
-                                            <span class="badge bg-label-primary">{{ $item->productCategory->name }}</span>
+                                            <span class="badge bg-label-{{ $item->productCategory->warna }}">{{ $item->productCategory->name }}</span>
                                             <p
                                                 class="d-flex align-items-center justify-content-center fw-medium gap-1 mb-0">
                                                 <span class="text-warning">
@@ -94,6 +94,9 @@
                                             @endif
                                         </p>
                                         <p class="d-flex align-items-center mb-1">
+                                            Level : <span class="ms-2">{{ ucwords($item->level) }}</span>
+                                        </p>
+                                    <p class="d-flex align-items-center mb-1">
                                             <i class="ti ti-clock me-1"></i>{{ $item->video_duration }} menit
                                         </p>
                                         {{-- <div class="progress rounded-pill mb-4" style="height: 8px">

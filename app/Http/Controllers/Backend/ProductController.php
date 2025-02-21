@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\Order;
 use Ramsey\Uuid\Uuid;
 use App\Models\Product;
+use App\Models\OrderItem;
 use App\Models\Instructor;
 use App\Models\ImageResize;
 use App\Models\ImageArticle;
@@ -13,7 +15,6 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreProductReq;
-use App\Models\Order;
 use Illuminate\Support\Facades\Storage;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 
@@ -142,6 +143,13 @@ class ProductController extends Controller
     public function show(Product $course)
     {
         $title = 'Course';
+        if (Auth::user()->role == 'user') {
+            $totStudent = Order::where('customer_id', $course->id)->count();
+            $myCourses = OrderItem::with('product', 'order')->leftJoin('orders', 'orders.id', '=', 'order_items.order_id')->where('order_items.product_id', $course->id)->where('orders.customer_id', Auth::user()->id)->first();
+            // dd($myCourses->payment_status);
+            // dd($myCourses[0]->payment_status);
+            return view('backend.e-commerce.product.show-student', compact('title', 'course', 'totStudent', 'myCourses'));
+        }
         $totStudent = Order::where('customer_id', $course->id)->count();
         return view('backend.e-commerce.product.show', compact('title', 'course', 'totStudent'));
     }
