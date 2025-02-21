@@ -153,8 +153,8 @@
                         @foreach($courses as $dt)
                             <div class="tw-bg-white tw-rounded-xl tw-shadow-lg tw-overflow-hidden">
                                 <div class="tw-h-48">
-                                    {{-- <img src="#" --}}
-                                    <img src="https://picsum.photos/1200/1200?random={{ $dt->id }}"
+                                    <img src="#"
+                                    {{-- <img src="https://picsum.photos/1200/1200?random={{ $dt->id }}" --}}
                                         alt="{{ $dt->name }}"
                                         class="tw-w-full tw-h-full tw-object-cover">
                                 </div>
@@ -200,7 +200,7 @@
                                         <a href="{{ route('product.show', $dt->slug) }}"
                                             class="tw-bg-gray-100 tw-text-gray-800 tw-px-4 tw-py-2.5 tw-rounded-lg tw-text-sm hover:tw-bg-gray-200 tw-transition-colors tw-text-center">
                                             <i class="flaticon-eye tw-mr-2"></i>
-                                            Lihat Detail
+                                            Detail
                                         </a>
                                         <button
                                             onclick="addToCart({{ json_encode([
@@ -211,7 +211,7 @@
                                             ]) }})"
                                             class="tw-bg-[#4A1B7F] tw-text-white tw-px-4 tw-py-2.5 tw-rounded-lg tw-text-sm hover:tw-bg-[#3A1560] tw-transition-colors">
                                             <i class="flaticon-shopping-cart tw-mr-2"></i>
-                                            Beli Sekarang
+                                            Beli
                                         </button>
                                     </div>
                                 </div>
