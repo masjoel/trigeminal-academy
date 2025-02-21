@@ -25,8 +25,8 @@ use App\Http\Controllers\Backend\ProductCategoryController;
 use App\Http\Controllers\Frontend\SlidebannerController;
 use App\Http\Controllers\Frontend\ProfilBisnisController;
 use App\Http\Controllers\Frontend\PerangkatDesaController;
-use App\Http\Controllers\InstructorController;
-use App\Http\Controllers\StudentController;
+use App\Http\Controllers\Backend\InstructorController;
+use App\Http\Controllers\Backend\StudentController;
 
 /*
 |--------------------------------------------------------------------------
