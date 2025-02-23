@@ -80,7 +80,7 @@
                     <div class="header-action hl-right-side-four">
                         <ul class="list-wrap">
                             <li class="header-cart">
-                                <a href="#" id="keranjang-belanja-data"><i class="flaticon-basket"></i><span>0</span></a>
+                                <a href="{{ route('class.process') }}" id="keranjang-belanja-data"><i class="flaticon-basket"></i><span>0</span></a>
                                 {{-- <strong>Rp 5.343.500</strong> --}}
                             </li>
                             <li class="header-sine-in">

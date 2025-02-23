@@ -92,6 +92,28 @@
             height: auto;
         }
     </style>
+    <style>
+        .toast-notification {
+            position: fixed;
+            bottom: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            z-index: 1000;
+            transition: bottom 0.5s ease-in-out;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .toast-notification.show {
+            bottom: 24px;
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
 @endpush
 @section('title', $title)
 @section('main')
@@ -127,20 +149,96 @@
             }
         });
     </script>
-    <h2>Keranjang Belanja</h2>
+    <div class="tw-container tw-mx-auto tw-px-4 tw-py-8">
+        <div class="tw-bg-white tw-rounded-xl tw-shadow-lg tw-p-6">
+            <h1 class="tw-text-2xl tw-font-bold tw-mb-6">Keranjang Belanja</h1>
 
-    @if ($courses->isEmpty())
-        <p>Keranjang belanja kosong.</p>
-    @else
-        <ol>
-            @foreach ($courses as $product)
-                <li>
-                    {{ $loop->iteration }}.
-                    {{ $product->name }} - Rp{{ number_format($product->price) }}
-                </li>
-            @endforeach
-        </ol>
-    @endif
+            <form id="checkout-form" method="POST" action="#">
+                @csrf
+                <input type="hidden" name="selected_items" id="selected-items">
+
+                @if ($courses->isEmpty())
+                    <div class="tw-text-center tw-py-8">
+                        <i class="flaticon-shopping-cart tw-text-4xl tw-text-gray-400 tw-mb-4"></i>
+                        <p class="tw-text-gray-600">Keranjang belanja Anda masih kosong.</p>
+                        <a href="{{ route('product.index') }}" class="tw-inline-block tw-mt-4 tw-bg-[#4A1B7F] tw-text-white tw-px-6 tw-py-2 tw-rounded-lg hover:tw-bg-[#3A1560] tw-transition-colors">
+                            Lihat Kelas
+                        </a>
+                    </div>
+                @else
+                    <div class="tw-overflow-x-auto">
+                        <table class="tw-w-full tw-min-w-[640px]">
+                            <thead>
+                                <tr class="tw-border-b">
+                                    <th class="tw-p-4 tw-text-left">
+                                        <label class="tw-flex tw-items-center">
+                                            <input type="checkbox" id="select-all" checked
+                                                class="tw-rounded tw-border-gray-300 tw-text-[#4A1B7F] focus:tw-ring-[#4A1B7F]">
+                                            <span class="tw-ml-2">Pilih Semua</span>
+                                        </label>
+                                    </th>
+                                    <th class="tw-p-4 tw-text-left">Kelas</th>
+                                    <th class="tw-p-4 tw-text-right">Harga</th>
+                                    <th class="tw-p-4 tw-text-center">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($courses as $product)
+                                    <tr class="tw-border-b" data-product-id="{{ $product->id }}">
+                                        <td class="tw-p-4">
+                                            <input type="checkbox" class="product-checkbox tw-rounded tw-border-gray-300 tw-text-[#4A1B7F] focus:tw-ring-[#4A1B7F]"
+                                                value="{{ $product->id }}" checked>
+                                        </td>
+                                        <td class="tw-p-4">
+                                            <div class="tw-flex tw-items-center tw-gap-4">
+                                                <img src="{{ Storage::url('thumb/'.$product->image_url) }}"
+                                                    alt="{{ $product->name }}"
+                                                    class="tw-w-16 tw-h-16 tw-rounded-lg tw-object-cover">
+                                                <div>
+                                                    <h3 class="tw-font-small tw-text-md">{{ $product->name }}</h3>
+                                                    <span class="tw-text-sm tw-text-gray-600">{{ $product->productCategory->name }}</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="tw-p-4 tw-text-right">
+                                            @if($product->discount)
+                                                <div class="tw-flex tw-flex-col tw-items-end">
+                                                    <span class="tw-text-gray-500 tw-line-through">Rp {{ number_format($product->price, 0, ',', '.') }}</span>
+                                                    <span class="tw-font-bold">Rp {{ number_format($product->price * (1 - $product->discount/100), 0, ',', '.') }}</span>
+                                                </div>
+                                            @else
+                                                <span class="tw-font-bold">Rp {{ number_format($product->price, 0, ',', '.') }}</span>
+                                            @endif
+                                        </td>
+                                        <td class="tw-p-4 tw-text-center">
+                                            <button type="button" onclick="removeFromCart({{ $product->id }})"
+                                                class="tw-text-red-600 hover:tw-text-red-800 tw-transition-colors">Hapus
+                                                <i class="flaticon-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="tw-mt-6 tw-flex tw-flex-col md:tw-flex-row tw-justify-between tw-items-center tw-gap-4">
+                        <div class="tw-text-lg">
+                            Total: <span id="total-price" class="tw-font-bold tw-text-[#4A1B7F]">Rp 0</span>
+                        </div>
+                        <button type="submit" id="checkout-button"
+                            class="tw-bg-[#4A1B7F] tw-text-white tw-px-8 tw-py-3 tw-rounded-lg hover:tw-bg-[#3A1560] tw-transition-colors disabled:tw-opacity-50 disabled:tw-cursor-not-allowed">
+                            Checkout
+                        </button>
+                    </div>
+                @endif
+            </form>
+        </div>
+    </div>
+
+    <div id="toast" class="toast-notification">
+        <span id="toast-message"></span>
+    </div>
 
     <section class="top-news-post-area pt-50">
         <div class="container">
@@ -153,4 +251,114 @@
     <script type="text/javascript" src="{{ asset('library/owl_carousel/js/owl.carousel.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/frontend/carousel.js') }}"></script>
     <script type="text/javascript" src="{{ asset('v3/libs/leaflet/leaflet.min.js') }}"></script>
+
+@endpush
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const selectAll = document.getElementById('select-all');
+    const productCheckboxes = document.querySelectorAll('.product-checkbox');
+    const checkoutForm = document.getElementById('checkout-form');
+    const selectedItemsInput = document.getElementById('selected-items');
+
+    function updateTotalPrice() {
+        let total = 0;
+        productCheckboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                const row = checkbox.closest('tr');
+                const priceEl = row.querySelector('td:nth-child(3)');
+                const price = priceEl.querySelector('.tw-line-through')
+                    ? parseFloat(priceEl.querySelector('.tw-font-bold').textContent.replace(/[^0-9]/g, ''))
+                    : parseFloat(priceEl.textContent.replace(/[^0-9]/g, ''));
+                total += price;
+            }
+        });
+
+        document.getElementById('total-price').textContent =
+            'Rp ' + total.toLocaleString('id-ID');
+
+        const checkoutButton = document.getElementById('checkout-button');
+        checkoutButton.disabled = !Array.from(productCheckboxes).some(cb => cb.checked);
+    }
+
+    function updateSelectedItems() {
+        const selectedIds = Array.from(productCheckboxes)
+            .filter(cb => cb.checked)
+            .map(cb => cb.value);
+        selectedItemsInput.value = JSON.stringify(selectedIds);
+    }
+
+    function showToast(message, duration = 3000) {
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toast-message');
+
+        clearTimeout(window.toastTimeout);
+        toast.classList.remove('show');
+        void toast.offsetWidth;
+
+        toastMessage.textContent = message;
+        toast.classList.add('show');
+
+        window.toastTimeout = setTimeout(() => {
+            toast.classList.remove('show');
+        }, duration);
+    }
+
+    selectAll?.addEventListener('change', function() {
+        productCheckboxes.forEach(checkbox => {
+            checkbox.checked = this.checked;
+        });
+        updateTotalPrice();
+        updateSelectedItems();
+    });
+
+    productCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            const allChecked = Array.from(productCheckboxes).every(cb => cb.checked);
+            if (selectAll) selectAll.checked = allChecked;
+            updateTotalPrice();
+            updateSelectedItems();
+        });
+    });
+
+    updateTotalPrice();
+    updateSelectedItems();
+
+    window.removeFromCart = function(productId) {
+        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        const updatedCart = cart.filter(item => item.id !== productId);
+        localStorage.setItem('cart', JSON.stringify(updatedCart));
+
+        const row = document.querySelector(`tr[data-product-id="${productId}"]`);
+        if (row) {
+            row.remove();
+            updateTotalPrice();
+            updateSelectedItems();
+            showToast('Produk berhasil dihapus dari keranjang');
+
+            const cartCount = document.querySelector('#keranjang-belanja-data span');
+            if (cartCount) {
+                cartCount.textContent = updatedCart.length;
+            }
+
+            if (updatedCart.length === 0) {
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            }
+        }
+    };
+
+    checkoutForm?.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const selectedIds = JSON.parse(selectedItemsInput.value);
+        if (selectedIds.length === 0) {
+            showToast('Pilih minimal satu produk untuk checkout');
+            return;
+        }
+        this.submit();
+    });
+});
+</script>
 @endpush

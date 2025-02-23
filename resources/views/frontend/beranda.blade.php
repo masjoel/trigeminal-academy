@@ -381,7 +381,7 @@
 
                         <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-6">
                             @foreach($courses as $dt)
-                                <a href="{{ route('kelas.show', $dt->slug) }}" class="tw-block">
+                                <a href="{{ route('product.show', $dt->slug) }}" class="tw-block">
                                     <div class="tw-bg-white tw-rounded-xl tw-shadow-lg tw-overflow-hidden tw-h-full tw-transition-all tw-duration-300 hover:tw-brightness-95">
                                         <div class="tw-relative tw-h-48">
                                             <img src="{{ Storage::url('thumb/'.$dt->image_url) }}"
