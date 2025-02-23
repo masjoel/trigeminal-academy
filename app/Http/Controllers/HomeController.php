@@ -796,5 +796,4 @@ class HomeController extends Controller
         $title = 'DetailKelas';
         return view('frontend.detail-kelas', compact('title', 'course', 'totStudent'));
     }
-
 }

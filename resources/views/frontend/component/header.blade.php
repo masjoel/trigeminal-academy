@@ -80,7 +80,7 @@
                     <div class="header-action hl-right-side-four">
                         <ul class="list-wrap">
                             <li class="header-cart">
-                                <a href="javascript:void(0)"><i class="flaticon-basket"></i><span>0</span></a>
+                                <a href="{{ route('cart.index') }}"><i class="flaticon-basket"></i><span>{{ totalCart() ?? 0 }}</span></a>
                                 {{-- <strong>$0.00</strong> --}}
                             </li>
                             <li class="header-sine-in">

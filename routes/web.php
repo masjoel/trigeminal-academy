@@ -2,11 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\Api\NikController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AutoNumberController;
 use App\Http\Controllers\BackupDataController;
@@ -15,18 +17,18 @@ use App\Http\Controllers\Backend\DesaController;
 use App\Http\Controllers\Frontend\FotoController;
 use App\Http\Controllers\Frontend\VideoController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\StudentController;
 use App\Http\Controllers\Frontend\ArtikelController;
 use App\Http\Controllers\Frontend\HalamanController;
 use App\Http\Controllers\Frontend\BukuTamuController;
 use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\Frontend\StrukturOrganisasi;
+use App\Http\Controllers\Backend\InstructorController;
 use App\Http\Controllers\Backend\LinkExternalController;
-use App\Http\Controllers\Backend\ProductCategoryController;
 use App\Http\Controllers\Frontend\SlidebannerController;
 use App\Http\Controllers\Frontend\ProfilBisnisController;
 use App\Http\Controllers\Frontend\PerangkatDesaController;
-use App\Http\Controllers\Backend\InstructorController;
-use App\Http\Controllers\Backend\StudentController;
+use App\Http\Controllers\Backend\ProductCategoryController;
 use App\Http\Controllers\Frontend\ProductFrontendController;
 
 /*
@@ -66,7 +68,7 @@ Route::get('autonumbers', [AutoNumberController::class, 'get']);
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('x', function () {
+    Route::get('profile', function () {
         return view('backend.profile');
     })->name('profile.edit');
     Route::resource('user', UserController::class);
@@ -100,3 +102,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 });
 Route::post('aktivasi', [DesaController::class, 'aktivasi'])->name('aktivasi');
 Route::get('/detail-kelas/{slug}', [HomeController::class, 'detailKelas'])->name('detail-kelas');
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
+Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
+Route::get('/checkout/success', [CheckoutController::class, 'checkoutSuccess'])->name('checkout.success');

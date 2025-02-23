@@ -9,6 +9,14 @@ use App\Models\AdsrtPermohonan;
 use App\Models\LapakOrder;
 use Illuminate\Support\Facades\DB;
 
+if (!function_exists('totalCart')) {
+  function totalCart()
+  {
+    $cart = session()->get('cart', []);
+    $totalQuantity = array_sum(array_column($cart, 'quantity'));
+    return $totalQuantity;
+  }
+}
 if (!function_exists('infodesa')) {
   function infodesa($data)
   {
