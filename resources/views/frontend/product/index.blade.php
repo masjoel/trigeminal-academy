@@ -149,19 +149,19 @@
                         <p class="tw-text-gray-600 tw-mt-2">Coba ubah filter atau kata kunci pencarian Anda</p>
                     </div>
                 @else
-                    <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-4 tw-gap-6">
+                    <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-3 tw-gap-8">
                         @foreach($courses as $dt)
                             <div class="tw-bg-white tw-rounded-xl tw-shadow-lg tw-overflow-hidden">
                                 <div class="tw-h-48">
-                                    <img src="#"
-                                    {{-- <img src="https://picsum.photos/1200/1200?random={{ $dt->id }}" --}}
+                                    {{-- <img src="#" --}}
+                                    <img src="https://picsum.photos/1200/1200?random={{ $dt->id }}"
                                         alt="{{ $dt->name }}"
                                         class="tw-w-full tw-h-full tw-object-cover">
                                 </div>
 
                                 <div class="tw-p-6">
                                     <div class="tw-mb-3">
-                                        <span class="tw-bg-[#4A1B7F]/10 tw-text-[#4A1B7F] tw-px-3 tw-py-1 tw-rounded-full tw-text-sm tw-font-medium">
+                                        <span class="tw-bg-[#4A1B7F]/10 tw-text-[#4A1B7F] tw-px-3 tw-py-1 tw-rounded-full tw-text-sm tw-font-medium" style="background-color: {{ $dt->productCategory->warna }}20; color: {{ $dt->productCategory->warna }};">
                                             {{ $dt->productCategory->name }}
                                         </span>
                                     </div>
@@ -172,11 +172,15 @@
                                     <div class="tw-grid tw-grid-cols-2 tw-gap-4 tw-mb-4">
                                         <div class="tw-flex tw-items-center">
                                             <i class="flaticon-history tw-text-[#4A1B7F] tw-mr-2"></i>
-                                            <span class="tw-text-sm tw-text-gray-600">{{ $dt->video_duration }} Jam</span>
+                                            <span class="tw-text-sm tw-text-gray-600">{{ $dt->video_duration }} Menit</span>
                                         </div>
                                         <div class="tw-flex tw-items-center">
-                                            <i class="flaticon-document tw-text-[#4A1B7F] tw-mr-2"></i>
+                                            <i class="flaticon-calendar tw-text-[#4A1B7F] tw-mr-2"></i>
                                             <span class="tw-text-sm tw-text-gray-600">{{ $dt->productContent->count() }} Materi</span>
+                                        </div>
+                                        <div class="tw-flex tw-items-center tw-col-span-2">
+                                            <i class="flaticon-thunder tw-text-[#4A1B7F] tw-mr-2"></i>
+                                            <span class="tw-text-sm tw-text-gray-600">Level {{ ucwords($dt->level) }}</span>
                                         </div>
                                     </div>
 
