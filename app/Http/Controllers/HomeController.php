@@ -88,11 +88,86 @@ class HomeController extends Controller
             ->latest()->limit(9)->get();
 
         $title = klien('nama_client') == null ? 'LMS' : klien('nama_client');
-        $courses = Product::with('productCategory', 'instruktur')->where('publish', '1')->limit(3)->latest()->get();
+        $courses = Product::with('productCategory', 'instruktur', 'productContent')->where('publish', '1')->limit(3)->latest()->get();
 
 
         return view('frontend.beranda', compact('title', 'profil_usaha', 'artikel', 'banner', 'halaman', 'sid', 'tentang_kami', 'kontak_kami', 'feature', 'berita', 'berita2', 'berita3', 'pengumuman', 'pengumuman3', 'top_stories', 'video', 'agenda', 'agenda3', 'galeries', 'perangkatdesa', 'foto', 'courses'));
     }
+
+    function exampleProductDetail(Request $request)
+    {
+        $profil_usaha = ProfilBisnis::first();
+        $feature = Artikel::where('jenis', 'post')->where('status', 'published')->where('feature', '1')->latest()->first();
+        $berita = Artikel::leftJoin('categories', 'categories.id', '=', 'artikels.category_id')
+            ->where('artikels.jenis', 'post')->where('artikels.status', 'published')->where('categories.slug', '=', 'berita')
+            ->select('artikels.*')
+            ->latest()->first();
+        $berita2 = Artikel::leftJoin('categories', 'categories.id', '=', 'artikels.category_id')
+            ->where('artikels.jenis', 'post')->where('artikels.status', 'published')->where('categories.slug', '=', 'berita')
+            ->select('artikels.*')
+            ->latest()->limit(2)->get();
+        $berita3 = $berita == null ? [] : Artikel::leftJoin('categories', 'categories.id', '=', 'artikels.category_id')
+            ->where('artikels.jenis', 'post')->where('artikels.status', 'published')->where('categories.slug', '=', 'berita')
+            ->where('artikels.id', '!=', $berita->id)
+            ->select('artikels.*')
+            ->latest()->limit(4)->get();
+        $pengumuman = Artikel::leftJoin('categories', 'categories.id', '=', 'artikels.category_id')
+            ->where('artikels.jenis', 'post')->where('artikels.status', 'published')->where('categories.slug', '=', 'pengumuman')
+            ->select('artikels.*')
+            ->latest()->first();
+        $pengumuman3 =  $pengumuman == null ? [] : Artikel::leftJoin('categories', 'categories.id', '=', 'artikels.category_id')
+            ->where('artikels.jenis', 'post')->where('artikels.status', 'published')->where('categories.slug', '=', 'pengumuman')
+            ->where('artikels.id', '!=', $pengumuman->id)
+            ->select('artikels.*')
+            ->latest()->limit(3)->get();
+        $agenda = Artikel::leftJoin('categories', 'categories.id', '=', 'artikels.category_id')
+            ->where('artikels.jenis', 'post')->where('artikels.status', 'published')->where('categories.slug', '=', 'agenda-kegiatan')
+            ->select('artikels.*')
+            ->latest()->first();
+        $agenda3 =  $agenda == null ? [] : Artikel::leftJoin('categories', 'categories.id', '=', 'artikels.category_id')
+            ->where('artikels.jenis', 'post')->where('artikels.status', 'published')->where('categories.slug', '=', 'agenda-kegiatan')
+            ->where('artikels.id', '!=', $agenda->id)
+            ->select('artikels.*')
+            ->latest()->limit(3)->get();
+        $video = Artikel::leftJoin('categories', 'categories.id', '=', 'artikels.category_id')
+            ->where('artikels.jenis', 'post')->where('artikels.status', 'published')->where('categories.slug', '=', 'galeri-video')
+            ->select('artikels.*')
+            ->latest()->limit(9)->get();
+        $foto = Artikel::leftJoin('categories', 'categories.id', '=', 'artikels.category_id')
+            ->where('artikels.jenis', 'post')->where('artikels.status', 'published')->where('categories.slug', '=', 'galeri-foto')
+            ->select('artikels.*')
+            ->latest()->limit(9)->get();
+        $top_stories = Artikel::leftJoin('categories', 'categories.id', '=', 'artikels.category_id')
+            ->where('artikels.jenis', 'post')->where('artikels.status', 'published')->where('categories.slug', 'not like', '%galeri%')
+            ->select('artikels.*')
+            ->latest()->limit(5)->get();
+        $halaman = Halaman::where('jenis', 'page')->where('status', 'published')->where('idkategori', 'home')->latest()->first();
+        $tentang_kami = Halaman::where('jenis', 'page')->where('status', 'published')->where('idkategori', 'about')->latest()->first();
+        $kontak_kami = Halaman::where('jenis', 'page')->where('status', 'published')->where('idkategori', 'kontak')->latest()->first();
+
+        $qry_artikel = Artikel::select('artikels.*')->leftJoin('categories', 'categories.id', '=', 'artikels.category_id')->where('categories.slug', '!=', 'sid')->where('jenis', 'post')->where('artikels.status', 'published');
+        $qry_sid = Halaman::where('jenis', 'sid')->where('status', 'published');
+        $sid = null;
+        $artikel = null;
+        if ($qry_sid->count() > 0) {
+            $sid = $qry_sid->latest()->get();
+        }
+        if ($qry_artikel->count() > 0) {
+            $artikel = $qry_artikel->limit(3)->latest()->get();
+        }
+        $banner = Slidebanner::where('status', 'publish')->limit(3)->latest()->get();
+        $perangkatdesa = PerangkatDesa::where('status', 'Aktif')->get();
+        $galeries = Artikel::leftJoin('categories', 'categories.id', '=', 'artikels.category_id')
+            ->where('artikels.jenis', 'post')->where('artikels.status', 'published')->where('categories.slug', 'like', '%galeri%')
+            ->select('artikels.*')
+            ->latest()->limit(9)->get();
+
+        $title = klien('nama_client') == null ? 'Desa Klampok' : klien('nama_client');
+
+        return view('frontend.example-product-detail', compact('title', 'profil_usaha', 'artikel', 'banner', 'halaman', 'sid', 'tentang_kami', 'kontak_kami', 'feature', 'berita', 'berita2', 'berita3', 'pengumuman', 'pengumuman3', 'top_stories', 'video', 'agenda', 'agenda3', 'galeries', 'perangkatdesa', 'foto'));
+    }
+
+
     public function about()
     {
         $title = 'Tentang ' . klien('nama_client') == null ? 'LMS' : klien('nama_client');;

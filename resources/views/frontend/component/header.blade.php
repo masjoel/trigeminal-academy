@@ -62,12 +62,14 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="text-center">
+                    {{-- <div class="text-center"> --}}
+                    <div class="text-center tw-flex tw-justify-center">
                         <a href="/"><img
                                 src="{{ preg_match('/desa/i', klien('logo')) ? Storage::url(klien('logo')) : asset(klien('logo')) }}"
                                 style="height: 50px; width:auto" alt=""></a>
                     </div>
-                    <div class="logo d-none text-center">
+                    {{-- <div class="logo d-none text-center"> --}}
+                    <div class="logo d-none text-center tw-flex tw-justify-center">
                         <a href="/"><img
                                 src="{{ preg_match('/desa/i', klien('logo')) ? Storage::url(klien('logo')) : asset(klien('logo')) }}"
                                 style="height: 50px; width:auto" alt=""></a>

@@ -24,6 +24,12 @@ class Product extends Model
     {
         return $this->belongsTo(ProductCategory::class, 'category_id');
     }
+
+    public function productContent()
+    {
+        return $this->hasMany(ProductContent::class, 'product_id');
+    }
+
     public function instruktur()
     {
         return $this->belongsTo(Instructor::class, 'instructor_id');
