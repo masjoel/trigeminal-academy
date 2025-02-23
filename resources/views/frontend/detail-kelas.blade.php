@@ -95,34 +95,6 @@
 @endpush
 @section('title', $title)
 @section('main')
-    {{-- @php
-        $course = [
-            'title' => 'Web Development Fundamentals',
-            'category' => 'Web Development',
-            'duration' => '12 Jam',
-            'total_materials' => '24 Materi',
-            'participants' => 126,
-            'max_participants' => 150,
-            'rating' => 4.8,
-            'description' =>
-                'Pelajari dasar-dasar pengembangan web modern dari awal hingga mahir dengan studi kasus yang komprehensif. Kelas ini dirancang untuk pemula yang ingin memulai karir sebagai web developer.',
-            'details' =>
-                'Anda akan mempelajari HTML, CSS, JavaScript, dan berbagai teknologi modern lainnya yang diperlukan untuk membangun website yang responsif dan interaktif.',
-            'price' => 1500000,
-            'discount' => 20, // Dalam persen
-            'lessons' => [
-            ['icon' => 'flaticon-html', 'title' => 'Fundamental HTML5 & CSS3'],
-            ['icon' => 'flaticon-javascript', 'title' => 'JavaScript ES6+'],
-            ['icon' => 'flaticon-responsive', 'title' => 'Responsive Web Design'],
-            ['icon' => 'flaticon-css', 'title' => 'Modern CSS Framework']
-        ],
-            'image' => 'https://picsum.photos/1920/1080?random=1',
-        ];
-        $discountedPrice = $course['price'] - $course['price'] * ($course['discount'] / 100);
-        $remainingSlots = $course['max_participants'] - $course['participants'];
-        $progressPercentage = ($course['participants'] / $course['max_participants']) * 100;
-    @endphp --}}
-
     <section id="detail-class">
         <!-- Hero Section -->
         <div class="tw-relative tw-w-full tw-h-[300px] md:tw-h-[400px]">
@@ -231,11 +203,17 @@
                         <div class="tw-space-y-3">
                             <button
                                 class="tw-w-full tw-bg-[#4A1B7F] tw-text-white tw-py-3 tw-rounded-lg tw-font-medium hover:tw-bg-[#3A1560] tw-transition-colors">
-                                Beli Sekarang
-                            </button>
-                            <button
-                                class="tw-w-full tw-border-2 tw-border-[#4A1B7F] tw-text-[#4A1B7F] tw-py-3 tw-rounded-lg tw-font-medium hover:tw-bg-[#4A1B7F]/10 tw-transition-colors">
-                                Tambah ke Keranjang
+                                {{-- Beli Sekarang --}}
+                                <form action="{{ route('cart.add') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{ $course->id }}">
+                                    {{-- <button type="submit" class="btn btn-primary">Tambah ke Keranjang</button> --}}
+                                    <button type="submit"
+                                        class="tw-w-full tw-border-2 tw-border-[#4A1B7F] tw-text-[#4A1B7F] tw-py-3 tw-rounded-lg tw-font-medium hover:tw-bg-[#4A1B7F]/10 tw-transition-colors">
+                                        Tambah ke Keranjang
+                                    </button>
+                                </form>
+                                
                             </button>
                         </div>
                     </div>

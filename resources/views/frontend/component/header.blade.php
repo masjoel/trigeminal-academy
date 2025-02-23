@@ -80,8 +80,8 @@
                     <div class="header-action hl-right-side-four">
                         <ul class="list-wrap">
                             <li class="header-cart">
-                                <a href="{{ route('class.process') }}" id="keranjang-belanja-data"><i class="flaticon-basket"></i><span>0</span></a>
-                                {{-- <strong>Rp 5.343.500</strong> --}}
+                                <a href="{{ route('cart.index') }}"><i class="flaticon-basket"></i><span>{{ totalCart() ?? 0 }}</span></a>
+                                {{-- <strong>$0.00</strong> --}}
                             </li>
                             <li class="header-sine-in">
                                 <a href="{{ route('login') }}"><i class="flaticon-user"></i>Sign In</a>

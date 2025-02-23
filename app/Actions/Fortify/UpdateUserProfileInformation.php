@@ -90,11 +90,18 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 'name' => $input['name'],
                 'email' => $input['email'],
                 'phone' => $input['phone'],
+                'address' => $input['alamat'],
                 'avatar' => $avatarPath,
             ])->save();
             // cek Student
             $cekStudent = Student::where('user_id', $user->id)->first();
             if ($cekStudent) {
+                // User::where('user_id', $user->id)->update([
+                //     'name' => $input['name'],
+                //     'email' => $input['email'],
+                //     'phone' => $input['phone'],
+                //     'address' => $input['alamat'],
+                // ]);
                 Student::where('user_id', $user->id)->update([
                     'nama' => $input['name'],
                     'email' => $input['email'],

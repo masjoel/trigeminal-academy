@@ -40,13 +40,6 @@ class AuthController extends Controller
 
         $dataUser = User::find(2);
         $permissions = $dataUser->getPermissionNames();
-        // $permissions = [
-        //     'seting-desa',
-        //     'seting-user',
-        //     'seting-user.create',
-        //     'seting-user.edit',
-        //     'adm-umum-tanahkas',
-        // ];
         foreach ($permissions as $permissionName) {
             $permission = Permission::where('name', $permissionName)->first();
             if ($userRole && $permission) {
