@@ -364,6 +364,7 @@
 
             window.closeDeleteModal = function() {
                 deleteModal.classList.add('tw-hidden');
+                location.reload();
             };
 
             window.removeFromCart = function(productId) {
@@ -373,22 +374,36 @@
 
                 const row = document.querySelector(`tr[data-product-id="${productId}"]`);
                 if (row) {
-                    row.remove();
-                    updateTotalPrice();
-                    updateSelectedItems();
-                    showToast('Produk berhasil dihapus dari keranjang');
-                    closeDeleteModal();
+                    row.style.transition = 'all 0.3s ease-out';
+                    row.style.opacity = '0';
+                    row.style.transform = 'translateX(-20px)';
 
-                    const cartCount = document.querySelector('#keranjang-belanja-data span');
-                    if (cartCount) {
-                        cartCount.textContent = updatedCart.length;
-                    }
+                    setTimeout(() => {
+                        row.remove();
+                        updateTotalPrice();
+                        updateSelectedItems();
 
-                    if (updatedCart.length === 0) {
-                        setTimeout(() => {
-                            window.location.reload();
-                        }, 1000);
-                    }
+                        if (selectAll) {
+                            const remainingCheckboxes = document.querySelectorAll('.product-checkbox');
+                            selectAll.checked = remainingCheckboxes.length > 0 &&
+                                Array.from(remainingCheckboxes).every(cb => cb.checked);
+                        }
+
+                        showToast('Produk berhasil dihapus dari keranjang');
+                        closeDeleteModal();
+
+
+                        const cartCount = document.querySelector('#keranjang-belanja-data span');
+                        if (cartCount) {
+                            cartCount.textContent = updatedCart.length;
+                        }
+
+                        if (updatedCart.length === 0) {
+                            setTimeout(() => {
+                                window.location.reload();
+                            }, 1000);
+                        }
+                    }, 300);
                 }
             };
 
