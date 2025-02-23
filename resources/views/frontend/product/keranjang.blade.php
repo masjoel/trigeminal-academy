@@ -140,7 +140,7 @@
                     </div>
                 @else
                     <div class="tw-flex tw-flex-col md:tw-flex-row tw-gap-6">
-                        <div class="tw-flex-1">
+                        <div class="tw-flex-1 tw-overflow-auto">
                             <table class="tw-w-full">
                                 <thead>
                                     <tr class="tw-border-b">
