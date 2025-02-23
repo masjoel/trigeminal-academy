@@ -791,11 +791,11 @@ class HomeController extends Controller
     }
     public function detailKelas($slug)
     {
-        $course = Product::with('productCategory')->where('slug', $slug)->first();
-        $totStudent = OrderItem::where('product_id', $course->id)->count();
+        // $course = Product::with('productCategory')->where('slug', $slug)->first();
+        // $totStudent = OrderItem::where('product_id', $course->id)->count();
         $title = 'Detail Kelas';
         $course = Product::with('productCategory', 'instruktur', 'productContent', 'orderitems')->where('slug', $slug)->where('publish', '1')->limit(3)->firstOrFail();
 
-        return view('frontend.detail-kelas', compact('title', 'course', 'totStudent', 'course'));
+        return view('frontend.detail-kelas', compact('title', 'course'));
     }
 }
