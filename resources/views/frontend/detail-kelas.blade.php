@@ -95,143 +95,161 @@
 @endpush
 @section('title', $title)
 @section('main')
-    <section id="detail-class">
-        <!-- Hero Section -->
-        <div class="tw-relative tw-w-full tw-h-[300px] md:tw-h-[400px]">
-            <img src="{{ Storage::url($course->image_url) }}" alt="Course Cover" class="tw-w-full tw-h-full tw-object-cover tw-opacity-50">
-            <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-t tw-from-gray-900/80 tw-to-transparent"></div>
 
-            <!-- Course Title & Category -->
-            <div class="tw-absolute tw-bottom-0 tw-left-0 tw-right-0 tw-p-6 md:tw-p-10">
-                <div class="tw-container tw-mx-auto">
-                    <span
-                        class="bg-{{ $course->productCategory->warna }} tw-text-white tw-px-4 tw-py-1.5 tw-rounded-full tw-text-sm tw-font-medium tw-mb-4 tw-inline-block">
-                        {{ $course->productCategory->name }}
-                    </span>
-                    <h1 class="tw-text-2xl md:tw-text-4xl tw-font-bold tw-text-white tw-mb-2">
+    {{-- <div class="tw-bg-[#F7F7F7] tw-min-h-screen"> --}}
+    <div class="tw-bg-white border-1 tw-min-h-screen">
+        <div class="tw-container tw-mx-auto tw-px-4 tw-py-8">
+            <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-8">
+                <!-- Left Column - Image -->
+                <div class="tw-bg-white tw-rounded-2xl tw-overflow-hidden tw-shadow-sm">
+                    <img src="{{ Storage::url($course->image_url) }}" alt="{{ $course->name }}"
+                        class="tw-w-full tw-aspect-[4/3] tw-h-full tw-object-cover">
+                </div>
+
+                <!-- Right Column - Product Info -->
+                <div class="tw-space-y-6">
+                    <!-- Category Badge -->
+                    <div class="tw-space-y-2">
+                        <span
+                            class="tw-bg-purple-100 tw-text-[#4A1B7F] tw-px-4 tw-py-1.5 tw-rounded-full tw-text-sm tw-font-medium">
+                            {{ $course->productCategory->name }}
+                        </span>
+                    </div>
+
+                    <!-- Title -->
+                    <h1 class="tw-text-2xl md:tw-text-3xl tw-font-bold tw-text-gray-900">
                         {{ $course->name }}
                     </h1>
-                </div>
-            </div>
-        </div>
 
-        <!-- Course Details -->
-        <div class="tw-container tw-mx-auto tw-px-4 tw-py-8">
-            <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-3 tw-gap-8">
-                <div class="tw-col-span-2">
-                    <!-- Course Stats -->
-                    <div class="tw-grid tw-grid-cols-2 md:tw-grid-cols-4 tw-gap-4 tw-mb-8">
-                        {{-- @foreach ([['Durasi', $course['duration']], ['Total Materi', $course['total_materials']], ['Peserta', "$course[participants]/$course[max_participants]"], ['Rating', "$course[rating]/5.0"]] as $stat) --}}
-                            <div class="tw-bg-white tw-p-4 tw-rounded-xl tw-shadow-sm">
-                                <p class="tw-text-sm tw-font-medium tw-text-[#4A1B7F]">Durasi</p>
-                                <p class="tw-text-lg tw-font-bold tw-mt-1">{{ $course->video_duration }}</p>
-                            </div>
-                            <div class="tw-bg-white tw-p-4 tw-rounded-xl tw-shadow-sm">
-                                <p class="tw-text-sm tw-font-medium tw-text-[#4A1B7F]">Level</p>
-                                <p class="tw-text-lg tw-font-bold tw-mt-1">{{ ucwords($course->level) }}</p>
-                            </div>
-                            <div class="tw-bg-white tw-p-4 tw-rounded-xl tw-shadow-sm">
-                                <p class="tw-text-sm tw-font-medium tw-text-[#4A1B7F]">Peserta</p>
-                                <p class="tw-text-lg tw-font-bold tw-mt-1">{{ $totStudent }}</p>
-                            </div>
-                        {{-- @endforeach --}}
-                    </div>
-
-                    <!-- Course Description -->
-                    <div class="tw-bg-white tw-rounded-xl tw-shadow-sm tw-p-6 tw-mb-8">
-                        <h2 class="tw-text-xl tw-font-bold tw-mb-4">Deskripsi Kelas</h2>
-                        <p class="tw-text-gray-600 tw-mb-4">{{ $course->excerpt }}</p>
-                        <p class="tw-text-gray-600">{!! nl2br($course->description) !!}</p>
-                    </div>
-
-                    <!-- What You'll Learn -->
-                    <div class="tw-bg-white tw-rounded-xl tw-shadow-sm tw-p-6">
-                        <h2 class="tw-text-xl tw-font-bold tw-mb-4">Yang Akan Anda Pelajari</h2>
-                        <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-2 tw-gap-4">
-                            {{-- @foreach ($course['lessons'] as $lesson)
-                                <div class="tw-bg-gray-100 tw-rounded-xl tw-p-4 tw-flex tw-items-center tw-shadow-sm">
-                                    <i class="{{ $lesson['icon'] }} tw-text-[#4A1B7F] tw-text-2xl tw-mr-3"></i>
-                                    <span class="tw-font-medium">{{ $lesson['title'] }}</span>
-                                </div>
-                            @endforeach --}}
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sidebar -->
-                <div class="tw-col-span-1">
-                    <div class="tw-bg-white tw-rounded-xl tw-shadow-sm tw-p-6 tw-sticky tw-top-4">
+                    <!-- Price Section -->
+                    <div class="tw-space-y-2">
                         @if ($course->discount)
-                            <div class="tw-flex tw-items-center tw-gap-2 tw-mb-1">
-                                <span class="tw-text-gray-500 tw-line-through">Rp
-                                    {{ number_format($course->price) }}</span>
+                            <div class="tw-flex tw-items-center tw-gap-3">
                                 <span
-                                    class="tw-bg-red-100 tw-text-red-600 tw-px-2 tw-py-1 tw-rounded tw-text-xs">{{ $course->discount }}%
+                                    class="tw-text-gray-500 tw-line-through tw-text-lg">Rp{{ number_format($course->price, 0, ',', '.') }}</span>
+                                <span
+                                    class="tw-bg-red-100 tw-text-red-600 tw-px-2 tw-py-1 tw-rounded tw-text-xs tw-font-medium">{{ $course->discount }}%
                                     OFF</span>
                             </div>
-                            <div class="tw-text-[#4A1B7F] tw-font-bold tw-text-3xl tw-mb-4">
-                                Rp {{ number_format($course->price * (1 - $course->discount/100)) }}
+                            <div class="tw-text-[#4A1B7F] tw-font-bold tw-text-3xl">
+                                Rp{{ number_format(($course->price * (100 - $course->discount)) / 100, 0, ',', '.') }}
+                            </div>
+                        @else
+                            <div class="tw-text-[#4A1B7F] tw-font-bold tw-text-3xl">
+                                Rp{{ number_format($course->price, 0, ',', '.') }}
                             </div>
                         @endif
+                    </div>
 
-                        <!-- Enrollment Progress -->
-                        <div class="tw-mb-6">
-                            <div class="tw-flex tw-justify-between tw-mb-2">
-                                <span class="tw-text-sm tw-text-gray-600">Sisa Kuota</span>
-                                <span class="tw-text-sm tw-font-medium">{{ $totStudent }} Peserta</span>
-                            </div>
-                            <div class="tw-w-full tw-bg-gray-200 tw-rounded-full tw-h-2">
-                                <div class="tw-bg-[#4A1B7F] tw-h-2 tw-rounded-full"
-                                    style="width: {{ $totStudent }}%"></div>
-                            </div>
-                        </div>
+                    <!-- Description -->
+                    <div class="tw-prose tw-max-w-none tw-text-gray-600">
+                        {{ $course->excerpt }}
+                    </div>
 
-                        <!-- Quantity Select -->
-                        <div class="tw-mb-6">
-                            <label class="tw-block tw-text-sm tw-font-medium tw-mb-2">Jumlah Peserta</label>
-                            <div class="tw-flex tw-items-center tw-border tw-rounded-lg tw-p-1">
-                                <button
-                                    class="tw-px-3 tw-py-1 tw-text-[#4A1B7F] tw-font-bold hover:tw-bg-[#4A1B7F]/10 tw-rounded">-</button>
-                                <input type="number" value="1"
-                                    class="tw-w-full tw-text-center tw-border-0 tw-focus:ring-0" readonly>
-                                <button
-                                    class="tw-px-3 tw-py-1 tw-text-[#4A1B7F] tw-font-bold hover:tw-bg-[#4A1B7F]/10 tw-rounded">+</button>
-                            </div>
-                        </div>
-
-                        <!-- Action Buttons -->
-                        <div class="tw-space-y-3">
-                            <button
-                                class="tw-w-full tw-bg-[#4A1B7F] tw-text-white tw-py-3 tw-rounded-lg tw-font-medium hover:tw-bg-[#3A1560] tw-transition-colors">
-                                {{-- Beli Sekarang --}}
-                                <form action="{{ route('cart.add') }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="product_id" value="{{ $course->id }}">
-                                    {{-- <button type="submit" class="btn btn-primary">Tambah ke Keranjang</button> --}}
-                                    <button type="submit"
-                                        class="tw-w-full tw-border-2 tw-border-[#4A1B7F] tw-text-[#4A1B7F] tw-py-3 tw-rounded-lg tw-font-medium hover:tw-bg-[#4A1B7F]/10 tw-transition-colors">
-                                        Tambah ke Keranjang
-                                    </button>
-                                </form>
-                                
+                    <!-- Action Buttons and Quantity -->
+                    <div class="tw-space-y-4">
+                        <div class="tw-flex tw-items-center tw-gap-3">
+                            {{-- <div class="tw-w-32"> --}}
+                                {{-- <button id="add-cart-button-{{ $course->id }}"
+                                    onclick="handleAddToCart({{ json_encode([
+                                        'id' => $course->id,
+                                        'checkoutUrl' => route('class.process'),
+                                    ]) }})"
+                                    class="tw-w-full tw-border-2 tw-border-[#4A1B7F] tw-text-[#4A1B7F] tw-py-3 tw-rounded-lg tw-font-medium hover:tw-bg-[#4A1B7F]/10 tw-transition-colors">
+                                    <span class="cart-button-text">Add to Cart</span>
+                                </button>  --}}
+                            {{-- </div> --}}
+                            <form action="{{ route('cart.add') }}" method="POST" class="tw-w-full">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{ $course->id }}">
+                            <button type="submit" class="tw-w-full tw-flex-1 tw-bg-[#4A1B7F] tw-text-white tw-py-3 tw-rounded-lg tw-font-medium hover:tw-bg-[#3A1560] tw-transition-colors">
+                                Tambah ke Keranjang
                             </button>
+                        </form>
+                        </div>
+
+                    </div>
+
+                    <!-- Product Info Grid -->
+                    <div class="tw-grid tw-grid-cols-2 md:tw-grid-cols-3 tw-gap-4 tw-border-t tw-border-gray-200 tw-pt-6">
+
+                        <div>
+                            <span class="tw-text-sm tw-text-gray-500">Durasi</span>
+                            <p class="tw-font-medium tw-text-gray-900">{{ $course->video_duration }} Menit</p>
+                        </div>
+                        <div>
+                            <span class="tw-text-sm tw-text-gray-500">Peserta</span>
+                            <p class="tw-font-medium tw-text-gray-900">{{ number_format($course->orderitems->count()) }}
+                            </p>
+                        </div>
+                        <div>
+                            <span class="tw-text-sm tw-text-gray-500">Level</span>
+                            <p class="tw-font-medium tw-text-gray-900">{{ ucwords($course->level) }}</p>
+                        </div>
+                        <div>
+                            <span class="tw-text-sm tw-text-gray-500">Bahasa</span>
+                            <p class="tw-font-medium tw-text-gray-900">Indonesia</p>
+                        </div>
+                        <div>
+                            <span class="tw-text-sm tw-text-gray-500">Materi</span>
+                            <p class="tw-font-medium tw-text-gray-900">{{ $course->productContent->count() }}</p>
+                        </div>
+                        <div>
+                            <span class="tw-text-sm tw-text-gray-500">Caption</span>
+                            <p class="tw-font-medium tw-text-gray-900">Yes</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
+            <!-- Description Section -->
+            <div class="tw-mt-12">
+                <div class="tw-border-b tw-border-gray-200">
+                    <nav class="tw-flex tw-space-x-8">
+                        <button
+                            class="tw-border-b-2 tw-border-[#4A1B7F] tw-py-4 tw-px-1 tw-text-sm tw-font-medium tw-text-[#4A1B7F]">
+                            Description
+                        </button>
+                    </nav>
+                </div>
 
-    <section class="top-news-post-area pt-50">
-        <div class="container">
+                <div class="tw-prose tw-max-w-none tw-py-8">
+                    {!! $course->description !!}
+
+                </div>
+
+                <div class="tw-border-b tw-border-gray-200">
+                    <nav class="tw-flex tw-space-x-8">
+                        <button
+                            class="tw-border-b-2 tw-border-[#4A1B7F] tw-py-4 tw-px-1 tw-text-sm tw-font-medium tw-text-[#4A1B7F]">
+                            Instructor
+                        </button>
+                    </nav>
+                </div>
+
+                <div class="tw-prose tw-max-w-none tw-py-8">
+                    <div class="tw-flex tw-items-center tw-gap-4">
+                        <img src="{{ Storage::url($course->instruktur->photo) }}" alt="{{ $course->instruktur->nama }}"
+                            class="tw-w-16 tw-h-16 tw-rounded-full tw-object-cover">
+                        <div>
+                            <h3 class="tw-font-medium tw-text-lg">{{ $course->instruktur->nama }}</h3>
+                            <p class="tw-text-gray-600">{{ $course->instruktur->keterangan }}</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </section>
-@endsection
-@push('scripts')
-    <script type="text/javascript" src="{{ asset('js/frontend/lib.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('library/wow/js/wow.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('library/owl_carousel/js/owl.carousel.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/frontend/carousel.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('v3/libs/leaflet/leaflet.min.js') }}"></script>
-@endpush
+
+        <section class="top-news-post-area pt-50">
+            <div class="container">
+            </div>
+        </section>
+    @endsection
+    @push('scripts')
+        <script type="text/javascript" src="{{ asset('js/frontend/lib.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('library/wow/js/wow.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('library/owl_carousel/js/owl.carousel.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/frontend/carousel.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('v3/libs/leaflet/leaflet.min.js') }}"></script>
+    @endpush

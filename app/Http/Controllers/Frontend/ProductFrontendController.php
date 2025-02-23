@@ -14,7 +14,7 @@ class ProductFrontendController extends Controller
      */
     public function index(Request $request)
     {
-        $title = 'Kelas Online';
+        $title = 'Kelas';
         $query = Product::with('productCategory', 'instruktur', 'productContent', 'orderitems')->where('publish', '1');
 
         if($request->search) {

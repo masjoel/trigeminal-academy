@@ -381,7 +381,7 @@
 
                         <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-6">
                             @foreach($courses as $dt)
-                                <a href="{{ route('product.show', $dt->slug) }}" class="tw-block">
+                                <a href="{{ route('detail-kelas', $dt->slug) }}" class="tw-block">
                                     <div class="tw-bg-white tw-rounded-xl tw-shadow-lg tw-overflow-hidden tw-h-full tw-transition-all tw-duration-300 hover:tw-brightness-95">
                                         <div class="tw-relative tw-h-48">
                                             <img src="{{ Storage::url('thumb/'.$dt->image_url) }}"
@@ -457,7 +457,7 @@
                             @endforeach
                         </div>
                         <div class="tw-mt-8 tw-flex tw-justify-center">
-                            <a href="{{ route('product.index') }}" class="tw-bg-[#4A1B7F] tw-text-white tw-px-6 tw-py-3 tw-rounded-lg tw-text-lg tw-font-medium
+                            <a href="{{ route('list-kelas') }}" class="tw-bg-[#4A1B7F] tw-text-white tw-px-6 tw-py-3 tw-rounded-lg tw-text-lg tw-font-medium
                                 hover:tw-bg-[#3A1560] hover:tw-text-white tw-transition-all tw-duration-300 tw-cursor-pointer tw-shadow-lg">
                                 Lihat Kelas Lainnya
                             </a>

@@ -148,14 +148,15 @@
             <div class="tw-col-span-4 lg:tw-col-span-1">
                 <div class="tw-bg-white tw-rounded-xl tw-shadow-lg tw-p-6 md:tw-sticky md:tw-top-8">
                     <h3 class="tw-text-xl tw-font-bold tw-mb-4">Kategori</h3>
-                    <div class="tw-flex tw-flex-col tw-gap-2">
-                        <a href="{{ route('product.index') }}"
-                            class="tw-px-4 tw-py-2 tw-rounded-lg {{ !request('category') ? 'tw-bg-[#4A1B7F] tw-text-white' : 'tw-bg-gray-100 hover:tw-bg-gray-200' }}">
+                    <!-- Mengubah flex-col menjadi flex-row pada mobile dan tambahkan overflow -->
+                    <div class="tw-flex tw-flex-row lg:tw-flex-col tw-gap-2 tw-overflow-x-auto tw-pb-2">
+                        <a href="{{ route('list-kelas') }}"
+                            class="tw-whitespace-nowrap tw-px-4 tw-py-2 tw-rounded-lg {{ !request('category') ? 'tw-bg-[#4A1B7F] tw-text-white' : 'tw-bg-gray-100 hover:tw-bg-gray-200' }}">
                             Semua Kategori
                         </a>
                         @foreach($categories as $category)
-                            <a href="{{ route('product.index', ['category' => $category->id] + request()->except('category')) }}"
-                                class="tw-px-4 tw-py-2 tw-rounded-lg {{ request('category') == $category->id ? 'tw-bg-[#4A1B7F] tw-text-white' : 'tw-bg-gray-100 hover:tw-bg-gray-200' }}">
+                            <a href="{{ route('list-kelas', ['category' => $category->id] + request()->except('category')) }}"
+                                class="tw-whitespace-nowrap tw-px-4 tw-py-2 tw-rounded-lg {{ request('category') == $category->id ? 'tw-bg-[#4A1B7F] tw-text-white' : 'tw-bg-gray-100 hover:tw-bg-gray-200' }}">
                                 {{ $category->name }}
                             </a>
                         @endforeach
@@ -221,23 +222,19 @@
                                         @endif
                                     </div>
 
-                                    <div class="tw-grid tw-grid-cols-2 tw-gap-2">
-                                        <a href="{{ route('product.show', $dt->slug) }}"
+                                    <form action="{{ route('cart.add') }}" method="POST" class="tw-grid tw-grid-cols-2 tw-gap-2">
+                                        @csrf
+                                <input type="hidden" name="product_id" value="{{ $dt->id }}">
+                                        <a href="{{ route('detail-kelas', $dt->slug) }}"
                                             class="tw-bg-gray-100 tw-text-gray-800 tw-px-4 tw-py-2.5 tw-rounded-lg tw-text-sm hover:tw-bg-gray-200 tw-transition-colors tw-text-center">
                                             <i class="flaticon-eye tw-mr-2"></i>
                                             Detail
                                         </a>
-                                        <button
-                                            id="buy-button-{{ $dt->id }}"
-                                            onclick="handleBuyButton({{ json_encode([
-                                                'id' => $dt->id,
-                                                'checkoutUrl' => route('class.process')  // Tambahkan route ke halaman checkout
-                                            ]) }})"
-                                            class="tw-bg-[#4A1B7F] tw-text-white tw-px-4 tw-py-2.5 tw-rounded-lg tw-text-sm hover:tw-bg-[#3A1560] tw-transition-colors">
+                                        <button type="submit" class="tw-bg-[#4A1B7F] tw-text-white tw-px-4 tw-py-2.5 tw-rounded-lg tw-text-sm hover:tw-bg-[#3A1560] tw-transition-colors">
                                             <i class="flaticon-shopping-cart tw-mr-2"></i>
                                             <span class="button-text">Beli</span>
                                         </button>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         @endforeach
@@ -268,76 +265,4 @@
     <script type="text/javascript" src="{{ asset('library/owl_carousel/js/owl.carousel.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/frontend/carousel.js') }}"></script>
     <script type="text/javascript" src="{{ asset('v3/libs/leaflet/leaflet.min.js') }}"></script>
-    <script>
-        let toastTimeout;
-
-        function showToast(message, duration = 3000) {
-            const toast = document.getElementById('toast');
-            const toastMessage = document.getElementById('toast-message');
-
-            clearTimeout(toastTimeout);
-            toast.classList.remove('show');
-            void toast.offsetWidth;
-
-            toastMessage.textContent = message;
-            toast.classList.add('show');
-
-            toastTimeout = setTimeout(() => {
-                toast.classList.remove('show');
-            }, duration);
-        }
-
-        function updateCartCount() {
-            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-            const totalItems = cart.length;
-            document.querySelector('#keranjang-belanja-data span').textContent = totalItems;
-        }
-
-        function updateButtonState(productId, isInCart, checkoutUrl = '') {
-            const button = document.getElementById(`buy-button-${productId}`);
-            if (!button) return;
-
-            const buttonText = button.querySelector('.button-text');
-
-            if (isInCart) {
-                buttonText.textContent = 'Checkout';
-                button.onclick = () => window.location.href = checkoutUrl;
-            } else {
-                buttonText.textContent = 'Beli';
-            }
-        }
-
-        function checkProductInCart(productId) {
-            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-            return cart.some(item => item.id === productId);
-        }
-
-        function handleBuyButton(product) {
-            if (checkProductInCart(product.id)) {
-                window.location.href = product.checkoutUrl;
-                return;
-            }
-
-            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-
-            cart.push({
-                ...product,
-                quantity: 1
-            });
-
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartCount();
-            showToast('Produk berhasil ditambahkan ke keranjang!');
-            updateButtonState(product.id, true, product.checkoutUrl);
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            updateCartCount();
-
-            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-            cart.forEach(item => {
-                updateButtonState(item.id, true, item.checkoutUrl);
-            });
-        });
-        </script>
 @endpush
