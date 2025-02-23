@@ -207,6 +207,17 @@
         // let BASE_URL = "{{ url('/') }}";
         let BASE_URL = "http://{{ $_SERVER['HTTP_HOST'] }}";
     </script>
+    <script>
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const totalItems = cart.length;
+            document.querySelector('#keranjang-belanja-data span').textContent = totalItems;
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+        });
+
+    </script>
     @stack('scripts')
 
 </body>

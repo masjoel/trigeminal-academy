@@ -95,167 +95,282 @@
 @endpush
 @section('title', $title)
 @section('main')
-@php
-$courseData = [
-    'title' => 'Web Development Fundamentals',
-    'category' => 'Web Development',
-    'cover_image' => 'https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg',
-    'description' => 'Pelajari dasar-dasar pengembangan web modern dari awal hingga mahir dengan studi kasus yang komprehensif. Kelas ini dirancang untuk pemula yang ingin memulai karir sebagai web developer.',
-    'skillLevel' => 'All Levels',
-    'students' => 36500,
-    'language' => 'English',
-    'captions' => 'Yes',
-    'lectures' => 19,
-    'videoHours' => '1.5 total hours',
-    'price' => 1500000,
-    'discount' => 20,
-    'remainingSlots' => 24,
-    'instructor' => [
-        'name' => 'Devonne Wallbridge',
-        'role' => 'Web Developer, Designer, and Teacher',
-        'image' => 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg'
-    ]
-];
-@endphp
-
-<section id="detail-class">
-    <!-- Hero Section -->
-    <div class="tw-relative tw-w-full tw-h-[300px] md:tw-h-[400px] tw-bg-gray-900">
-        <img src="{{ Storage::url('thumb/',$course->image_url) }}" alt="Course Cover" class="tw-w-full tw-h-full tw-object-cover tw-opacity-50">
-        <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-t tw-from-gray-900/80 tw-to-transparent"></div>
-
-        <!-- Course Title & Category -->
-        <div class="tw-absolute tw-bottom-0 tw-left-0 tw-right-0 tw-p-6 md:tw-p-10">
-            <div class="tw-container tw-mx-auto">
-                <span class="tw-bg-[#4A1B7F]/10 tw-text-white tw-px-4 tw-py-1.5 tw-rounded-full tw-text-sm tw-font-medium tw-mb-4 tw-inline-block">
-                    {{ $course->productCategory->category }}
-                </span>
-                <h1 class="tw-text-2xl md:tw-text-4xl tw-font-bold tw-text-white tw-mb-2">
-                    {{ $courseData['title'] }}
-                </h1>
-            </div>
-        </div>
+    <div id="toast" class="toast-notification">
+        <span id="toast-message"></span>
     </div>
 
-    <!-- Course Details -->
-    <div class="tw-container tw-mx-auto tw-px-4 tw-py-8">
-        <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-3 tw-gap-y-8 md:tw-gap-8">
-            <!-- Main Content -->
-            <div class="tw-col-span-2">
-                <!-- Course Stats -->
-                <div class="tw-space-y-3 tw-p-6 tw-mb-8 tw-grid tw-grid-cols-1 md:tw-grid-cols-2">
-                    <div class="tw-flex tw-items-center tw-gap-2">
-                        <svg class="tw-w-5 tw-h-5 tw-text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <span class="tw-text-gray-600">Skill level: {{ $courseData['skillLevel'] }}</span>
-                    </div>
-                    <div class="tw-flex tw-items-center tw-gap-2">
-                        <svg class="tw-w-5 tw-h-5 tw-text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg>
-                        <span class="tw-text-gray-600">Students: {{ number_format($courseData['students']) }}</span>
-                    </div>
-                    <div class="tw-flex tw-items-center tw-gap-2">
-                        <svg class="tw-w-5 tw-h-5 tw-text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
-                        </svg>
-                        <span class="tw-text-gray-600">Language: {{ $courseData['language'] }}</span>
-                    </div>
-                    <div class="tw-flex tw-items-center tw-gap-2">
-                        <svg class="tw-w-5 tw-h-5 tw-text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
-                        </svg>
-                        <span class="tw-text-gray-600">Captions: {{ $courseData['captions'] }}</span>
-                    </div>
-                    <div class="tw-flex tw-items-center tw-gap-2">
-                        <svg class="tw-w-5 tw-h-5 tw-text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                        </svg>
-                        <span class="tw-text-gray-600">Lectures: {{ $courseData['lectures'] }}</span>
-                    </div>
-                    <div class="tw-flex tw-items-center tw-gap-2">
-                        <svg class="tw-w-5 tw-h-5 tw-text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <span class="tw-text-gray-600">Video: {{ $courseData['videoHours'] }}</span>
-                    </div>
+    {{-- <div class="tw-bg-[#F7F7F7] tw-min-h-screen"> --}}
+    <div class="tw-bg-white border-1 tw-min-h-screen">
+        <div class="tw-container tw-mx-auto tw-px-4 tw-py-8">
+            <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-8">
+                <!-- Left Column - Image -->
+                <div class="tw-bg-white tw-rounded-2xl tw-overflow-hidden tw-shadow-sm">
+                    <img src="{{ Storage::url($course->image_url) }}" alt="{{ $course->name }}"
+                        class="tw-w-full tw-aspect-[4/3] tw-h-full tw-object-cover">
                 </div>
 
-                <!-- Course Description -->
-                <div class="tw-bg-white tw-rounded-xl tw-shadow-sm tw-p-6 tw-mb-8">
-                    <h2 class="tw-text-xl tw-font-bold tw-mb-4">Deskripsi Kelas</h2>
-                    <p class="tw-text-gray-600">
-                        {{ $courseData['description'] }}
-                    </p>
-                </div>
-
-                <!-- Instructor -->
-                <div class="tw-bg-white tw-rounded-xl tw-shadow-sm tw-p-6">
-                    <h2 class="tw-text-xl tw-font-bold tw-mb-4">Instructor</h2>
-                    <div class="tw-flex tw-items-center tw-gap-4">
-                        <img src="{{ $courseData['instructor']['image'] }}" alt="{{ $courseData['instructor']['name'] }}"
-                             class="tw-w-16 tw-h-16 tw-rounded-full tw-object-cover">
-                        <div>
-                            <h3 class="tw-font-medium tw-text-lg">{{ $courseData['instructor']['name'] }}</h3>
-                            <p class="tw-text-gray-600">{{ $courseData['instructor']['role'] }}</p>
-                        </div>
+                <!-- Right Column - Product Info -->
+                <div class="tw-space-y-6">
+                    <!-- Category Badge -->
+                    <div class="tw-space-y-2">
+                        <span
+                            class="tw-bg-purple-100 tw-text-[#4A1B7F] tw-px-4 tw-py-1.5 tw-rounded-full tw-text-sm tw-font-medium">
+                            {{ $course->productCategory->name }}
+                        </span>
                     </div>
-                </div>
 
-            </div>
+                    <!-- Title -->
+                    <h1 class="tw-text-2xl md:tw-text-3xl tw-font-bold tw-text-gray-900">
+                        {{ $course->name }}
+                    </h1>
 
-            <!-- Sidebar -->
-            <div class="tw-col-span-1">
-                <div class="tw-bg-white tw-rounded-xl tw-shadow-md tw-border tw-border-[#4A1B7F]-100 tw-p-6 tw-sticky tw-top-4">
-                    <div class="tw-mb-6">
-                        @if($courseData['discount'])
-                            <div class="tw-flex tw-items-center tw-gap-2 tw-mb-1">
-                                <span class="tw-text-gray-500 tw-line-through">Rp {{ number_format($courseData['price']) }}</span>
-                                <span class="tw-bg-red-100 tw-text-red-600 tw-px-2 tw-py-1 tw-rounded tw-text-xs">{{ $courseData['discount'] }}% OFF</span>
+                    <!-- Price Section -->
+                    <div class="tw-space-y-2">
+                        @if ($course->discount)
+                            <div class="tw-flex tw-items-center tw-gap-3">
+                                <span
+                                    class="tw-text-gray-500 tw-line-through tw-text-lg">Rp{{ number_format($course->price, 0, ',', '.') }}</span>
+                                <span
+                                    class="tw-bg-red-100 tw-text-red-600 tw-px-2 tw-py-1 tw-rounded tw-text-xs tw-font-medium">{{ $course->discount }}%
+                                    OFF</span>
                             </div>
-                            <div class="tw-text-[#4A1B7F] tw-font-bold tw-text-3xl tw-mb-4">
-                                Rp {{ number_format($courseData['price'] * (100 - $courseData['discount']) / 100) }}
+                            <div class="tw-text-[#4A1B7F] tw-font-bold tw-text-3xl">
+                                Rp{{ number_format(($course->price * (100 - $course->discount)) / 100, 0, ',', '.') }}
+                            </div>
+                        @else
+                            <div class="tw-text-[#4A1B7F] tw-font-bold tw-text-3xl">
+                                Rp{{ number_format($course->price, 0, ',', '.') }}
                             </div>
                         @endif
                     </div>
 
-                    <!-- Enrollment Progress -->
-                    <div class="tw-mb-6">
-                        <div class="tw-flex tw-justify-between tw-mb-2">
-                            <span class="tw-text-sm tw-text-gray-600">Sisa Kuota</span>
-                            <span class="tw-text-sm tw-font-medium">{{ $courseData['remainingSlots'] }} Peserta</span>
-                        </div>
-                        <div class="tw-w-full tw-bg-gray-200 tw-rounded-full tw-h-2">
-                            <div class="tw-bg-[#4A1B7F] tw-h-2 tw-rounded-full" style="width: 84%"></div>
-                        </div>
+                    <!-- Description -->
+                    <div class="tw-prose tw-max-w-none tw-text-gray-600">
+                        {{ $course->excerpt }}
                     </div>
 
-                    <!-- Action Buttons -->
-                    <div class="tw-space-y-3">
-                        <button class="tw-w-full tw-bg-[#4A1B7F] tw-text-white tw-py-3 tw-rounded-lg tw-font-medium hover:tw-bg-[#3A1560] tw-transition-colors">
-                            Beli Sekarang
-                        </button>
-                        <button class="tw-w-full tw-border-2 tw-border-[#4A1B7F] tw-text-[#4A1B7F] tw-py-3 tw-rounded-lg tw-font-medium hover:tw-bg-[#4A1B7F]/10 tw-transition-colors">
-                            Tambah ke Keranjang
-                        </button>
+                    <!-- Action Buttons and Quantity -->
+                    <div class="tw-space-y-4">
+                        <div class="tw-flex tw-items-center tw-gap-3">
+                            <div class="tw-w-32">
+                                <button id="add-cart-button-{{ $course->id }}"
+                                    onclick="handleAddToCart({{ json_encode([
+                                        'id' => $course->id,
+                                        'checkoutUrl' => route('class.process'),
+                                    ]) }})"
+                                    class="tw-w-full tw-border-2 tw-border-[#4A1B7F] tw-text-[#4A1B7F] tw-py-3 tw-rounded-lg tw-font-medium hover:tw-bg-[#4A1B7F]/10 tw-transition-colors">
+                                    <span class="cart-button-text">Add to Cart</span>
+                                </button>
+                            </div>
+                            <button id="buy-now-button-{{ $course->id }}"
+                                onclick="handleBuyNow({{ json_encode([
+                                    'id' => $course->id,
+                                    'checkoutUrl' => route('class.process'),
+                                ]) }})"
+                                class="tw-flex-1 tw-bg-[#4A1B7F] tw-text-white tw-py-3 tw-rounded-lg tw-font-medium hover:tw-bg-[#3A1560] tw-transition-colors">
+                                Buy Now!
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <!-- Product Info Grid -->
+                    <div class="tw-grid tw-grid-cols-2 md:tw-grid-cols-3 tw-gap-4 tw-border-t tw-border-gray-200 tw-pt-6">
+                        <div>
+                            <span class="tw-text-sm tw-text-gray-500">Level</span>
+                            <p class="tw-font-medium tw-text-gray-900">{{ ucwords($course->level) }}</p>
+                        </div>
+                        <div>
+                            <span class="tw-text-sm tw-text-gray-500">Students</span>
+                            <p class="tw-font-medium tw-text-gray-900">{{ number_format($course->orderitems->count()) }}
+                            </p>
+                        </div>
+                        <div>
+                            <span class="tw-text-sm tw-text-gray-500">Language</span>
+                            <p class="tw-font-medium tw-text-gray-900">Indonesia</p>
+                        </div>
+                        <div>
+                            <span class="tw-text-sm tw-text-gray-500">Lectures</span>
+                            <p class="tw-font-medium tw-text-gray-900">{{ $course->productContent->count() }}</p>
+                        </div>
+                        <div>
+                            <span class="tw-text-sm tw-text-gray-500">Duration</span>
+                            <p class="tw-font-medium tw-text-gray-900">{{ $course->video_duration }} Minutes</p>
+                        </div>
+                        <div>
+                            <span class="tw-text-sm tw-text-gray-500">Captions</span>
+                            <p class="tw-font-medium tw-text-gray-900">Yes</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
+
+            <!-- Description Section -->
+            <div class="tw-mt-12">
+                <div class="tw-border-b tw-border-gray-200">
+                    <nav class="tw-flex tw-space-x-8">
+                        <button
+                            class="tw-border-b-2 tw-border-[#4A1B7F] tw-py-4 tw-px-1 tw-text-sm tw-font-medium tw-text-[#4A1B7F]">
+                            Description
+                        </button>
+                    </nav>
+                </div>
+
+                <div class="tw-prose tw-max-w-none tw-py-8">
+                    {!! $course->description !!}
+
+                </div>
+
+                <div class="tw-border-b tw-border-gray-200">
+                    <nav class="tw-flex tw-space-x-8">
+                        <button
+                            class="tw-border-b-2 tw-border-[#4A1B7F] tw-py-4 tw-px-1 tw-text-sm tw-font-medium tw-text-[#4A1B7F]">
+                            Instructor
+                        </button>
+                    </nav>
+                </div>
+
+                <div class="tw-prose tw-max-w-none tw-py-8">
+                    <div class="tw-flex tw-items-center tw-gap-4">
+                        <img src="{{ Storage::url($course->instruktur->photo) }}" alt="{{ $course->instruktur->nama }}"
+                            class="tw-w-16 tw-h-16 tw-rounded-full tw-object-cover">
+                        <div>
+                            <h3 class="tw-font-medium tw-text-lg">{{ $course->instruktur->nama }}</h3>
+                            <p class="tw-text-gray-600">{{ $course->instruktur->keterangan }}</p>
+                        </div>
+                    </div>
+                </div>
 
 
-    <section class="top-news-post-area pt-50">
-        <div class="container">
+            </div>
         </div>
-    </section>
-@endsection
-@push('scripts')
-    <script type="text/javascript" src="{{ asset('js/frontend/lib.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('library/wow/js/wow.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('library/owl_carousel/js/owl.carousel.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/frontend/carousel.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('v3/libs/leaflet/leaflet.min.js') }}"></script>
-@endpush
+
+        <style>
+            .toast-notification {
+                position: fixed;
+                bottom: -100px;
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: rgba(0, 0, 0, 0.8);
+                color: white;
+                padding: 12px 24px;
+                border-radius: 8px;
+                z-index: 1000;
+                transition: bottom 0.5s ease-in-out;
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            .toast-notification.show {
+                bottom: 24px;
+                opacity: 1;
+                visibility: visible;
+            }
+        </style>
+
+
+
+
+        <section class="top-news-post-area pt-50">
+            <div class="container">
+            </div>
+        </section>
+    @endsection
+    @push('scripts')
+        <script type="text/javascript" src="{{ asset('js/frontend/lib.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('library/wow/js/wow.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('library/owl_carousel/js/owl.carousel.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/frontend/carousel.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('v3/libs/leaflet/leaflet.min.js') }}"></script>
+        <script>
+            let toastTimeout;
+
+            function showToast(message, duration = 3000) {
+                const toast = document.getElementById('toast');
+                const toastMessage = document.getElementById('toast-message');
+
+                clearTimeout(toastTimeout);
+                toast.classList.remove('show');
+                void toast.offsetWidth;
+
+                toastMessage.textContent = message;
+                toast.classList.add('show');
+
+                toastTimeout = setTimeout(() => {
+                    toast.classList.remove('show');
+                }, duration);
+            }
+
+            function updateCartCount() {
+                const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+                const totalItems = cart.length;
+                document.querySelector('#keranjang-belanja-data span').textContent = totalItems;
+            }
+
+            function checkProductInCart(productId) {
+                const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+                return cart.some(item => item.id === productId);
+            }
+
+            function updateButtonStates(productId, isInCart) {
+                const addCartButton = document.getElementById(`add-cart-button-${productId}`);
+                const buyNowButton = document.getElementById(`buy-now-button-${productId}`);
+
+                if (isInCart) {
+                    if (addCartButton) {
+                        const cartButtonText = addCartButton.querySelector('.cart-button-text');
+                        cartButtonText.textContent = 'Checkout';
+                        addCartButton.onclick = () => window.location.href = '{{ route('class.process') }}';
+                    }
+                }
+            }
+
+            function handleAddToCart(product) {
+                if (checkProductInCart(product.id)) {
+                    window.location.href = product.checkoutUrl;
+                    return;
+                }
+
+                let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+                cart.push({
+                    ...product,
+                    quantity: 1
+                });
+
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartCount();
+                showToast('Produk berhasil ditambahkan ke keranjang!');
+                updateButtonStates(product.id, true);
+            }
+
+            function handleBuyNow(product) {
+                if (!checkProductInCart(product.id)) {
+                    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+                    cart.push({
+                        ...product,
+                        quantity: 1
+                    });
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    updateCartCount();
+                }
+                window.location.href = product.checkoutUrl;
+            }
+
+            // Initialize cart state when page loads
+            updateCartCount();
+            document.addEventListener('DOMContentLoaded', function() {
+
+                // Check product status in cart
+                const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+                cart.forEach(item => {
+                    updateButtonStates(item.id, true);
+                });
+
+                // Check current product
+                const currentProductId = {{ $course->id }};
+                if (checkProductInCart(currentProductId)) {
+                    updateButtonStates(currentProductId, true);
+                }
+            });
+        </script>
+    @endpush

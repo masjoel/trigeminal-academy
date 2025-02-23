@@ -82,7 +82,7 @@ class ExampleProductSeeder extends Seeder
         }
 
         // Seeding products
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             $productId = DB::table('products')->insertGetId([
                 'user_id' => null,
                 'category_id' => rand(1, 5),
@@ -111,7 +111,7 @@ class ExampleProductSeeder extends Seeder
             ]);
 
             // Seeding product_contents
-            for ($j = 0; $j < rand(1, 5); $j++) {
+            for ($j = 0; $j < rand(1, 10); $j++) {
                 DB::table('product_contents')->insert([
                     'product_id' => $productId,
                     'parent' => null,

@@ -92,6 +92,28 @@
             height: auto;
         }
     </style>
+    <style>
+        .toast-notification {
+            position: fixed;
+            bottom: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            z-index: 1000;
+            transition: bottom 0.5s ease-in-out;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .toast-notification.show {
+            bottom: 24px;
+            opacity: 1;
+            visibility: visible;
+        }
+        </style>
 @endpush
 @section('title', $title)
 @section('main')
@@ -153,13 +175,12 @@
                         @foreach($courses as $dt)
                             <div class="tw-bg-white tw-rounded-xl tw-shadow-lg tw-overflow-hidden">
                                 <div class="tw-h-48">
-                                    {{-- <img src="#" --}}
-                                    <img src="https://picsum.photos/1200/1200?random={{ $dt->id }}"
-                                        alt="{{ $dt->name }}"
-                                        class="tw-w-full tw-h-full tw-object-cover">
+                                    <img src="{{ Storage::url('thumb/'.$dt->image_url) }}"
+                                                alt="{{ $dt->name }}"
+                                                class="tw-w-full tw-h-full tw-object-cover">
                                 </div>
 
-                                <div class="tw-p-6">
+                                <div class="tw-p-6 tw-pt-6 tw-flex tw-flex-col tw-h-[calc(100%-192px)]">
                                     <div class="tw-mb-3">
                                         <span class="tw-bg-[#4A1B7F]/10 tw-text-[#4A1B7F] tw-px-3 tw-py-1 tw-rounded-full tw-text-sm tw-font-medium" style="background-color: {{ $dt->productCategory->warna }}20; color: {{ $dt->productCategory->warna }};">
                                             {{ $dt->productCategory->name }}
@@ -167,24 +188,24 @@
                                     </div>
 
                                     <h3 class="tw-text-xl tw-font-bold tw-text-gray-800 tw-mb-2">{{ $dt->name }}</h3>
-                                    <p class="tw-text-gray-600 tw-mb-4 tw-line-clamp-2">{{ Str::words($dt->description, 15, '...') }}</p>
+                                    <p class="tw-text-gray-600 tw-mb-4 tw-line-clamp-2">{{ $dt->excerpt, 15 }}</p>
 
-                                    <div class="tw-grid tw-grid-cols-2 tw-gap-4 tw-mb-4">
+                                    <div class="tw-flex tw-flex-wrap tw-gap-4 tw-mb-4">
                                         <div class="tw-flex tw-items-center">
                                             <i class="flaticon-history tw-text-[#4A1B7F] tw-mr-2"></i>
                                             <span class="tw-text-sm tw-text-gray-600">{{ $dt->video_duration }} Menit</span>
                                         </div>
                                         <div class="tw-flex tw-items-center">
-                                            <i class="flaticon-calendar tw-text-[#4A1B7F] tw-mr-2"></i>
-                                            <span class="tw-text-sm tw-text-gray-600">{{ $dt->productContent->count() }} Materi</span>
+                                            <i class="flaticon-user tw-text-[#4A1B7F] tw-mr-2"></i>
+                                            <span class="tw-text-sm tw-text-gray-600">{{ $dt->orderitems->count() }} Peserta</span>
                                         </div>
-                                        <div class="tw-flex tw-items-center tw-col-span-2">
+                                        <div class="tw-flex tw-items-center">
                                             <i class="flaticon-thunder tw-text-[#4A1B7F] tw-mr-2"></i>
-                                            <span class="tw-text-sm tw-text-gray-600">Level {{ ucwords($dt->level) }}</span>
+                                            <span class="tw-text-sm tw-text-gray-600">{{ ucwords($dt->level) }}</span>
                                         </div>
                                     </div>
 
-                                    <div class="tw-mb-4">
+                                    <div class="tw-mt-auto">
                                         @if($dt->discount)
                                             <div class="tw-flex tw-items-center tw-gap-2 tw-mb-1">
                                                 <span class="tw-text-gray-500 tw-line-through">Rp {{ number_format($dt->price, 0, ',', '.') }}</span>
@@ -207,15 +228,14 @@
                                             Detail
                                         </a>
                                         <button
-                                            onclick="addToCart({{ json_encode([
+                                            id="buy-button-{{ $dt->id }}"
+                                            onclick="handleBuyButton({{ json_encode([
                                                 'id' => $dt->id,
-                                                'name' => $dt->name,
-                                                'price' => $dt->discount ? $dt->price * (1 - $dt->discount/100) : $dt->price,
-                                                'image' => "https://picsum.photos/1200/1200?random={$dt->id}"
+                                                'checkoutUrl' => route('class.process')  // Tambahkan route ke halaman checkout
                                             ]) }})"
                                             class="tw-bg-[#4A1B7F] tw-text-white tw-px-4 tw-py-2.5 tw-rounded-lg tw-text-sm hover:tw-bg-[#3A1560] tw-transition-colors">
                                             <i class="flaticon-shopping-cart tw-mr-2"></i>
-                                            Beli
+                                            <span class="button-text">Beli</span>
                                         </button>
                                     </div>
                                 </div>
@@ -237,6 +257,10 @@
         <div class="container">
         </div>
     </section>
+
+    <div id="toast" class="toast-notification">
+        <span id="toast-message"></span>
+    </div>
 @endsection
 @push('scripts')
     <script type="text/javascript" src="{{ asset('js/frontend/lib.js') }}"></script>
@@ -245,25 +269,75 @@
     <script type="text/javascript" src="{{ asset('js/frontend/carousel.js') }}"></script>
     <script type="text/javascript" src="{{ asset('v3/libs/leaflet/leaflet.min.js') }}"></script>
     <script>
-        function addToCart(product) {
-            let cart = JSON.parse(sessionStorage.getItem('cart') || '[]');
+        let toastTimeout;
 
-            // Check if product already exists in cart
-            const existingProductIndex = cart.findIndex(item => item.id === product.id);
+        function showToast(message, duration = 3000) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
 
-            if (existingProductIndex > -1) {
-                cart[existingProductIndex].quantity = (cart[existingProductIndex].quantity || 1) + 1;
+            clearTimeout(toastTimeout);
+            toast.classList.remove('show');
+            void toast.offsetWidth;
+
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, duration);
+        }
+
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const totalItems = cart.length;
+            document.querySelector('#keranjang-belanja-data span').textContent = totalItems;
+        }
+
+        function updateButtonState(productId, isInCart, checkoutUrl = '') {
+            const button = document.getElementById(`buy-button-${productId}`);
+            if (!button) return;
+
+            const buttonText = button.querySelector('.button-text');
+
+            if (isInCart) {
+                buttonText.textContent = 'Checkout';
+                button.onclick = () => window.location.href = checkoutUrl;
             } else {
-                cart.push({
-                    ...product,
-                    quantity: 1
-                });
+                buttonText.textContent = 'Beli';
+            }
+        }
+
+        function checkProductInCart(productId) {
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            return cart.some(item => item.id === productId);
+        }
+
+        function handleBuyButton(product) {
+            if (checkProductInCart(product.id)) {
+                window.location.href = product.checkoutUrl;
+                return;
             }
 
-            sessionStorage.setItem('cart', JSON.stringify(cart));
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
 
-            // Show notification
-            alert('Produk berhasil ditambahkan ke keranjang!');
+            cart.push({
+                ...product,
+                quantity: 1
+            });
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            showToast('Produk berhasil ditambahkan ke keranjang!');
+            updateButtonState(product.id, true, product.checkoutUrl);
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            cart.forEach(item => {
+                updateButtonState(item.id, true, item.checkoutUrl);
+            });
+        });
         </script>
 @endpush

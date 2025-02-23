@@ -42,8 +42,10 @@ use App\Http\Controllers\Frontend\ProductFrontendController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/example-product-detail', [HomeController::class, 'exampleProductDetail'])->name('example-product-detail');
-Route::get('/kelas/{slug}', [ProductFrontendController::class, 'show'])->name('product.show');
 Route::get('/kelas', [ProductFrontendController::class, 'index'])->name('product.index');
+Route::get('/kelas/{slug}', [ProductFrontendController::class, 'show'])->name('product.show');
+Route::get('/data/kelas/process', [ProductFrontendController::class, 'process'])->name('class.process');
+Route::post('/data/kelas/keranjang', [ProductFrontendController::class, 'keranjang'])->name('keranjang');
 
 // Route::get('/login', [HomeController::class, 'login']);
 Route::get('about', [HomeController::class, 'about'])->name('about');

@@ -15,7 +15,8 @@ class ProductFrontendController extends Controller
     public function index(Request $request)
     {
         $title = 'Kelas Online';
-        $query = Product::with('productCategory', 'instruktur', 'productContent')->where('publish', '1');
+        $query = Product::with('productCategory', 'instruktur', 'productContent', 'orderitems')->where('publish', '1');
+
         if($request->search) {
             $query->where('name', 'like', '%'. $request->search .'%');
         }
@@ -53,9 +54,27 @@ class ProductFrontendController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function process()
     {
-        //
+        $title = 'Proses Data';
+        return view('frontend.product.process', compact('title'));
+    }
+
+    public function keranjang(Request $request)
+    {
+        $cartIds = json_decode($request->input('cart_items'), true);
+
+        if (!$cartIds || !is_array($cartIds)) {
+            $cartIds = [];
+        }
+
+        $courses = Product::whereIn('id', $cartIds)->where('publish', '1')->get();
+
+        $title = 'Keranjang Belanja';
+        return view('frontend.product.keranjang', compact(
+            'title',
+            'courses'
+        ));
     }
 
     /**
@@ -72,7 +91,7 @@ class ProductFrontendController extends Controller
     public function show($slug)
     {
         $title = 'Show';
-        $course = Product::with('productCategory', 'instruktur', 'productContent')->where('slug', $slug)->where('publish', '1')->limit(3)->firstOrFail();
+        $course = Product::with('productCategory', 'instruktur', 'productContent', 'orderitems')->where('slug', $slug)->where('publish', '1')->limit(3)->firstOrFail();
 
         return view('frontend.product.show', compact(
             'title',
