@@ -122,6 +122,134 @@
         <input type="hidden" name="cart_items" id="cart-items">
     </form>
 
+    <div class="tw-container tw-mx-auto tw-px-4 tw-py-8">
+        <div class="tw-bg-white tw-rounded-xl tw-shadow-lg tw-p-6">
+            <h1 class="tw-text-2xl tw-font-bold tw-mb-6">Keranjang Belanja</h1>
+
+            <form id="checkout-form" method="POST" action="#">
+                @csrf
+                <input type="hidden" name="selected_items" id="selected-items">
+
+                @if ($courses->isEmpty())
+                    <div class="tw-text-center tw-py-8">
+                        <p class="tw-text-gray-600">Keranjang belanja Anda masih kosong.</p>
+                        <a href="{{ route('product.index') }}"
+                            class="tw-inline-block tw-mt-4 tw-bg-[#4A1B7F] tw-text-white tw-px-6 tw-py-2 tw-rounded-lg hover:tw-bg-[#3A1560] tw-transition-colors">
+                            Lihat Kelas
+                        </a>
+                    </div>
+                @else
+                    <div class="tw-flex tw-flex-col md:tw-flex-row tw-gap-6">
+                        <div class="tw-flex-1">
+                            <table class="tw-w-full">
+                                <thead>
+                                    <tr class="tw-border-b">
+                                        <th class="tw-p-3 tw-text-left">
+                                            <label class="tw-flex tw-items-center">
+                                                <input type="checkbox" id="select-all" checked
+                                                    class="tw-rounded tw-border-gray-300 tw-text-[#4A1B7F] focus:tw-ring-[#4A1B7F]">
+                                                <span class="tw-ml-2 tw-text-sm">Pilih Semua</span>
+                                            </label>
+                                        </th>
+                                        <th class="tw-p-3 tw-text-left">Kelas</th>
+                                        <th class="tw-p-3 tw-text-right">Harga</th>
+                                        <th class="tw-p-3 tw-text-center">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($courses as $product)
+                                        <tr class="tw-border-b" data-product-id="{{ $product->id }}">
+                                            <td class="tw-p-3">
+                                                <input type="checkbox"
+                                                    class="product-checkbox tw-rounded tw-border-gray-300 tw-text-[#4A1B7F] focus:tw-ring-[#4A1B7F]"
+                                                    value="{{ $product->id }}" checked>
+                                            </td>
+                                            <td class="tw-p-3">
+                                                <div class="tw-flex tw-items-center tw-gap-3">
+                                                    <img src="{{ Storage::url('thumb/' . $product->image_url) }}"
+                                                        alt="{{ $product->name }}"
+                                                        class="tw-w-12 tw-h-12 tw-rounded-lg tw-object-cover">
+                                                    <div>
+                                                        <h3 class="tw-font-medium tw-text-sm">{{ $product->name }}</h3>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="tw-p-3 tw-text-right">
+                                                @if ($product->discount)
+                                                    <div class="tw-flex tw-flex-col tw-items-end">
+                                                        <span class="tw-text-xs tw-text-gray-500 tw-line-through">Rp
+                                                            {{ number_format($product->price, 0, ',', '.') }}</span>
+                                                        <span class="tw-text-sm tw-font-bold">Rp
+                                                            {{ number_format($product->price * (1 - $product->discount / 100), 0, ',', '.') }}</span>
+                                                    </div>
+                                                @else
+                                                    <span class="tw-text-sm tw-font-bold">Rp
+                                                        {{ number_format($product->price, 0, ',', '.') }}</span>
+                                                @endif
+                                            </td>
+                                            <td class="tw-p-3 tw-text-center">
+                                                <button type="button"
+                                                    onclick="confirmDelete({{ $product->id }}, '{{ $product->name }}')"
+                                                    class="tw-text-sm tw-text-red-600 hover:tw-text-red-800 tw-transition-colors">
+                                                    Hapus
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="md:tw-w-80">
+                            <div class="tw-bg-gray-50 tw-rounded-lg tw-p-4">
+                                <h3 class="tw-font-bold tw-mb-4">Ringkasan Pesanan</h3>
+                                <div class="tw-flex tw-justify-between tw-mb-4">
+                                    <span class="tw-text-gray-600">Total</span>
+                                    <span id="total-price" class="tw-font-bold tw-text-[#4A1B7F]">Rp 0</span>
+                                </div>
+                                <button type="submit" id="checkout-button"
+                                    class="tw-w-full tw-bg-[#4A1B7F] tw-text-white tw-px-4 tw-py-2 tw-rounded-lg hover:tw-bg-[#3A1560] tw-transition-colors disabled:tw-opacity-50 disabled:tw-cursor-not-allowed">
+                                    Checkout
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+            </form>
+        </div>
+    </div>
+
+    <div id="delete-modal" class="tw-fixed tw-inset-0 tw-bg-black/50 tw-flex tw-items-center tw-justify-center tw-hidden">
+        <div class="tw-bg-white tw-rounded-xl tw-p-6 tw-max-w-sm tw-w-full tw-mx-4">
+            <h3 class="tw-text-lg tw-font-bold tw-mb-2">Konfirmasi Hapus</h3>
+            <p id="delete-message" class="tw-text-gray-600 tw-mb-6"></p>
+            <div class="tw-flex tw-justify-end tw-gap-3">
+                <button onclick="closeDeleteModal()"
+                    class="tw-px-4 tw-py-2 tw-text-gray-600 hover:tw-text-gray-800 tw-transition-colors">
+                    Batal
+                </button>
+                <button id="confirm-delete-btn"
+                    class="tw-bg-red-600 tw-text-white tw-px-4 tw-py-2 tw-rounded-lg hover:tw-bg-red-700 tw-transition-colors">
+                    Hapus
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast-notification">
+        <span id="toast-message"></span>
+    </div>
+    <section class="top-news-post-area pt-50">
+        <div class="container">
+        </div>
+    </section>
+@endsection
+@push('scripts')
+    <script type="text/javascript" src="{{ asset('js/frontend/lib.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('library/wow/js/wow.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('library/owl_carousel/js/owl.carousel.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/frontend/carousel.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('v3/libs/leaflet/leaflet.min.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             let cart = localStorage.getItem('cart');
@@ -149,216 +277,136 @@
             }
         });
     </script>
-    <div class="tw-container tw-mx-auto tw-px-4 tw-py-8">
-        <div class="tw-bg-white tw-rounded-xl tw-shadow-lg tw-p-6">
-            <h1 class="tw-text-2xl tw-font-bold tw-mb-6">Keranjang Belanja</h1>
-
-            <form id="checkout-form" method="POST" action="#">
-                @csrf
-                <input type="hidden" name="selected_items" id="selected-items">
-
-                @if ($courses->isEmpty())
-                    <div class="tw-text-center tw-py-8">
-                        <i class="flaticon-shopping-cart tw-text-4xl tw-text-gray-400 tw-mb-4"></i>
-                        <p class="tw-text-gray-600">Keranjang belanja Anda masih kosong.</p>
-                        <a href="{{ route('product.index') }}" class="tw-inline-block tw-mt-4 tw-bg-[#4A1B7F] tw-text-white tw-px-6 tw-py-2 tw-rounded-lg hover:tw-bg-[#3A1560] tw-transition-colors">
-                            Lihat Kelas
-                        </a>
-                    </div>
-                @else
-                    <div class="tw-overflow-x-auto">
-                        <table class="tw-w-full tw-min-w-[640px]">
-                            <thead>
-                                <tr class="tw-border-b">
-                                    <th class="tw-p-4 tw-text-left">
-                                        <label class="tw-flex tw-items-center">
-                                            <input type="checkbox" id="select-all" checked
-                                                class="tw-rounded tw-border-gray-300 tw-text-[#4A1B7F] focus:tw-ring-[#4A1B7F]">
-                                            <span class="tw-ml-2">Pilih Semua</span>
-                                        </label>
-                                    </th>
-                                    <th class="tw-p-4 tw-text-left">Kelas</th>
-                                    <th class="tw-p-4 tw-text-right">Harga</th>
-                                    <th class="tw-p-4 tw-text-center">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($courses as $product)
-                                    <tr class="tw-border-b" data-product-id="{{ $product->id }}">
-                                        <td class="tw-p-4">
-                                            <input type="checkbox" class="product-checkbox tw-rounded tw-border-gray-300 tw-text-[#4A1B7F] focus:tw-ring-[#4A1B7F]"
-                                                value="{{ $product->id }}" checked>
-                                        </td>
-                                        <td class="tw-p-4">
-                                            <div class="tw-flex tw-items-center tw-gap-4">
-                                                <img src="{{ Storage::url('thumb/'.$product->image_url) }}"
-                                                    alt="{{ $product->name }}"
-                                                    class="tw-w-16 tw-h-16 tw-rounded-lg tw-object-cover">
-                                                <div>
-                                                    <h3 class="tw-font-small tw-text-md">{{ $product->name }}</h3>
-                                                    <span class="tw-text-sm tw-text-gray-600">{{ $product->productCategory->name }}</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="tw-p-4 tw-text-right">
-                                            @if($product->discount)
-                                                <div class="tw-flex tw-flex-col tw-items-end">
-                                                    <span class="tw-text-gray-500 tw-line-through">Rp {{ number_format($product->price, 0, ',', '.') }}</span>
-                                                    <span class="tw-font-bold">Rp {{ number_format($product->price * (1 - $product->discount/100), 0, ',', '.') }}</span>
-                                                </div>
-                                            @else
-                                                <span class="tw-font-bold">Rp {{ number_format($product->price, 0, ',', '.') }}</span>
-                                            @endif
-                                        </td>
-                                        <td class="tw-p-4 tw-text-center">
-                                            <button type="button" onclick="removeFromCart({{ $product->id }})"
-                                                class="tw-text-red-600 hover:tw-text-red-800 tw-transition-colors">Hapus
-                                                <i class="flaticon-trash"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class="tw-mt-6 tw-flex tw-flex-col md:tw-flex-row tw-justify-between tw-items-center tw-gap-4">
-                        <div class="tw-text-lg">
-                            Total: <span id="total-price" class="tw-font-bold tw-text-[#4A1B7F]">Rp 0</span>
-                        </div>
-                        <button type="submit" id="checkout-button"
-                            class="tw-bg-[#4A1B7F] tw-text-white tw-px-8 tw-py-3 tw-rounded-lg hover:tw-bg-[#3A1560] tw-transition-colors disabled:tw-opacity-50 disabled:tw-cursor-not-allowed">
-                            Checkout
-                        </button>
-                    </div>
-                @endif
-            </form>
-        </div>
-    </div>
-
-    <div id="toast" class="toast-notification">
-        <span id="toast-message"></span>
-    </div>
-
-    <section class="top-news-post-area pt-50">
-        <div class="container">
-        </div>
-    </section>
-@endsection
-@push('scripts')
-    <script type="text/javascript" src="{{ asset('js/frontend/lib.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('library/wow/js/wow.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('library/owl_carousel/js/owl.carousel.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/frontend/carousel.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('v3/libs/leaflet/leaflet.min.js') }}"></script>
-
 @endpush
 
 @push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const selectAll = document.getElementById('select-all');
-    const productCheckboxes = document.querySelectorAll('.product-checkbox');
-    const checkoutForm = document.getElementById('checkout-form');
-    const selectedItemsInput = document.getElementById('selected-items');
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const selectAll = document.getElementById('select-all');
+            const productCheckboxes = document.querySelectorAll('.product-checkbox');
+            const checkoutForm = document.getElementById('checkout-form');
+            const selectedItemsInput = document.getElementById('selected-items');
+            const deleteModal = document.getElementById('delete-modal');
 
-    function updateTotalPrice() {
-        let total = 0;
-        productCheckboxes.forEach(checkbox => {
-            if (checkbox.checked) {
-                const row = checkbox.closest('tr');
-                const priceEl = row.querySelector('td:nth-child(3)');
-                const price = priceEl.querySelector('.tw-line-through')
-                    ? parseFloat(priceEl.querySelector('.tw-font-bold').textContent.replace(/[^0-9]/g, ''))
-                    : parseFloat(priceEl.textContent.replace(/[^0-9]/g, ''));
-                total += price;
+            function updateTotalPrice() {
+                let total = 0;
+                productCheckboxes.forEach(checkbox => {
+                    if (checkbox.checked) {
+                        const row = checkbox.closest('tr');
+                        const priceEl = row.querySelector('td:nth-child(3)');
+                        const price = priceEl.querySelector('.tw-line-through') ?
+                            parseFloat(priceEl.querySelector('.tw-font-bold').textContent.replace(/[^0-9]/g,
+                                '')) :
+                            parseFloat(priceEl.textContent.replace(/[^0-9]/g, ''));
+                        total += price;
+                    }
+                });
+
+                document.getElementById('total-price').textContent =
+                    'Rp ' + total.toLocaleString('id-ID');
+
+                const checkoutButton = document.getElementById('checkout-button');
+                checkoutButton.disabled = !Array.from(productCheckboxes).some(cb => cb.checked);
             }
-        });
 
-        document.getElementById('total-price').textContent =
-            'Rp ' + total.toLocaleString('id-ID');
+            function updateSelectedItems() {
+                const selectedIds = Array.from(productCheckboxes)
+                    .filter(cb => cb.checked)
+                    .map(cb => cb.value);
+                selectedItemsInput.value = JSON.stringify(selectedIds);
+            }
 
-        const checkoutButton = document.getElementById('checkout-button');
-        checkoutButton.disabled = !Array.from(productCheckboxes).some(cb => cb.checked);
-    }
+            function showToast(message, duration = 3000) {
+                const toast = document.getElementById('toast');
+                const toastMessage = document.getElementById('toast-message');
 
-    function updateSelectedItems() {
-        const selectedIds = Array.from(productCheckboxes)
-            .filter(cb => cb.checked)
-            .map(cb => cb.value);
-        selectedItemsInput.value = JSON.stringify(selectedIds);
-    }
+                clearTimeout(window.toastTimeout);
+                toast.classList.remove('show');
+                void toast.offsetWidth;
 
-    function showToast(message, duration = 3000) {
-        const toast = document.getElementById('toast');
-        const toastMessage = document.getElementById('toast-message');
+                toastMessage.textContent = message;
+                toast.classList.add('show');
 
-        clearTimeout(window.toastTimeout);
-        toast.classList.remove('show');
-        void toast.offsetWidth;
+                window.toastTimeout = setTimeout(() => {
+                    toast.classList.remove('show');
+                }, duration);
+            }
 
-        toastMessage.textContent = message;
-        toast.classList.add('show');
+            selectAll?.addEventListener('change', function() {
+                productCheckboxes.forEach(checkbox => {
+                    checkbox.checked = this.checked;
+                });
+                updateTotalPrice();
+                updateSelectedItems();
+            });
 
-        window.toastTimeout = setTimeout(() => {
-            toast.classList.remove('show');
-        }, duration);
-    }
+            productCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const allChecked = Array.from(productCheckboxes).every(cb => cb.checked);
+                    if (selectAll) selectAll.checked = allChecked;
+                    updateTotalPrice();
+                    updateSelectedItems();
+                });
+            });
 
-    selectAll?.addEventListener('change', function() {
-        productCheckboxes.forEach(checkbox => {
-            checkbox.checked = this.checked;
-        });
-        updateTotalPrice();
-        updateSelectedItems();
-    });
-
-    productCheckboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
-            const allChecked = Array.from(productCheckboxes).every(cb => cb.checked);
-            if (selectAll) selectAll.checked = allChecked;
             updateTotalPrice();
             updateSelectedItems();
+
+            window.confirmDelete = function(productId, productName) {
+                const message = document.getElementById('delete-message');
+                message.textContent = `Apakah Anda yakin ingin menghapus "${productName}" dari keranjang?`;
+
+                const confirmBtn = document.getElementById('confirm-delete-btn');
+                confirmBtn.onclick = () => removeFromCart(productId);
+
+                deleteModal.classList.remove('tw-hidden');
+            };
+
+            window.closeDeleteModal = function() {
+                deleteModal.classList.add('tw-hidden');
+            };
+
+            window.removeFromCart = function(productId) {
+                const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+                const updatedCart = cart.filter(item => item.id !== productId);
+                localStorage.setItem('cart', JSON.stringify(updatedCart));
+
+                const row = document.querySelector(`tr[data-product-id="${productId}"]`);
+                if (row) {
+                    row.remove();
+                    updateTotalPrice();
+                    updateSelectedItems();
+                    showToast('Produk berhasil dihapus dari keranjang');
+                    closeDeleteModal();
+
+                    const cartCount = document.querySelector('#keranjang-belanja-data span');
+                    if (cartCount) {
+                        cartCount.textContent = updatedCart.length;
+                    }
+
+                    if (updatedCart.length === 0) {
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 1000);
+                    }
+                }
+            };
+
+            checkoutForm?.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const selectedIds = JSON.parse(selectedItemsInput.value);
+                if (selectedIds.length === 0) {
+                    showToast('Pilih minimal satu produk untuk checkout');
+                    return;
+                }
+                this.submit();
+            });
+
+            deleteModal?.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeDeleteModal();
+                }
+            });
         });
-    });
-
-    updateTotalPrice();
-    updateSelectedItems();
-
-    window.removeFromCart = function(productId) {
-        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-        const updatedCart = cart.filter(item => item.id !== productId);
-        localStorage.setItem('cart', JSON.stringify(updatedCart));
-
-        const row = document.querySelector(`tr[data-product-id="${productId}"]`);
-        if (row) {
-            row.remove();
-            updateTotalPrice();
-            updateSelectedItems();
-            showToast('Produk berhasil dihapus dari keranjang');
-
-            const cartCount = document.querySelector('#keranjang-belanja-data span');
-            if (cartCount) {
-                cartCount.textContent = updatedCart.length;
-            }
-
-            if (updatedCart.length === 0) {
-                setTimeout(() => {
-                    window.location.reload();
-                }, 1000);
-            }
-        }
-    };
-
-    checkoutForm?.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const selectedIds = JSON.parse(selectedItemsInput.value);
-        if (selectedIds.length === 0) {
-            showToast('Pilih minimal satu produk untuk checkout');
-            return;
-        }
-        this.submit();
-    });
-});
-</script>
+    </script>
 @endpush
