@@ -103,4 +103,4 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('instruktur', InstructorController::class);
 });
 Route::post('aktivasi', [DesaController::class, 'aktivasi'])->name('aktivasi');
-Route::get('/buku-tamu/cek-nik', [BukuTamuController::class, 'cekNik'])->name('buku-tamu.cek-nik');
+Route::get('/detail-kelas/{slug}', [HomeController::class, 'detailKelas'])->name('detail-kelas');

@@ -8,6 +8,7 @@ use App\Models\Artikel;
 use App\Models\Halaman;
 use App\Models\Product;
 use App\Models\Provinsi;
+use App\Models\OrderItem;
 use App\Models\ImageResize;
 use App\Models\Slidebanner;
 use App\Models\ProfilBisnis;
@@ -88,8 +89,7 @@ class HomeController extends Controller
             ->latest()->limit(9)->get();
 
         $title = klien('nama_client') == null ? 'LMS' : klien('nama_client');
-        $courses = Product::with('productCategory', 'instruktur', 'productContent')->where('publish', '1')->limit(3)->latest()->get();
-
+        $courses = Product::with('productCategory', 'instruktur', 'orderitems')->where('publish', '1')->limit(3)->latest()->get();
 
         return view('frontend.beranda', compact('title', 'profil_usaha', 'artikel', 'banner', 'halaman', 'sid', 'tentang_kami', 'kontak_kami', 'feature', 'berita', 'berita2', 'berita3', 'pengumuman', 'pengumuman3', 'top_stories', 'video', 'agenda', 'agenda3', 'galeries', 'perangkatdesa', 'foto', 'courses'));
     }
@@ -777,76 +777,6 @@ class HomeController extends Controller
             'provinsi'
         ));
     }
-    public function storeRegistrasi(StorePendudukReq $request)
-    {
-        DB::beginTransaction();
-        $slug = SlugService::createSlug(Anggota::class, 'slug', $request->nama);
-        $imagePath = $imagePath2 = null;
-        $validate = $request->validated();
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $extFile = $image->getClientOriginalExtension();
-            $nameFile = Uuid::uuid1()->getHex() . '.' . $extFile;
-            $imagePath = $image->storeAs('anggota', $nameFile, 'public');
-            $smallthumbnailpath = public_path('storage/anggota/' . $nameFile);
-            $imageInfo = ImageResize::getFileImageSize($smallthumbnailpath);
-            if ($imageInfo) {
-                $width = $imageInfo['width'];
-                $height = $imageInfo['height'];
-            }
-            if ($width >= 800 || $height >= 600) {
-                ImageResize::createThumbnail($smallthumbnailpath, 800, 600);
-            }
-            $thumbnail = $image->storeAs('thumb/anggota', $nameFile, 'public');
-            $smallthumbnailpath = public_path('storage/thumb/anggota/' . $nameFile);
-            $imageInfo = ImageResize::getFileImageSize($smallthumbnailpath);
-            if ($imageInfo) {
-                $width = $imageInfo['width'];
-                $height = $imageInfo['height'];
-            }
-            if ($width >= 800 || $height >= 600) {
-                ImageResize::createThumbnail($smallthumbnailpath, 800, 600);
-            }
-        }
-        if ($request->hasFile('image_ktp')) {
-            $image_ktp = $request->file('image_ktp');
-            $extFile = $image_ktp->getClientOriginalExtension();
-            $nameFile = Uuid::uuid1()->getHex() . '.' . $extFile;
-            $imagePath2 = $image_ktp->storeAs('anggota', $nameFile, 'public');
-            $smallthumbnailpath = public_path('storage/anggota/' . $nameFile);
-            $imageInfo = ImageResize::getFileImageSize($smallthumbnailpath);
-            if ($imageInfo) {
-                $width = $imageInfo['width'];
-                $height = $imageInfo['height'];
-            }
-            if ($width >= 800 || $height >= 600) {
-                ImageResize::createThumbnail($smallthumbnailpath, 800, 600);
-            }
-
-            $thumbnail = $image_ktp->storeAs('thumb/anggota', $nameFile, 'public');
-            $smallthumbnailpath = public_path('storage/thumb/anggota/' . $nameFile);
-            $imageInfo = ImageResize::getFileImageSize($smallthumbnailpath);
-            if ($imageInfo) {
-                $width = $imageInfo['width'];
-                $height = $imageInfo['height'];
-            }
-            if ($width >= 800 || $height >= 600) {
-                ImageResize::createThumbnail($smallthumbnailpath, 800, 600);
-            }
-        }
-        $validate['image'] = $imagePath;
-        $validate['image_ktp'] = $imagePath2;
-        $validate['slug'] = $slug;
-        $validate['iddesa'] = infodesa('kodedesa');
-        $validate['id_ktp'] = $request->nik;
-        $validate['status'] = 'pending';
-        $save = Anggota::create($validate);
-        $validate['iduser'] = $save->id;
-        $validate['kcds'] = infodesa('kodedesa') . '-' . $save->id;
-        $save->update($validate);
-        DB::commit();
-        return redirect(route('form-registrasi'))->with('success', 'Data berhasil ditambahkan');
-    }
     public function cekAnggota()
     {
         $title = 'Cek Status Anggota';
@@ -859,4 +789,12 @@ class HomeController extends Controller
         // dd($profil);
         return view('pages.status-anggota', compact('title', 'profil'));
     }
+    public function detailKelas($slug)
+    {
+        $course = Product::with('productCategory')->where('slug', $slug)->first();
+        $totStudent = OrderItem::where('product_id', $course->id)->count();
+        $title = 'DetailKelas';
+        return view('frontend.detail-kelas', compact('title', 'course', 'totStudent'));
+    }
+
 }
