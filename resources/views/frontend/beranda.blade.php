@@ -113,374 +113,220 @@
     </div>
 
     {{-- Mulai Konten tailwindcss --}}
-        <section id="tw-sec-1" class="tw-container tw-mx-auto tw-px-4 tw-py-12 md:tw-py-16">
-            <div class="tw-flex tw-flex-col-reverse md:tw-flex-row tw-items-center tw-justify-between tw-gap-8">
-                {{-- Left Content --}}
-                <div class="tw-flex-1 md:tw-text-left tw-text-center">
-                    <h1 class="tw-text-4xl md:tw-text-5xl tw-font-bold tw-text-[#4A1B7F]">{{ $section1->title }}</h1>
-                    {!! nl2br($section1->deskripsi) !!}
-                    {{-- <h2 class="tw-text-2xl md:tw-text-3xl tw-text-gray-800 tw-mt-4">Upskilling and Reskilling Platform</h2>
-                    <p class="tw-text-lg tw-text-gray-700 tw-mt-4 tw-max-w-xl tw-mx-auto md:tw-mx-0">
-                        Ayo tingkatkan skill Anda! Kembangkan diri Anda untuk meraih potensi terbaik diri Anda!
-                    </p> --}}
-                    <div class="tw-mt-8 tw-flex tw-flex-wrap tw-gap-4 tw-justify-center md:tw-justify-start">
-                        <a href="{{ route('login') }}"
-                            class="tw-px-6 tw-py-3 tw-bg-[#4A1B7F] tw-text-white tw-rounded-lg hover:tw-bg-[#3B1564] tw-transition tw-font-medium">
-                            Login Member
-                        </a>
-                        <a href="/kelas"
-                            class="tw-px-6 tw-py-3 tw-bg-white tw-text-[#4A1B7F] tw-border tw-border-[#4A1B7F] tw-rounded-lg hover:tw-bg-gray-50 tw-transition tw-font-medium">
-                            Browse Class
-                        </a>
-                    </div>
-                </div>
+    <section id="tw-sec-1" class="tw-container tw-mx-auto tw-px-4 tw-py-12 md:tw-py-16">
+        <div class="tw-flex tw-flex-col-reverse md:tw-flex-row tw-items-center tw-justify-between tw-gap-8">
+            {{-- Left Content --}}
+            <div class="tw-flex-1 md:tw-text-left tw-text-center">
+                <h1 class="tw-text-4xl md:tw-text-5xl tw-font-bold tw-text-[#4A1B7F]">
+                    {{ $section1 == null ? 'Lorem ipsum' : $section1->title }}</h1>
+                @if ($section1 == null)
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio praesentium aperiam nihil iure
+                        adipisci nulla, voluptate quis assumenda recusandae vel ex est enim voluptatum, nostrum
+                        repellat, harum earum exercitationem excepturi!</p>
+                @else
+                    {!! nl2br($section1 == null ? '' : $section1->deskripsi) !!}
+                @endif
 
-                {{-- Right Content - Hero Image --}}
-                <div class="tw-flex-1 tw-relative tw-w-full">
-                    <div class="tw-relative">
-                        {{-- Main Image Container --}}
-                        <div class="tw-rounded-[2.5rem] shadow-1 shadow-gray-300 tw-overflow-hidden tw-relative">
-                            <img src="{{ Storage::url($section1->foto_unggulan) }}"
-                                alt="Students Learning"
-                                class="tw-w-full md:tw-max-w-[600px] tw-mx-auto tw-h-auto tw-object-cover tw-rounded-[2.5rem]">
-                        </div>
-                        {{-- Purple Glow Effect --}}
-                        <div class="tw-absolute tw-inset-0 tw-bg-purple-300 tw-opacity-20 tw-blur-3xl tw-rounded-full tw--z-10">
-                        </div>
+                <div class="tw-mt-8 tw-flex tw-flex-wrap tw-gap-4 tw-justify-center md:tw-justify-start">
+                    <a href="{{ route('login') }}"
+                        class="tw-px-6 tw-py-3 tw-bg-[#4A1B7F] tw-text-white tw-rounded-lg hover:tw-bg-[#3B1564] tw-transition tw-font-medium">
+                        Login Member
+                    </a>
+                    <a href="/kelas"
+                        class="tw-px-6 tw-py-3 tw-bg-white tw-text-[#4A1B7F] tw-border tw-border-[#4A1B7F] tw-rounded-lg hover:tw-bg-gray-50 tw-transition tw-font-medium">
+                        Browse Class
+                    </a>
+                </div>
+            </div>
+
+            {{-- Right Content - Hero Image --}}
+            <div class="tw-flex-1 tw-relative tw-w-full">
+                <div class="tw-relative">
+                    {{-- Main Image Container --}}
+                    <div class="tw-rounded-[2.5rem] shadow-1 shadow-gray-300 tw-overflow-hidden tw-relative">
+                        <img src="{{ $section1 == null ? infodesa('logo') : Storage::url($section1->foto_unggulan) }}"
+                            alt="Students Learning"
+                            class="tw-w-full md:tw-max-w-[600px] tw-mx-auto tw-h-auto tw-object-cover tw-rounded-[2.5rem]">
+                    </div>
+                    <div class="tw-absolute tw-inset-0 tw-bg-purple-300 tw-opacity-20 tw-blur-3xl tw-rounded-full tw--z-10">
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        {{-- Program Categories Section --}}
-        <section class="tw-container tw-mx-auto tw-px-4 tw-py-12">
-            <div class="tw-grid tw-grid-cols-2 lg:tw-grid-cols-4 tw-gap-4 md:tw-gap-6">
-                {{-- C-Suite Programs --}}
-                <div class="tw-relative tw-overflow-hidden tw-group tw-h-[90px] md:tw-h-[140px]">
-                    <div class="tw-bg-[#4A1B7F] tw-h-full tw-relative" style="border-radius: 34px 40px 80px 5px;">
-                        <img src="https://cdn.pixabay.com/photo/2017/08/01/13/36/computer-2565478_1280.jpg"
-                            alt="C-Suite Programs" class="tw-w-full tw-h-full tw-object-cover tw-opacity-75"
-                            style="border-radius: 34px 40px 80px 5px;">
-                        <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-b tw-from-transparent tw-to-[#4A1B7F]/90"
-                            style="border-radius: 34px 40px 80px 5px;"></div>
-                        <h3 class="tw-absolute tw-bottom-4 tw-left-4 tw-text-sm md:tw-text-xl tw-font-bold tw-text-white">
-                            Umum</h3>
-                    </div>
-                </div>
-
-                {{-- Senior Executive Programs --}}
-                <div class="tw-relative tw-overflow-hidden tw-group tw-h-[90px] md:tw-h-[140px]">
-                    <div class="tw-bg-[#831843] tw-h-full tw-relative" style="border-radius: 34px 40px 80px 5px;">
-                        <img src="https://cdn.pixabay.com/photo/2017/03/28/12/11/chairs-2181960_640.jpg"
-                            alt="Senior Executive Programs" class="tw-w-full tw-h-full tw-object-cover tw-opacity-75"
-                            style="border-radius: 34px 40px 80px 5px;">
-                        <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-b tw-from-transparent tw-to-[#831843]/90"
-                            style="border-radius: 34px 40px 80px 5px;"></div>
-                        <h3 class="tw-absolute tw-bottom-4 tw-left-4 tw-text-sm md:tw-text-xl tw-font-bold tw-text-white">
-                            Pemula</h3>
-                    </div>
-                </div>
-
-                {{-- Junior Executive Programs --}}
-                <div class="tw-relative tw-overflow-hidden tw-group tw-h-[90px] md:tw-h-[140px]">
-                    <div class="tw-bg-[#92400E] tw-h-full tw-relative" style="border-radius: 34px 40px 80px 5px;">
-                        <img src="https://cdn.pixabay.com/photo/2017/03/28/12/07/bricks-2181920_640.jpg"
-                            alt="Junior Executive Programs" class="tw-w-full tw-h-full tw-object-cover tw-opacity-75"
-                            style="border-radius: 34px 40px 80px 5px;">
-                        <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-b tw-from-transparent tw-to-[#92400E]/90"
-                            style="border-radius: 34px 40px 80px 5px;"></div>
-                        <h3 class="tw-absolute tw-bottom-4 tw-left-4 tw-text-sm md:tw-text-xl tw-font-bold tw-text-white">
-                            Menengah</h3>
-                    </div>
-                </div>
-
-                {{-- Student Programs --}}
-                <div class="tw-relative tw-overflow-hidden tw-group tw-h-[90px] md:tw-h-[140px]">
-                    <div class="tw-bg-[#A21CAF] tw-h-full tw-relative" style="border-radius: 34px 40px 80px 5px;">
-                        <img src="https://cdn.pixabay.com/photo/2015/01/08/18/26/man-593333_640.jpg" alt="Student Programs"
-                            class="tw-w-full tw-h-full tw-object-cover tw-opacity-75"
-                            style="border-radius: 34px 40px 80px 5px;">
-                        <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-b tw-from-transparent tw-to-[#A21CAF]/90"
-                            style="border-radius: 34px 40px 80px 5px;"></div>
-                        <h3 class="tw-absolute tw-bottom-4 tw-left-4 tw-text-sm md:tw-text-xl tw-font-bold tw-text-white">
-                            Terampil</h3>
-                    </div>
+    <section class="tw-container tw-mx-auto tw-px-4 tw-py-12">
+        <div class="tw-grid tw-grid-cols-2 lg:tw-grid-cols-4 tw-gap-4 md:tw-gap-6">
+            {{-- C-Suite Programs --}}
+            <div class="tw-relative tw-overflow-hidden tw-group tw-h-[90px] md:tw-h-[140px]">
+                <div class="tw-bg-[#4A1B7F] tw-h-full tw-relative" style="border-radius: 34px 40px 80px 5px;">
+                    <img src="https://cdn.pixabay.com/photo/2017/08/01/13/36/computer-2565478_1280.jpg"
+                        alt="C-Suite Programs" class="tw-w-full tw-h-full tw-object-cover tw-opacity-75"
+                        style="border-radius: 34px 40px 80px 5px;">
+                    <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-b tw-from-transparent tw-to-[#4A1B7F]/90"
+                        style="border-radius: 34px 40px 80px 5px;"></div>
+                    <h3 class="tw-absolute tw-bottom-4 tw-left-4 tw-text-sm md:tw-text-xl tw-font-bold tw-text-white">
+                        Umum</h3>
                 </div>
             </div>
-        </section>
 
-        {{-- Section Kelas tailwindcss --}}
+            {{-- Senior Executive Programs --}}
+            <div class="tw-relative tw-overflow-hidden tw-group tw-h-[90px] md:tw-h-[140px]">
+                <div class="tw-bg-[#831843] tw-h-full tw-relative" style="border-radius: 34px 40px 80px 5px;">
+                    <img src="https://cdn.pixabay.com/photo/2017/03/28/12/11/chairs-2181960_640.jpg"
+                        alt="Senior Executive Programs" class="tw-w-full tw-h-full tw-object-cover tw-opacity-75"
+                        style="border-radius: 34px 40px 80px 5px;">
+                    <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-b tw-from-transparent tw-to-[#831843]/90"
+                        style="border-radius: 34px 40px 80px 5px;"></div>
+                    <h3 class="tw-absolute tw-bottom-4 tw-left-4 tw-text-sm md:tw-text-xl tw-font-bold tw-text-white">
+                        Pemula</h3>
+                </div>
+            </div>
 
-        {{-- @php
-            $dts = [
-                [
-                    'title' => 'Web Development Fundamentals',
-                    'description' => 'Pelajari dasar-dasar pengembangan web modern dari awal hingga mahir dengan studi kasus yang komprehensif.',
-                    'duration' => '12',
-                    'materials' => '24',
-                    'price' => 1500000,
-                    'discount' => 20,
-                    'isPopular' => true,
-                    'isNew' => true,
-                    'category' => 'Web Development'
-                ],
-                [
-                    'title' => 'UI/UX Design Masterclass',
-                    'description' => 'Kuasai prinsip desain dan teknik UX research untuk membuat produk yang user-friendly dan menarik.',
-                    'duration' => '15',
-                    'materials' => '30',
-                    'price' => 2000000,
-                    'discount' => 25,
-                    'isPopular' => false,
-                    'isNew' => true,
-                    'category' => 'Design'
-                ],
-                [
-                    'title' => 'Mobile App Development with Flutter',
-                    'description' => 'Belajar membuat aplikasi mobile cross-platform dengan Flutter dan Firebase sebagai backend.',
-                    'duration' => '20',
-                    'materials' => '40',
-                    'price' => 2500000,
-                    'discount' => null,
-                    'isPopular' => true,
-                    'isNew' => false,
-                    'category' => 'Mobile Development'
-                ],
-                [
-                    'title' => 'Data Science Essential',
-                    'description' => 'Pelajari analisis data, machine learning, dan visualisasi data untuk memulai karir sebagai Data Scientist.',
-                    'duration' => '25',
-                    'materials' => '45',
-                    'price' => 3000000,
-                    'discount' => 30,
-                    'isPopular' => true,
-                    'isNew' => true,
-                    'category' => 'Data Science'
-                ],
-                [
-                    'title' => 'Python for Beginners',
-                    'description' => 'Pelajari dasar-dasar pemrograman dengan Python dan mulai membangun proyek pertama Anda.',
-                    'duration' => '10',
-                    'materials' => '20',
-                    'price' => 1000000,
-                    'discount' => 10,
-                    'isPopular' => true,
-                    'isNew' => true,
-                    'category' => 'Programming'
-                ],
-                [
-                    'title' => 'Cyber Security Basics',
-                    'description' => 'Pahami dasar-dasar keamanan siber, enkripsi data, dan perlindungan terhadap serangan siber.',
-                    'duration' => '18',
-                    'materials' => '35',
-                    'price' => 2200000,
-                    'discount' => 15,
-                    'isPopular' => false,
-                    'isNew' => false,
-                    'category' => 'Cyber Security'
-                ],
-                [
-                    'title' => 'Digital Marketing Strategy',
-                    'description' => 'Pelajari teknik digital marketing seperti SEO, SEM, dan strategi media sosial untuk meningkatkan bisnis Anda.',
-                    'duration' => '14',
-                    'materials' => '28',
-                    'price' => 1800000,
-                    'discount' => 20,
-                    'isPopular' => true,
-                    'isNew' => true,
-                    'category' => 'Marketing'
-                ],
-                [
-                    'title' => 'Advanced Java Programming',
-                    'description' => 'Tingkatkan keahlian Java Anda dengan mempelajari teknik pemrograman lanjutan dan best practices.',
-                    'duration' => '22',
-                    'materials' => '40',
-                    'price' => 2800000,
-                    'discount' => 25,
-                    'isPopular' => false,
-                    'isNew' => false,
-                    'category' => 'Programming'
-                ],
-                [
-                    'title' => 'Artificial Intelligence and Machine Learning',
-                    'description' => 'Jelajahi konsep AI dan ML, termasuk deep learning dan neural networks.',
-                    'duration' => '30',
-                    'materials' => '50',
-                    'price' => 3500000,
-                    'discount' => 30,
-                    'isPopular' => true,
-                    'isNew' => false,
-                    'category' => 'Artificial Intelligence'
-                ],
-                [
-                    'title' => 'ReactJS Frontend Development',
-                    'description' => 'Bangun aplikasi web modern dengan ReactJS dan integrasikan dengan API backend.',
-                    'duration' => '16',
-                    'materials' => '32',
-                    'price' => 2000000,
-                    'discount' => 15,
-                    'isPopular' => true,
-                    'isNew' => true,
-                    'category' => 'Web Development'
-                ],
-                [
-                    'title' => 'WordPress for Beginners',
-                    'description' => 'Pelajari cara membuat website profesional dengan WordPress tanpa perlu coding.',
-                    'duration' => '8',
-                    'materials' => '16',
-                    'price' => 800000,
-                    'discount' => 10,
-                    'isPopular' => false,
-                    'isNew' => true,
-                    'category' => 'Web Development'
-                ],
-                [
-                    'title' => 'Cloud Computing with AWS',
-                    'description' => 'Pahami konsep cloud computing dan mulai menggunakan AWS untuk pengelolaan server.',
-                    'duration' => '20',
-                    'materials' => '38',
-                    'price' => 2700000,
-                    'discount' => null,
-                    'isPopular' => true,
-                    'isNew' => false,
-                    'category' => 'Cloud Computing'
-                ],
-                [
-                    'title' => 'Ethical Hacking for Beginners',
-                    'description' => 'Pelajari teknik hacking etis untuk menguji keamanan sistem komputer secara legal.',
-                    'duration' => '18',
-                    'materials' => '34',
-                    'price' => 2300000,
-                    'discount' => 20,
-                    'isPopular' => false,
-                    'isNew' => false,
-                    'category' => 'Cyber Security'
-                ],
-                [
-                    'title' => 'Blockchain and Cryptocurrency Fundamentals',
-                    'description' => 'Pelajari dasar-dasar blockchain, smart contract, dan teknologi di balik cryptocurrency.',
-                    'duration' => '12',
-                    'materials' => '25',
-                    'price' => 2000000,
-                    'discount' => 15,
-                    'isPopular' => false,
-                    'isNew' => true,
-                    'category' => 'Blockchain'
-                ],
-            ];
-        @endphp --}}
-        <section class="top-news-post-area pt-50 pb-70">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="sports-post-wrap">
-                        <div class="section-title-wrap mb-30">
-                            <div class="section-title section-title-four">
-                                <h2 class="title">Kelas</h2>
-                            </div>
-                            <div class="section-title-line"></div>
-                            <div class="view-all-btn">
-                                <a href="/kelas" class="link-btn">Lihat semua
-                                    <span class="svg-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" fill="none">
-                                            <path
-                                                d="M1.07692 10L0 8.92308L7.38462 1.53846H0.769231V0H10V9.23077H8.46154V2.61538L1.07692 10Z"
-                                                fill="currentColor" />
-                                            <path
-                                                d="M1.07692 10L0 8.92308L7.38462 1.53846H0.769231V0H10V9.23077H8.46154V2.61538L1.07692 10Z"
-                                                fill="currentColor" />
-                                        </svg>
-                                    </span>
-                                </a>
-                            </div>
+            {{-- Junior Executive Programs --}}
+            <div class="tw-relative tw-overflow-hidden tw-group tw-h-[90px] md:tw-h-[140px]">
+                <div class="tw-bg-[#92400E] tw-h-full tw-relative" style="border-radius: 34px 40px 80px 5px;">
+                    <img src="https://cdn.pixabay.com/photo/2017/03/28/12/07/bricks-2181920_640.jpg"
+                        alt="Junior Executive Programs" class="tw-w-full tw-h-full tw-object-cover tw-opacity-75"
+                        style="border-radius: 34px 40px 80px 5px;">
+                    <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-b tw-from-transparent tw-to-[#92400E]/90"
+                        style="border-radius: 34px 40px 80px 5px;"></div>
+                    <h3 class="tw-absolute tw-bottom-4 tw-left-4 tw-text-sm md:tw-text-xl tw-font-bold tw-text-white">
+                        Menengah</h3>
+                </div>
+            </div>
+
+            {{-- Student Programs --}}
+            <div class="tw-relative tw-overflow-hidden tw-group tw-h-[90px] md:tw-h-[140px]">
+                <div class="tw-bg-[#A21CAF] tw-h-full tw-relative" style="border-radius: 34px 40px 80px 5px;">
+                    <img src="https://cdn.pixabay.com/photo/2015/01/08/18/26/man-593333_640.jpg" alt="Student Programs"
+                        class="tw-w-full tw-h-full tw-object-cover tw-opacity-75"
+                        style="border-radius: 34px 40px 80px 5px;">
+                    <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-b tw-from-transparent tw-to-[#A21CAF]/90"
+                        style="border-radius: 34px 40px 80px 5px;"></div>
+                    <h3 class="tw-absolute tw-bottom-4 tw-left-4 tw-text-sm md:tw-text-xl tw-font-bold tw-text-white">
+                        Terampil</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="top-news-post-area pt-50 pb-70">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="sports-post-wrap">
+                    <div class="section-title-wrap mb-30">
+                        <div class="section-title section-title-four">
+                            <h2 class="title">Kelas</h2>
                         </div>
+                        <div class="section-title-line"></div>
+                        <div class="view-all-btn">
+                            <a href="/kelas" class="link-btn">Lihat semua
+                                <span class="svg-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" fill="none">
+                                        <path
+                                            d="M1.07692 10L0 8.92308L7.38462 1.53846H0.769231V0H10V9.23077H8.46154V2.61538L1.07692 10Z"
+                                            fill="currentColor" />
+                                        <path
+                                            d="M1.07692 10L0 8.92308L7.38462 1.53846H0.769231V0H10V9.23077H8.46154V2.61538L1.07692 10Z"
+                                            fill="currentColor" />
+                                    </svg>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
 
-                        <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-4 tw-gap-6">
-                            @foreach($courses as $dt)
-                                <a href="{{ route('detail-kelas', $dt->slug) }}" class="tw-block">
-                                    <div class="tw-bg-white tw-rounded-xl tw-shadow-lg tw-overflow-hidden tw-h-full tw-transition-all tw-duration-300 hover:tw-brightness-95">
-                                        <div class="tw-relative tw-h-48">
-                                            <img src="{{ Storage::url('thumb/'.$dt->image_url) }}"
-                                                alt="{{ $dt->name }}"
-                                                class="tw-w-full tw-h-full tw-object-cover">
+                    <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-4 tw-gap-6">
+                        @foreach ($courses as $dt)
+                            <a href="{{ route('detail-kelas', $dt->slug) }}" class="tw-block">
+                                <div
+                                    class="tw-bg-white tw-rounded-xl tw-shadow-lg tw-overflow-hidden tw-h-full tw-transition-all tw-duration-300 hover:tw-brightness-95">
+                                    <div class="tw-relative tw-h-48">
+                                        <img src="{{ Storage::url('thumb/' . $dt->image_url) }}"
+                                            alt="{{ $dt->name }}" class="tw-w-full tw-h-full tw-object-cover">
 
-                                            {{-- Status Badges --}}
-                                            {{-- <div class="tw-absolute tw-top-4 tw-right-4 tw-flex tw-items-center tw-gap-2">
-                                                @if($dt['isNew'])
+                                        {{-- Status Badges --}}
+                                        {{-- <div class="tw-absolute tw-top-4 tw-right-4 tw-flex tw-items-center tw-gap-2">
+                                                @if ($dt['isNew'])
                                                     <div class="tw-bg-green-500 tw-text-white tw-px-3 tw-py-1 tw-rounded-full tw-text-sm tw-whitespace-nowrap">
                                                         Baru
                                                     </div>
                                                 @endif
-                                                @if($dt['isPopular'])
+                                                @if ($dt['isPopular'])
                                                     <div class="tw-bg-[#4A1B7F] tw-text-white tw-px-3 tw-py-1 tw-rounded-full tw-text-sm tw-whitespace-nowrap">
                                                         Populer
                                                     </div>
                                                 @endif
                                             </div> --}}
+                                    </div>
+
+                                    <div class="tw-p-6 tw-pt-6 tw-flex tw-flex-col tw-h-[calc(100%-192px)]">
+                                        {{-- Category Badge --}}
+                                        <div class="tw-mb-3">
+                                            <span
+                                                class="tw-bg-[#4A1B7F]/10 tw-text-[#4A1B7F] tw-px-3 tw-py-1 tw-rounded-full tw-text-sm tw-font-medium"
+                                                style="background-color: {{ $dt->productCategory->warna }}20; color: {{ $dt->productCategory->warna }};">
+                                                {{ $dt->productCategory->name }}
+                                            </span>
                                         </div>
 
-                                        <div class="tw-p-6 tw-pt-6 tw-flex tw-flex-col tw-h-[calc(100%-192px)]">
-                                            {{-- Category Badge --}}
-                                            <div class="tw-mb-3">
-                                                <span class="tw-bg-[#4A1B7F]/10 tw-text-[#4A1B7F] tw-px-3 tw-py-1 tw-rounded-full tw-text-sm tw-font-medium" style="background-color: {{ $dt->productCategory->warna }}20; color: {{ $dt->productCategory->warna }};">
-                                                    {{ $dt->productCategory->name }}
-                                                </span>
+                                        <h3 class="tw-text-xl tw-font-bold tw-text-gray-800 tw-mb-2">{{ $dt->name }}
+                                        </h3>
+
+                                        <p class="tw-text-gray-600 tw-mb-4 tw-line-clamp-2">{{ $dt->excerpt }}</p>
+
+                                        <div class="tw-flex tw-flex-wrap tw-gap-4 tw-mb-4">
+                                            <div class="tw-flex tw-items-center">
+                                                <i class="flaticon-history tw-text-[#4A1B7F] tw-mr-2"></i>
+                                                <span class="tw-text-sm tw-text-gray-600">{{ $dt->video_duration }}
+                                                    Menit</span>
+                                            </div>
+                                            <div class="tw-flex tw-items-center">
+                                                <i class="flaticon-user tw-text-[#4A1B7F] tw-mr-2"></i>
+                                                <span class="tw-text-sm tw-text-gray-600">{{ $dt->orderitems->count() }}
+                                                    Peserta</span>
+                                            </div>
+                                            <div class="tw-flex tw-items-center">
+                                                <i class="flaticon-thunder tw-text-[#4A1B7F] tw-mr-2"></i>
+                                                <span class="tw-text-sm tw-text-gray-600">{{ ucwords($dt->level) }}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="tw-mt-auto">
+                                            <div class="tw-mb-4">
+                                                @if ($dt['discount'])
+                                                    <div class="tw-flex tw-items-center tw-gap-2 tw-mb-1">
+                                                        <span class="tw-text-gray-500 tw-line-through">Rp
+                                                            {{ number_format($dt->price, 0, ',', '.') }}</span>
+                                                        <span
+                                                            class="tw-bg-red-100 tw-text-red-600 tw-px-2 tw-py-1 tw-rounded tw-text-xs">{{ $dt->discount }}%
+                                                            OFF</span>
+                                                    </div>
+                                                    <div class="tw-text-[#4A1B7F] tw-font-bold tw-text-2xl">
+                                                        Rp
+                                                        {{ number_format($dt->price * (1 - $dt->discount / 100), 0, ',', '.') }}
+                                                    </div>
+                                                @else
+                                                    <div class="tw-text-[#4A1B7F] tw-font-bold tw-text-2xl">
+                                                        Rp {{ number_format($dt->price, 0, ',', '.') }}
+                                                    </div>
+                                                @endif
                                             </div>
 
-                                            <h3 class="tw-text-xl tw-font-bold tw-text-gray-800 tw-mb-2">{{ $dt->name }}</h3>
-
-                                            <p class="tw-text-gray-600 tw-mb-4 tw-line-clamp-2">{{ $dt->excerpt }}</p>
-
-                                            <div class="tw-flex tw-flex-wrap tw-gap-4 tw-mb-4">
-                                                <div class="tw-flex tw-items-center">
-                                                    <i class="flaticon-history tw-text-[#4A1B7F] tw-mr-2"></i>
-                                                    <span class="tw-text-sm tw-text-gray-600">{{ $dt->video_duration }} Menit</span>
-                                                </div>
-                                                <div class="tw-flex tw-items-center">
-                                                    <i class="flaticon-user tw-text-[#4A1B7F] tw-mr-2"></i>
-                                                    <span class="tw-text-sm tw-text-gray-600">{{ $dt->orderitems->count() }} Peserta</span>
-                                                </div>
-                                                <div class="tw-flex tw-items-center">
-                                                    <i class="flaticon-thunder tw-text-[#4A1B7F] tw-mr-2"></i>
-                                                    <span class="tw-text-sm tw-text-gray-600">{{ ucwords($dt->level) }}</span>
-                                                </div>
-                                            </div>
-
-                                            <div class="tw-mt-auto">
-                                                <div class="tw-mb-4">
-                                                    @if($dt['discount'])
-                                                        <div class="tw-flex tw-items-center tw-gap-2 tw-mb-1">
-                                                            <span class="tw-text-gray-500 tw-line-through">Rp {{ number_format($dt->price, 0, ',', '.') }}</span>
-                                                            <span class="tw-bg-red-100 tw-text-red-600 tw-px-2 tw-py-1 tw-rounded tw-text-xs">{{ $dt->discount }}% OFF</span>
-                                                        </div>
-                                                        <div class="tw-text-[#4A1B7F] tw-font-bold tw-text-2xl">
-                                                            Rp {{ number_format($dt->price * (1 - $dt->discount/100), 0, ',', '.') }}
-                                                        </div>
-                                                    @else
-                                                        <div class="tw-text-[#4A1B7F] tw-font-bold tw-text-2xl">
-                                                            Rp {{ number_format($dt->price, 0, ',', '.') }}
-                                                        </div>
-                                                    @endif
-                                                </div>
-
-                                                <button class="tw-w-full tw-bg-[#4A1B7F] tw-text-white tw-px-4 tw-py-2.5 tw-rounded-lg tw-text-sm hover:tw-bg-[#3A1560] tw-transition-colors">
-                                                    Lihat Detail
-                                                </button>
-                                            </div>
+                                            <button
+                                                class="tw-w-full tw-bg-[#4A1B7F] tw-text-white tw-px-4 tw-py-2.5 tw-rounded-lg tw-text-sm hover:tw-bg-[#3A1560] tw-transition-colors">
+                                                Lihat Detail
+                                            </button>
                                         </div>
                                     </div>
-                                </a>
-                            @endforeach
-                        </div>
-                        {{-- <div class="tw-mt-8 tw-flex tw-justify-center">
-                            <a href="{{ route('list-kelas') }}" class="tw-bg-[#4A1B7F] tw-text-white tw-px-6 tw-py-3 tw-rounded-lg tw-text-lg tw-font-medium
-                                hover:tw-bg-[#3A1560] hover:tw-text-white tw-transition-all tw-duration-300 tw-cursor-pointer tw-shadow-lg">
-                                Lihat Kelas Lainnya
+                                </div>
                             </a>
-                        </div> --}}
+                        @endforeach
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
     {{-- End of mainin tailwindcss --}}
 
     <section class="banner-post-area-five pt-50 pb-50">
@@ -506,65 +352,6 @@
         </div>
     </section>
 
-    {{-- <section class="trending-post-area-two">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title-wrap mb-30">
-                        <div class="section-title">
-                            <h2 class="title"> </h2>
-                        </div>
-                        <div class="view-all-btn">
-                            <a href="/anggota-pengurus" class="link-btn">Lihat semua
-                                <span class="svg-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" fill="none">
-                                        <path
-                                            d="M1.07692 10L0 8.92308L7.38462 1.53846H0.769231V0H10V9.23077H8.46154V2.61538L1.07692 10Z"
-                                            fill="currentColor" />
-                                        <path
-                                            d="M1.07692 10L0 8.92308L7.38462 1.53846H0.769231V0H10V9.23077H8.46154V2.61538L1.07692 10Z"
-                                            fill="currentColor" />
-                                    </svg>
-                                </span>
-                            </a>
-                        </div>
-                        <div class="section-title-line"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="row trending-post-active wow bounceInRight" data-wow-duration="2s">
-                @if (count($perangkatdesa) > 0)
-                    @foreach ($perangkatdesa as $pd)
-                        <div class="col-lg-4">
-                            <div class="overlay-post-three overlay-post-four">
-                                <div class="overlay-post-thumb-three">
-                                    <a href="/anggota-pengurus/{{ $pd->slug }}">
-                                        @if ($pd->avatar != null)
-                                            <img src="{{ Storage::url($pd->avatar) }}" alt="{{ $pd->nama }}">
-                                        @else
-                                            <img src="{{ asset('image/icon-foto.png') }}">
-                                        @endif
-                                    </a>
-                                </div>
-                                <div class="overlay-post-content-three">
-                                    <a href="/anggota-pengurus/{{ $pd->slug }}"
-                                        class="post-tag">{{ $pd->jabatan }}</a>
-                                    <h2 class="post-title"><a
-                                            href="/anggota-pengurus/{{ $pd->slug }}">{{ $pd->nama }}</a></h2>
-                                    <div class="blog-post-meta white-blog-meta">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                @endif
-            </div>
-        </div>
-        <div class="trending-shape-wrap">
-            <img src="assets/img/images/trending_shape01.png" alt="">
-            <img src="assets/img/images/trending_shape02.png" alt="">
-        </div>
-    </section> --}}
 
     <section class="top-news-post-area pt-50 pb-70">
         <div class="container">
@@ -649,53 +436,6 @@
         </div>
     </section>
 
-    {{-- <section class="editor-post-area-three pt-30" style="padding: 30px">
-        <div class="container">
-            <div class="row justify-content-left">
-                <div class="col-lg-12">
-                    <div class="section-title-wrap mb-30">
-                        <div class="section-title section-title-four">
-                            <h2 class="title">Galery Video</h2>
-                            <div class="editor-nav-two"></div>
-                        </div>
-                        <div class="section-title-line"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="row gutter-40 editor-post-active-two">
-                @foreach ($video as $v)
-                    <div class="col-lg-3 wow bounceInRight" data-wow-duration="3s">
-                        <div class="editor-post-three">
-                            <div class="editor-post-thumb-three">
-                                @if ($v->foto_unggulan != null)
-                                    <img src="{{ Storage::url('thumb/' . $v->foto_unggulan) }}"
-                                        alt="{{ $v->title }}" class="w-100" style="min-height: 205px">
-                                @else
-                                    <img src="{{ asset('img/example-image.jpg') }}" class="img-fluid"
-                                        alt="{{ $v->title }}">
-                                @endif
-                                <a href="{{ $v->excerpt }}" class="paly-btn popup-video"><i class="fas fa-play"></i>
-                                </a>
-                            </div>
-                            <div class="editor-post-content-three">
-                                <h2 class="post-title"><a href="{{ $v->excerpt }}"
-                                        target="_blank">{{ Str::lower($v->title) }}</a></h2>
-                                <div class="blog-post-meta">
-                                    <ul class="list-wrap">
-                                        <li style="font-size: 10px"><i
-                                                class="flaticon-calendar"></i>{{ kal($v->created_at) }} </li>
-                                        <li style="font-size: 10px"><i
-                                                class="flaticon-history"></i>{{ $v->created_at->diffForHumans() }}
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section> --}}
 
     <section class="editor-post-area-three pt-30" style="padding: 30px">
         <div class="container">
@@ -711,41 +451,10 @@
                 </div>
             </div>
             <div class="row gutter-40">
-                {!! nl2br($faq->deskripsi) !!}
+                @if ($faq)
+                    {!! nl2br($faq->deskripsi) !!}
+                @endif
             </div>
-            {{-- <div class="row gutter-40 editor-post-active-two">
-                @foreach ($foto as $v)
-                    <div class="col-lg-3 wow bounceInRight" data-wow-duration="3s">
-                        <div class="editor-post-three">
-                            <div class="editor-post-thumb-three">
-                                @if ($v->foto_unggulan != null)
-                                    <img src="{{ Storage::url('thumb/' . $v->foto_unggulan) }}"
-                                        alt="{{ $v->title }}" class="w-100" style="min-height: 205px">
-                                @else
-                                    <img src="{{ asset('img/example-image.jpg') }}" class="img-fluid"
-                                        alt="{{ $v->title }}">
-                                @endif
-                                <a href="{{ Storage::url($v->foto_unggulan) }}" class="paly-btn popup-video"><i
-                                        class="fas fa-camera"></i>
-                                </a>
-                            </div>
-                            <div class="editor-post-content-three">
-                                <h2 class="post-title"><a href="{{ $v->excerpt }}"
-                                        target="_blank">{{ $v->title }}</a></h2>
-                                <div class="blog-post-meta">
-                                    <ul class="list-wrap">
-                                        <li style="font-size: 10px"><i
-                                                class="flaticon-calendar"></i>{{ kal($v->created_at) }} </li>
-                                        <li style="font-size: 10px"><i
-                                                class="flaticon-history"></i>{{ $v->created_at->diffForHumans() }}
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div> --}}
         </div>
     </section>
 
