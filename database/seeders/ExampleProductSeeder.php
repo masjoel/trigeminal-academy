@@ -32,7 +32,8 @@ class ExampleProductSeeder extends Seeder
                 'user_id' => null,
                 'name' => $faker->word,
                 'description' => $faker->sentence,
-                'thumbnail' => $faker->imageUrl(640, 480, 'business'),
+                // 'thumbnail' => $faker->imageUrl(640, 480, 'business'),
+                'thumbnail' => '$faker->sentence,https://source.unsplash.com/random/900×900/?business',
                 'warna' => $faker->hexColor,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -48,7 +49,8 @@ class ExampleProductSeeder extends Seeder
                 'alamat' => $faker->address,
                 'telpon' => $faker->phoneNumber,
                 'email' => $faker->email,
-                'photo' => $faker->imageUrl(640, 480, 'people'),
+                // 'photo' => $faker->imageUrl(640, 480, 'people'),
+                'photo' => 'https://source.unsplash.com/random/900×900/?people',
                 'keterangan' => $faker->sentence,
                 'ktp' => $faker->numerify('##############'),
                 'npwp' => $faker->numerify('##.###.###.#-###.###'),
@@ -69,7 +71,8 @@ class ExampleProductSeeder extends Seeder
                 'alamat' => $faker->address,
                 'telpon' => $faker->phoneNumber,
                 'email' => $faker->email,
-                'photo' => $faker->imageUrl(640, 480, 'people'),
+                // 'photo' => $faker->imageUrl(640, 480, 'people'),$faker->sentence,
+                'photo' => 'https://source.unsplash.com/random/900×900/?web',
                 'keterangan' => $faker->sentence,
                 'ktp' => $faker->numerify('##############'),
                 'npwp' => $faker->numerify('##.###.###.#-###.###'),
@@ -82,7 +85,7 @@ class ExampleProductSeeder extends Seeder
         }
 
         // Seeding products
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             $productId = DB::table('products')->insertGetId([
                 'user_id' => null,
                 'category_id' => rand(1, 5),
@@ -101,7 +104,8 @@ class ExampleProductSeeder extends Seeder
                 'in_stock' => $faker->boolean,
                 'publish' => $faker->boolean,
                 'level' => $faker->randomElement(['pemula', 'menengah', 'mahir']),
-                'image_url' => $faker->imageUrl(640, 480, 'products'),
+                // 'image_url' => $faker->imageUrl(640, 480, 'products'),
+                'image_url' => 'https://source.unsplash.com/random/900×900/?web',
                 'storage_type' => $faker->randomElement(['local', 'cloud']),
                 'video_url' => $faker->url,
                 'video_duration' => $faker->numberBetween(60, 3600),
@@ -111,7 +115,7 @@ class ExampleProductSeeder extends Seeder
             ]);
 
             // Seeding product_contents
-            for ($j = 0; $j < rand(1, 5); $j++) {
+            for ($j = 0; $j < rand(1, 10); $j++) {
                 DB::table('product_contents')->insert([
                     'product_id' => $productId,
                     'parent' => null,

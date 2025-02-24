@@ -384,7 +384,7 @@
                                 <a href="{{ route('detail-kelas', $dt->slug) }}" class="tw-block">
                                     <div class="tw-bg-white tw-rounded-xl tw-shadow-lg tw-overflow-hidden tw-h-full tw-transition-all tw-duration-300 hover:tw-brightness-95">
                                         <div class="tw-relative tw-h-48">
-                                            <img src="{{ Storage::url($dt->image_url) }}"
+                                            <img src="{{ Storage::url('thumb/'.$dt->image_url) }}"
                                                 alt="{{ $dt->name }}"
                                                 class="tw-w-full tw-h-full tw-object-cover">
 
@@ -406,14 +406,14 @@
                                         <div class="tw-p-6 tw-pt-6 tw-flex tw-flex-col tw-h-[calc(100%-192px)]">
                                             {{-- Category Badge --}}
                                             <div class="tw-mb-3">
-                                                <span class="tw-bg-[#4A1B7F]/10 tw-text-[#4A1B7F] tw-px-3 tw-py-1 tw-rounded-full tw-text-sm tw-font-medium">
+                                                <span class="tw-bg-[#4A1B7F]/10 tw-text-[#4A1B7F] tw-px-3 tw-py-1 tw-rounded-full tw-text-sm tw-font-medium" style="background-color: {{ $dt->productCategory->warna }}20; color: {{ $dt->productCategory->warna }};">
                                                     {{ $dt->productCategory->name }}
                                                 </span>
                                             </div>
 
                                             <h3 class="tw-text-xl tw-font-bold tw-text-gray-800 tw-mb-2">{{ $dt->name }}</h3>
 
-                                            <p class="tw-text-gray-600 tw-mb-4 tw-line-clamp-2">{{ Str::words($dt->description, 15, '...') }}</p>
+                                            <p class="tw-text-gray-600 tw-mb-4 tw-line-clamp-2">{{ $dt->excerpt }}</p>
 
                                             <div class="tw-flex tw-flex-wrap tw-gap-4 tw-mb-4">
                                                 <div class="tw-flex tw-items-center">
@@ -457,7 +457,7 @@
                             @endforeach
                         </div>
                         <div class="tw-mt-8 tw-flex tw-justify-center">
-                            <a href="#" class="tw-bg-[#4A1B7F] tw-text-white tw-px-6 tw-py-3 tw-rounded-lg tw-text-lg tw-font-medium
+                            <a href="{{ route('list-kelas') }}" class="tw-bg-[#4A1B7F] tw-text-white tw-px-6 tw-py-3 tw-rounded-lg tw-text-lg tw-font-medium
                                 hover:tw-bg-[#3A1560] hover:tw-text-white tw-transition-all tw-duration-300 tw-cursor-pointer tw-shadow-lg">
                                 Lihat Kelas Lainnya
                             </a>

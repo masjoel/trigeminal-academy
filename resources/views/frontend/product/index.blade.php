@@ -92,6 +92,28 @@
             height: auto;
         }
     </style>
+    <style>
+        .toast-notification {
+            position: fixed;
+            bottom: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            z-index: 1000;
+            transition: bottom 0.5s ease-in-out;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .toast-notification.show {
+            bottom: 24px;
+            opacity: 1;
+            visibility: visible;
+        }
+        </style>
 @endpush
 @section('title', $title)
 @section('main')
@@ -126,14 +148,15 @@
             <div class="tw-col-span-4 lg:tw-col-span-1">
                 <div class="tw-bg-white tw-rounded-xl tw-shadow-lg tw-p-6 md:tw-sticky md:tw-top-8">
                     <h3 class="tw-text-xl tw-font-bold tw-mb-4">Kategori</h3>
-                    <div class="tw-flex tw-flex-col tw-gap-2">
-                        <a href="{{ route('product.index') }}"
-                            class="tw-px-4 tw-py-2 tw-rounded-lg {{ !request('category') ? 'tw-bg-[#4A1B7F] tw-text-white' : 'tw-bg-gray-100 hover:tw-bg-gray-200' }}">
+                    <!-- Mengubah flex-col menjadi flex-row pada mobile dan tambahkan overflow -->
+                    <div class="tw-flex tw-flex-row lg:tw-flex-col tw-gap-2 tw-overflow-x-auto tw-pb-2">
+                        <a href="{{ route('list-kelas') }}"
+                            class="tw-whitespace-nowrap tw-px-4 tw-py-2 tw-rounded-lg {{ !request('category') ? 'tw-bg-[#4A1B7F] tw-text-white' : 'tw-bg-gray-100 hover:tw-bg-gray-200' }}">
                             Semua Kategori
                         </a>
                         @foreach($categories as $category)
-                            <a href="{{ route('product.index', ['category' => $category->id] + request()->except('category')) }}"
-                                class="tw-px-4 tw-py-2 tw-rounded-lg {{ request('category') == $category->id ? 'tw-bg-[#4A1B7F] tw-text-white' : 'tw-bg-gray-100 hover:tw-bg-gray-200' }}">
+                            <a href="{{ route('list-kelas', ['category' => $category->id] + request()->except('category')) }}"
+                                class="tw-whitespace-nowrap tw-px-4 tw-py-2 tw-rounded-lg {{ request('category') == $category->id ? 'tw-bg-[#4A1B7F] tw-text-white' : 'tw-bg-gray-100 hover:tw-bg-gray-200' }}">
                                 {{ $category->name }}
                             </a>
                         @endforeach
@@ -153,13 +176,12 @@
                         @foreach($courses as $dt)
                             <div class="tw-bg-white tw-rounded-xl tw-shadow-lg tw-overflow-hidden">
                                 <div class="tw-h-48">
-                                    {{-- <img src="#" --}}
-                                    <img src="https://picsum.photos/1200/1200?random={{ $dt->id }}"
-                                        alt="{{ $dt->name }}"
-                                        class="tw-w-full tw-h-full tw-object-cover">
+                                    <img src="{{ Storage::url('thumb/'.$dt->image_url) }}"
+                                                alt="{{ $dt->name }}"
+                                                class="tw-w-full tw-h-full tw-object-cover">
                                 </div>
 
-                                <div class="tw-p-6">
+                                <div class="tw-p-6 tw-pt-6 tw-flex tw-flex-col tw-h-[calc(100%-192px)]">
                                     <div class="tw-mb-3">
                                         <span class="tw-bg-[#4A1B7F]/10 tw-text-[#4A1B7F] tw-px-3 tw-py-1 tw-rounded-full tw-text-sm tw-font-medium" style="background-color: {{ $dt->productCategory->warna }}20; color: {{ $dt->productCategory->warna }};">
                                             {{ $dt->productCategory->name }}
@@ -167,24 +189,24 @@
                                     </div>
 
                                     <h3 class="tw-text-xl tw-font-bold tw-text-gray-800 tw-mb-2">{{ $dt->name }}</h3>
-                                    <p class="tw-text-gray-600 tw-mb-4 tw-line-clamp-2">{{ Str::words($dt->description, 15, '...') }}</p>
+                                    <p class="tw-text-gray-600 tw-mb-4 tw-line-clamp-2">{{ $dt->excerpt, 15 }}</p>
 
-                                    <div class="tw-grid tw-grid-cols-2 tw-gap-4 tw-mb-4">
+                                    <div class="tw-flex tw-flex-wrap tw-gap-4 tw-mb-4">
                                         <div class="tw-flex tw-items-center">
                                             <i class="flaticon-history tw-text-[#4A1B7F] tw-mr-2"></i>
                                             <span class="tw-text-sm tw-text-gray-600">{{ $dt->video_duration }} Menit</span>
                                         </div>
                                         <div class="tw-flex tw-items-center">
-                                            <i class="flaticon-calendar tw-text-[#4A1B7F] tw-mr-2"></i>
-                                            <span class="tw-text-sm tw-text-gray-600">{{ $dt->productContent->count() }} Materi</span>
+                                            <i class="flaticon-user tw-text-[#4A1B7F] tw-mr-2"></i>
+                                            <span class="tw-text-sm tw-text-gray-600">{{ $dt->orderitems->count() }} Peserta</span>
                                         </div>
-                                        <div class="tw-flex tw-items-center tw-col-span-2">
+                                        <div class="tw-flex tw-items-center">
                                             <i class="flaticon-thunder tw-text-[#4A1B7F] tw-mr-2"></i>
-                                            <span class="tw-text-sm tw-text-gray-600">Level {{ ucwords($dt->level) }}</span>
+                                            <span class="tw-text-sm tw-text-gray-600">{{ ucwords($dt->level) }}</span>
                                         </div>
                                     </div>
 
-                                    <div class="tw-mb-4">
+                                    <div class="tw-mt-auto">
                                         @if($dt->discount)
                                             <div class="tw-flex tw-items-center tw-gap-2 tw-mb-1">
                                                 <span class="tw-text-gray-500 tw-line-through">Rp {{ number_format($dt->price, 0, ',', '.') }}</span>
@@ -200,24 +222,19 @@
                                         @endif
                                     </div>
 
-                                    <div class="tw-grid tw-grid-cols-2 tw-gap-2">
-                                        <a href="{{ route('product.show', $dt->slug) }}"
+                                    <form action="{{ route('cart.add') }}" method="POST" class="tw-grid tw-grid-cols-2 tw-gap-2">
+                                        @csrf
+                                <input type="hidden" name="product_id" value="{{ $dt->id }}">
+                                        <a href="{{ route('detail-kelas', $dt->slug) }}"
                                             class="tw-bg-gray-100 tw-text-gray-800 tw-px-4 tw-py-2.5 tw-rounded-lg tw-text-sm hover:tw-bg-gray-200 tw-transition-colors tw-text-center">
                                             <i class="flaticon-eye tw-mr-2"></i>
                                             Detail
                                         </a>
-                                        <button
-                                            onclick="addToCart({{ json_encode([
-                                                'id' => $dt->id,
-                                                'name' => $dt->name,
-                                                'price' => $dt->discount ? $dt->price * (1 - $dt->discount/100) : $dt->price,
-                                                'image' => "https://picsum.photos/1200/1200?random={$dt->id}"
-                                            ]) }})"
-                                            class="tw-bg-[#4A1B7F] tw-text-white tw-px-4 tw-py-2.5 tw-rounded-lg tw-text-sm hover:tw-bg-[#3A1560] tw-transition-colors">
+                                        <button type="submit" class="tw-bg-[#4A1B7F] tw-text-white tw-px-4 tw-py-2.5 tw-rounded-lg tw-text-sm hover:tw-bg-[#3A1560] tw-transition-colors">
                                             <i class="flaticon-shopping-cart tw-mr-2"></i>
-                                            Beli
+                                            <span class="button-text">Beli</span>
                                         </button>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         @endforeach
@@ -237,6 +254,10 @@
         <div class="container">
         </div>
     </section>
+
+    <div id="toast" class="toast-notification">
+        <span id="toast-message"></span>
+    </div>
 @endsection
 @push('scripts')
     <script type="text/javascript" src="{{ asset('js/frontend/lib.js') }}"></script>
@@ -244,26 +265,4 @@
     <script type="text/javascript" src="{{ asset('library/owl_carousel/js/owl.carousel.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/frontend/carousel.js') }}"></script>
     <script type="text/javascript" src="{{ asset('v3/libs/leaflet/leaflet.min.js') }}"></script>
-    <script>
-        function addToCart(product) {
-            let cart = JSON.parse(sessionStorage.getItem('cart') || '[]');
-
-            // Check if product already exists in cart
-            const existingProductIndex = cart.findIndex(item => item.id === product.id);
-
-            if (existingProductIndex > -1) {
-                cart[existingProductIndex].quantity = (cart[existingProductIndex].quantity || 1) + 1;
-            } else {
-                cart.push({
-                    ...product,
-                    quantity: 1
-                });
-            }
-
-            sessionStorage.setItem('cart', JSON.stringify(cart));
-
-            // Show notification
-            alert('Produk berhasil ditambahkan ke keranjang!');
-        }
-        </script>
 @endpush

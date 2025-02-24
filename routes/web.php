@@ -43,6 +43,8 @@ use App\Http\Controllers\Frontend\ProductFrontendController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+
 // Route::get('/login', [HomeController::class, 'login']);
 Route::get('about', [HomeController::class, 'about'])->name('about');
 Route::get('kontak', [HomeController::class, 'kontak'])->name('kontak');
@@ -100,6 +102,14 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('kategori-kursus', ProductCategoryController::class);
     Route::resource('instruktur', InstructorController::class);
 });
+
+Route::get('/example-product-detail', [HomeController::class, 'exampleProductDetail'])->name('example-product-detail');
+Route::get('/kelas', [ProductFrontendController::class, 'index'])->name('list-kelas');
+Route::get('/kelas/{slug}', [ProductFrontendController::class, 'show'])->name('product.show');
+Route::get('/data/kelas/process', [ProductFrontendController::class, 'process'])->name('class.process');
+Route::post('/data/kelas/keranjang', [ProductFrontendController::class, 'keranjang'])->name('keranjang');
+
+
 Route::post('aktivasi', [DesaController::class, 'aktivasi'])->name('aktivasi');
 Route::get('/detail-kelas/{slug}', [HomeController::class, 'detailKelas'])->name('detail-kelas');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
