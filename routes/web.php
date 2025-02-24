@@ -25,6 +25,7 @@ use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\Frontend\StrukturOrganisasi;
 use App\Http\Controllers\Backend\InstructorController;
 use App\Http\Controllers\Backend\LinkExternalController;
+use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Frontend\SlidebannerController;
 use App\Http\Controllers\Frontend\ProfilBisnisController;
 use App\Http\Controllers\Frontend\PerangkatDesaController;
@@ -119,3 +120,5 @@ Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remov
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
 Route::get('/checkout/success', [CheckoutController::class, 'checkoutSuccess'])->name('checkout.success');
+Route::get('/konfirmasi-pembayaran/{id}', [OrderController::class, 'konfirmasiPembayaran']);
+Route::post('/konfirmasi-pembayaran', [OrderController::class, 'konfirmasiPembayaranSuccess'])->name('konfirmasi.pembayaran');

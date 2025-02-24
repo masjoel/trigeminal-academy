@@ -68,6 +68,8 @@ class HomeController extends Controller
             ->select('artikels.*')
             ->latest()->limit(5)->get();
         $halaman = Halaman::where('jenis', 'page')->where('status', 'published')->where('idkategori', 'home')->latest()->first();
+        $section1 = Halaman::where('jenis', 'page')->where('status', 'published')->where('idkategori', 'section1')->latest()->first();
+        $faq = Halaman::where('jenis', 'page')->where('status', 'published')->where('idkategori', 'faq')->latest()->first();
         $tentang_kami = Halaman::where('jenis', 'page')->where('status', 'published')->where('idkategori', 'about')->latest()->first();
         $kontak_kami = Halaman::where('jenis', 'page')->where('status', 'published')->where('idkategori', 'kontak')->latest()->first();
 
@@ -91,7 +93,7 @@ class HomeController extends Controller
         $title = klien('nama_client') == null ? 'LMS' : klien('nama_client');
         $courses = Product::with('productCategory', 'instruktur', 'orderitems')->where('publish', '1')->limit(3)->latest()->get();
 
-        return view('frontend.beranda', compact('title', 'profil_usaha', 'artikel', 'banner', 'halaman', 'sid', 'tentang_kami', 'kontak_kami', 'feature', 'berita', 'berita2', 'berita3', 'pengumuman', 'pengumuman3', 'top_stories', 'video', 'agenda', 'agenda3', 'galeries', 'perangkatdesa', 'foto', 'courses'));
+        return view('frontend.beranda', compact('title', 'profil_usaha', 'artikel', 'banner', 'halaman', 'sid', 'tentang_kami', 'kontak_kami', 'feature', 'berita', 'berita2', 'berita3', 'pengumuman', 'pengumuman3', 'top_stories', 'video', 'agenda', 'agenda3', 'galeries', 'perangkatdesa', 'foto', 'courses', 'section1', 'faq'));
     }
 
     function exampleProductDetail(Request $request)

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Order;
+use App\Models\Student;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -27,21 +28,20 @@ class CheckoutController extends Controller
     {
         try {
             DB::beginTransaction();
-
             // Get cart from session
             $cart = session()->get('cart', []);
-
+            
             // Sesuaikan validasi dengan field yang ada
             $validator = Validator::make($request->all(), [
-                'username' => ['required', 'string', 'max:255', 'unique:users'],
+                'username' => Auth::user() ? ['required', 'string', 'max:255'] : ['required', 'string', 'max:255', 'unique:users'],
                 'name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                'password' => empty(Auth::user()) ? ['required', 'string', 'min:8'] : [], // Password hanya required untuk user baru
+                'email' => Auth::user() ? ['required', 'string', 'email', 'max:255'] : ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:8'],
                 'phone' => ['required', 'string'],
                 'address' => ['required', 'string'],
-                'payment_method' => ['required', 'in:transfer,ewallet,cod']
+                'payment_method' => ['required'],
             ]);
-
+            
             if ($validator->fails()) {
                 return back()->withErrors($validator)->withInput();
             }
@@ -57,18 +57,16 @@ class CheckoutController extends Controller
                     'address' => $request->address,
                     'role' => 'user'
                 ]);
-
+                Student::create([
+                    'user_id' => $user->id,
+                    'nama' => $request->name,
+                    'email' => $request->email,
+                    'telpon' => $request->phone,
+                    'alamat' => $request->address,
+                ]);
                 // Login user baru
                 Auth::login($user);
                 $request->session()->regenerate();
-            } else {
-                // Update data user yang sudah login
-                $user = Auth::user();
-                $user->update([
-                    'name' => $request->name,
-                    'phone' => $request->phone,
-                    'address' => $request->address,
-                ]);
             }
 
             // Create order

@@ -117,20 +117,21 @@
             <div class="tw-flex tw-flex-col-reverse md:tw-flex-row tw-items-center tw-justify-between tw-gap-8">
                 {{-- Left Content --}}
                 <div class="tw-flex-1 md:tw-text-left tw-text-center">
-                    <h1 class="tw-text-4xl md:tw-text-5xl tw-font-bold tw-text-[#4A1B7F]">Trigeminal Academy</h1>
-                    <h2 class="tw-text-2xl md:tw-text-3xl tw-text-gray-800 tw-mt-4">Upskilling and Reskilling Platform</h2>
+                    <h1 class="tw-text-4xl md:tw-text-5xl tw-font-bold tw-text-[#4A1B7F]">{{ $section1->title }}</h1>
+                    {!! nl2br($section1->deskripsi) !!}
+                    {{-- <h2 class="tw-text-2xl md:tw-text-3xl tw-text-gray-800 tw-mt-4">Upskilling and Reskilling Platform</h2>
                     <p class="tw-text-lg tw-text-gray-700 tw-mt-4 tw-max-w-xl tw-mx-auto md:tw-mx-0">
                         Ayo tingkatkan skill Anda! Kembangkan diri Anda untuk meraih potensi terbaik diri Anda!
-                    </p>
+                    </p> --}}
                     <div class="tw-mt-8 tw-flex tw-flex-wrap tw-gap-4 tw-justify-center md:tw-justify-start">
-                        <button
+                        <a href="{{ route('login') }}"
                             class="tw-px-6 tw-py-3 tw-bg-[#4A1B7F] tw-text-white tw-rounded-lg hover:tw-bg-[#3B1564] tw-transition tw-font-medium">
                             Login Member
-                        </button>
-                        <button
+                        </a>
+                        <a href="/kelas"
                             class="tw-px-6 tw-py-3 tw-bg-white tw-text-[#4A1B7F] tw-border tw-border-[#4A1B7F] tw-rounded-lg hover:tw-bg-gray-50 tw-transition tw-font-medium">
                             Browse Class
-                        </button>
+                        </a>
                     </div>
                 </div>
 
@@ -139,7 +140,7 @@
                     <div class="tw-relative">
                         {{-- Main Image Container --}}
                         <div class="tw-rounded-[2.5rem] shadow-1 shadow-gray-300 tw-overflow-hidden tw-relative">
-                            <img src="https://images.pexels.com/photos/572056/pexels-photo-572056.jpeg?auto=compress&cs=tinysrgb&w=600"
+                            <img src="{{ Storage::url($section1->foto_unggulan) }}"
                                 alt="Students Learning"
                                 class="tw-w-full md:tw-max-w-[600px] tw-mx-auto tw-h-auto tw-object-cover tw-rounded-[2.5rem]">
                         </div>
@@ -163,7 +164,7 @@
                         <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-b tw-from-transparent tw-to-[#4A1B7F]/90"
                             style="border-radius: 34px 40px 80px 5px;"></div>
                         <h3 class="tw-absolute tw-bottom-4 tw-left-4 tw-text-sm md:tw-text-xl tw-font-bold tw-text-white">
-                            C-Suite<br>Programs</h3>
+                            Umum</h3>
                     </div>
                 </div>
 
@@ -176,7 +177,7 @@
                         <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-b tw-from-transparent tw-to-[#831843]/90"
                             style="border-radius: 34px 40px 80px 5px;"></div>
                         <h3 class="tw-absolute tw-bottom-4 tw-left-4 tw-text-sm md:tw-text-xl tw-font-bold tw-text-white">
-                            Senior<br>Executive</h3>
+                            Pemula</h3>
                     </div>
                 </div>
 
@@ -189,7 +190,7 @@
                         <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-b tw-from-transparent tw-to-[#92400E]/90"
                             style="border-radius: 34px 40px 80px 5px;"></div>
                         <h3 class="tw-absolute tw-bottom-4 tw-left-4 tw-text-sm md:tw-text-xl tw-font-bold tw-text-white">
-                            Junior<br>Executive</h3>
+                            Menengah</h3>
                     </div>
                 </div>
 
@@ -202,7 +203,7 @@
                         <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-b tw-from-transparent tw-to-[#A21CAF]/90"
                             style="border-radius: 34px 40px 80px 5px;"></div>
                         <h3 class="tw-absolute tw-bottom-4 tw-left-4 tw-text-sm md:tw-text-xl tw-font-bold tw-text-white">
-                            Student<br>Programs</h3>
+                            Terampil</h3>
                     </div>
                 </div>
             </div>
@@ -377,9 +378,23 @@
                                 <h2 class="title">Kelas</h2>
                             </div>
                             <div class="section-title-line"></div>
+                            <div class="view-all-btn">
+                                <a href="/kelas" class="link-btn">Lihat semua
+                                    <span class="svg-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" fill="none">
+                                            <path
+                                                d="M1.07692 10L0 8.92308L7.38462 1.53846H0.769231V0H10V9.23077H8.46154V2.61538L1.07692 10Z"
+                                                fill="currentColor" />
+                                            <path
+                                                d="M1.07692 10L0 8.92308L7.38462 1.53846H0.769231V0H10V9.23077H8.46154V2.61538L1.07692 10Z"
+                                                fill="currentColor" />
+                                        </svg>
+                                    </span>
+                                </a>
+                            </div>
                         </div>
 
-                        <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-6">
+                        <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-4 tw-gap-6">
                             @foreach($courses as $dt)
                                 <a href="{{ route('detail-kelas', $dt->slug) }}" class="tw-block">
                                     <div class="tw-bg-white tw-rounded-xl tw-shadow-lg tw-overflow-hidden tw-h-full tw-transition-all tw-duration-300 hover:tw-brightness-95">
@@ -456,12 +471,12 @@
                                 </a>
                             @endforeach
                         </div>
-                        <div class="tw-mt-8 tw-flex tw-justify-center">
+                        {{-- <div class="tw-mt-8 tw-flex tw-justify-center">
                             <a href="{{ route('list-kelas') }}" class="tw-bg-[#4A1B7F] tw-text-white tw-px-6 tw-py-3 tw-rounded-lg tw-text-lg tw-font-medium
                                 hover:tw-bg-[#3A1560] hover:tw-text-white tw-transition-all tw-duration-300 tw-cursor-pointer tw-shadow-lg">
                                 Lihat Kelas Lainnya
                             </a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -472,7 +487,7 @@
         <div class="container">
             <div class="row mb-4">
                 <div class="mb-5 col-md-12 col-sm-12  col-lg-4 wow zoomIn" data-wow-duration="2s">
-                    <img src="{{ infodesa('logo') == 'image/icon-foto.png' ? infodesa('logo') : Storage::url(infodesa('logo')) }}"
+                    <img src="{{ $halaman == null ? infodesa('logo') : Storage::url($halaman->foto_unggulan) }}"
                         style="height:200px;width:100%;object-fit:contain;" alt="slider-image" class="img-fluid">
                 </div>
                 <div class="col-md-7 col-sm-12  col-md-12 col-lg-8 wow bounceInLeft" data-wow-duration="2s">
@@ -488,70 +503,10 @@
                     @endif
                 </div>
             </div>
-            {{-- <div class="row">
-                <div class="col-sm-6 col-md-6 col-lg-3 wow bounceInLeft" data-wow-duration="2s">
-                    <a href="{{ url('/surat-keterangan') }}" style="text-decoration: none">
-                        <div class="box">
-                            <div class="box-icon" style="border: 1px solid #FD8A8A">
-                                <i class="livicon icon-layanan" data-name="mail" data-size="55" data-loop="true"
-                                    data-c="#FD8A8A" data-hc="#FD8A8A"></i>
-                            </div>
-                            <div class="info">
-                                <h3 class="danger text-center h3-layanan">Layanan Masyarakat</h3>
-                                <p>Surat Keterangan online untuk memudahkan layanan publik</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-sm-6 col-md-6  col-lg-3 col-12 wow bounceInDown" data-wow-duration="2s"
-                    data-wow-delay="0.4s">
-                    <a href="{{ url('/lapak-desa') }}" style="text-decoration: none">
-                        <div class="box">
-                            <div class="box-icon" style="border: 1px solid #418bca">
-                                <i class="livicon icon-layanan" data-name="shopping-cart" data-size="55" data-loop="true"
-                                    data-c="#418bca" data-hc="#418bca"></i>
-                            </div>
-                            <div class="info">
-                                <h3 class="primary text-center h3-layanan">Lapak Desa</h3>
-                                <p>Menumbuhkan perekonomian desa melalui jualan online</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-sm-6 col-md-6  col-lg-3 col-12 wow bounceInUp" data-wow-duration="2s" data-wow-delay="0.8s">
-                    <a href="{{ url('/pembangunan-desa') }}" style="text-decoration: none">
-                        <div class="box">
-                            <div class="box-icon" style="border: 1px solid #f89a14">
-                                <i class="livicon icon-layanan" data-name="gears" data-size="55" data-loop="true"
-                                    data-c="#f89a14" data-hc="#f89a14"></i>
-                            </div>
-                            <div class="info">
-                                <h3 class="warning text-center h3-layanan">Pembangunan Desa</h3>
-                                <p>Monitor pembangunan desa secara online</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-sm-6 col-md-6 col-lg-3 col-12  wow bounceInRight" data-wow-duration="2s"
-                    data-wow-delay="0.8s">
-                    <a href="{{ url('/apbdesa') }}" style="text-decoration: none">
-                        <div class="box">
-                            <div class="box-icon" style="border: 1px solid #01bc8c">
-                                <i class="livicon icon-layanan" data-name="money" data-size="55" data-loop="true"
-                                    data-c="#01bc8c" data-hc="#01bc8c"></i>
-                            </div>
-                            <div class="info">
-                                <h3 class="success text-center h3-layanan">Keuangan Desa</h3>
-                                <p>Transparansi keuangan demi meningkatkan kepercayaan</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div> --}}
         </div>
     </section>
 
-    <section class="trending-post-area-two">
+    {{-- <section class="trending-post-area-two">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -609,7 +564,7 @@
             <img src="assets/img/images/trending_shape01.png" alt="">
             <img src="assets/img/images/trending_shape02.png" alt="">
         </div>
-    </section>
+    </section> --}}
 
     <section class="top-news-post-area pt-50 pb-70">
         <div class="container">
@@ -748,44 +703,15 @@
                 <div class="col-lg-12">
                     <div class="section-title-wrap mb-30">
                         <div class="section-title section-title-four">
-                            <h2 class="title">Materi terbaru</h2>
+                            <h2 class="title">FAQ</h2>
                             <div class="editor-nav-two"></div>
                         </div>
                         <div class="section-title-line"></div>
                     </div>
                 </div>
             </div>
-            <div class="row gutter-40 editor-post-active-two">
-                {{-- @foreach ($dts as $v)
-                    <div class="col-lg-3 wow bounceInRight" data-wow-duration="3s">
-                        <div class="editor-post-three">
-                            <div class="editor-post-thumb-three">
-                                @if ($v->image_url != null)
-                                    <img src="{{ Storage::url('thumb/' . $v->image_url) }}"
-                                        alt="{{ $v->title }}" class="w-100" style="min-height: 205px">
-                                @else
-                                    <img src="{{ asset('img/example-image.jpg') }}" class="img-fluid"
-                                        alt="{{ $v->title }}">
-                                @endif
-                                <a href="{{ Storage::url($v->image_url) }}" class="paly-btn popup-video"><i class="fas fa-camera"></i>
-                                </a>
-                            </div>
-                            <div class="editor-post-content-three">
-                                <h2 class="post-title"><a href="{{ $v->excerpt }}"
-                                        target="_blank">{{ $v->title }}</a></h2>
-                                <div class="blog-post-meta">
-                                    <ul class="list-wrap">
-                                        <li style="font-size: 10px"><i
-                                                class="flaticon-calendar"></i>{{ kal($v->created_at) }} </li>
-                                        <li style="font-size: 10px"><i
-                                                class="flaticon-history"></i>{{ $v->created_at->diffForHumans() }}
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach --}}
+            <div class="row gutter-40">
+                {!! nl2br($faq->deskripsi) !!}
             </div>
             {{-- <div class="row gutter-40 editor-post-active-two">
                 @foreach ($foto as $v)

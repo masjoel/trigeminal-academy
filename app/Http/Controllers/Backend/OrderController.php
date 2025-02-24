@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\Order;
+use Ramsey\Uuid\Uuid;
+use App\Models\ImageResize;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -62,5 +65,38 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         //
+    }
+    public function konfirmasiPembayaran($id)
+    {
+        $order = Order::with('orderItems', 'orderItems.product', 'orderItems.product.instruktur')->find($id);
+        $title = 'Konfirmasi Pembayaran';
+        return view('backend.e-commerce.konfirmasi', compact('title', 'order'));
+    }
+    public function konfirmasiPembayaranSuccess(Request $request)
+    {
+        DB::beginTransaction();
+        $imagePath = null;
+        if ($request->hasFile('bukti_bayar')) {
+            $photo = $request->file('bukti_bayar');
+            $extFile = $photo->getClientOriginalExtension();
+            $nameFile = Uuid::uuid1()->getHex() . '.' . $extFile;
+            $imagePath = $photo->storeAs('bukti_bayar', $nameFile, 'public');
+
+            $smallthumbnailpath = public_path('storage/bukti_bayar/' . $nameFile);
+            $imageInfo = ImageResize::getFileImageSize($smallthumbnailpath);
+            if ($imageInfo) {
+                $width = $imageInfo['width'];
+                $height = $imageInfo['height'];
+                if ($width >= 400 || $height >= 400) {
+                    ImageResize::createThumbnail($smallthumbnailpath, 400, 400);
+                }
+            }
+        }
+        $validate['bukti_bayar'] = $imagePath;
+        $validate['payment_status'] = 4;
+        $order = Order::find($request->order_id);
+        $order->update($validate);
+        DB::commit();
+        return redirect(route('dashboard'))->with('success', 'Konfirmasi pembayaran berhasil disimpan');
     }
 }

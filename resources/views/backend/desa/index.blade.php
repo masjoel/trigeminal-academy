@@ -84,6 +84,11 @@
                                             <td>:</td>
                                             <td>{{ infodesa('web') }}</td>
                                         </tr>
+                                        <tr>
+                                            <td style="vertical-align: top">Data Bank</td>
+                                            <td style="vertical-align: top">:</td>
+                                            <td style="vertical-align: top">{!! nl2br(infodesa('bank')) !!}</td>
+                                        </tr>
 
                                     </table>
                                 </div>
@@ -124,7 +129,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mt-3">
+                        {{-- <div class="card mt-3">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label>Peta</label>
@@ -132,7 +137,7 @@
                                     <div id="mapLink"></div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

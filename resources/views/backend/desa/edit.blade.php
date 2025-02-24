@@ -149,7 +149,7 @@
                                         @enderror
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        {{-- <div class="col-md-6">
                                             <div class="form-group mb-4">
                                                 <label>Latitude</label>
                                                 <input type="text" name='latitude'
@@ -174,10 +174,19 @@
                                                     </div>
                                                 @enderror
                                             </div>
+                                        </div> --}}
+                                        <div class="form-group mb-4">
+                                            <label>Data Bank</label>
+                                            <textarea name='bank' rows="9" class="form-control @error('bank') is-invalid @enderror">{{ old('bank', $profil_bisni->bank) }}</textarea>
+                                            @error('bank')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                         <div class="form-group mb-4">
                                             <label>Catatan kaki</label>
-                                            <textarea name='footnot' data-height="70" class="form-control @error('footnot') is-invalid @enderror">{{ old('footnot', $profil_bisni->footnot) }}</textarea>
+                                            <textarea name='footnot' rows="3" class="form-control @error('footnot') is-invalid @enderror">{{ old('footnot', $profil_bisni->footnot) }}</textarea>
                                             @error('footnot')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -322,11 +331,11 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="form-group mt-5">
+                                    {{-- <div class="form-group mt-5">
                                         <label>Peta</label>
                                         <div id="map"></div>
                                         <div id="mapLink"></div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>

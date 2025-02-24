@@ -26,6 +26,7 @@ class UpdateHalamanRequest extends FormRequest
             'excerpt' => 'nullable|string|max:250',
             'foto_unggulan' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg,webp|max:2048',
             'status' => 'nullable',
+            'idkategori' => 'nullable',
         ];
     }
     public function messages(): array

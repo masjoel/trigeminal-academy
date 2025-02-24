@@ -37,10 +37,10 @@
     <!-- CSS here -->
     @production
         @php
-            $manifest = json_decode(file_get_contents(public_path('build/manifest.json')), true);
+            $manifest = json_decode(file_get_contents(public_path('tailwind/.vite/manifest.json')), true);
         @endphp
-        <link rel="stylesheet" href="{{ asset('build/' . $manifest['resources/css/app.css']['file']) }}">
-        <script type="module" src="{{ asset('build/' . $manifest['resources/js/app.js']['file']) }}"></script>
+        <link rel="stylesheet" href="{{ asset('tailwind/' . $manifest['resources/css/app.css']['file']) }}">
+        <script type="module" src="{{ asset('tailwind/' . $manifest['resources/js/app.js']['file']) }}"></script>
     @else
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     @endproduction

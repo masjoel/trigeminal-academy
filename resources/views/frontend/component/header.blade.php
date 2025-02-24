@@ -80,11 +80,15 @@
                     <div class="header-action hl-right-side-four">
                         <ul class="list-wrap">
                             <li class="header-cart">
-                                <a href="{{ route('cart.index') }}"><i class="flaticon-basket"></i><span>{{ totalCart() ?? 0 }}</span></a>
-                                {{-- <strong>$0.00</strong> --}}
+                                <a href="{{ route('cart.index') }}"><i
+                                        class="flaticon-basket"></i><span>{{ totalCart() ?? 0 }}</span></a>
                             </li>
                             <li class="header-sine-in">
-                                <a href="{{ route('login') }}"><i class="flaticon-user"></i>Sign In</a>
+                                @if (Auth::check())
+                                    <a href="{{ route('dashboard') }}"><i class="flaticon-user"></i>My Account</a>
+                                @else
+                                    <a href="{{ route('login') }}"><i class="flaticon-user"></i>Sign In</a>
+                                @endif
                             </li>
                         </ul>
                     </div>
@@ -229,12 +233,15 @@
                                     </form> --}}
                                     <ul class="list-wrap">
                                         <li class="header-cart">
-                                            <a href="javascript:void(0)"><i
-                                                    class="flaticon-basket"></i><span>0</span></a>
-                                            {{-- <strong>$0.00</strong> --}}
+                                            <a href="{{ route('cart.index') }}"><i
+                                                    class="flaticon-basket"></i><span>{{ totalCart() ?? 0 }}</span></a>
                                         </li>
                                         <li class="header-sine-in">
-                                            <a href="{{ route('login') }}"><i class="flaticon-user"></i></a>
+                                            @if (Auth::check())
+                                                <a href="{{ route('dashboard') }}"><i class="flaticon-user"></i></a>
+                                            @else
+                                                <a href="{{ route('login') }}"><i class="flaticon-user"></i></a>
+                                            @endif
                                         </li>
                                     </ul>
                                 </div>

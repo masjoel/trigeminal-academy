@@ -39,7 +39,7 @@ class DashboardController extends Controller
         $courses = Product::with('productCategory', 'instruktur')->where('publish', '1')->limit(3)->latest()->get();
         $totalCourses = Product::where('publish', '1')->count();
         // $myCourses = Order::with('orderItems', 'orderItems.product')->where('customer_id', Auth::user()->id)->get();
-        $myCourses = OrderItem::with('product')->leftJoin('orders', 'orders.id', '=', 'order_items.order_id')->get();
+        $myCourses = OrderItem::with('product','order')->leftJoin('orders', 'orders.id', '=', 'order_items.order_id')->where('orders.customer_id', Auth::user()->id)->get();
         // dd($myCourses);
         $title = 'Dashboard';
         $halaman = Auth::user()->role == 'user' ? 'dashboard-student' : 'dashboard';

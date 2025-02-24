@@ -52,8 +52,10 @@ class HalamanController extends Controller
         $title = 'Halaman';
         $kategori = [
             "home" => "Beranda",
+            "section1" => "Beranda - Section 1",
             "about" => "Tentang kami",
             "kontak" => "Kontak",
+            "faq" => "FAQ",
             // "visimisi" => "Visi Misi",
             // "sejarah" => "Sejarah Desa",
             // "geografis" => "Geografis Desa",
@@ -74,6 +76,7 @@ class HalamanController extends Controller
         $title = $request->input('title');
         $deskripsi = $request->input('deskripsi');
         $validate = $request->validated();
+        $imagePath = null;
 
         $slug = SlugService::createSlug(Artikel::class, 'slug', $request->title);
         preg_match_all('/src=["\']data:image\/([a-zA-Z]*);base64,([^\s"]+)[^>]/', $deskripsi, $matches, PREG_SET_ORDER);
@@ -97,6 +100,33 @@ class HalamanController extends Controller
             $dataImageArticle[] = $path . $nama_file;
             $deskripsi = str_replace('data:image/' . $extension . ';base64,' . $base64_str, '../../storage/' . $path . $nama_file, $deskripsi);
         }
+        if ($request->hasFile('foto_unggulan')) {
+            $foto_unggulan = $request->file('foto_unggulan');
+            $extFile = $foto_unggulan->getClientOriginalExtension();
+            $nameFile = Uuid::uuid1()->getHex() . '.' . $extFile;
+            $imagePath = $foto_unggulan->storeAs('artikel', $nameFile, 'public');
+            $thumbnail = $foto_unggulan->storeAs('thumb/artikel', $nameFile, 'public');
+
+            $smallthumbnailpath = public_path('storage/artikel/' . $nameFile);
+            $imageInfo = ImageResize::getFileImageSize($smallthumbnailpath);
+            if ($imageInfo) {
+                $width = $imageInfo['width'];
+                $height = $imageInfo['height'];
+                if ($width >= 800 || $height >= 600) {
+                    ImageResize::createThumbnail($smallthumbnailpath, 800, 600);
+                }
+            }
+
+            $smallthumbnailpath = public_path('storage/thumb/artikel/' . $nameFile);
+            $imageInfo = ImageResize::getFileImageSize($smallthumbnailpath);
+            if ($imageInfo) {
+                $width = $imageInfo['width'];
+                $height = $imageInfo['height'];
+                if ($width >= 300 || $height >= 200) {
+                    ImageResize::createThumbnail($smallthumbnailpath, 300, 200);
+                }
+            }
+        }
         $save = Artikel::create([
             'title' => $title,
             'slug' => $slug,
@@ -104,6 +134,7 @@ class HalamanController extends Controller
             'deskripsi' => $deskripsi,
             'status' => $request->input('status'),
             'jenis' => 'page',
+            'foto_unggulan' => $imagePath,
         ]);
         if (isset($dataImageArticle)) {
             foreach ($dataImageArticle as $key => $value) {
@@ -132,8 +163,10 @@ class HalamanController extends Controller
     {
         $kategori = [
             "home" => "Beranda",
+            "section1" => "Beranda - Section 1",
             "about" => "Tentang kami",
             "kontak" => "Kontak",
+            "faq" => "FAQ",
             // "visimisi" => "Visi Misi",
             // "sejarah" => "Sejarah Desa",
             // "geografis" => "Geografis Desa",
@@ -211,9 +244,43 @@ class HalamanController extends Controller
             }
 
             // Update artikel
+            $imagePath = $halaman->foto_unggulan;
+            if ($request->hasFile('foto_unggulan')) {
+                $foto_unggulan = $request->file('foto_unggulan');
+                $extFile = $foto_unggulan->getClientOriginalExtension();
+                if ($imagePath && Storage::disk('public')->exists($imagePath)) {
+                    Storage::disk('public')->delete($imagePath);
+                    Storage::disk('public')->delete('thumb/' . $imagePath);
+                }
+                $nameFile = Uuid::uuid1()->getHex() . '.' . $extFile;
+                $imagePath = $foto_unggulan->storeAs('artikel', $nameFile, 'public');
+                $thumbnail = $foto_unggulan->storeAs('thumb/artikel', $nameFile, 'public');
+
+                $smallthumbnailpath = public_path('storage/artikel/' . $nameFile);
+                $imageInfo = ImageResize::getFileImageSize($smallthumbnailpath);
+                if ($imageInfo) {
+                    $width = $imageInfo['width'];
+                    $height = $imageInfo['height'];
+                    if ($width >= 800 || $height >= 600) {
+                        ImageResize::createThumbnail($smallthumbnailpath, 800, 600);
+                    }
+                }
+
+                $smallthumbnailpath = public_path('storage/thumb/artikel/' . $nameFile);
+                $imageInfo = ImageResize::getFileImageSize($smallthumbnailpath);
+                if ($imageInfo) {
+                    $width = $imageInfo['width'];
+                    $height = $imageInfo['height'];
+                }
+                if ($width >= 300 || $height >= 200) {
+                    ImageResize::createThumbnail($smallthumbnailpath, 300, 200);
+                }
+            }
+
             $validate['slug'] = $slug;
             $validate['excerpt'] = $request->input('excerpt');
             $validate['deskripsi'] = $deskripsi;
+            $validate['foto_unggulan'] = $imagePath;
             $halaman->update($validate);
 
             DB::commit();

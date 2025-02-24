@@ -112,10 +112,10 @@
                                 <thead>
                                     <tr>
                                         <th>Pict</th>
-                                        <th>Judul</th>
+                                        <th>Kelas</th>
                                         <th>Instruktur</th>
-                                        <th>Level</th>
-                                        <th>Durasi</th>
+                                        {{-- <th>Level</th> --}}
+                                        {{-- <th>Durasi</th> --}}
                                         <th>Harga</th>
                                         <th>Disc.</th>
                                         <th>Status</th>
@@ -126,9 +126,9 @@
                                     @foreach ($myCourses as $item)
                                         <tr>
                                             <td>
-                                                @if ($item->image_url !== null)
+                                                @if ($item->product->image_url !== null)
                                                     <img class="rounded-circle mr-3" width="40" height="40"
-                                                        src="{{ Storage::url('thumb/' . $item->image_url) }}"
+                                                        src="{{ Storage::url('thumb/' . $item->product->image_url) }}"
                                                         alt="image">
                                                 @else
                                                     <img class="rounded-circle mr-3" width="40"
@@ -139,8 +139,8 @@
                                                     href="{{ route('course.show', $item->product->id) }}">{{ $item->product->name }}</a>
                                             </td>
                                             <td>{{ $item->product->instruktur->nama }}</td>
-                                            <td>{{ ucwords($item->product->level) }}</td>
-                                            <td>{{ $item->product->video_duration }} menit</td>
+                                            {{-- <td>{{ ucwords($item->product->level) }}</td> --}}
+                                            {{-- <td>{{ $item->product->video_duration }} menit</td> --}}
                                             <td>{{ number_format($item->product->price) }}</td>
                                             <td>{{ number_format($item->product->discount) }} %</td>
                                             <td>
@@ -154,7 +154,12 @@
                                             </td>
                                             {{-- <td>{{ number_format($item->product->price - ($item->product->price * $item->product->discount) / 100) }} --}}
                                             </td>
-                                            <td>{{ $item->created_at->diffForHumans() }}</td>
+                                            <td>{{ $item->created_at->diffForHumans() }}
+                                                @if ($item->payment_status !== '4')
+                                                    <br><a href="/konfirmasi-pembayaran/{{ $item->id }}"
+                                                        class="badge bg-primary">konfirmasi pembayaran</a>
+                                                @endif
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
