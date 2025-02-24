@@ -8,9 +8,11 @@ use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Validator;
 
 class CheckoutController extends Controller
 {
@@ -23,74 +25,95 @@ class CheckoutController extends Controller
 
     public function process(Request $request)
     {
-        DB::beginTransaction();
-        $cart = session()->get('cart', []);
-        $validator = Validator::make($request->all(), [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        try {
+            DB::beginTransaction();
 
-        if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
-        }
+            // Get cart from session
+            $cart = session()->get('cart', []);
 
-        // Create the user
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-        $userRole = Role::where('name', 'user')->first();
-        // $user->assignRole($userRole);
-
-        $dataUser = User::find(2);
-        $permissions = $dataUser->getPermissionNames();
-        foreach ($permissions as $permissionName) {
-            $permission = Permission::where('name', $permissionName)->first();
-            if ($userRole && $permission) {
-                $user->assignRole($userRole);
-                $user->givePermissionTo($permission);
-            }
-        }
-
-        $credentials = [
-            'email' => $request->email,
-            'password' => $request->password,
-        ];
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->intended('/dashboard');
-        }
-        $order = [
-            'invoice' => 'INV-' . date('YmdHis'),
-            // 'total_budget' => 0,
-            // 'total_price' => array_sum(array_column(session()->get('cart', []), 'price')),
-            'total_price' => collect($cart)->sum(fn($item) => ($item['price'] * (1 - $item['discount']/100) * $item['quantity'])),
-            // 'total_price' => collect($cart)->sum(fn($item) => ($item['price'] * $item['quantity']) - $item['discount']),
-            // 'total_discount' => array_sum(array_column(session()->get('cart', []), 'discount')),
-            'customer_id' => Auth::user()->id ?? null,
-            'payment_status' => 1,
-            'payment_method' => $request->payment_method,
-            'name' => $request->name,
-            'phone' => $request->phone,
-            'delivery_address' => $request->address,
-            'token' => csrf_token()
-        ];
-        $save = Order::create($order);
-        foreach ($cart as $item) {
-            OrderItem::create([
-                'order_id' => $save->id,
-                'product_id' => $item['product_id'],
-                'quantity' => $item['quantity'],
-                'price' => $item['price'],
-                'discount' => $item['discount'] ?? 0,
+            // Sesuaikan validasi dengan field yang ada
+            $validator = Validator::make($request->all(), [
+                'username' => ['required', 'string', 'max:255', 'unique:users'],
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => empty(Auth::user()) ? ['required', 'string', 'min:8'] : [], // Password hanya required untuk user baru
+                'phone' => ['required', 'string'],
+                'address' => ['required', 'string'],
+                'payment_method' => ['required', 'in:transfer,ewallet,cod']
             ]);
-        }
-        session()->forget('cart'); // Hapus isi keranjang setelah checkout
-        DB::commit();
 
-        return redirect()->route('checkout.success')->with('success', 'Pesanan berhasil dibuat!');
+            if ($validator->fails()) {
+                return back()->withErrors($validator)->withInput();
+            }
+
+            if (empty(Auth::user())) {
+                // Create new user jika belum login
+                $user = User::create([
+                    'username' => $request->username,
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                    'phone' => $request->phone,
+                    'address' => $request->address,
+                    'role' => 'user'
+                ]);
+
+                // Login user baru
+                Auth::login($user);
+                $request->session()->regenerate();
+            } else {
+                // Update data user yang sudah login
+                $user = Auth::user();
+                $user->update([
+                    'name' => $request->name,
+                    'phone' => $request->phone,
+                    'address' => $request->address,
+                ]);
+            }
+
+            // Create order
+            $total = collect($cart)->sum(
+                fn($item) => ($item['price'] * (1 - $item['discount'] / 100) * $item['quantity'])
+            );
+
+            $order = Order::create([
+                'invoice' => 'INV-' . date('YmdHis'),
+                'total_price' => $total,
+                'customer_id' => Auth::id(),
+                'payment_status' => 1,
+                'payment_method' => $request->payment_method,
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'delivery_address' => $request->address,
+                'token' => csrf_token()
+            ]);
+
+            // Create order items
+            foreach ($cart as $item) {
+                OrderItem::create([
+                    'order_id' => $order->id,
+                    'product_id' => $item['product_id'],
+                    'quantity' => $item['quantity'],
+                    'price' => $item['price'],
+                    'discount' => $item['discount'] ?? 0,
+                ]);
+            }
+
+            // Clear cart
+            session()->forget('cart');
+
+            DB::commit();
+
+            return redirect()->route('checkout.success')
+                ->with('success', 'Pesanan berhasil dibuat!');
+        } catch (\Exception $e) {
+            DB::rollback();
+            Log::error('Checkout Error: ' . $e->getMessage());
+
+            return back()
+                ->with('error', 'Terjadi kesalahan: ' . $e->getMessage())
+                ->withInput();
+        }
     }
     public function checkoutSuccess()
     {

@@ -1,5 +1,5 @@
 @extends('frontend.component.main')
-
+@section('title', $title)
 @section('main')
     <section class="about-area pt-80 pb-80">
         <div class="container">
