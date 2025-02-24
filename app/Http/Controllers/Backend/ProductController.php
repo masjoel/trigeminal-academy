@@ -124,7 +124,7 @@ class ProductController extends Controller
         } else {
             $videoUrl = $request->input('video_url');
         }
-        if (str_contains($videoPath, 'youtube')) {
+        if (str_contains($videoUrl, 'youtube')) {
             $videoUrl = Str::replace('/watch?v=', '/embed/', $videoUrl);
         }
 
@@ -273,7 +273,7 @@ class ProductController extends Controller
         } else {
             $videoUrl = $request->input('video_url');
         }
-        if (str_contains($videoPath, 'youtube')) {
+        if (str_contains($videoUrl, 'youtube')) {
             $videoUrl = Str::replace('/watch?v=', '/embed/', $videoUrl);
         }
         $validate['description'] = $deskripsi;
