@@ -125,45 +125,8 @@
         $(document).on("click", "a#delete-data", function(e) {
             e.preventDefault();
             let id = $(this).data('id');
-            showDeletePopup('{{ url('') }}/course/' + id, '{{ csrf_token() }}',
-                '{{ url('') }}/course');
+            showDeletePopup(BASE_URL + '/course/' + id, '{{ csrf_token() }}',
+                BASE_URL + '/course');
         });
-
-        function showDeletePopup(url, token, reload) {
-            swal({
-                    title: 'Hapus data',
-                    text: 'Yakin data akan dihapus?',
-                    icon: 'error',
-                    buttons: true,
-                    dangerMode: true,
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        $.ajax({
-                                url: url,
-                                "headers": {
-                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                                },
-                                type: "DELETE"
-                            })
-                            .done(function(data) {
-                                if (data.status == 'success') {
-                                    swal('Data telah dihapus', {
-                                        icon: 'success',
-                                    });
-                                    setTimeout(function() {
-                                        swal.close()
-                                        window.location.replace(reload);
-                                    }, 1000);
-                                } else {
-                                    swal("Error!", data.message, "error");
-                                }
-                            })
-                            .fail(function(data) {
-                                swal("Oops...!", "Terjadi kesalahan pada server!", "error");
-                            });
-                    }
-                });
-        }
     </script>
 @endpush

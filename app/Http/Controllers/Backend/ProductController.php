@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\OrderItem;
 use App\Models\Instructor;
 use App\Models\ImageResize;
+use Illuminate\Support\Str;
 use App\Models\ImageArticle;
 use Illuminate\Http\Request;
 use App\Models\ProductCategory;
@@ -119,11 +120,18 @@ class ProductController extends Controller
             $extFile = $video_file->getClientOriginalExtension();
             $nameFile = Uuid::uuid1()->getHex() . '.' . $extFile;
             $videoPath = $video_file->storeAs('product_video', $nameFile, 'public');
+            $videoUrl = $videoPath;
+        } else {
+            $videoUrl = $request->input('video_url');
         }
+        if (str_contains($videoPath, 'youtube')) {
+            $videoUrl = Str::replace('/watch?v=', '/embed/', $videoUrl);
+        }
+
         $validate['description'] = $deskripsi;
         $validate['slug'] = $slug;
         $validate['image_url'] = $imagePath;
-        $validate['video_url'] = $videoPath;
+        $validate['video_url'] = $videoUrl;
         $validate['user_id'] = Auth::user()->id;
         $save = Product::create($validate);
         if (isset($dataImageArticle)) {
@@ -163,7 +171,6 @@ class ProductController extends Controller
         $category = ProductCategory::orderBy('name', 'asc')->get();
         $instruktur = Instructor::orderBy('nama', 'asc')->get();
         return view('backend.e-commerce.product.edit', compact('category', 'instruktur', 'title', 'course'));
-
     }
 
     /**
@@ -262,11 +269,17 @@ class ProductController extends Controller
             }
             $nameFile = Uuid::uuid1()->getHex() . '.' . $extFile;
             $videoPath = $video_file->storeAs('product_video', $nameFile, 'public');
+            $videoUrl = $videoPath;
+        } else {
+            $videoUrl = $request->input('video_url');
+        }
+        if (str_contains($videoPath, 'youtube')) {
+            $videoUrl = Str::replace('/watch?v=', '/embed/', $videoUrl);
         }
         $validate['description'] = $deskripsi;
         $validate['slug'] = $slug;
         $validate['image_url'] = $imagePath;
-        $validate['video_url'] = $videoPath;
+        $validate['video_url'] = $videoUrl;
         $course->update($validate);
 
         DB::commit();
