@@ -145,7 +145,7 @@
                                                     </div>
                                                 @enderror
                                             </div>
-                                            @if (auth()->user()->roles == 'user')
+                                            @if (auth()->user()->role == 'user')
                                                 <div class="form-group mb-4">
                                                     <label>Alamat</label>
                                                     <textarea name="alamat" class="form-control" data-height="40">{{ old('alamat', $user->alamat) }}</textarea>
