@@ -52,7 +52,7 @@ class DesaController extends Controller
         $title = 'Profil Bisnis';
         $latitude = $profil_bisni->latitude;
         $longitude = $profil_bisni->longitude;
-        return view('backend.desa.index', compact('title', 'profil_bisni', 'latitude', 'longitude'));
+        return view('backend.profil-bisnis.index', compact('title', 'profil_bisni', 'latitude', 'longitude'));
     }
 
     /**
@@ -89,7 +89,7 @@ class DesaController extends Controller
         $kabupaten = Kabupaten::where('provinsi_id', $profil_bisni->provinsi_id)->get();
         $kecamatan = Kecamatan::where('kabupaten_id', $profil_bisni->kabupaten_id)->get();
         $kelurahan = Kelurahan::where('kecamatan_id', $profil_bisni->kecamatan_id)->get();
-        return view('backend.desa.edit', compact('title', 'profil_bisni', 'provinsi', 'kabupaten', 'kecamatan', 'kelurahan'));
+        return view('backend.profil-bisnis.edit', compact('title', 'profil_bisni', 'provinsi', 'kabupaten', 'kecamatan', 'kelurahan'));
     }
 
     /**

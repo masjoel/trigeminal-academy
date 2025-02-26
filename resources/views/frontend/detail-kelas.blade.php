@@ -102,8 +102,8 @@
             <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-8">
                 <!-- Left Column - Image -->
                 <div class="tw-bg-white tw-rounded-2xl tw-overflow-hidden tw-shadow-sm">
-                    <img src="{{ Storage::url($course->image_url) }}" alt="{{ $course->name }}"
-                        class="tw-w-full tw-aspect-[4/3] tw-h-full tw-object-cover">
+                    <img src="{{ $course->image_url == null ? asset('img/example-image.jpg') : Storage::url($course->image_url) }}"
+                        alt="{{ $course->name }}" class="tw-w-full tw-aspect-[4/3] tw-h-full tw-object-cover">
                 </div>
 
                 <!-- Right Column - Product Info -->
@@ -126,17 +126,17 @@
                         @if ($course->discount)
                             <div class="tw-flex tw-items-center tw-gap-3">
                                 <span
-                                    class="tw-text-gray-500 tw-line-through tw-text-lg">Rp{{ number_format($course->price, 0, ',', '.') }}</span>
+                                    class="tw-text-gray-500 tw-line-through tw-text-lg">Rp {{ number_format($course->price, 0, ',', '.') }}</span>
                                 <span
                                     class="tw-bg-red-100 tw-text-red-600 tw-px-2 tw-py-1 tw-rounded tw-text-xs tw-font-medium">{{ $course->discount }}%
                                     OFF</span>
                             </div>
                             <div class="tw-text-[#4A1B7F] tw-font-bold tw-text-3xl">
-                                Rp{{ number_format(($course->price * (100 - $course->discount)) / 100, 0, ',', '.') }}
+                                Rp {{ number_format(($course->price * (100 - $course->discount)) / 100, 0, ',', '.') }}
                             </div>
                         @else
                             <div class="tw-text-[#4A1B7F] tw-font-bold tw-text-3xl">
-                                Rp{{ number_format($course->price, 0, ',', '.') }}
+                                Rp {{ number_format($course->price, 0, ',', '.') }}
                             </div>
                         @endif
                     </div>
@@ -150,7 +150,7 @@
                     <div class="tw-space-y-4">
                         <div class="tw-flex tw-items-center tw-gap-3">
                             {{-- <div class="tw-w-32"> --}}
-                                {{-- <button id="add-cart-button-{{ $course->id }}"
+                            {{-- <button id="add-cart-button-{{ $course->id }}"
                                     onclick="handleAddToCart({{ json_encode([
                                         'id' => $course->id,
                                         'checkoutUrl' => route('class.process'),
@@ -162,10 +162,11 @@
                             <form action="{{ route('cart.add') }}" method="POST" class="tw-w-full">
                                 @csrf
                                 <input type="hidden" name="product_id" value="{{ $course->id }}">
-                            <button type="submit" class="tw-w-full tw-flex-1 tw-bg-[#4A1B7F] tw-text-white tw-py-3 tw-rounded-lg tw-font-medium hover:tw-bg-[#3A1560] tw-transition-colors">
-                                Tambah ke Keranjang
-                            </button>
-                        </form>
+                                <button type="submit"
+                                    class="tw-w-full tw-flex-1 tw-bg-[#4A1B7F] tw-text-white tw-py-3 tw-rounded-lg tw-font-medium hover:tw-bg-[#3A1560] tw-transition-colors">
+                                    Tambah ke Keranjang
+                                </button>
+                            </form>
                         </div>
 
                     </div>
@@ -194,10 +195,10 @@
                             <span class="tw-text-sm tw-text-gray-500">Materi</span>
                             <p class="tw-font-medium tw-text-gray-900">{{ $course->productContent->count() }}</p>
                         </div>
-                        <div>
+                        {{-- <div>
                             <span class="tw-text-sm tw-text-gray-500">Caption</span>
                             <p class="tw-font-medium tw-text-gray-900">Yes</p>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -229,8 +230,13 @@
 
                 <div class="tw-prose tw-max-w-none tw-py-8">
                     <div class="tw-flex tw-items-center tw-gap-4">
-                        <img src="{{ Storage::url($course->instruktur->photo) }}" alt="{{ $course->instruktur->nama }}"
-                            class="tw-w-16 tw-h-16 tw-rounded-full tw-object-cover">
+                        @if ($course->instruktur->photo == null)
+                            <i class="flaticon-user"></i>
+                        @else
+                            <img src="{{ Storage::url($course->instruktur->photo) }}"
+                                alt="{{ $course->instruktur->nama }}"
+                                class="tw-w-16 tw-h-16 tw-rounded-full tw-object-cover">
+                        @endif
                         <div>
                             <h3 class="tw-font-medium tw-text-lg">{{ $course->instruktur->nama }}</h3>
                             <p class="tw-text-gray-600">{{ $course->instruktur->keterangan }}</p>

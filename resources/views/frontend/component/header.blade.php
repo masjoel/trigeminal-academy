@@ -133,71 +133,16 @@
                             <div class="navbar-wrap main-menu d-none d-lg-flex">
                                 <ul class="navigation">
                                     <li><a href="{{ route('home') }}" title="Beranda">Beranda</a></li>
+                                    @if (cekPage('about'))
+                                        <li><a href="{{ route('about') }}" title="Tentang Kami">Tentang Kami</a></li>
+                                    @endif
+                                    @if (cekPage('visimisi'))
+                                        <li><a href="{{ route('visimisi') }}" title="Visi Misi">Visi Misi</a></li>
+                                    @endif
+                                    @if (cekPage('kontak'))
+                                        <li><a href="{{ route('kontak') }}" title="Kontak">Kontak</a></li>
+                                    @endif
                                     <li><a href="/blog/category/berita" title="Beranda">Blog</a></li>
-                                    {{-- <li class="menu-item-has-children"><a href="#">Profil Desa</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="{{ route('about') }}" title="Tentang Kami">Tentang Kami</a>
-                                            </li>
-                                            <li><a href="{{ route('visimisi') }}" title="Visi Misi">Visi Misi</a>
-                                            </li>
-                                            <li><a href="{{ route('sejarah') }}" title="Sejarah Desa">Sejarah
-                                                    Desa</a></li>
-                                            <li><a href="{{ route('geografis') }}" title="Geografis Desa">Geografis
-                                                    Desa</a></li>
-                                            <li><a href="{{ route('demografi') }}" title="Demografi Desa">Demografi
-                                                    Desa</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children"><a href="#">Pemerintahan</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="{{ route('sotk') }}" title="Struktur Organisasi">Struktur
-                                                    Organisasi</a></li>
-                                            <li><a href="{{ route('perangkat') }}" title="Perangkat Desa">Perangkat
-                                                    Desa</a></li>
-                                            <li><a href="{{ route('lembaga-desa') }}" title="Lembaga Desa">Lembaga
-                                                    Desa</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children"><a href="#">Layanan</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="{{ route('surket') }}" title="Surat Keterangan">Surat
-                                                    Keterangan</a></li>
-                                            <li><a href="{{ route('lapak-desa') }}" title="Surat Keterangan">Lapak
-                                                    Desa</a></li>
-                                            <li><a href="{{ route('buku-tamu') }}" title="Surat Keterangan">Buku
-                                                    Tamu</a></li>
-                                            <li><a href="{{ route('survey-layanan') }}"
-                                                    title="Surat Keterangan">Survey Layanan</a></li>
-                                        </ul>
-                                    </li> --}}
-                                    {{-- <li class="menu-item-has-children"><a href="#">Informasi</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="/blog/category/berita" title="Kabar Berita">Kabar Berita</a>
-                                            </li>
-                                            <li><a href="/blog/category/pengumuman" title="Pengumuman">Pengumuman</a>
-                                            </li>
-                                            <li><a href="/blog/category/agenda-kegiatan"
-                                                    title="Agenda Kegiatan">Agenda Kegiatan</a></li>
-                                            <li><a href="{{ url('/apbdesa') }}" title="APBDesa">APBDesa</a></li>
-                                            <li><a href="{{ route('galery') }}" title="Galeri">Galeri</a></li>
-                                            <li><a href="{{ url('/perpustakaan-desa') }}"
-                                                    title="Perpustakaan Desa">Perpustakaan Desa</a></li>
-                                        </ul>
-                                    </li> --}}
-                                    {{-- <li class="menu-item-has-children"><a href="#">Potensi Desa</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="{{ route('potensi.penduduk') }}"
-                                                    title="Potensi Penduduk">Potensi Penduduk</a></li>
-                                            <li><a href="{{ route('potensi.wilayah') }}"
-                                                    title="Potensi Wilayah">Potensi Wilayah</a></li>
-                                            <li><a href="{{ route('potensi.sarana') }}"
-                                                    title="Sarana & Prasarana">Sarana & Prasarana</a></li>
-                                        </ul>
-                                    </li> --}}
-                                    {{-- <li><a href="{{ route('absensi.login') }}" title="Absensi">Absensi</a>
-                                    </li>
-                                    <li><a href="{{ route('produk.hukum') }}" title="Produk Hukum">Produk Hukum</a>
-                                    </li> --}}
                                 </ul>
 
                             </div>

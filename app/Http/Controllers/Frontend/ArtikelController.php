@@ -60,6 +60,7 @@ class ArtikelController extends Controller
     public function store(UpdateHalamanRequest $request)
     {
         DB::beginTransaction();
+        dd($request->all());
         $validate = $request->validated();
         $title = $request->input('title');
         $deskripsi = $request->input('deskripsi');

@@ -242,7 +242,7 @@
                                 <div
                                     class="tw-bg-white tw-rounded-xl tw-shadow-lg tw-overflow-hidden tw-h-full tw-transition-all tw-duration-300 hover:tw-brightness-95">
                                     <div class="tw-relative tw-h-48">
-                                        <img src="{{ Storage::url('thumb/' . $dt->image_url) }}"
+                                        <img src="{{ $dt->image_url == null ? asset('img/example-image.jpg') : Storage::url('thumb/' . $dt->image_url) }}"
                                             alt="{{ $dt->name }}" class="tw-w-full tw-h-full tw-object-cover">
 
                                         {{-- Status Badges --}}

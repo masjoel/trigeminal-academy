@@ -1,14 +1,22 @@
 <?php
 
-use App\Models\AdpddInduk;
 use App\Models\Desa;
 use GuzzleHttp\Client;
 use App\Models\Artikel;
+use App\Models\Halaman;
+use App\Models\AdpddInduk;
+use App\Models\LapakOrder;
 use App\Models\ProfilBisnis;
 use App\Models\AdsrtPermohonan;
-use App\Models\LapakOrder;
 use Illuminate\Support\Facades\DB;
 
+if (!function_exists('cekPage')) {
+  function cekPage($page)
+  {
+    $halaman = Halaman::where('jenis', 'page')->where('status', 'published')->where('idkategori', $page)->latest()->first();
+    return $halaman;
+  }
+}
 if (!function_exists('totalCart')) {
   function totalCart()
   {
