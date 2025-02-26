@@ -33,7 +33,7 @@ class StudentController extends Controller
             $query->where('name', 'like', '%' . $search . '%')
                 ->orWhere('description', 'like', '%' . $search . '%');
         })->paginate($limit);
-        $title = 'Student';
+        $title = 'Peserta';
         return view('backend.student.index', compact('title', 'student'));
     }
 
@@ -42,7 +42,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        $title = 'Student';
+        $title = 'Peserta';
         return view('backend.student.create', compact('title'));
     }
 
@@ -83,7 +83,7 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        $title = 'Student';
+        $title = 'Peserta';
         return view('backend.student.show', compact('title', 'student'));
     }
 
@@ -92,7 +92,7 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        $title = 'Student';
+        $title = 'Peserta';
         return view('backend.student.edit', compact('title', 'student'));
 
     }

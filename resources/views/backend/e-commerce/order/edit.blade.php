@@ -26,7 +26,7 @@
             <div class="section-body">
 
                 <div class="card">
-                    <form id="fileForm" action="{{ route('lapak-desa-order.update', $order) }}" method="POST"
+                    <form id="fileForm" action="{{ route('order.update', $order) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -43,9 +43,7 @@
                                             <option value="1" {{ $order->payment_status == '1' ? 'selected' : '' }}>
                                                 Pending</option>
                                             <option value="2" {{ $order->payment_status == '2' ? 'selected' : '' }}>
-                                                Diproses</option>
-                                            <option value="3" {{ $order->payment_status == '3' ? 'selected' : '' }}>
-                                                Dikirim</option>
+                                                Konfirmasi</option>
                                             <option value="4" {{ $order->payment_status == '4' ? 'selected' : '' }}>
                                                 Selesai</option>
                                             <option value="5" {{ $order->payment_status == '5' ? 'selected' : '' }}>
@@ -108,7 +106,7 @@
                                     <div class="form-group my-2">
                                         <label><b>Bukti Pembayaran</b></label>
                                         <div class="d-block text-left">
-                                            <img src="{{ $order->bukti_bayar == null ? asset('img/example-image.jpg') : Storage::url('thumb/' . $order->bukti_bayar) }}"
+                                            <img src="{{ $order->bukti_bayar == null ? asset('img/example-image.jpg') : Storage::url( $order->bukti_bayar) }}"
                                                 alt="" class="w-px-100 h-px-100 rounded" id="uploadedAvatar" />
                                             <div class="button-wrapper">
                                                 <label for="image-upload" class="btn btn-sm btn-info my-2" tabindex="0">
@@ -132,7 +130,7 @@
 
                         </div>
                         <div class="card-footer text-end">
-                            @if ($order->payment_status !== '4')
+                            @if ($order->payment_status == '1')
                                 <a href="#" class="me-2 btn btn-lg btn-danger" id="delete-data"
                                     data-id="{{ $order->id }}" title="Hapus"><i class="fa fa-trash-alt me-2"></i>
                                     Hapus</a>
@@ -172,8 +170,8 @@
         $(document).on("click", "a#delete-data", function(e) {
             e.preventDefault();
             let id = $(this).data('id');
-            showDeletePopup('{{ url('') }}/lapak-desa-order/' + id, '{{ csrf_token() }}',
-                '{{ url('') }}/lapak-desa-order');
+            showDeletePopup('{{ url('') }}/order/' + id, '{{ csrf_token() }}',
+                '{{ url('') }}/order');
         });
     </script>
 @endpush

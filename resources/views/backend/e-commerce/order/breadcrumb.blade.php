@@ -4,7 +4,7 @@
             <a href="{{ route('dashboard') }}">Dashboard</a>
         </li>
         <li class="breadcrumb-item">
-            <a href="{{ route('lapak-desa-order.index') }}">Orders</a>
+            <a href="{{ route('order.index') }}">Orders</a>
         </li>
         @if (Request::is('*create'))
             <li class="breadcrumb-item active">Add Order</li>

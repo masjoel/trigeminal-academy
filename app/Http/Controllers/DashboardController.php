@@ -39,10 +39,15 @@ class DashboardController extends Controller
         $courses = Product::with('productCategory', 'instruktur')->where('publish', '1')->limit(3)->latest()->get();
         $totalCourses = Product::where('publish', '1')->count();
         // $myCourses = Order::with('orderItems', 'orderItems.product')->where('customer_id', Auth::user()->id)->get();
-        $myCourses = OrderItem::with('product','order')->leftJoin('orders', 'orders.id', '=', 'order_items.order_id')->where('orders.customer_id', Auth::user()->id)->get();
+        $myCourses = OrderItem::with('product', 'order')->leftJoin('orders', 'orders.id', '=', 'order_items.order_id')->where('orders.customer_id', Auth::user()->id)->get();
+        // sum of total_price
+        $orderPending = Order::where('payment_status', '1')->count();
+        $orderOmzet = Order::where('payment_status', '4')->count();
+        $totalPending = Order::where('payment_status', '1')->sum('total_price');
+        $totalOmzet = Order::where('payment_status', '4')->sum('total_price');
         // dd($myCourses);
         $title = 'Dashboard';
         $halaman = Auth::user()->role == 'user' ? 'dashboard-student' : 'dashboard';
-        return view('backend.' . $halaman, compact('title', 'statistics', 'dataArtikel', 'courses', 'totalCourses', 'dataStudent', 'myCourses'));
+        return view('backend.' . $halaman, compact('title', 'statistics', 'dataArtikel', 'courses', 'totalCourses', 'dataStudent', 'myCourses', 'totalPending', 'totalOmzet', 'orderPending', 'orderOmzet'));
     }
 }

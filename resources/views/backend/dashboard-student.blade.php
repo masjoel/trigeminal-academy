@@ -155,9 +155,13 @@
                                                     <span class="badge bg-danger">Batal</span>
                                                 @endif
                                             </td>
-                                            <td><img src="{{ $item->bukti_bayar == null ? asset('img/example-image-50.jpg') : Storage::url($item->bukti_bayar) }}"
-                                                    class="img-fluid" alt="Bukti Transfer"></td>
-                                            {{-- <td>{{ number_format($item->product->price - ($item->product->price * $item->product->discount) / 100) }} --}}
+                                            <td>
+                                                @if ($item->bukti_bayar != null)
+                                                    <a href="#" id="show-image" data-id="{{ $item->id }}"
+                                                        data-image="{{ $item->bukti_bayar }}" target="_blank">
+                                                        <i class="fa fa-image text-secondary fa-2x"></i>
+                                                    </a>
+                                                @endif
                                             </td>
                                             <td>{{ $item->created_at->diffForHumans() }}
                                                 @if ($item->payment_status !== '4')
@@ -175,9 +179,35 @@
             </div>
         </section>
     </div>
+    <div class="modal fade" tabindex="-1" role="dialog" id="view-modal">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Bukti Pembayaran</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="tampil-image"></div>
+                </div>
+                <div class="modal-footer bg-whitesmoke br">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @push('scripts')
     <script src="{{ asset('library/select2/dist/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('v3/libs/apex-charts/apexcharts.js') }}"></script>
     <script src="{{ asset('v3/assets/js/app-academy-dashboard.js') }}"></script>
+    <script>
+        let asset = '{{ Storage::url('') }}';
+        $(document).on("click", "a#show-image", function(e) {
+            e.preventDefault();
+            let id = $(this).data('id');
+            let image = $(this).data('image');
+            $('#tampil-image').html('<img src="' + asset + image + '" class="img-fluid">');
+            $('#view-modal').modal('show');
+        });
+    </script>
 @endpush

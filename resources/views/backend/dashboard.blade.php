@@ -25,23 +25,57 @@
                                     <h4 class="mb-0">{{ number_format($statistics->total_pdd) }}</h4>
                                 </div>
                             </a>
-                            <p class="mb-1">Jumlah Student</p>
+                            <p class="mb-1">Jumlah Peserta</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-2">
-                    <div class="card card-border-shadow-success h-100">
+                    <div class="card card-border-shadow-info h-100">
                         <div class="card-body">
                             <a href="{{ route('course.index') }}">
                                 <div class="d-flex align-items-center mb-2">
                                     <div class="avatar me-4">
-                                        <span class="avatar-initial rounded bg-success"><i
+                                        <span class="avatar-initial rounded bg-info"><i
                                                 class="ti ti-book ti-28px text-white"></i></span>
                                     </div>
                                     <h4 class="mb-0">{{ number_format($totalCourses) }}</h4>
                                 </div>
                             </a>
                             <p class="mb-1">Jumlah Kelas</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-2">
+                    <div class="card card-border-shadow-danger h-100">
+                        <div class="card-body">
+                            <a href="{{ route('order.index') }}">
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="avatar me-4">
+                                        <span class="avatar-initial rounded bg-danger">
+                                            <i class="ti-26px ti ti-calendar-stats text-white"></i>
+                                        </span>
+                                    </div>
+                                    <h5 class="mb-0 me-4">Rp. {{ number_format($totalPending) }}</h5>
+                                </div>
+                            </a>
+                            <p class="mb-1">Pending Order : {{ number_format($orderPending) }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-2">
+                    <div class="card card-border-shadow-success h-100">
+                        <div class="card-body">
+                            <a href="{{ route('order.index') }}">
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="avatar me-4">
+                                        <span class="avatar-initial rounded bg-success">
+                                            <i class="ti-26px ti ti-wallet text-white"></i>
+                                        </span>
+                                    </div>
+                                    <h5 class="mb-0 me-4">Rp. {{ number_format($totalOmzet) }}</h5>
+                                </div>
+                            </a>
+                            <p class="mb-1">Selesai : {{ number_format($orderOmzet) }}</p>
                         </div>
                     </div>
                 </div>
@@ -63,7 +97,8 @@
                                     <div class="rounded-2 text-center mb-4">
                                         <a href="{{ route('course.show', $item->id) }}">
                                             @if ($item->image_url !== null)
-                                                <img class="img-fluid" src="{{ Storage::url('thumb/' . $item->image_url) }}"
+                                                <img class="img-fluid"
+                                                    src="{{ Storage::url('thumb/' . $item->image_url) }}"
                                                     alt="{{ $item->name }}">
                                             @else
                                                 <img class="img-fluid" src="{{ asset('img/example-image-50.jpg') }}"

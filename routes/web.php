@@ -80,6 +80,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('course', ProductController::class);
     Route::resource('kategori-kursus', ProductCategoryController::class);
     Route::resource('instruktur', InstructorController::class);
+    Route::resource('order', OrderController::class);
 });
 
 Route::get('/example-product-detail', [HomeController::class, 'exampleProductDetail'])->name('example-product-detail');

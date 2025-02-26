@@ -29,7 +29,7 @@
                                     <div
                                         class="d-flex justify-content-between align-items-start card-widget-1 border-end pb-4 pb-sm-0">
                                         <div>
-                                            <h5 class="mb-0">Rp. {{ number_format($tot_pending) }}</h5>
+                                            <h5 class="mb-0">Rp. {{ number_format($totalPending) }}</h5>
                                             <p class="mb-0">Pending</p>
                                         </div>
                                         <span class="avatar me-sm-6">
@@ -41,27 +41,13 @@
                                     <hr class="d-none d-sm-block d-lg-none me-6" />
                                 </div>
 
-                                <div class="col-sm-6 col-lg-3">
-                                    <div
-                                        class="d-flex justify-content-between align-items-start card-widget-2 border-end pb-4 pb-sm-0">
-                                        <div>
-                                            <h5 class="mb-0">Rp. {{ number_format($tot_batal) }}</h5>
-                                            <p class="mb-0">Batal</p>
-                                        </div>
 
-                                        <span class="avatar p-2 me-lg-6">
-                                            <span class="avatar-initial bg-label-secondary rounded"><i
-                                                    class="ti-26px ti ti-alert-octagon text-danger"></i></span>
-                                        </span>
-                                    </div>
-                                    <hr class="d-none d-sm-block d-lg-none" />
-                                </div>
                                 <div class="col-sm-6 col-lg-3">
                                     <div
                                         class="d-flex justify-content-between align-items-start border-end pb-4 pb-sm-0 card-widget-3">
                                         <div>
-                                            <h5 class="mb-0">Rp. {{ number_format($tot_finish) }}</h5>
-                                            <p class="mb-0">Selesai</p>
+                                            <h5 class="mb-0">Rp. {{ number_format($totalKonfirm) }}</h5>
+                                            <p class="mb-0">Konfirm</p>
                                         </div>
 
                                         <span class="avatar p-2 me-sm-6">
@@ -71,14 +57,28 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-lg-3">
-                                    <div class="d-flex justify-content-between align-items-start">
+                                    <div
+                                        class="d-flex justify-content-between align-items-start border-end pb-4 pb-sm-0 card-widget-3">
                                         <div>
-                                            <h5 class="mb-0">Rp. {{ number_format($tot_pending + $tot_finish) }}</h5>
-                                            <p class="mb-0">Omzet</p>
+                                            <h5 class="mb-0">Rp. {{ number_format($totalFinish) }}</h5>
+                                            <p class="mb-0">Selesai</p>
                                         </div>
-                                        <span class="avatar p-2">
+                                        <span class="avatar p-2 me-lg-6">
                                             <span class="avatar-initial bg-label-secondary rounded bg-success"><i
                                                     class="ti-26px ti ti-wallet text-white"></i></span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-lg-3">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <h5 class="mb-0">Rp. {{ number_format($totalBatal) }}</h5>
+                                            <p class="mb-0">Batal</p>
+                                        </div>
+
+                                        <span class="avatar p-2">
+                                            <span class="avatar-initial bg-label-secondary rounded"><i
+                                                    class="ti-26px ti ti-alert-octagon text-danger"></i></span>
                                         </span>
                                     </div>
                                 </div>
@@ -86,44 +86,6 @@
                         </div>
                     </div>
                 </div>
-                {{-- <div class="row">
-                    <div class="col-md-6 col-lg-3">
-                        <div class="alert alert-solid-info d-flex align-items-center" role="alert">
-                            <span class="alert-icon rounded">
-                                <i class="ti ti-shopping-cart"></i>
-                            </span>
-                            Rp. {{ number_format($tot_pending) }}
-                            <br>Pesanan Baru
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="alert alert-solid-secondary d-flex align-items-center" role="alert">
-                            <span class="alert-icon rounded">
-                                <i class="ti ti-shopping-cart"></i>
-                            </span>
-                            Rp. {{ number_format($tot_batal) }}
-                            <br>Pesanan Batal
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="alert alert-solid-success d-flex align-items-center" role="alert">
-                            <span class="alert-icon rounded">
-                                <i class="ti ti-shopping-cart"></i>
-                            </span>
-                            Rp. {{ number_format($tot_finish) }}
-                            <br>Pesanan Selesai
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="alert alert-solid-primary d-flex align-items-center" role="alert">
-                            <span class="alert-icon rounded">
-                                <i class="ti ti-shopping-cart"></i>
-                            </span>
-                            Rp. {{ number_format($tot_pending + $tot_finish) }}
-                            <br>OMZET
-                        </div>
-                    </div>
-                </div> --}}
 
                 <div class="row mt-4">
                     <div class="col-12">
@@ -146,13 +108,13 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Tanggal</th>
-                                            <th>Invoice</th>
-                                            <th>Pelanggan</th>
+                                            <th>Kelas</th>
+                                            <th>Peserta</th>
                                             <th>No. HP</th>
                                             <th class="text-right">Total</th>
                                             <th class="text-nowrap">Bukti bayar</th>
                                             <th>Proses</th>
-                                            @can(['lapak-desa-order.edit', 'lapak-desa-order.delete'])
+                                            @can(['orders.edit', 'orders.delete'])
                                                 <th class="text-center" width="120">Action</th>
                                             @endcan
                                         </tr>
@@ -161,9 +123,9 @@
                                             <tr>
                                                 <td width="50">{{ $i++ }}</td>
                                                 <td class="text-nowrap">{{ $item->created_at->format('d-m-Y H:i') }}</td>
-                                                <td>{{ $item->number }}</td>
-                                                <td>{{ $item->customer->nama }}</td>
-                                                <td class="text-nowrap">{{ $item->customer->telpon }}
+                                                <td>{{ $item->orderItems->first()->product->name }}</td>
+                                                <td>{{ $item->customer->name }}</td>
+                                                <td class="text-nowrap">{{ $item->customer->phone }}
                                                     @if (Str::length($item->customer->telpon) > 10 && Str::length($item->customer->telpon) < 13)
                                                         <a href="http://wa.me/62{{ $item->customer->telpon }}"
                                                             class="ml-2 btn btn-sm btn-success text-white"
@@ -188,7 +150,7 @@
                                                         @break
 
                                                         @case(2)
-                                                            <span class="badge bg-info">diproses</span>
+                                                            <span class="badge bg-info">konfirmasi</span>
                                                         @break
 
                                                         @case(3)
@@ -206,17 +168,17 @@
                                                         @default
                                                     @endswitch
                                                 </td>
-                                                @can(['lapak-desa-order.edit', 'lapak-desa-order.delete'])
+                                                @can(['orders.edit', 'orders.delete'])
                                                     <td>
                                                         <div class="d-flex justify-content-center">
-                                                            @can('lapak-desa-order.edit')
-                                                                <a href="{{ route('lapak-desa-order.edit', $item->id) }}"
+                                                            @can('orders.edit')
+                                                                <a href="{{ route('order.edit', $item->id) }}"
                                                                     class="btn btn-sm btn-info waves-effect waves-light mx-1"
                                                                     id="edit-data" title="Detil Order"><i
                                                                         class="fas fa-edit me-2"></i>
                                                                     Detil</a>
                                                             @endcan
-                                                            @can('lapak-desa-order.delete')
+                                                            @can('orders.delete')
                                                                 <a href="#" class="ml-2 btn btn-sm btn-danger"
                                                                     id="delete-data" data-id="{{ $item->id }}" title="Hapus"
                                                                     data-toggle="tooltip"><i class="fa fa-trash-alt"></i></a>
@@ -271,8 +233,8 @@
         $(document).on("click", "a#delete-data", function(e) {
             e.preventDefault();
             let id = $(this).data('id');
-            showDeletePopup('{{ url('') }}/lapak-desa-order/' + id, '{{ csrf_token() }}', '', '',
-                '{{ url('') }}/lapak-desa-order');
+            showDeletePopup('{{ url('') }}/order/' + id, '{{ csrf_token() }}', '', '',
+                '{{ url('') }}/order');
         });
     </script>
 @endpush

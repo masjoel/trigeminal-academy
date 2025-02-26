@@ -7,7 +7,7 @@
 @can('student')
     <li class="menu-item {{ Request::is('student*') ? 'active' : '' }}">
         <a href="{{ route('student.index') }}" class="menu-link "><i class="menu-icon ti ti-users"></i>
-            <div>Student</div>
+            <div>Peserta</div>
         </a>
     </li>
 @endcan
@@ -76,40 +76,16 @@
     </li>
 @endif
 
-{{-- @if (Str::contains(Auth::user()->getPermissionNames(), 'admin-struktur') || Str::contains(Auth::user()->getPermissionNames(), 'admin-pengurus'))
-    <li class="menu-item {{ Request::is('admin-struktur*', 'admin-pengurus*', 'admin-lembaga*','absensi/admin-pengurus*') ? 'active open' : '' }}">
-        <a href="#" class="menu-link menu-toggle"><i class="menu-icon ti ti-building"></i><div>Pengurus</div></a>
-        <ul class="menu-sub">
-            @can('admin-struktur-organisasi')
-                <li class="menu-item {{ Request::is('admin-struktur-organisasi*') ? 'active' : '' }}">
-                    <a href="{{ route('admin-struktur-organisasi.index') }}" class="menu-link "><div>Struktur
-                            Organisasi</div></a>
-                </li>
-            @endcan
-            @can('admin-pengurus')
-                <li class="menu-item {{ Request::is('admin-pengurus*','absensi/admin-pengurus*') ? 'active' : '' }}">
-                    <a href="{{ route('admin-pengurus.index') }}" class="menu-link "><div>Anggota Pengurus</div></a>
-                </li>
-            @endcan
-        </ul>
-    </li>
-@endif --}}
-{{-- @if (Str::contains(Auth::user()->getPermissionNames(), 'lapak-desa')) --}}
-<li class="menu-item {{ Request::is('course*', 'kategori-kursus*') ? 'active open' : '' }}">
+@if (Str::contains(Auth::user()->getPermissionNames(), 'course') || Str::contains(Auth::user()->getPermissionNames(), 'kategori-kursus') || Str::contains(Auth::user()->getPermissionNames(), 'orders'))
+<li class="menu-item {{ Request::is('course*', 'kategori-kursus*', 'order*') ? 'active open' : '' }}">
     <a href="#" class="menu-link menu-toggle"><i class="menu-icon ti ti-shopping-cart"></i>
-        <div>Order</div>
+        <div>e-Commerce</div>
     </a>
     <ul class="menu-sub">
-        {{-- <li class="menu-item {{ Request::is('lapak-desa-dashboard') ? 'active' : '' }}"> --}}
-        <li class="menu-item">
-            <a href="#" class="menu-link ">
-                <div>Monitoring</div>
-            </a>
-        </li>
         @can('course')
             <li class="menu-item {{ Request::is('course*') ? 'active' : '' }}">
                 <a href="{{ route('course.index') }}" class="menu-link ">
-                    <div>Course</div>
+                    <div>Kelas</div>
                 </a>
             </li>
         @endcan
@@ -120,13 +96,14 @@
                 </a>
             </li>
         @endcan
-        {{-- @can('lapak-desa-order') --}}
-        <li class="menu-item">
-            <a href="#" class="menu-link ">
+        @can('orders')
+        <li class="menu-item {{ Request::is('order*') ? 'active' : '' }}">
+            <a href="{{ route('order.index') }}" class="menu-link ">
                 <div>Order</div>
             </a>
         </li>
-        {{-- @endcan
+        @endcan
+        {{-- 
             @can('lapak-desa-report') --}}
         {{-- <li class="menu-item">
                     <a href="#" class="menu-link "><div>Report</div></a>
@@ -134,7 +111,7 @@
         {{-- @endcan --}}
     </ul>
 </li>
-{{-- @endif --}}
+@endif
 
 
 @can('slide-banner')

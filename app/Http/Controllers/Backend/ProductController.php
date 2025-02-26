@@ -40,7 +40,7 @@ class ProductController extends Controller
         $products = $qry->when($request->input('search'), function ($query, $search) {
             $query->where('name', 'like', '%' . $search . '%');
         })->paginate($limit);
-        $title = 'Course';
+        $title = 'Kelas';
         return view('backend.e-commerce.product.index', compact('products', 'nomor', 'title'));
     }
 
@@ -51,7 +51,7 @@ class ProductController extends Controller
     {
         $category = ProductCategory::orderBy('name', 'asc')->get();
         $instruktur = Instructor::orderBy('nama', 'asc')->get();
-        $title = 'Course';
+        $title = 'Kelas';
         return view('backend.e-commerce.product.create', compact('category', 'instruktur', 'title'));
     }
 
@@ -150,7 +150,7 @@ class ProductController extends Controller
      */
     public function show(Product $course)
     {
-        $title = 'Course';
+        $title = 'Kelas';
         if (Auth::user()->role == 'user') {
             $totStudent = Order::where('customer_id', $course->id)->count();
             $myCourses = OrderItem::with('product', 'order')->leftJoin('orders', 'orders.id', '=', 'order_items.order_id')->where('order_items.product_id', $course->id)->where('orders.customer_id', Auth::user()->id)->first();
@@ -167,7 +167,7 @@ class ProductController extends Controller
      */
     public function edit(Product $course)
     {
-        $title = 'Course';
+        $title = 'Kelas';
         $category = ProductCategory::orderBy('name', 'asc')->get();
         $instruktur = Instructor::orderBy('nama', 'asc')->get();
         return view('backend.e-commerce.product.edit', compact('category', 'instruktur', 'title', 'course'));
