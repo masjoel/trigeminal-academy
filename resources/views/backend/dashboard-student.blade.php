@@ -119,6 +119,7 @@
                                         <th>Harga</th>
                                         <th>Disc.</th>
                                         <th>Status</th>
+                                        <th>Bukti Transfer</th>
                                         <th>Join at</th>
                                     </tr>
                                 </thead>
@@ -146,12 +147,16 @@
                                             <td>
                                                 @if ($item->payment_status == '1')
                                                     <span class="badge bg-warning">Pending</span>
+                                                @elseif($item->payment_status == '2')
+                                                    <span class="badge bg-info">Konfirmasi</span>
                                                 @elseif($item->payment_status == '4')
                                                     <span class="badge bg-success">Success</span>
                                                 @else
                                                     <span class="badge bg-danger">Batal</span>
                                                 @endif
                                             </td>
+                                            <td><img src="{{ $item->bukti_bayar == null ? asset('img/example-image-50.jpg') : Storage::url($item->bukti_bayar) }}"
+                                                    class="img-fluid" alt="Bukti Transfer"></td>
                                             {{-- <td>{{ number_format($item->product->price - ($item->product->price * $item->product->discount) / 100) }} --}}
                                             </td>
                                             <td>{{ $item->created_at->diffForHumans() }}

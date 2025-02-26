@@ -145,7 +145,7 @@
                                                     </div>
                                                 @enderror
                                             </div>
-                                            @if ($user)
+                                            @if (auth()->user()->roles == 'user')
                                                 <div class="form-group mb-4">
                                                     <label>Alamat</label>
                                                     <textarea name="alamat" class="form-control" data-height="40">{{ old('alamat', $user->alamat) }}</textarea>
@@ -154,6 +154,9 @@
                                                     <label>Catatan</label>
                                                     <textarea name="keterangan" class="form-control" data-height="60">{{ old('keterangan', $user->keterangan) }}</textarea>
                                                 </div>
+                                            @else
+                                                <input type="hidden" name="alamat" value="address">
+                                                <input type="hidden" name="keterangan" value="keterangan">
                                             @endif
                                         </div>
                                         <div class="col-md-6 col-12">

@@ -16,13 +16,15 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-2">
                     <div class="card card-border-shadow-primary h-100">
                         <div class="card-body">
-                            <div class="d-flex align-items-center mb-2">
-                                <div class="avatar me-4">
-                                    <span class="avatar-initial rounded bg-primary"><i
-                                            class="ti ti-users ti-28px text-white"></i></span>
+                            <a href="{{ route('student.index') }}">
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="avatar me-4">
+                                        <span class="avatar-initial rounded bg-primary"><i
+                                                class="ti ti-users ti-28px text-white"></i></span>
+                                    </div>
+                                    <h4 class="mb-0">{{ number_format($statistics->total_pdd) }}</h4>
                                 </div>
-                                <h4 class="mb-0">{{ number_format($statistics->total_pdd) }}</h4>
-                            </div>
+                            </a>
                             <p class="mb-1">Jumlah Student</p>
                         </div>
                     </div>
@@ -30,14 +32,16 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-2">
                     <div class="card card-border-shadow-success h-100">
                         <div class="card-body">
-                            <div class="d-flex align-items-center mb-2">
-                                <div class="avatar me-4">
-                                    <span class="avatar-initial rounded bg-success"><i
-                                            class="ti ti-book ti-28px text-white"></i></span>
+                            <a href="{{ route('course.index') }}">
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="avatar me-4">
+                                        <span class="avatar-initial rounded bg-success"><i
+                                                class="ti ti-book ti-28px text-white"></i></span>
+                                    </div>
+                                    <h4 class="mb-0">{{ number_format($totalCourses) }}</h4>
                                 </div>
-                                <h4 class="mb-0">{{ number_format($totalCourses) }}</h4>
-                            </div>
-                            <p class="mb-1">Jumlah Materi</p>
+                            </a>
+                            <p class="mb-1">Jumlah Kelas</p>
                         </div>
                     </div>
                 </div>
@@ -45,11 +49,11 @@
             <div class="card mb-6">
                 <div class="card-header d-flex flex-wrap justify-content-between gap-4">
                     <div class="card-title mb-0 me-1">
-                        <h5 class="mb-0">Materi terbaru</h5>
+                        <h5 class="mb-0">Kelas terbaru</h5>
                     </div>
                     <div class="form-check form-switch my-2 ms-2">
                         <a href="{{ route('course.index') }}">view all</a>
-                      </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="row gy-6 mb-6">
@@ -69,7 +73,8 @@
                                     </div>
                                     <div class="card-body p-4 pt-2">
                                         <div class="d-flex justify-content-between align-items-center mb-4">
-                                            <span class="badge bg-label-{{ $item->productCategory->warna }}">{{ $item->productCategory->name }}</span>
+                                            <span
+                                                class="badge bg-label-{{ $item->productCategory->warna }}">{{ $item->productCategory->name }}</span>
                                             <p
                                                 class="d-flex align-items-center justify-content-center fw-medium gap-1 mb-0">
                                                 <span class="text-warning">
@@ -96,7 +101,7 @@
                                         <p class="d-flex align-items-center mb-1">
                                             Level : <span class="ms-2">{{ ucwords($item->level) }}</span>
                                         </p>
-                                    <p class="d-flex align-items-center mb-1">
+                                        <p class="d-flex align-items-center mb-1">
                                             <i class="ti ti-clock me-1"></i>{{ $item->video_duration }} menit
                                         </p>
                                         {{-- <div class="progress rounded-pill mb-4" style="height: 8px">

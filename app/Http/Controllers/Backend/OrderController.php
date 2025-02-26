@@ -8,6 +8,7 @@ use App\Models\ImageResize;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class OrderController extends Controller
 {
@@ -75,6 +76,8 @@ class OrderController extends Controller
     public function konfirmasiPembayaranSuccess(Request $request)
     {
         DB::beginTransaction();
+        $order = Order::find($request->order_id);
+        $oldImage = $order->bukti_bayar;
         $imagePath = null;
         if ($request->hasFile('bukti_bayar')) {
             $photo = $request->file('bukti_bayar');
@@ -91,11 +94,13 @@ class OrderController extends Controller
                     ImageResize::createThumbnail($smallthumbnailpath, 400, 400);
                 }
             }
+            if ($oldImage) {
+                Storage::disk('public')->delete($oldImage);
+            }
+            $validate['bukti_bayar'] = $imagePath;
+            $validate['payment_status'] = 2;
+            $order->update($validate);
         }
-        $validate['bukti_bayar'] = $imagePath;
-        $validate['payment_status'] = 4;
-        $order = Order::find($request->order_id);
-        $order->update($validate);
         DB::commit();
         return redirect(route('dashboard'))->with('success', 'Konfirmasi pembayaran berhasil disimpan');
     }

@@ -55,13 +55,13 @@
                                                                 tabindex="0">
                                                                 <span class="d-none d-sm-block">Upload Bukti transfer</span>
                                                                 <i class="ti ti-upload d-block d-sm-none"></i>
-                                                                <input type="file" name="photo" id="image-upload"
-                                                                    class="account-file-input @error('photo') is-invalid @enderror"
+                                                                <input type="file" name="bukti_bayar" id="image-upload"
+                                                                    class="account-file-input @error('bukti_bayar') is-invalid @enderror"
                                                                     hidden />
                                                             </label>
                                                             <div class="account-image-reset d-none"></div>
                                                         </div>
-                                                        @error('photo')
+                                                        @error('bukti_bayar')
                                                             <div class="invalid-feedback">
                                                                 {{ $message }}
                                                             </div>
