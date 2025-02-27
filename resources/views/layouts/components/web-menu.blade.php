@@ -76,41 +76,45 @@
     </li>
 @endif
 
-@if (Str::contains(Auth::user()->getPermissionNames(), 'course') || Str::contains(Auth::user()->getPermissionNames(), 'kategori-kursus') || Str::contains(Auth::user()->getPermissionNames(), 'orders'))
-<li class="menu-item {{ Request::is('course*', 'kategori-kursus*', 'order*') ? 'active open' : '' }}">
-    <a href="#" class="menu-link menu-toggle"><i class="menu-icon ti ti-shopping-cart"></i>
-        <div>e-Commerce</div>
-    </a>
-    <ul class="menu-sub">
-        @can('course')
-            <li class="menu-item {{ Request::is('course*') ? 'active' : '' }}">
-                <a href="{{ route('course.index') }}" class="menu-link ">
-                    <div>Kelas</div>
-                </a>
-            </li>
-        @endcan
-        @can('kategori-kursus')
-            <li class="menu-item {{ Request::is('kategori-kursus*') ? 'active' : '' }}">
-                <a href="{{ route('kategori-kursus.index') }}" class="menu-link ">
-                    <div>Kategori </div>
-                </a>
-            </li>
-        @endcan
-        @can('orders')
-        <li class="menu-item {{ Request::is('order*') ? 'active' : '' }}">
-            <a href="{{ route('order.index') }}" class="menu-link ">
-                <div>Order</div>
-            </a>
-        </li>
-        @endcan
-        {{-- 
+@if (Str::contains(Auth::user()->getPermissionNames(), 'course') ||
+        Str::contains(Auth::user()->getPermissionNames(), 'kategori-kursus') ||
+        Str::contains(Auth::user()->getPermissionNames(), 'orders') ||
+        Str::contains(Auth::user()->getPermissionNames(), 'lihat-peserta'))
+    <li
+        class="menu-item {{ Request::is('course*', 'kategori-kursus*', 'order*', 'lihat-peserta*') ? 'active open' : '' }}">
+        <a href="#" class="menu-link menu-toggle"><i class="menu-icon ti ti-shopping-cart"></i>
+            <div>e-Commerce</div>
+        </a>
+        <ul class="menu-sub">
+            @can('course')
+                <li class="menu-item {{ Request::is('course*', 'lihat-peserta*') ? 'active' : '' }}">
+                    <a href="{{ route('course.index') }}" class="menu-link ">
+                        <div>Kelas</div>
+                    </a>
+                </li>
+            @endcan
+            @can('kategori-kursus')
+                <li class="menu-item {{ Request::is('kategori-kursus*') ? 'active' : '' }}">
+                    <a href="{{ route('kategori-kursus.index') }}" class="menu-link ">
+                        <div>Kategori </div>
+                    </a>
+                </li>
+            @endcan
+            @can('orders')
+                <li class="menu-item {{ Request::is('order*') ? 'active' : '' }}">
+                    <a href="{{ route('order.index') }}" class="menu-link ">
+                        <div>Order</div>
+                    </a>
+                </li>
+            @endcan
+            {{-- 
             @can('lapak-desa-report') --}}
-        {{-- <li class="menu-item">
+            {{-- <li class="menu-item">
                     <a href="#" class="menu-link "><div>Report</div></a>
                 </li> --}}
-        {{-- @endcan --}}
-    </ul>
-</li>
+            {{-- @endcan --}}
+        </ul>
+    </li>
 @endif
 
 

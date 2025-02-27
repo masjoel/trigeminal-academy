@@ -91,7 +91,7 @@ class HomeController extends Controller
             ->latest()->limit(9)->get();
 
         $title = klien('nama_client') == null ? 'LMS' : klien('nama_client');
-        $courses = Product::with('productCategory', 'instruktur', 'orderitems')->where('publish', '1')->limit(3)->latest()->get();
+        $courses = Product::with('productCategory', 'instruktur', 'orderitems')->where('publish', '1')->limit(4)->latest()->get();
 
         return view('frontend.beranda', compact('title', 'profil_usaha', 'artikel', 'banner', 'halaman', 'sid', 'tentang_kami', 'kontak_kami', 'feature', 'berita', 'berita2', 'berita3', 'pengumuman', 'pengumuman3', 'top_stories', 'video', 'agenda', 'agenda3', 'galeries', 'perangkatdesa', 'foto', 'courses', 'section1', 'faq'));
     }

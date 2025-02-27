@@ -466,5 +466,11 @@
     "guard_name": "web",
     "created_at": "2024-07-16 21:12:23",
     "updated_at": "2024-07-16 21:12:23"
+  },
+  {
+    "name": "lihat-peserta",
+    "guard_name": "web",
+    "created_at": "2024-07-16 21:12:11",
+    "updated_at": "2024-07-16 21:12:11"
   }
 ]

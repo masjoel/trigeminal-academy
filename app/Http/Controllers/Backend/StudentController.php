@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\User;
 use Ramsey\Uuid\Uuid;
+use App\Models\Product;
 use App\Models\Student;
 use App\Models\ImageResize;
 use Illuminate\Http\Request;
+use App\Exports\PesertaExport;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreInstructorReq;
 
@@ -155,6 +159,10 @@ class StudentController extends Controller
             'status' => 'success',
             'message' => 'Succesfully Deleted Data'
         ]);
+    }
+    public function exportCustomer($product_id)
+    {
+        return Excel::download(new PesertaExport($product_id), 'peserta_'.$product_id.'.csv');
     }
 
 }

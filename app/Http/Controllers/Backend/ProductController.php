@@ -36,7 +36,12 @@ class ProductController extends Controller
         $page = $request->input('page', 1);
         $limit = $request->input('limit', 12);
         $nomor = ($page - 1) * $limit + 1;
-        $qry = Product::with('productCategory', 'instruktur')->orderBy('id', 'desc');
+        $qry = Product::with('productCategory', 'instruktur')
+            ->withCount(['orderitems as jumlahpeserta' => function ($query) {
+                $query->select(DB::raw('COALESCE(SUM(quantity), 0)'));
+            }])
+            ->orderBy('id', 'desc');
+
         $products = $qry->when($request->input('search'), function ($query, $search) {
             $query->where('name', 'like', '%' . $search . '%');
         })->paginate($limit);
@@ -160,6 +165,16 @@ class ProductController extends Controller
         }
         $totStudent = Order::where('customer_id', $course->id)->count();
         return view('backend.e-commerce.product.show', compact('title', 'course', 'totStudent'));
+    }
+    public function lihatPeserta($product_id, Request $request)
+    {
+        $title = 'Kelas';
+        $page = $request->input('page', 1);
+        $limit = $request->input('limit', 12);
+        $nomor = ($page - 1) * $limit + 1;        
+        $course = Product::where('id', $product_id)->first();
+        $peserta = OrderItem::with('order', 'order.customer')->where('product_id', $product_id)->get();
+        return view('backend.e-commerce.product.peserta', compact('title', 'course', 'peserta', 'nomor'));
     }
 
     /**

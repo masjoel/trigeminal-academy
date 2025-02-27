@@ -176,7 +176,7 @@
                         @foreach($courses as $dt)
                             <div class="tw-bg-white tw-rounded-xl tw-shadow-lg tw-overflow-hidden">
                                 <div class="tw-h-48">
-                                    <img src="{{ Storage::url('thumb/'.$dt->image_url) }}"
+                                    <img src="{{ $dt->image_url == null ? asset('img/example-image.jpg') : Storage::url('thumb/'.$dt->image_url) }}"
                                                 alt="{{ $dt->name }}"
                                                 class="tw-w-full tw-h-full tw-object-cover">
                                 </div>

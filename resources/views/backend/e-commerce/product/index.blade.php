@@ -57,6 +57,7 @@
                                             <th class="text-right" scope="col">Harga</th>
                                             <th class="text-right" scope="col">Disc.</th>
                                             <th scope="col">Instruktur</th>
+                                            <th scope="col">Peserta</th>
                                             <th scope="col">Kategori</th>
                                             <th scope="col">Level</th>
                                             <th scope="col">Status</th>
@@ -80,17 +81,28 @@
                                                 </td>
                                                 <td>{{ $item->name }}</td>
                                                 <td class="text-right" width="100">{{ number_format($item->price) }}</td>
-                                                <td class="text-right" width="100">{{ number_format($item->discount) }}%</td>
+                                                <td class="text-right" width="100">{{ number_format($item->discount) }}%
+                                                </td>
                                                 <td>{{ $item->instruktur == null ? '' : $item->instruktur->nama }}</td>
+                                                <td class="text-end text-nowrap">{{ $item->jumlahpeserta }}
+                                                    @if ($item->jumlahpeserta > 0)
+                                                        <a href="{{ route('lihat-peserta', $item->id) }}" class="ms-2" title="Lihat data Peserta"><i class="fas fa-eye text-warning"></i></a>
+                                                        <a href="#" id="export-peserta" data-id="{{ $item->id }}" class="ms-2" title="Download email Peserta"><i class="fas fa-download text-success"></i></a>
+                                                    @endif
+                                                </td>
                                                 <td>{{ $item->productCategory->name }}</td>
                                                 <td>{{ ucwords($item->level) }}</td>
                                                 <td class="text-center" width="120"><span
-                                                    class="badge bg-{{ $item->publish == 0 ? 'secondary' : 'primary' }}">{{ $item->publish == 0 ? 'Draft' : 'Published' }}</span>
+                                                        class="badge bg-{{ $item->publish == 0 ? 'secondary' : 'primary' }}">{{ $item->publish == 0 ? 'Draft' : 'Published' }}</span>
                                                 </td>
                                                 @can(['course.edit', 'course.delete'])
                                                     <td>
                                                         <div class="d-flex justify-content-center">
                                                             @can('course.edit')
+                                                                <a href="{{ route('course.show', $item->id) }}"
+                                                                    class="btn btn-sm btn-warning waves-effect waves-light mx-1"
+                                                                    id="detil-data" title="Detil"><i class="fas fa-eye me-2"></i>
+                                                                    Detil</a>
                                                                 <a href="{{ route('course.edit', $item->id) }}"
                                                                     class="btn btn-sm btn-info waves-effect waves-light mx-1"
                                                                     id="edit-data" title="Edit"><i class="fas fa-edit me-2"></i>
@@ -128,5 +140,11 @@
             showDeletePopup(BASE_URL + '/course/' + id, '{{ csrf_token() }}',
                 BASE_URL + '/course');
         });
+        // buatkan fungsi untuk export data peserta
+        $(document).on("click", "a#export-peserta", function(e) {
+            e.preventDefault();
+            let id = $(this).data('id');
+            window.open(BASE_URL + '/export-peserta/' + id, '_blank');
+        })
     </script>
 @endpush
