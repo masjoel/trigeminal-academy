@@ -139,6 +139,7 @@ class OrderController extends Controller
                 $product->save();
             }
         }
+        $item->delete();
         $order->delete();
         DB::commit();
         return response()->json([
