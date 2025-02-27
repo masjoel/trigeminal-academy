@@ -139,7 +139,7 @@ class OrderController extends Controller
                 $product->save();
             }
         }
-        $item->delete();
+        OrderItem::where('order_id', $order->id)->delete();
         $order->delete();
         DB::commit();
         return response()->json([
