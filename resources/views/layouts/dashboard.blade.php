@@ -47,7 +47,7 @@
             left: 0 !important;
             width: 100% !important;
             height: 100vh !important;
-            z-index: 9999 !important;
+            z-index: 9990 !important;
         }
 
         .note-editor.note-frame.fullscreen .note-editable,
