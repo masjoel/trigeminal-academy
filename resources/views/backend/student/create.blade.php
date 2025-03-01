@@ -3,7 +3,7 @@
 @section('title', $title)
 
 @push('style')
-    <link rel="stylesheet" href="{{ asset('library/summernote/dist/summernote-bs5.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/summernote/dist/summernote-lite.min.css') }}">
     <link rel="stylesheet" href="{{ asset('v3/libs/select2/select2.css') }}" />
     <link rel="stylesheet" href="{{ asset('v3/libs/bootstrap-select/bootstrap-select.css') }}" />
 @endpush
@@ -49,7 +49,8 @@
                                             </div>
                                             <div class="form-group mb-4">
                                                 <label>Email</label>
-                                                <input type="text" class="form-control" name="email" value="{{ old('email') }}">
+                                                <input type="text" class="form-control" name="email"
+                                                    value="{{ old('email') }}">
                                             </div>
                                             <div class="form-group mb-4">
                                                 <label>Alamat</label>
@@ -112,7 +113,7 @@
 
 @push('scripts')
     <script src="{{ asset('v3/assets/js/pages-account-settings-account.js') }}"></script>
-    <script src="{{ asset('library/summernote/dist/summernote-bs5.min.js') }}"></script>
+    <script src="{{ asset('library/summernote/dist/summernote-lite.min.js') }}"></script>
     <script src="{{ asset('js/scripts.js') }}"></script>
     <script src="{{ asset('v3/libs/select2/select2.js') }}"></script>
     <script>

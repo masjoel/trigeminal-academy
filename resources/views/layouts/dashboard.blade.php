@@ -56,6 +56,13 @@
             background-color: #f5f5f5 !important; /* Ganti dengan warna yang diinginkan */
             color: #161414 !important; /* Warna teks agar kontras */
         }
+        .note-modal.open {
+            top: 60px !important;
+            z-index: 9991 !important;
+        }
+        .note-modal-footer {
+            height: 60px !important;
+        }
     </style>
 </head>
 

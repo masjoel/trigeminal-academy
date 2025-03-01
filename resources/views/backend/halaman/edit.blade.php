@@ -3,7 +3,7 @@
 @section('title', $title)
 
 @push('style')
-    <link rel="stylesheet" href="{{ asset('library/summernote/dist/summernote-bs5.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/summernote/dist/summernote-lite.min.css') }}">
     <link rel="stylesheet" href="{{ asset('v3/libs/select2/select2.css') }}" />
     <link rel="stylesheet" href="{{ asset('v3/libs/bootstrap-select/bootstrap-select.css') }}" />
 @endpush
@@ -49,7 +49,8 @@
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Category</label>
+                                        <label
+                                            class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Category</label>
                                         <div class="col-sm-12 col-md-7">
                                             <select class="form-control select2" name="idkategori">
                                                 @foreach ($kategori as $key => $value)
@@ -70,7 +71,8 @@
                                                 <span class="selectgroup-button">Draft</span>
                                             </label>
                                             <label class="selectgroup-item me-5">
-                                                <input type="radio" name="status" value="published" class="form-check-input"
+                                                <input type="radio" name="status" value="published"
+                                                    class="form-check-input"
                                                     {{ $artikel->status == 'published' ? 'checked' : '' }}>
                                                 <span class="selectgroup-button">Publish</span>
                                             </label>
@@ -108,7 +110,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group row mb-4">
                                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                                 <div class="col-sm-12 col-md-7 d-grid">
@@ -127,25 +129,25 @@
 @endsection
 
 @push('scripts')
-<script src="{{ asset('v3/assets/js/pages-account-settings-account.js') }}"></script>
-<script src="{{ asset('library/summernote/dist/summernote-bs5.min.js') }}"></script>
-<script src="{{ asset('js/scripts.js') }}"></script>
-<script src="{{ asset('v3/libs/select2/select2.js') }}"></script>
-<script>
-    $(document).on("change", "#image-upload", function(e) {
-        e.preventDefault()
-        let jmlFiles = $("#image-upload")[0].files
-        let maxSize = 2
-        let totFiles = jmlFiles[0].size
-        let filesize = totFiles / 1000 / 1000;
-        filesize = filesize.toFixed(1);
-        if (filesize > maxSize) {
-            showWarningAlert('File foto max. ' + maxSize + ' MB, Total size : ' + filesize + ' MB')
-            $("#image-upload").val('')
-            $('#checkSize').prop('disabled', true);
-        } else {
-            $('#checkSize').prop('disabled', false);
-        }
-    });
-</script>
+    <script src="{{ asset('v3/assets/js/pages-account-settings-account.js') }}"></script>
+    <script src="{{ asset('library/summernote/dist/summernote-lite.min.js') }}"></script>
+    <script src="{{ asset('js/scripts.js') }}"></script>
+    <script src="{{ asset('v3/libs/select2/select2.js') }}"></script>
+    <script>
+        $(document).on("change", "#image-upload", function(e) {
+            e.preventDefault()
+            let jmlFiles = $("#image-upload")[0].files
+            let maxSize = 2
+            let totFiles = jmlFiles[0].size
+            let filesize = totFiles / 1000 / 1000;
+            filesize = filesize.toFixed(1);
+            if (filesize > maxSize) {
+                showWarningAlert('File foto max. ' + maxSize + ' MB, Total size : ' + filesize + ' MB')
+                $("#image-upload").val('')
+                $('#checkSize').prop('disabled', true);
+            } else {
+                $('#checkSize').prop('disabled', false);
+            }
+        });
+    </script>
 @endpush

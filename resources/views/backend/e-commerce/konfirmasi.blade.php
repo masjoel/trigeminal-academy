@@ -3,7 +3,7 @@
 @section('title', $title)
 
 @push('style')
-    <link rel="stylesheet" href="{{ asset('library/summernote/dist/summernote-bs5.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/summernote/dist/summernote-lite.min.css') }}">
     <link rel="stylesheet" href="{{ asset('v3/libs/select2/select2.css') }}" />
     <link rel="stylesheet" href="{{ asset('v3/libs/bootstrap-select/bootstrap-select.css') }}" />
 @endpush
@@ -38,7 +38,8 @@
                                                 <label>Kelas : {{ $order->orderItems[0]->product->name }}</label>
                                             </div>
                                             <div class="form-group mb-4">
-                                                <label>Instruktur : {{ $order->orderItems[0]->product->instruktur->nama }}</label>
+                                                <label>Instruktur :
+                                                    {{ $order->orderItems[0]->product->instruktur->nama }}</label>
                                             </div>
                                             <div class="form-group mb-4">
                                                 <label>Harga : Rp. {{ number_format($order->total_price) }}</label>
@@ -90,7 +91,7 @@
 
 @push('scripts')
     <script src="{{ asset('v3/assets/js/pages-account-settings-account.js') }}"></script>
-    <script src="{{ asset('library/summernote/dist/summernote-bs5.min.js') }}"></script>
+    <script src="{{ asset('library/summernote/dist/summernote-lite.min.js') }}"></script>
     <script src="{{ asset('js/scripts.js') }}"></script>
     <script src="{{ asset('v3/libs/select2/select2.js') }}"></script>
     <script>

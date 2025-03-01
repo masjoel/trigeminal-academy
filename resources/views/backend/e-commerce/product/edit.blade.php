@@ -3,7 +3,7 @@
 @section('title', $title)
 
 @push('style')
-    <link rel="stylesheet" href="{{ asset('library/summernote/dist/summernote-bs5.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/summernote/dist/summernote-lite.min.css') }}">
     <link rel="stylesheet" href="{{ asset('v3/libs/select2/select2.css') }}" />
     <link rel="stylesheet" href="{{ asset('v3/libs/bootstrap-select/bootstrap-select.css') }}" />
 @endpush
@@ -205,8 +205,8 @@
                                         <div class="cursor-pointer">
                                             @if ($course->video_url)
                                                 @if ($course->storage_type == 'youtube')
-                                                    <iframe class="w-100" height="200" src="{{ $course->video_url }}" title="YouTube video player"
-                                                        frameborder="0"
+                                                    <iframe class="w-100" height="200" src="{{ $course->video_url }}"
+                                                        title="YouTube video player" frameborder="0"
                                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                                         referrerpolicy="strict-origin-when-cross-origin"
                                                         allowfullscreen></iframe>
@@ -268,7 +268,7 @@
 
 @push('scripts')
     <script src="{{ asset('v3/assets/js/pages-account-settings-account.js') }}"></script>
-    <script src="{{ asset('library/summernote/dist/summernote-bs5.min.js') }}"></script>
+    <script src="{{ asset('library/summernote/dist/summernote-lite.min.js') }}"></script>
     <script src="{{ asset('js/scripts.js') }}"></script>
     <script src="{{ asset('v3/libs/select2/select2.js') }}"></script>
     <script>

@@ -3,7 +3,7 @@
 @section('title', $title)
 
 @push('style')
-    <link rel="stylesheet" href="{{ asset('library/summernote/dist/summernote-bs5.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/summernote/dist/summernote-lite.min.css') }}">
     <link rel="stylesheet" href="{{ asset('v3/libs/select2/select2.css') }}" />
     <link rel="stylesheet" href="{{ asset('v3/libs/bootstrap-select/bootstrap-select.css') }}" />
 @endpush
@@ -106,7 +106,7 @@
                                     <div class="form-group my-2">
                                         <label><b>Bukti Pembayaran</b></label>
                                         <div class="d-block text-left">
-                                            <img src="{{ $order->bukti_bayar == null ? asset('img/example-image.jpg') : Storage::url( $order->bukti_bayar) }}"
+                                            <img src="{{ $order->bukti_bayar == null ? asset('img/example-image.jpg') : Storage::url($order->bukti_bayar) }}"
                                                 alt="" class="w-px-100 h-px-100 rounded" id="uploadedAvatar" />
                                             <div class="button-wrapper">
                                                 <label for="image-upload" class="btn btn-sm btn-info my-2" tabindex="0">
@@ -148,7 +148,7 @@
 
 @push('scripts')
     <script src="{{ asset('v3/assets/js/pages-account-settings-account.js') }}"></script>
-    <script src="{{ asset('library/summernote/dist/summernote-bs5.min.js') }}"></script>
+    <script src="{{ asset('library/summernote/dist/summernote-lite.min.js') }}"></script>
     <script src="{{ asset('js/scripts.js') }}"></script>
     <script src="{{ asset('v3/libs/select2/select2.js') }}"></script>
     <script>
