@@ -14,7 +14,13 @@ if (!function_exists('cekPage')) {
   function cekPage($page)
   {
     $halaman = Halaman::where('jenis', 'page')->where('status', 'published')->where('idkategori', $page)->latest()->first();
-    return $halaman;
+    $galeries = Artikel::leftJoin('categories', 'categories.id', '=', 'artikels.category_id')
+                ->where('artikels.jenis', 'post')->where('artikels.status', 'published')->where('categories.slug', 'like', '%galeri%')
+                ->select('artikels.*')->latest()->first();
+    return [
+      'galeries' => $galeries,
+      'halaman' => $halaman,
+    ];
   }
 }
 if (!function_exists('totalCart')) {
