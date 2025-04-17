@@ -101,8 +101,8 @@
 
 
     <script type="text/javascript">
-        // let BASE_URL = "{{ url('/') }}";
-        let BASE_URL = "https://{{ $_SERVER['HTTP_HOST'] }}";
+        let BASE_URL = "{{ url('/') }}";
+        // let BASE_URL = "https://{{ $_SERVER['HTTP_HOST'] }}";
 
         function resetAllInputOnForm(formId) {
             $(formId).find('input, textarea').val('');
