@@ -7,7 +7,7 @@
                         <div class="footer-widget">
                             <div class="logo">
                                 <a href="/"><img
-                                        src="{{ preg_match('/desa/i', klien('logo')) ? Storage::url(klien('logo')) : asset(klien('logo')) }}"
+                                        src="{{ preg_match('/profil/i', klien('logo')) ? Storage::url(klien('logo')) : asset(klien('logo')) }}"
                                         alt="{{ klien('nama_app') }}"></a>
                             </div>
                             <div class="footer-content">

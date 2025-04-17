@@ -11,8 +11,9 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AutoNumberController;
 use App\Http\Controllers\BackupDataController;
 use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\Backend\DesaController;
+use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Frontend\FotoController;
+use App\Http\Controllers\Backend\ProfilController;
 use App\Http\Controllers\Frontend\VideoController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\StudentController;
@@ -21,7 +22,6 @@ use App\Http\Controllers\Frontend\HalamanController;
 use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\Backend\InstructorController;
 use App\Http\Controllers\Backend\LinkExternalController;
-use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Frontend\SlidebannerController;
 use App\Http\Controllers\Frontend\ProfilBisnisController;
 use App\Http\Controllers\Backend\ProductCategoryController;
@@ -59,7 +59,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('user/{user}/permission', [UserController::class, 'permission'])->name('user.permission');
     Route::put('user-permision/{user}', [UserController::class, 'updatepermission'])->name('user.updatepermission');
 
-    Route::resource('profil-bisnis', DesaController::class);
+    Route::resource('profil-bisnis', ProfilController::class);
     Route::resource('link', LinkExternalController::class);
     Route::resource('backup-data', BackupDataController::class);
     Route::controller(BackupDataController::class)->group(function () {
@@ -90,7 +90,7 @@ Route::get('/kelas', [ProductFrontendController::class, 'index'])->name('list-ke
 Route::get('/kelas/{slug}', [ProductFrontendController::class, 'show'])->name('product.show');
 Route::get('/data/kelas/process', [ProductFrontendController::class, 'process'])->name('class.process');
 Route::post('/data/kelas/keranjang', [ProductFrontendController::class, 'keranjang'])->name('keranjang');
-Route::post('aktivasi', [DesaController::class, 'aktivasi'])->name('aktivasi');
+Route::post('aktivasi', [ProfilController::class, 'aktivasi'])->name('aktivasi');
 Route::get('/detail-kelas/{slug}', [HomeController::class, 'detailKelas'])->name('detail-kelas');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');

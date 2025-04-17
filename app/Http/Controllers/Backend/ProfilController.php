@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreMemberRequest;
 use App\Models\ProfilBisnis;
 
-class DesaController extends Controller
+class ProfilController extends Controller
 {
     public function __construct()
     {
@@ -110,10 +110,10 @@ class DesaController extends Controller
                 Storage::delete($logoPath);
                 Storage::delete('thumbs/' . $logoPath);
             }
-            $logoPath = $logo->storeAs('desa', $nameFile, 'public');
-            $thumbnail = $logo->storeAs('thumbs/desa', $nameFile, 'public');
+            $logoPath = $logo->storeAs('profil', $nameFile, 'public');
+            $thumbnail = $logo->storeAs('thumbs/profil', $nameFile, 'public');
 
-            $smallthumbnailpath = public_path('storage/desa/' . $nameFile);
+            $smallthumbnailpath = public_path('storage/profil/' . $nameFile);
             $imageInfo = ImageResize::getFileImageSize($smallthumbnailpath);
             if ($imageInfo) {
                 $width = $imageInfo['width'];
@@ -123,7 +123,7 @@ class DesaController extends Controller
                 ImageResize::createThumbnail($smallthumbnailpath, 300, 300);
             }
 
-            $smallthumbnailpath = public_path('storage/thumbs/desa/' . $nameFile);
+            $smallthumbnailpath = public_path('storage/thumbs/profil/' . $nameFile);
             ImageResize::createThumbnail($smallthumbnailpath, 150, 150);
         }
         if ($request->hasFile('photo')) {
@@ -134,10 +134,10 @@ class DesaController extends Controller
                 Storage::delete($photoPath);
                 Storage::delete('thumbs/' . $photoPath);
             }
-            $photoPath = $photo->storeAs('desa', $nameFile, 'public');
-            $thumbnail = $photo->storeAs('thumbs/desa', $nameFile, 'public');
+            $photoPath = $photo->storeAs('profil', $nameFile, 'public');
+            $thumbnail = $photo->storeAs('thumbs/profil', $nameFile, 'public');
 
-            $smallthumbnailpath = public_path('storage/desa/' . $nameFile);
+            $smallthumbnailpath = public_path('storage/profil/' . $nameFile);
             $imageInfo = ImageResize::getFileImageSize($smallthumbnailpath);
             if ($imageInfo) {
                 $width = $imageInfo['width'];
@@ -147,7 +147,7 @@ class DesaController extends Controller
                 ImageResize::createThumbnail($smallthumbnailpath, 300, 300);
             }
 
-            $smallthumbnailpath = public_path('storage/thumbs/desa/' . $nameFile);
+            $smallthumbnailpath = public_path('storage/thumbs/profil/' . $nameFile);
             ImageResize::createThumbnail($smallthumbnailpath, 150, 150);
         }
         if ($request->hasFile('image_icon')) {
@@ -158,10 +158,10 @@ class DesaController extends Controller
                 Storage::delete($image_iconPath);
                 Storage::delete('thumbs/' . $image_iconPath);
             }
-            $image_iconPath = $image_icon->storeAs('desa', $nameFile, 'public');
-            $thumbnail = $image_icon->storeAs('thumbs/desa', $nameFile, 'public');
+            $image_iconPath = $image_icon->storeAs('profil', $nameFile, 'public');
+            $thumbnail = $image_icon->storeAs('thumbs/profil', $nameFile, 'public');
 
-            $smallthumbnailpath = public_path('storage/desa/' . $nameFile);
+            $smallthumbnailpath = public_path('storage/profil/' . $nameFile);
             $imageInfo = ImageResize::getFileImageSize($smallthumbnailpath);
             if ($imageInfo) {
                 $width = $imageInfo['width'];
@@ -171,7 +171,7 @@ class DesaController extends Controller
                 ImageResize::createThumbnail($smallthumbnailpath, 64, 64);
             }
 
-            $smallthumbnailpath = public_path('storage/thumbs/desa/' . $nameFile);
+            $smallthumbnailpath = public_path('storage/thumbs/profil/' . $nameFile);
             ImageResize::createThumbnail($smallthumbnailpath, 64, 64);
         }
         $validate['photo'] = $photoPath;
