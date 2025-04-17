@@ -205,7 +205,7 @@
     <!-- Template Main JS File -->
     <script>
         // let BASE_URL = "{{ url('/') }}";
-        let BASE_URL = "http://{{ $_SERVER['HTTP_HOST'] }}";
+        let BASE_URL = "https://{{ $_SERVER['HTTP_HOST'] }}";
     </script>
     <script>
         function updateCartCount() {
