@@ -65,13 +65,13 @@
                     {{-- <div class="text-center"> --}}
                     <div class="text-center tw-flex tw-justify-center">
                         <a href="/"><img
-                                src="{{ preg_match('/desa/i', klien('logo')) ? Storage::url(klien('logo')) : asset(klien('logo')) }}"
+                                src="{{ preg_match('/profil/i', klien('logo')) ? Storage::url(klien('logo')) : asset(klien('logo')) }}"
                                 style="height: 50px; width:auto" alt=""></a>
                     </div>
                     {{-- <div class="logo d-none text-center"> --}}
                     <div class="logo d-none text-center tw-flex tw-justify-center">
                         <a href="/"><img
-                                src="{{ preg_match('/desa/i', klien('logo')) ? Storage::url(klien('logo')) : asset(klien('logo')) }}"
+                                src="{{ preg_match('/profil/i', klien('logo')) ? Storage::url(klien('logo')) : asset(klien('logo')) }}"
                                 style="height: 50px; width:auto" alt=""></a>
                     </div>
                 </div>
@@ -115,12 +115,12 @@
                         <nav class="menu-nav">
                             <div class="logo d-none">
                                 <a href="/"><img
-                                        src="{{ preg_match('/desa/i', klien('logo')) ? Storage::url(klien('logo')) : asset(klien('logo')) }}"
+                                        src="{{ preg_match('/profil/i', klien('logo')) ? Storage::url(klien('logo')) : asset(klien('logo')) }}"
                                         style="height: 80px !important; width:auto" alt=""></a>
                             </div>
                             <div class="logo d-none white-logo">
                                 <a href="/"><img
-                                        src="{{ preg_match('/desa/i', klien('logo')) ? Storage::url(klien('logo')) : asset(klien('logo')) }}"
+                                        src="{{ preg_match('/profil/i', klien('logo')) ? Storage::url(klien('logo')) : asset(klien('logo')) }}"
                                         alt=""></a>
                             </div>
                             <div class="offcanvas-toggle border-0">
@@ -165,12 +165,12 @@
                             <div class="close-btn"><i class="fas fa-times"></i></div>
                             <div class="nav-logo">
                                 <a href="/"><img
-                                        src="{{ preg_match('/desa/i', klien('logo')) ? Storage::url(klien('logo')) : asset(klien('logo')) }}"
+                                        src="{{ preg_match('/profil/i', klien('logo')) ? Storage::url(klien('logo')) : asset(klien('logo')) }}"
                                         alt="Logo"></a>
                             </div>
                             <div class="nav-logo d-none">
                                 <a href="/"><img
-                                        src="{{ preg_match('/desa/i', klien('logo')) ? Storage::url(klien('logo')) : asset(klien('logo')) }}"
+                                        src="{{ preg_match('/profil/i', klien('logo')) ? Storage::url(klien('logo')) : asset(klien('logo')) }}"
                                         alt="Logo"></a>
                             </div>
                             <div class="mobile-search mb-3">
@@ -245,10 +245,10 @@
             <div class="offCanvas-content">
                 <div class="offCanvas-logo logo">
                     <a href="/" class="logo-dark"><img
-                            src="{{ preg_match('/desa/i', klien('logo')) ? Storage::url(klien('logo')) : asset(klien('logo')) }}"
+                            src="{{ preg_match('/profil/i', klien('logo')) ? Storage::url(klien('logo')) : asset(klien('logo')) }}"
                             alt="Logo"></a>
                     <a href="/" class="logo-light"><img
-                            src="{{ preg_match('/desa/i', klien('logo')) ? Storage::url(klien('logo')) : asset(klien('logo')) }}"
+                            src="{{ preg_match('/profil/i', klien('logo')) ? Storage::url(klien('logo')) : asset(klien('logo')) }}"
                             alt="Logo"></a>
                 </div>
                 <p>The argument in favor of using filler text goes something like this: If you use any real content in
