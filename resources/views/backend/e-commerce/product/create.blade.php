@@ -160,19 +160,22 @@
                                     <div class="form-group mb-1">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Penyimpanan Video</label>
+                                                <label>Penyimpanan</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <select name="storage_type" id="select_storage_type"
                                                     class="form-control select2">
-                                                    <option value="upload">Upload</option>
                                                     <option value="youtube" selected>YouTube</option>
+                                                    <option value="slide">Google Slide</option>
+                                                    <option value="upload">Upload</option>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group mb-4">
-                                        <label for="video_input">Video</label>
+                                        <div id="label_wrapper">
+                                            <label for="video_input">Video</label>
+                                        </div>
                                         <div id="video_input_wrapper">
                                             <input type="text" class="form-control" name="video_url" id="video_url"
                                                 placeholder="Masukkan URL YouTube">
@@ -180,7 +183,9 @@
                                     </div>
                                     {{-- video duration --}}
                                     <div class="form-group mb-4">
-                                        <label for="video_duration">Durasi Video (menit)</label>
+                                        <div id="label_duration">
+                                            <label for="video_duration">Durasi Video (menit)</label>
+                                        </div>
                                         <div id="video_duration_wrapper">
                                             <input type="text"
                                                 class="form-control @error('video_duration') is-invalid @enderror"
@@ -262,6 +267,8 @@
         $(document).ready(function() {
             function updateVideoInput() {
                 var selectedValue = $("#select_storage_type").val();
+                var labelWrapper = $("#label_wrapper");
+                var labelDuration = $("#label_duration");
                 var videoInputWrapper = $("#video_input_wrapper");
 
                 videoInputWrapper.empty(); // Kosongkan elemen
@@ -269,10 +276,20 @@
                 if (selectedValue === "upload") {
                     videoInputWrapper.append(
                         '<input type="file" class="form-control" name="video_file" id="video_file">');
+                    labelWrapper.html('<label for="video_input">Video</label>');
+                    labelDuration.html('<label for="video_duration">Durasi Video (menit)</label>');
+                } else if (selectedValue === "slide") {
+                    videoInputWrapper.append(
+                        '<input type="text" class="form-control" name="video_url" id="video_url" placeholder="Masukkan ID Slide">'
+                    );
+                    labelWrapper.html('<label for="video_input">Slide</label>');
+                    labelDuration.html('<label for="video_duration">Durasi Slide (menit)</label>');
                 } else {
                     videoInputWrapper.append(
                         '<input type="text" class="form-control" name="video_url" id="video_url" placeholder="Masukkan URL YouTube">'
                     );
+                    labelWrapper.html('<label for="video_input">Video</label>');
+                    labelDuration.html('<label for="video_duration">Durasi Video (menit)</label>');
                 }
             }
 

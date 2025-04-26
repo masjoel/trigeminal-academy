@@ -170,10 +170,20 @@ class ProductController extends Controller
     {
         $title = 'Kelas';
         $page = $request->input('page', 1);
-        $limit = $request->input('limit', 12);
-        $nomor = ($page - 1) * $limit + 1;        
+        $limit = $request->input('limit', 10);
+        $nomor = ($page - 1) * $limit + 1;
+        
+        $qry = OrderItem::with('order', 'order.customer')
+            ->where('product_id', $product_id)
+            ->orderBy('id', 'desc');
+        
+        $peserta = $qry->when($request->input('search'), function ($query, $search) {
+            $query->whereHas('order.customer', function ($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%');
+            });
+        })->paginate($limit);
+        
         $course = Product::where('id', $product_id)->first();
-        $peserta = OrderItem::with('order', 'order.customer')->where('product_id', $product_id)->get();
         return view('backend.e-commerce.product.peserta', compact('title', 'course', 'peserta', 'nomor'));
     }
 
@@ -288,7 +298,7 @@ class ProductController extends Controller
         } else {
             $videoUrl = $request->input('video_url');
         }
-        if (str_contains($videoUrl, 'youtube')) {
+        if (str_contains($videoUrl, 'youtube') && !str_contains($videoUrl, 'embed')) {
             $videoUrl = Str::replace('/watch?v=', '/embed/', $videoUrl);
         }
         $validate['description'] = $deskripsi;

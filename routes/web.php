@@ -82,6 +82,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('instruktur', InstructorController::class);
     Route::resource('order', OrderController::class);
     Route::get('/export-peserta/{product_id}', [StudentController::class, 'exportCustomer']);
+    Route::get('/export-kelas/{product_id}', [StudentController::class, 'exportStudent']);
     Route::get('/lihat-peserta/{product_id}', [ProductController::class, 'lihatPeserta'])->name('lihat-peserta');
 });
 

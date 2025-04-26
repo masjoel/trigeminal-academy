@@ -94,7 +94,10 @@ class HomeController extends Controller
 
         return view('frontend.beranda', compact('title', 'profil_usaha', 'artikel', 'banner', 'halaman', 'sid', 'tentang_kami', 'kontak_kami', 'feature', 'berita', 'berita2', 'berita3', 'pengumuman', 'pengumuman3', 'top_stories', 'video', 'agenda', 'agenda3', 'galeries', 'foto', 'courses', 'section1', 'faq'));
     }
-
+    function slide()
+    {
+        return view('slide');
+    }
     function exampleProductDetail(Request $request)
     {
         $profil_usaha = ProfilBisnis::first();

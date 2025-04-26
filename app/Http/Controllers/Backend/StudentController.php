@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Exports\PesertaExport;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
+use App\Exports\PesertaKelasExport;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
@@ -164,5 +165,8 @@ class StudentController extends Controller
     {
         return Excel::download(new PesertaExport($product_id), 'peserta_'.$product_id.'.csv');
     }
-
+    public function exportStudent($product_id)
+    {
+        return Excel::download(new PesertaKelasExport($product_id), 'peserta_kelas_'.$product_id.'.xlsx');
+    }
 }

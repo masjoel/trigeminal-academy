@@ -163,23 +163,28 @@
                                     <div class="form-group mb-1">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Penyimpanan Video</label>
+                                                <label>Penyimpanan</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <select name="storage_type" id="select_storage_type"
                                                     class="form-control select2">
-                                                    <option value="upload"
-                                                        {{ old('storage_type', $course->storage_type) == 'upload' ? 'selected' : '' }}>
-                                                        Upload</option>
                                                     <option value="youtube"
                                                         {{ old('storage_type', $course->storage_type) == 'youtube' ? 'selected' : '' }}>
                                                         YouTube</option>
+                                                    <option value="slide"
+                                                        {{ old('storage_type', $course->storage_type) == 'slide' ? 'selected' : '' }}>
+                                                        Google Slide</option>
+                                                    <option value="upload"
+                                                        {{ old('storage_type', $course->storage_type) == 'upload' ? 'selected' : '' }}>
+                                                        Upload</option>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group mb-4">
-                                        <label for="video_input">Video</label>
+                                        <div id="label_wrapper">
+                                            <label for="video_input">Video</label>
+                                        </div>
                                         <div id="video_input_wrapper">
                                             <input type="text" class="form-control" name="video_url" id="video_url"
                                                 placeholder="Masukkan URL YouTube"
@@ -188,7 +193,9 @@
                                     </div>
                                     {{-- video duration --}}
                                     <div class="form-group mb-4">
-                                        <label for="video_duration">Durasi Video (menit)</label>
+                                        <div id="label_duration">
+                                            <label for="video_duration">Durasi Video (menit)</label>
+                                        </div>
                                         <div id="video_duration_wrapper">
                                             <input type="text"
                                                 class="form-control @error('video_duration') is-invalid @enderror"
@@ -210,6 +217,11 @@
                                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                                         referrerpolicy="strict-origin-when-cross-origin"
                                                         allowfullscreen></iframe>
+                                                @elseif ($course->storage_type == 'slide')
+                                                    <iframe class="w-100" height="200"
+                                                        src="https://docs.google.com/presentation/d/{{ $course->video_url }}/embed?start=false&loop=false&delayms=5000"
+                                                        allowfullscreen="true" mozallowfullscreen="true"
+                                                        webkitallowfullscreen="true"></iframe>
                                                 @else
                                                     <video class="w-100"
                                                         poster="{{ asset('storage/' . $course->image_url) }}"
@@ -290,17 +302,29 @@
         $(document).ready(function() {
             function updateVideoInput() {
                 var selectedValue = $("#select_storage_type").val();
+                var labelWrapper = $("#label_wrapper");
+                var labelDuration = $("#label_duration");
                 var videoInputWrapper = $("#video_input_wrapper");
 
                 videoInputWrapper.empty(); // Kosongkan elemen
 
                 if (selectedValue === "upload") {
                     videoInputWrapper.append(
-                        '<input type="file" class="form-control" name="video_file" id="video_file">');
+                        '<input type="file" class="form-control" name="video_file" id="video_file" value="{{ $course->video_file }}">');
+                    labelWrapper.html('<label for="video_input">Video</label>');
+                    labelDuration.html('<label for="video_duration">Durasi Video (menit)</label>');
+                } else if (selectedValue === "slide") {
+                    videoInputWrapper.append(
+                        '<input type="text" class="form-control" name="video_url" id="video_url" value="{{ $course->video_url }}" placeholder="Masukkan ID Slide">'
+                    );
+                    labelWrapper.html('<label for="video_input">Slide</label>');
+                    labelDuration.html('<label for="video_duration">Durasi Slide (menit)</label>');
                 } else {
                     videoInputWrapper.append(
-                        '<input type="text" class="form-control" name="video_url" id="video_url" placeholder="Masukkan URL YouTube">'
+                        '<input type="text" class="form-control" name="video_url" id="video_url"  value="{{ $course->video_url }}" placeholder="Masukkan URL YouTube">'
                     );
+                    labelWrapper.html('<label for="video_input">Video</label>');
+                    labelDuration.html('<label for="video_duration">Durasi Video (menit)</label>');
                 }
             }
 

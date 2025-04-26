@@ -52,6 +52,11 @@
                                                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                                             referrerpolicy="strict-origin-when-cross-origin"
                                                             allowfullscreen></iframe>
+                                                    @elseif ($course->storage_type == 'slide')
+                                                        <iframe class="w-100" height="360"
+                                                            src="https://docs.google.com/presentation/d/{{ $course->video_url }}/embed?start=false&loop=false&delayms=5000"
+                                                            allowfullscreen="true" mozallowfullscreen="true"
+                                                            webkitallowfullscreen="true"></iframe>
                                                     @else
                                                         <video class="w-100"
                                                             poster="{{ asset('storage/' . $course->image_url) }}"
@@ -95,7 +100,12 @@
                                                         <i class="ti ti-video me-2 align-top ms-50"></i>Lectures: 19
                                                     </p> --}}
                                                     <p class="text-nowrap mb-0">
-                                                        <i class="ti ti-clock me-2 align-top"></i>Video:
+                                                        <i class="ti ti-clock me-2 align-top"></i>
+                                                        @if ($course->storage_type == 'slide')
+                                                            Slide:
+                                                        @else
+                                                            Video:
+                                                        @endif
                                                         {{ $course->video_duration }} menit
                                                     </p>
                                                 </div>

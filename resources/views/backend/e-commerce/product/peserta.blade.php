@@ -40,6 +40,7 @@
                                                     class="ti ti-search"></i></button>
                                         </div>
                                     </form>
+                                    <a href="#" id="export-kelas" data-id="{{ $course->id }}" class="ms-2 btn btn-outline-secondary" title="Export Peserta"><i class="fas fa-download text-secondary"></i></a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -104,7 +105,7 @@
                                     </table>
                                 </div>
                                 <div class="mt-5">
-                                    {{-- {{ $peserta->withQueryString()->links() }} --}}
+                                    {{ $peserta->withQueryString()->links() }}
                                 </div>
                             </div>
                         </div>
@@ -117,17 +118,10 @@
 
 @push('scripts')
     <script>
-        $(document).on("click", "a#delete-data", function(e) {
+        $(document).on("click", "a#export-kelas", function(e) {
             e.preventDefault();
             let id = $(this).data('id');
-            showDeletePopup(BASE_URL + '/course/' + id, '{{ csrf_token() }}',
-                BASE_URL + '/course');
-        });
-        // buatkan fungsi untuk export data peserta
-        $(document).on("click", "a#export-peserta", function(e) {
-            e.preventDefault();
-            let id = $(this).data('id');
-            window.open(BASE_URL + '/export-peserta/' + id, '_blank');
+            window.open(BASE_URL + '/export-kelas/' + id);
         })
     </script>
 @endpush
