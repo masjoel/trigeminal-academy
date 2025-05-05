@@ -57,6 +57,7 @@
                                             <th scope="col">Telp.</th>
                                             <th scope="col">Alamat</th>
                                             <th scope="col">Status</th>
+                                            <th scope="col" class="text-center">QR Code</th>
                                             @can(['student.edit', 'student.delete'])
                                                 <th class="text-center" width="120">Action</th>
                                             @endcan
@@ -83,6 +84,10 @@
                                                     @elseif($item->approval == 'approved')
                                                         <span class="badge bg-success">Approved</span>
                                                     @endif
+                                                </td>
+                                                <td class="text-center">
+                                                    <a href="#" id="qrcode"
+                                                        data-id="{{ $item->id }}"><i class="fas fa-qrcode me-2"></i></a>
                                                 </td>
                                                 @can(['student.edit', 'student.delete'])
                                                     <td>
@@ -115,10 +120,48 @@
             </div>
         </section>
     </div>
+
+    <div class="modal fade modal-utama" id="modal-qrcode" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    {{-- <p class="mb-3 text-muted">
+                        Scan QR-Code untuk melihat detail anggota
+                    </p> --}}
+                    <img id="qr-code-img" class="card-img-top text-center w-50" alt="QR Code">
+                    <div class="form-group text-start" id="show-profil">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('scripts')
     <script>
+        $(document).on("click", "a#qrcode", function(e) {
+            e.preventDefault();
+            $('h4.modal-title').text('QR Code');
+            $('#modal-qrcode').modal('show');
+            let id = $(this).data('id');
+            $.ajax({
+                url: BASE_URL + '/student/' + id,
+                type: 'GET',
+                dataType: 'JSON',
+                success: function(data) {
+                    $('#qr-code-img').attr('src', 'data:image/png;base64,' + data.qrCodeBase64);
+                    $('#show-profil').html('<br>' + data.name + '<br>Username: ' + data.username + '<br>Email: ' + data.email + '<br>Phone: ' + data.phone);
+                }
+            })
+        });
         $(document).on("click", "a#delete-data", function(e) {
             e.preventDefault();
             let id = $(this).data('id');

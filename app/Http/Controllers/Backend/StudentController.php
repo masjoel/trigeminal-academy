@@ -6,6 +6,7 @@ use App\Models\User;
 use Ramsey\Uuid\Uuid;
 use App\Models\Product;
 use App\Models\Student;
+use BaconQrCode\Writer;
 use App\Models\ImageResize;
 use Illuminate\Http\Request;
 use App\Exports\PesertaExport;
@@ -14,8 +15,11 @@ use Illuminate\Support\Facades\DB;
 use App\Exports\PesertaKelasExport;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
+use BaconQrCode\Renderer\ImageRenderer;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreInstructorReq;
+use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
+use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 
 class StudentController extends Controller
 {
@@ -88,8 +92,21 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
+        $username = User::where('id', $student->user_id)->first();
         $title = 'Peserta';
-        return view('backend.student.show', compact('title', 'student'));
+        $text = url('/login/' . $username->username);
+        $renderer = new ImageRenderer(new RendererStyle(256), new ImagickImageBackEnd());
+        $writer = new Writer($renderer);
+        $qrCode = $writer->writeString($text);
+        $qrCodeBase64 = base64_encode($qrCode);
+        return json_encode([
+            'qrCodeBase64' => $qrCodeBase64,
+            'name' => $username->name,
+            'username' => $username->username,
+            'email' => $username->email,
+            'phone' => $username->phone,
+        ]);
+        // return view('backend.student.show', compact('title', 'student'));
     }
 
     /**

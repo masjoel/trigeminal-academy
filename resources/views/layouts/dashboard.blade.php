@@ -99,7 +99,6 @@
     <script src="{{ asset('v3/js/menu.js') }}"></script>
     <script src="{{ asset('library/sweetalert2/sweetalert2.min.js') }}"></script>
 
-
     <script type="text/javascript">
         // let BASE_URL = "{{ url('/') }}";
         let BASE_URL = "https://{{ $_SERVER['HTTP_HOST'] }}";

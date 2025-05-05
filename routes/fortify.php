@@ -1,17 +1,21 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CustomLoginController;
 use Laravel\Fortify\Http\Controllers\NewPasswordController;
 use Laravel\Fortify\Http\Controllers\PasswordResetLinkController;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
 Route::group(['middleware' => config('fortify.middleware', ['web']), 'namespace' => null], function () {
-    Route::get('/login', [AuthenticatedSessionController::class, 'create'])
-    ->middleware(['guest'])
+    // Route::get('/login', [AuthenticatedSessionController::class, 'create'])
+    //     ->middleware(['guest'])
+    //     ->name('login');
+    Route::get('/login/{email?}', [CustomLoginController::class, 'modif'])
+        ->middleware(['guest'])
         ->name('login');
 
     Route::post('/login', [AuthenticatedSessionController::class, 'store'])
-    ->middleware(['guest'])
+        ->middleware(['guest'])
         ->name('login.post');
 
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
@@ -22,13 +26,13 @@ Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])
     ->name('password.request');
 
 Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])
-->middleware(['guest', 'web'])
-->name('password.email');
+    ->middleware(['guest', 'web'])
+    ->name('password.email');
 
 Route::get('/reset-password/{token}', [NewPasswordController::class, 'create'])
-->middleware(['guest', 'web'])
-->name('password.reset');
+    ->middleware(['guest', 'web'])
+    ->name('password.reset');
 
 Route::post('/reset-password', [NewPasswordController::class, 'store'])
-->middleware(['guest', 'web'])
-->name('password.update');
+    ->middleware(['guest', 'web'])
+    ->name('password.update');
