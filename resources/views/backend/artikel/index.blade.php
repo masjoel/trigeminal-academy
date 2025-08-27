@@ -54,7 +54,7 @@
                                             <th scope="col">#</th>
                                             <th scope="col">Pict</th>
                                             <th scope="col">Title</th>
-                                            <th scope="col">Kategori</th>
+                                            <th scope="col">Category</th>
                                             <th scope="col">Status</th>
                                             @can(['artikel.edit', 'artikel.delete'])
                                                 <th class="text-center" scope="col" width="120">Action</th>

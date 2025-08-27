@@ -66,13 +66,13 @@
                     <div class="text-center tw-flex tw-justify-center">
                         <a href="/"><img
                                 src="{{ preg_match('/profil/i', klien('logo')) ? Storage::url(klien('logo')) : asset(klien('logo')) }}"
-                                style="height: 50px; width:auto" alt=""></a>
+                                style="height: 100px; width:auto" alt=""></a>
                     </div>
                     {{-- <div class="logo d-none text-center"> --}}
                     <div class="logo d-none text-center tw-flex tw-justify-center">
                         <a href="/"><img
                                 src="{{ preg_match('/profil/i', klien('logo')) ? Storage::url(klien('logo')) : asset(klien('logo')) }}"
-                                style="height: 50px; width:auto" alt=""></a>
+                                style="height: 100px; width:auto" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -132,20 +132,29 @@
                             </div>
                             <div class="navbar-wrap main-menu d-none d-lg-flex">
                                 <ul class="navigation">
-                                    <li><a href="{{ route('home') }}" title="Beranda">Beranda</a></li>
+                                    <li><a href="{{ route('home') }}" title="Home">Home</a></li>
                                     @if (cekPage('about')['halaman'])
-                                        <li><a href="{{ route('about') }}" title="Tentang Kami">Tentang Kami</a></li>
+                                        <li><a href="{{ route('about') }}" title="About us">About us</a></li>
                                     @endif
                                     @if (cekPage('visimisi')['halaman'])
                                         <li><a href="{{ route('visimisi') }}" title="Visi Misi">Visi Misi</a></li>
                                     @endif
+                                    @if (cekPage('precise')['halaman'])
+                                        <li><a href="{{ route('precise') }}" title="Precise">Precise</a></li>
+                                    @endif
+                                    @if (cekPage('regenerative-pain-school')['halaman'])
+                                        <li><a href="{{ route('regenerative-pain-school') }}" title="Regenerative Pain School">Regenerative Pain School</a></li>
+                                    @endif
+                                    @if (cekPage('painscope')['halaman'])
+                                        <li><a href="{{ route('painscope') }}" title="Painscope">Painscope</a></li>
+                                    @endif
                                     @if (cekPage('kontak')['halaman'])
-                                        <li><a href="{{ route('kontak') }}" title="Kontak">Kontak</a></li>
+                                        <li><a href="{{ route('kontak') }}" title="Contact Us">Contact Us</a></li>
                                     @endif
                                     @if (cekPage('galeries')['galeries'])
-                                        <li><a href="/galery" title="Galeri">Galeri</a></li>
+                                        <li><a href="/galery" title="Gallery">Gallery</a></li>
                                     @endif
-                                    <li><a href="/blog/category/berita" title="Beranda">Blog</a></li>
+                                    <li><a href="/blog" title="Blog">Blog</a></li>
                                 </ul>
 
                             </div>

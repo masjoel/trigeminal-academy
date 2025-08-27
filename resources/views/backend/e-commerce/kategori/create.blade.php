@@ -30,7 +30,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group mb-2">
-                                        <label>Nama Kategori</label>
+                                        <label>Category Name</label>
                                         <input type="text" class="form-control @error('name') is-invalid @enderror"
                                             name="name" value="{{ old('name') }}" autocomplete="off">
                                         @error('name')

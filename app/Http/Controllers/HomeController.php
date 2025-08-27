@@ -25,15 +25,18 @@ class HomeController extends Controller
         $profil_usaha = ProfilBisnis::first();
         $feature = Artikel::where('jenis', 'post')->where('status', 'published')->where('feature', '1')->latest()->first();
         $berita = Artikel::leftJoin('categories', 'categories.id', '=', 'artikels.category_id')
-            ->where('artikels.jenis', 'post')->where('artikels.status', 'published')->where('categories.slug', '=', 'berita')
+            ->where('artikels.jenis', 'post')->where('artikels.status', 'published')
+            // ->where('categories.slug', '=', 'berita')
             ->select('artikels.*')
             ->latest()->first();
         $berita2 = Artikel::leftJoin('categories', 'categories.id', '=', 'artikels.category_id')
-            ->where('artikels.jenis', 'post')->where('artikels.status', 'published')->where('categories.slug', '=', 'berita')
+            ->where('artikels.jenis', 'post')->where('artikels.status', 'published')
+            // ->where('categories.slug', '=', 'berita')
             ->select('artikels.*')
             ->latest()->limit(2)->get();
         $berita3 = $berita == null ? [] : Artikel::leftJoin('categories', 'categories.id', '=', 'artikels.category_id')
-            ->where('artikels.jenis', 'post')->where('artikels.status', 'published')->where('categories.slug', '=', 'berita')
+            ->where('artikels.jenis', 'post')->where('artikels.status', 'published')
+            // ->where('categories.slug', '=', 'berita')
             ->where('artikels.id', '!=', $berita->id)
             ->select('artikels.*')
             ->latest()->limit(4)->get();
@@ -188,6 +191,25 @@ class HomeController extends Controller
     {
         $title = 'Visi & Misi';
         $halaman = Halaman::where('jenis', 'page')->where('status', 'published')->where('idkategori', 'visimisi')->latest()->first();
+        return view('frontend.hlm', compact('title', 'halaman'));
+    }
+
+    public function precise()
+    {
+        $title = 'Precise';
+        $halaman = Halaman::where('jenis', 'page')->where('status', 'published')->where('idkategori', 'precise')->latest()->first();
+        return view('frontend.hlm', compact('title', 'halaman'));
+    }
+    public function regenerativePainSchool()
+    {
+        $title = 'Regenerative Pain School';
+        $halaman = Halaman::where('jenis', 'page')->where('status', 'published')->where('idkategori', 'regenerative-pain-school')->latest()->first();
+        return view('frontend.hlm', compact('title', 'halaman'));
+    }
+    public function painscope()
+    {
+        $title = 'Painscope';
+        $halaman = Halaman::where('jenis', 'page')->where('status', 'published')->where('idkategori', 'painscope')->latest()->first();
         return view('frontend.hlm', compact('title', 'halaman'));
     }
     public function galery(Request $request)

@@ -11,7 +11,7 @@
         </div>
         <div class="sidebar-widget sidebar-widget-two">
             <div class="widget-title mb-30">
-                <h6 class="title">Kategori</h6>
+                <h6 class="title">Category</h6>
                 <div class="section-title-line"></div>
             </div>
             <div class="sidebar-categories">
@@ -27,7 +27,7 @@
         </div>
         <div class="sidebar-widget sidebar-widget-two">
             <div class="widget-title mb-30">
-                <h6 class="title">Terbaru</h6>
+                <h6 class="title">Latest</h6>
                 <div class="section-title-line"></div>
             </div>
             <div class="hot-post-wrap">

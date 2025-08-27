@@ -58,7 +58,7 @@
                                             <th class="text-right" scope="col">Disc.</th>
                                             <th scope="col">Instruktur</th>
                                             <th scope="col">Peserta</th>
-                                            <th scope="col">Kategori</th>
+                                            <th scope="col">Category</th>
                                             <th scope="col">Level</th>
                                             <th scope="col">Status</th>
                                             @can(['course.edit', 'course.delete'])
@@ -86,8 +86,12 @@
                                                 <td>{{ $item->instruktur == null ? '' : $item->instruktur->nama }}</td>
                                                 <td class="text-end text-nowrap">{{ $item->jumlahpeserta }}
                                                     @if ($item->jumlahpeserta > 0)
-                                                        <a href="{{ route('lihat-peserta', $item->id) }}" class="ms-2" title="Lihat data Peserta"><i class="fas fa-eye text-warning"></i></a>
-                                                        <a href="#" id="export-peserta" data-id="{{ $item->id }}" class="ms-2" title="Download email Peserta"><i class="fas fa-download text-success"></i></a>
+                                                        <a href="{{ route('lihat-peserta', $item->id) }}" class="ms-2"
+                                                            title="Lihat data Peserta"><i
+                                                                class="fas fa-eye text-warning"></i></a>
+                                                        <a href="#" id="export-peserta" data-id="{{ $item->id }}"
+                                                            class="ms-2" title="Download email Peserta"><i
+                                                                class="fas fa-download text-success"></i></a>
                                                     @endif
                                                 </td>
                                                 <td>{{ $item->productCategory->name }}</td>

@@ -53,7 +53,7 @@
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">Title</th>
-                                            <th scope="col">Kategori</th>
+                                            <th scope="col">Category</th>
                                             <th scope="col">Status</th>
                                             {{-- @if (Auth::user()->roles == 'superadmin' || Auth::user()->username == 'admin') --}}
                                             @can(['halaman.edit', 'halaman.delete'])

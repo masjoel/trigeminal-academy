@@ -7,7 +7,7 @@
 @can('student')
     <li class="menu-item {{ Request::is('student*') ? 'active' : '' }}">
         <a href="{{ route('student.index') }}" class="menu-link "><i class="menu-icon ti ti-users"></i>
-            <div>Students</div>
+            <div>Member</div>
         </a>
     </li>
 @endcan

@@ -245,19 +245,6 @@
                                         <img src="{{ $dt->image_url == null ? asset('img/example-image.jpg') : Storage::url('thumb/' . $dt->image_url) }}"
                                             alt="{{ $dt->name }}" class="tw-w-full tw-h-full tw-object-cover">
 
-                                        {{-- Status Badges --}}
-                                        {{-- <div class="tw-absolute tw-top-4 tw-right-4 tw-flex tw-items-center tw-gap-2">
-                                                @if ($dt['isNew'])
-                                                    <div class="tw-bg-green-500 tw-text-white tw-px-3 tw-py-1 tw-rounded-full tw-text-sm tw-whitespace-nowrap">
-                                                        Baru
-                                                    </div>
-                                                @endif
-                                                @if ($dt['isPopular'])
-                                                    <div class="tw-bg-[#4A1B7F] tw-text-white tw-px-3 tw-py-1 tw-rounded-full tw-text-sm tw-whitespace-nowrap">
-                                                        Populer
-                                                    </div>
-                                                @endif
-                                            </div> --}}
                                     </div>
 
                                     <div class="tw-p-6 tw-pt-6 tw-flex tw-flex-col tw-h-[calc(100%-192px)]">

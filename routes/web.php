@@ -37,11 +37,13 @@ use App\Http\Controllers\Frontend\ProductFrontendController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('about', [HomeController::class, 'about'])->name('about');
 Route::get('kontak', [HomeController::class, 'kontak'])->name('kontak');
 Route::get('visi-misi', [HomeController::class, 'visimisi'])->name('visimisi');
+Route::get('precise', [HomeController::class, 'precise'])->name('precise');
+Route::get('regenerative-pain-school', [HomeController::class, 'regenerativePainSchool'])->name('regenerative-pain-school');
+Route::get('painscope', [HomeController::class, 'painscope'])->name('painscope');
 Route::get('sejarah', [HomeController::class, 'sejarah'])->name('sejarah');
 Route::get('galery', [HomeController::class, 'galery'])->name('galery');
 Route::get('blog', [BlogController::class, 'index'])->name('blog');

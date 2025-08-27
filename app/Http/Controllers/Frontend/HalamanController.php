@@ -55,15 +55,11 @@ class HalamanController extends Controller
             "section1" => "Beranda - Section 1",
             "about" => "Tentang kami",
             "visimisi" => "Visi Misi",
+            "precise" => "Precise",
+            "regenerative-pain-school" => "Regenerative Pain School",
+            "painscope" => "Painscope",
             "kontak" => "Kontak",
             "faq" => "FAQ",
-            // "visimisi" => "Visi Misi",
-            // "sejarah" => "Sejarah Desa",
-            // "geografis" => "Geografis Desa",
-            // "demografi" => "Demografi Desa",
-            // "sotk" => "Struktur Organisasi",
-            // "perangkat" => "Perangkat Desa",
-            // "lembaga" => "Lembaga Desa",
         ];
         return view('backend.halaman.create', compact('title', 'kategori'));
     }
@@ -167,15 +163,11 @@ class HalamanController extends Controller
             "section1" => "Beranda - Section 1",
             "about" => "Tentang kami",
             "visimisi" => "Visi Misi",
+            "precise" => "Precise",
+            "regenerative-pain-school" => "Regenerative Pain School",
+            "painscope" => "Painscope",
             "kontak" => "Kontak",
             "faq" => "FAQ",
-            // "visimisi" => "Visi Misi",
-            // "sejarah" => "Sejarah Desa",
-            // "geografis" => "Geografis Desa",
-            // "demografi" => "Demografi Desa",
-            // "sotk" => "Struktur Organisasi",
-            // "perangkat" => "Perangkat Desa",
-            // "lembaga" => "Lembaga Desa",
         ];
         return view('backend.halaman.edit')->with(['artikel' => $halaman, 'title' => 'Edit Halaman', 'kategori' => $kategori]);
     }

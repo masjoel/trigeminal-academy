@@ -52,7 +52,7 @@
                                     <table class="table-striped table">
                                         <tr>
                                             <th width="50">#</th>
-                                            <th scope="col">Kategori</th>
+                                            <th scope="col">Category</th>
                                             @can(['kategori-kursus.edit', 'kategori-kursus.delete'])
                                                 <th class="text-center" scope="col" width="120">Action</th>
                                             @endcan

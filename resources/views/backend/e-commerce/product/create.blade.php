@@ -64,7 +64,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group mb-4">
-                                                <label>Kategori</label>
+                                                <label>Category</label>
                                                 <select
                                                     class="form-control select2  @error('category_id') is-invalid @enderror"
                                                     name="category_id">

@@ -62,7 +62,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group mb-4">
-                                                <label>Kategori</label>
+                                                <label>Category</label>
                                                 <select class="form-control select2" name="category_id">
                                                     @foreach ($category as $item)
                                                         <option value="{{ $item->id }}"
@@ -310,7 +310,8 @@
 
                 if (selectedValue === "upload") {
                     videoInputWrapper.append(
-                        '<input type="file" class="form-control" name="video_file" id="video_file" value="{{ $course->video_file }}">');
+                        '<input type="file" class="form-control" name="video_file" id="video_file" value="{{ $course->video_file }}">'
+                        );
                     labelWrapper.html('<label for="video_input">Video</label>');
                     labelDuration.html('<label for="video_duration">Durasi Video (menit)</label>');
                 } else if (selectedValue === "slide") {
