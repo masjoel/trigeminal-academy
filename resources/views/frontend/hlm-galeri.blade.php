@@ -18,7 +18,7 @@
         <div class="container">
             <div class="section-title-wrap">
                 <div class="section-title section-title-four">
-                    <h2 class="title">Foto</h2>
+                    <h2 class="title">Photo</h2>
                     <div class="section-title-line"></div>
                 </div>
             </div>
