@@ -11,7 +11,7 @@ class CartController extends Controller
     {
         $cart = session()->get('cart', []);
         $totalQuantity = array_sum(array_column($cart, 'quantity'));
-        $title = 'Keranjang Belanja';
+        $title = 'Cart';
         return view('cart.index', compact('cart', 'title', 'totalQuantity'));
     }
 
@@ -34,7 +34,7 @@ class CartController extends Controller
         }
 
         session()->put('cart', $cart);
-        return redirect()->route('cart.index')->with('success', 'Produk ditambahkan ke keranjang');
+        return redirect()->route('cart.index')->with('success', 'Product added to cart');
     }
 
     // Mengupdate jumlah produk dalam keranjang
@@ -47,7 +47,7 @@ class CartController extends Controller
             session()->put('cart', $cart);
         }
 
-        return redirect()->route('cart.index')->with('success', 'Keranjang diperbarui');
+        return redirect()->route('cart.index')->with('success', 'Cart updated successfully');
     }
 
     // Menghapus produk dari keranjang
@@ -60,6 +60,6 @@ class CartController extends Controller
             session()->put('cart', $cart);
         }
 
-        return redirect()->route('cart.index')->with('success', 'Produk dihapus dari keranjang');
+        return redirect()->route('cart.index')->with('success', 'Product removed from cart');
     }
 }

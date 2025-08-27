@@ -3,7 +3,7 @@
 @section('main')
     <section class="about-area pt-80 pb-80">
         <div class="container">
-            <h2>Keranjang Belanja</h2>
+            <h2>Shopping Cart</h2>
 
             @if (session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
@@ -15,11 +15,11 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Nama Kelas</th>
-                            <th class="text-end">Harga</th>
+                            <th>Class name</th>
+                            <th class="text-end">Price</th>
                             <th class="text-end">Disc.</th>
                             <th class="text-end">Total</th>
-                            <th>Aksi</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -51,9 +51,9 @@
                 </table>
             </div>
                 {{-- <button type="submit" class="tw-w-full tw-border-2 tw-border-[#4A1B7F] tw-text-[#4A1B7F] tw-py-3 tw-rounded-lg tw-font-medium hover:tw-bg-[#4A1B7F]/10 tw-transition-colors"> --}}
-                <a href="{{ route('checkout.index') }}" class="tw-w-full tw-border-2 tw-border-[#4A1B7F] tw-text-[#4A1B7F] tw-p-3 tw-rounded-lg tw-font-medium hover:tw-bg-[#4A1B7F]/10 tw-transition-colors">Lanjut ke Pembayaran</a>
+                <a href="{{ route('checkout.index') }}" class="tw-w-full tw-border-2 tw-border-[#4A1B7F] tw-text-[#4A1B7F] tw-p-3 tw-rounded-lg tw-font-medium hover:tw-bg-[#4A1B7F]/10 tw-transition-colors">Proceed to Payment</a>
             @else
-                <p>Keranjang belanja kosong.</p>
+                <p>Shopping cart is empty.</p>
             @endif
         </div>
     </section>

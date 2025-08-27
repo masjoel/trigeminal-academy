@@ -284,7 +284,7 @@
                                             <div class="tw-flex tw-items-center">
                                                 <i class="flaticon-user tw-text-[#4A1B7F] tw-mr-2"></i>
                                                 <span class="tw-text-sm tw-text-gray-600">{{ $dt->orderitems->count() }}
-                                                    Participant</span>
+                                                    Member</span>
                                             </div>
                                             <div class="tw-flex tw-items-center">
                                                 <i class="flaticon-thunder tw-text-[#4A1B7F] tw-mr-2"></i>

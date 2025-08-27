@@ -14,7 +14,7 @@ class ProductFrontendController extends Controller
      */
     public function index(Request $request)
     {
-        $title = 'Kelas';
+        $title = 'Class';
         $query = Product::with('productCategory', 'instruktur', 'productContent', 'orderitems')->where('publish', '1');
 
         if($request->search) {
@@ -56,7 +56,7 @@ class ProductFrontendController extends Controller
      */
     public function process()
     {
-        $title = 'Proses Data';
+        $title = 'Data Process';
         return view('frontend.product.process', compact('title'));
     }
 
@@ -70,7 +70,7 @@ class ProductFrontendController extends Controller
 
         $courses = Product::whereIn('id', $cartIds)->where('publish', '1')->get();
 
-        $title = 'Keranjang Belanja';
+        $title = 'Cart';
         return view('frontend.product.keranjang', compact(
             'title',
             'courses'

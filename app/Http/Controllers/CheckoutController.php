@@ -30,7 +30,7 @@ class CheckoutController extends Controller
             DB::beginTransaction();
             // Get cart from session
             $cart = session()->get('cart', []);
-            
+
             // Sesuaikan validasi dengan field yang ada
             $validator = Validator::make($request->all(), [
                 'username' => Auth::user() ? ['required', 'string', 'max:255'] : ['required', 'string', 'max:255', 'unique:users'],
@@ -41,7 +41,7 @@ class CheckoutController extends Controller
                 'address' => ['required', 'string'],
                 'payment_method' => ['required'],
             ]);
-            
+
             if ($validator->fails()) {
                 return back()->withErrors($validator)->withInput();
             }
@@ -103,19 +103,19 @@ class CheckoutController extends Controller
             DB::commit();
 
             return redirect()->route('checkout.success')
-                ->with('success', 'Pesanan berhasil dibuat!');
+                ->with('success', 'Order successfully created!');
         } catch (\Exception $e) {
             DB::rollback();
             Log::error('Checkout Error: ' . $e->getMessage());
 
             return back()
-                ->with('error', 'Terjadi kesalahan: ' . $e->getMessage())
+                ->with('error', 'There is an error: ' . $e->getMessage())
                 ->withInput();
         }
     }
     public function checkoutSuccess()
     {
-        $title = 'Checkout Berhasil';
+        $title = 'Checkout Successful';
         return view('checkout.success', compact('title'));
     }
 }

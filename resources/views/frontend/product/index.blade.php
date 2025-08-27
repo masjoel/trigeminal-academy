@@ -123,14 +123,14 @@
             <div class="tw-bg-white tw-rounded-xl tw-shadow-lg tw-p-6 tw-mb-8">
                 <form method="GET" class="tw-flex tw-flex-col md:tw-flex-row tw-gap-4">
                     <div class="tw-flex-1">
-                        <input type="text" name="search" value="{{ request('search') }}" placeholder="Search for class..."
+                        <input type="text" name="search" value="{{ request('search') }}" placeholder="Look for a class..."
                             class="tw-w-full tw-px-4 tw-py-2 tw-rounded-lg tw-border tw-border-gray-300 focus:tw-border-[#4A1B7F] focus:tw-ring-1 focus:tw-ring-[#4A1B7F]">
                     </div>
                     <div class="tw-flex tw-gap-4">
                         <select name="sort"
                             class="tw-px-4 tw-py-2 tw-rounded-lg tw-border tw-border-gray-300 focus:tw-border-[#4A1B7F] focus:tw-ring-1 focus:tw-ring-[#4A1B7F]">
                             <option value="terbaru" {{ request('sort') == 'terbaru' ? 'selected' : '' }}>Latest</option>
-                            <option value="terlama" {{ request('sort') == 'terlama' ? 'selected' : '' }}>Oldest</option>
+                            <option value="terlama" {{ request('sort') == 'terlama' ? 'selected' : '' }}>Longest</option>
                             {{-- <option value="harga_terendah" {{ request('sort') == 'harga_terendah' ? 'selected' : '' }}>Harga
                                 Terendah</option>
                             <option value="harga_tertinggi" {{ request('sort') == 'harga_tertinggi' ? 'selected' : '' }}>
@@ -203,7 +203,7 @@
                                             <div class="tw-flex tw-items-center">
                                                 <i class="flaticon-user tw-text-[#4A1B7F] tw-mr-2"></i>
                                                 <span class="tw-text-sm tw-text-gray-600">{{ $dt->orderitems->count() }}
-                                                    Participant</span>
+                                                    Member</span>
                                             </div>
                                             <div class="tw-flex tw-items-center">
                                                 <i class="flaticon-thunder tw-text-[#4A1B7F] tw-mr-2"></i>
@@ -270,13 +270,13 @@
                                             <a href="{{ route('detail-kelas', $dt->slug) }}"
                                                 class="tw-bg-gray-100 tw-text-gray-800 tw-px-4 tw-py-2.5 tw-rounded-lg tw-text-sm hover:tw-bg-gray-200 tw-transition-colors tw-text-center">
                                                 <i class="flaticon-eye tw-mr-2"></i>
-                                                Detail
+                                                Details
                                             </a>
 
                                             <button type="submit"
                                                 class="tw-bg-[#4A1B7F] tw-text-white tw-px-4 tw-py-2.5 tw-rounded-lg tw-text-sm hover:tw-bg-[#3A1560] tw-transition-colors">
                                                 <i class="flaticon-shopping-cart tw-mr-2"></i>
-                                                <span class="button-text">Buy</span>
+                                                <span class="button-text">Take A Seat</span>
                                             </button>
                                         </form>
 

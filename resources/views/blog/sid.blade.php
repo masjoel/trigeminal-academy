@@ -101,9 +101,9 @@
                             <table class="table table-striped mt-0">
                                 <thead class="bg-dark text-white">
                                     <tr>
-                                        <th>Pendidikan</th>
-                                        <th style="text-align: right" nowrap>Laki-laki</th>
-                                        <th style="text-align: right">Perempuan</th>
+                                        <th>Education</th>
+                                        <th style="text-align: right" nowrap>Man</th>
+                                        <th style="text-align: right">Woman</th>
                                         <th style="text-align: right">Total</th>
                                     </tr>
                                 </thead>
@@ -148,9 +148,9 @@
                             <table class="table table-striped">
                                 <thead class="bg-dark text-white">
                                     <tr>
-                                        <th>Hubungan Keluarga</th>
-                                        <th style="text-align: right" nowrap>Laki-laki</th>
-                                        <th style="text-align: right">Perempuan</th>
+                                        <th>Family relationship</th>
+                                        <th style="text-align: right" nowrap>Man</th>
+                                        <th style="text-align: right">Woman</th>
                                         <th style="text-align: right">Total</th>
                                     </tr>
                                 </thead>
@@ -195,9 +195,9 @@
                             <table class="table table-striped">
                                 <thead class="bg-dark text-white">
                                     <tr>
-                                        <th>Pekerjaan</th>
-                                        <th style="text-align: right" nowrap>Laki-laki</th>
-                                        <th style="text-align: right">Perempuan</th>
+                                        <th>Work</th>
+                                        <th style="text-align: right" nowrap>Man</th>
+                                        <th style="text-align: right">Woman</th>
                                         <th style="text-align: right">Total</th>
                                     </tr>
                                 </thead>
@@ -231,9 +231,9 @@
                             <table class="table-striped mb-0 table">
                                 <thead class="bg-dark text-white">
                                     <tr>
-                                        <th>Usia</th>
-                                        <th style="text-align: right" nowrap>Laki-laki</th>
-                                        <th style="text-align: right">Perempuan</th>
+                                        <th>Age</th>
+                                        <th style="text-align: right" nowrap>Man</th>
+                                        <th style="text-align: right">Woman</th>
                                         <th style="text-align: right">Total</th>
                                     </tr>
                                 </thead>

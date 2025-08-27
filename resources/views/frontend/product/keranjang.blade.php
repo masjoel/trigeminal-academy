@@ -124,7 +124,7 @@
 
     <div class="tw-container tw-mx-auto tw-px-4 tw-py-8">
         <div class="tw-bg-white tw-rounded-xl tw-shadow-lg tw-p-6">
-            <h1 class="tw-text-2xl tw-font-bold tw-mb-6">Keranjang Belanja</h1>
+            <h1 class="tw-text-2xl tw-font-bold tw-mb-6">Shopping cart</h1>
 
             <form id="checkout-form" method="POST" action="#">
                 @csrf
@@ -132,10 +132,10 @@
 
                 @if ($courses->isEmpty())
                     <div class="tw-text-center tw-py-8">
-                        <p class="tw-text-gray-600">Keranjang belanja Anda masih kosong.</p>
+                        <p class="tw-text-gray-600">Your shopping cart is still empty.</p>
                         <a href="{{ route('product.index') }}"
                             class="tw-inline-block tw-mt-4 tw-bg-[#4A1B7F] tw-text-white tw-px-6 tw-py-2 tw-rounded-lg hover:tw-bg-[#3A1560] tw-transition-colors">
-                            Lihat Kelas
+                            View Class
                         </a>
                     </div>
                 @else
@@ -148,12 +148,12 @@
                                             <label class="tw-flex tw-items-center">
                                                 <input type="checkbox" id="select-all" checked
                                                     class="tw-rounded tw-border-gray-300 tw-text-[#4A1B7F] focus:tw-ring-[#4A1B7F]">
-                                                <span class="tw-ml-2 tw-text-sm">Pilih Semua</span>
+                                                <span class="tw-ml-2 tw-text-sm">Select All</span>
                                             </label>
                                         </th>
-                                        <th class="tw-p-3 tw-text-left">Kelas</th>
-                                        <th class="tw-p-3 tw-text-right">Harga</th>
-                                        <th class="tw-p-3 tw-text-center">Aksi</th>
+                                        <th class="tw-p-3 tw-text-left">Class</th>
+                                        <th class="tw-p-3 tw-text-right">Price</th>
+                                        <th class="tw-p-3 tw-text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -191,7 +191,7 @@
                                                 <button type="button"
                                                     onclick="confirmDelete({{ $product->id }}, '{{ $product->name }}')"
                                                     class="tw-text-sm tw-text-red-600 hover:tw-text-red-800 tw-transition-colors">
-                                                    Hapus
+                                                    Delete
                                                 </button>
                                             </td>
                                         </tr>
@@ -202,7 +202,7 @@
 
                         <div class="md:tw-w-80">
                             <div class="tw-bg-gray-50 tw-rounded-lg tw-p-4">
-                                <h3 class="tw-font-bold tw-mb-4">Ringkasan Pesanan</h3>
+                                <h3 class="tw-font-bold tw-mb-4">Order Summary</h3>
                                 <div class="tw-flex tw-justify-between tw-mb-4">
                                     <span class="tw-text-gray-600">Total</span>
                                     <span id="total-price" class="tw-font-bold tw-text-[#4A1B7F]">Rp 0</span>
@@ -221,16 +221,16 @@
 
     <div id="delete-modal" class="tw-fixed tw-inset-0 tw-bg-black/50 tw-flex tw-items-center tw-justify-center tw-hidden">
         <div class="tw-bg-white tw-rounded-xl tw-p-6 tw-max-w-sm tw-w-full tw-mx-4">
-            <h3 class="tw-text-lg tw-font-bold tw-mb-2">Konfirmasi Hapus</h3>
+            <h3 class="tw-text-lg tw-font-bold tw-mb-2">Confirm Delete</h3>
             <p id="delete-message" class="tw-text-gray-600 tw-mb-6"></p>
             <div class="tw-flex tw-justify-end tw-gap-3">
                 <button onclick="closeDeleteModal()"
                     class="tw-px-4 tw-py-2 tw-text-gray-600 hover:tw-text-gray-800 tw-transition-colors">
-                    Batal
+                    Cancel
                 </button>
                 <button id="confirm-delete-btn"
                     class="tw-bg-red-600 tw-text-white tw-px-4 tw-py-2 tw-rounded-lg hover:tw-bg-red-700 tw-transition-colors">
-                    Hapus
+                    Delete
                 </button>
             </div>
         </div>
@@ -354,7 +354,7 @@
 
             window.confirmDelete = function(productId, productName) {
                 const message = document.getElementById('delete-message');
-                message.textContent = `Apakah Anda yakin ingin menghapus "${productName}" dari keranjang?`;
+                message.textContent = `Are you sure you want to remove "${productName}" from cart?`;
 
                 const confirmBtn = document.getElementById('confirm-delete-btn');
                 confirmBtn.onclick = () => removeFromCart(productId);
@@ -389,7 +389,7 @@
                                 Array.from(remainingCheckboxes).every(cb => cb.checked);
                         }
 
-                        showToast('Produk berhasil dihapus dari keranjang');
+                        showToast('Product successfully removed from cart');
                         closeDeleteModal();
 
 
@@ -411,7 +411,7 @@
                 e.preventDefault();
                 const selectedIds = JSON.parse(selectedItemsInput.value);
                 if (selectedIds.length === 0) {
-                    showToast('Pilih minimal satu produk untuk checkout');
+                    showToast('Select at least one product to checkout');
                     return;
                 }
                 this.submit();

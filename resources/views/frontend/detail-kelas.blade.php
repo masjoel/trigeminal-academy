@@ -164,7 +164,7 @@
                                 <input type="hidden" name="product_id" value="{{ $course->id }}">
                                 <button type="submit"
                                     class="tw-w-full tw-flex-1 tw-bg-[#4A1B7F] tw-text-white tw-py-3 tw-rounded-lg tw-font-medium hover:tw-bg-[#3A1560] tw-transition-colors">
-                                    Add to Cart
+                                    TAKE A SEAT
                                 </button>
                             </form>
                         </div>
@@ -179,7 +179,7 @@
                             <p class="tw-font-medium tw-text-gray-900">{{ $course->video_duration }} Minute</p>
                         </div>
                         <div>
-                            <span class="tw-text-sm tw-text-gray-500">Participant</span>
+                            <span class="tw-text-sm tw-text-gray-500">Member</span>
                             <p class="tw-font-medium tw-text-gray-900">{{ number_format($course->orderitems->count()) }}
                             </p>
                         </div>
