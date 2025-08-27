@@ -131,10 +131,10 @@
                             class="tw-px-4 tw-py-2 tw-rounded-lg tw-border tw-border-gray-300 focus:tw-border-[#4A1B7F] focus:tw-ring-1 focus:tw-ring-[#4A1B7F]">
                             <option value="terbaru" {{ request('sort') == 'terbaru' ? 'selected' : '' }}>Terbaru</option>
                             <option value="terlama" {{ request('sort') == 'terlama' ? 'selected' : '' }}>Terlama</option>
-                            <option value="harga_terendah" {{ request('sort') == 'harga_terendah' ? 'selected' : '' }}>Harga
+                            {{-- <option value="harga_terendah" {{ request('sort') == 'harga_terendah' ? 'selected' : '' }}>Harga
                                 Terendah</option>
                             <option value="harga_tertinggi" {{ request('sort') == 'harga_tertinggi' ? 'selected' : '' }}>
-                                Harga Tertinggi</option>
+                                Harga Tertinggi</option> --}}
                         </select>
                         <button type="submit"
                             class="tw-bg-[#4A1B7F] tw-text-white tw-px-6 tw-py-2 tw-rounded-lg hover:tw-bg-[#3A1560] tw-transition-colors">
