@@ -17,7 +17,7 @@
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-6">
                         <div class="footer-widget">
-                            <h4 class="fw-title">Kunjungi</h4>
+                            <h4 class="fw-title">Visit</h4>
                             <div class="footer-link-wrap">
                                 <ul class="list-wrap">
                                     {!! App\Helpers\CustomHelper::linkExternal() !!}
@@ -27,9 +27,9 @@
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-6">
                         <div class="footer-widget">
-                            <h4 class="fw-title">Kontak kami</h4>
+                            <h4 class="fw-title">Contact us</h4>
                             <div class="footer-link-wrap">
-                                Kantor
+                                Office
                                 <br>{{ klien('alamat_client') }}
 
                                 <ul class="list-wrap" style="margin-bottom: 30px">
