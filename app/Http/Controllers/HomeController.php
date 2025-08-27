@@ -26,17 +26,17 @@ class HomeController extends Controller
         $feature = Artikel::where('jenis', 'post')->where('status', 'published')->where('feature', '1')->latest()->first();
         $berita = Artikel::leftJoin('categories', 'categories.id', '=', 'artikels.category_id')
             ->where('artikels.jenis', 'post')->where('artikels.status', 'published')
-            // ->where('categories.slug', '=', 'berita')
+            ->where('categories.slug', 'not like', 'galeri%')
             ->select('artikels.*')
             ->latest()->first();
         $berita2 = Artikel::leftJoin('categories', 'categories.id', '=', 'artikels.category_id')
             ->where('artikels.jenis', 'post')->where('artikels.status', 'published')
-            // ->where('categories.slug', '=', 'berita')
+            ->where('categories.slug', 'not like', 'galeri%')
             ->select('artikels.*')
             ->latest()->limit(2)->get();
         $berita3 = $berita == null ? [] : Artikel::leftJoin('categories', 'categories.id', '=', 'artikels.category_id')
             ->where('artikels.jenis', 'post')->where('artikels.status', 'published')
-            // ->where('categories.slug', '=', 'berita')
+            ->where('categories.slug', 'not like', 'galeri%')
             ->where('artikels.id', '!=', $berita->id)
             ->select('artikels.*')
             ->latest()->limit(4)->get();
