@@ -123,7 +123,7 @@
             <div class="tw-bg-white tw-rounded-xl tw-shadow-lg tw-p-6 tw-mb-8">
                 <form method="GET" class="tw-flex tw-flex-col md:tw-flex-row tw-gap-4">
                     <div class="tw-flex-1">
-                        <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari kelas..."
+                        <input type="text" name="search" value="{{ request('search') }}" placeholder="Search for class..."
                             class="tw-w-full tw-px-4 tw-py-2 tw-rounded-lg tw-border tw-border-gray-300 focus:tw-border-[#4A1B7F] focus:tw-ring-1 focus:tw-ring-[#4A1B7F]">
                     </div>
                     <div class="tw-flex tw-gap-4">
