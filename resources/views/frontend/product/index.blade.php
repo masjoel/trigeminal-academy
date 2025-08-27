@@ -123,18 +123,18 @@
             <div class="tw-bg-white tw-rounded-xl tw-shadow-lg tw-p-6 tw-mb-8">
                 <form method="GET" class="tw-flex tw-flex-col md:tw-flex-row tw-gap-4">
                     <div class="tw-flex-1">
-                        <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari kelas..."
+                        <input type="text" name="search" value="{{ request('search') }}" placeholder="Look for a class..."
                             class="tw-w-full tw-px-4 tw-py-2 tw-rounded-lg tw-border tw-border-gray-300 focus:tw-border-[#4A1B7F] focus:tw-ring-1 focus:tw-ring-[#4A1B7F]">
                     </div>
                     <div class="tw-flex tw-gap-4">
                         <select name="sort"
                             class="tw-px-4 tw-py-2 tw-rounded-lg tw-border tw-border-gray-300 focus:tw-border-[#4A1B7F] focus:tw-ring-1 focus:tw-ring-[#4A1B7F]">
-                            <option value="terbaru" {{ request('sort') == 'terbaru' ? 'selected' : '' }}>Terbaru</option>
-                            <option value="terlama" {{ request('sort') == 'terlama' ? 'selected' : '' }}>Terlama</option>
-                            <option value="harga_terendah" {{ request('sort') == 'harga_terendah' ? 'selected' : '' }}>Harga
+                            <option value="terbaru" {{ request('sort') == 'terbaru' ? 'selected' : '' }}>Latest</option>
+                            <option value="terlama" {{ request('sort') == 'terlama' ? 'selected' : '' }}>Longest</option>
+                            {{-- <option value="harga_terendah" {{ request('sort') == 'harga_terendah' ? 'selected' : '' }}>Harga
                                 Terendah</option>
                             <option value="harga_tertinggi" {{ request('sort') == 'harga_tertinggi' ? 'selected' : '' }}>
-                                Harga Tertinggi</option>
+                                Harga Tertinggi</option> --}}
                         </select>
                         <button type="submit"
                             class="tw-bg-[#4A1B7F] tw-text-white tw-px-6 tw-py-2 tw-rounded-lg hover:tw-bg-[#3A1560] tw-transition-colors">
@@ -148,12 +148,12 @@
                 <!-- Category Sidebar -->
                 <div class="tw-col-span-4 lg:tw-col-span-1">
                     <div class="tw-bg-white tw-rounded-xl tw-shadow-lg tw-p-6 md:tw-sticky md:tw-top-8">
-                        <h3 class="tw-text-xl tw-font-bold tw-mb-4">Kategori</h3>
+                        <h3 class="tw-text-xl tw-font-bold tw-mb-4">Category</h3>
                         <!-- Mengubah flex-col menjadi flex-row pada mobile dan tambahkan overflow -->
                         <div class="tw-flex tw-flex-row lg:tw-flex-col tw-gap-2 tw-overflow-x-auto tw-pb-2">
                             <a href="{{ route('list-kelas') }}"
                                 class="tw-whitespace-nowrap tw-px-4 tw-py-2 tw-rounded-lg {{ !request('category') ? 'tw-bg-[#4A1B7F] tw-text-white' : 'tw-bg-gray-100 hover:tw-bg-gray-200' }}">
-                                Semua Kategori
+                                All Categories
                             </a>
                             @foreach ($categories as $category)
                                 <a href="{{ route('list-kelas', ['category' => $category->id] + request()->except('category')) }}"
@@ -169,8 +169,8 @@
                 <div class="tw-col-span-4">
                     @if ($courses->isEmpty())
                         <div class="tw-bg-white tw-rounded-xl tw-shadow-lg tw-p-8 tw-text-center">
-                            <h3 class="tw-text-xl tw-font-bold tw-text-gray-800">Tidak ada kelas yang ditemukan</h3>
-                            <p class="tw-text-gray-600 tw-mt-2">Coba ubah filter atau kata kunci pencarian Anda</p>
+                            <h3 class="tw-text-xl tw-font-bold tw-text-gray-800">No classes found</h3>
+                            <p class="tw-text-gray-600 tw-mt-2">Try changing your search filters or keywords</p>
                         </div>
                     @else
                         <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-3 tw-gap-8">
@@ -198,12 +198,12 @@
                                             <div class="tw-flex tw-items-center">
                                                 <i class="flaticon-history tw-text-[#4A1B7F] tw-mr-2"></i>
                                                 <span class="tw-text-sm tw-text-gray-600">{{ $dt->video_duration }}
-                                                    Menit</span>
+                                                    Minute</span>
                                             </div>
                                             <div class="tw-flex tw-items-center">
                                                 <i class="flaticon-user tw-text-[#4A1B7F] tw-mr-2"></i>
                                                 <span class="tw-text-sm tw-text-gray-600">{{ $dt->orderitems->count() }}
-                                                    Peserta</span>
+                                                    Member</span>
                                             </div>
                                             <div class="tw-flex tw-items-center">
                                                 <i class="flaticon-thunder tw-text-[#4A1B7F] tw-mr-2"></i>
@@ -270,13 +270,13 @@
                                             <a href="{{ route('detail-kelas', $dt->slug) }}"
                                                 class="tw-bg-gray-100 tw-text-gray-800 tw-px-4 tw-py-2.5 tw-rounded-lg tw-text-sm hover:tw-bg-gray-200 tw-transition-colors tw-text-center">
                                                 <i class="flaticon-eye tw-mr-2"></i>
-                                                Detail
+                                                Details
                                             </a>
 
                                             <button type="submit"
                                                 class="tw-bg-[#4A1B7F] tw-text-white tw-px-4 tw-py-2.5 tw-rounded-lg tw-text-sm hover:tw-bg-[#3A1560] tw-transition-colors">
                                                 <i class="flaticon-shopping-cart tw-mr-2"></i>
-                                                <span class="button-text">Beli</span>
+                                                <span class="button-text">Take A Seat</span>
                                             </button>
                                         </form>
 

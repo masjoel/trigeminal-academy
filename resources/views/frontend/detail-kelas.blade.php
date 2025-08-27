@@ -164,7 +164,7 @@
                                 <input type="hidden" name="product_id" value="{{ $course->id }}">
                                 <button type="submit"
                                     class="tw-w-full tw-flex-1 tw-bg-[#4A1B7F] tw-text-white tw-py-3 tw-rounded-lg tw-font-medium hover:tw-bg-[#3A1560] tw-transition-colors">
-                                    Tambah ke Keranjang
+                                    TAKE A SEAT
                                 </button>
                             </form>
                         </div>
@@ -175,11 +175,11 @@
                     <div class="tw-grid tw-grid-cols-2 md:tw-grid-cols-3 tw-gap-4 tw-border-t tw-border-gray-200 tw-pt-6">
 
                         <div>
-                            <span class="tw-text-sm tw-text-gray-500">Durasi</span>
-                            <p class="tw-font-medium tw-text-gray-900">{{ $course->video_duration }} Menit</p>
+                            <span class="tw-text-sm tw-text-gray-500">Duration</span>
+                            <p class="tw-font-medium tw-text-gray-900">{{ $course->video_duration }} Minute</p>
                         </div>
                         <div>
-                            <span class="tw-text-sm tw-text-gray-500">Peserta</span>
+                            <span class="tw-text-sm tw-text-gray-500">Member</span>
                             <p class="tw-font-medium tw-text-gray-900">{{ number_format($course->orderitems->count()) }}
                             </p>
                         </div>
@@ -188,11 +188,11 @@
                             <p class="tw-font-medium tw-text-gray-900">{{ ucwords($course->level) }}</p>
                         </div>
                         <div>
-                            <span class="tw-text-sm tw-text-gray-500">Bahasa</span>
+                            <span class="tw-text-sm tw-text-gray-500">Language</span>
                             <p class="tw-font-medium tw-text-gray-900">Indonesia</p>
                         </div>
                         <div>
-                            <span class="tw-text-sm tw-text-gray-500">Materi</span>
+                            <span class="tw-text-sm tw-text-gray-500">Material</span>
                             <p class="tw-font-medium tw-text-gray-900">{{ $course->productContent->count() }}</p>
                         </div>
                         {{-- <div>

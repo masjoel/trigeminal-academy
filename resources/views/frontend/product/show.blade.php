@@ -159,7 +159,7 @@
                                         'checkoutUrl' => route('class.process'),
                                     ]) }})"
                                     class="tw-w-full tw-border-2 tw-border-[#4A1B7F] tw-text-[#4A1B7F] tw-py-3 tw-rounded-lg tw-font-medium hover:tw-bg-[#4A1B7F]/10 tw-transition-colors">
-                                    <span class="cart-button-text">Add to Cart</span>
+                                    <span class="cart-button-text">TAKE A SEAT</span>
                                 </button>
                             </div>
                             <button id="buy-now-button-{{ $course->id }}"
@@ -168,7 +168,7 @@
                                     'checkoutUrl' => route('class.process'),
                                 ]) }})"
                                 class="tw-flex-1 tw-bg-[#4A1B7F] tw-text-white tw-py-3 tw-rounded-lg tw-font-medium hover:tw-bg-[#3A1560] tw-transition-colors">
-                                Buy Now!
+                                TAKE A SEAT
                             </button>
                         </div>
 
@@ -181,7 +181,7 @@
                             <p class="tw-font-medium tw-text-gray-900">{{ ucwords($course->level) }}</p>
                         </div>
                         <div>
-                            <span class="tw-text-sm tw-text-gray-500">Students</span>
+                            <span class="tw-text-sm tw-text-gray-500">Member</span>
                             <p class="tw-font-medium tw-text-gray-900">{{ number_format($course->orderitems->count()) }}
                             </p>
                         </div>
@@ -339,7 +339,7 @@
 
                 localStorage.setItem('cart', JSON.stringify(cart));
                 updateCartCount();
-                showToast('Produk berhasil ditambahkan ke keranjang!');
+                showToast('Product successfully added to cart!');
                 updateButtonStates(product.id, true);
             }
 

@@ -14,13 +14,13 @@
 
                 <div class="row">
                     <div class="col-md-7">
-                        <h4>Ringkasan Pesanan</h4>
+                        <h4>Order Summary</h4>
                         <div class="table-responsive">
                             <table class="table mb-5">
                                 <thead>
                                     <tr>
-                                        <th>Nama Kelas</th>
-                                        <th class="text-end">Harga</th>
+                                        <th>Class Name</th>
+                                        <th class="text-end">Price</th>
                                         <th class="text-end">Disc.</th>
                                         {{-- <th class="text-end">Jumlah</th> --}}
                                         <th class="text-end">Total</th>
@@ -51,12 +51,12 @@
                             </table>
                         </div>
                         <p class="fw-bold">
-                            Silakan tranfer ke rekening berikut:
+                            Please transfer to the following account:
                         </p>
                         {!! nl2br(infodesa('bank')) !!}
                     </div>
                     <div class="col-md-5">
-                        <h4>Informasi Peserta</h4>
+                        <h4>Member Information</h4>
                         <div class="mb-3">
                             <label>Username</label>
                             <input type="text" name="username" class="form-control"
@@ -72,36 +72,36 @@
                                 <label>Password</label>
                                 <input type="password" name="password" class="form-control" {{ empty(Auth::user()) ? 'required' : 'readonly' }}>
                             </div>
-                            Sudah punya akun? <a href="{{ route('login') }}">login disini</a>
+                            Already have an account? <a href="{{ route('login') }}">login here</a>
                         @else
                             <input type="password" name="password" value="{{ Auth::user()->password }}">
                         @endif
                         <hr>
                         <div class="mb-3">
-                            <label>Nama Lengkap</label>
+                            <label>Full name</label>
                             <input type="text" name="name" class="form-control"
                                 value="{{ empty(Auth::user()) ? old('name') : Auth::user()->name }}" {{ empty(Auth::user()) ? 'required' : 'readonly' }}>
                         </div>
 
                         <div class="mb-3">
-                            <label>Nomor Telepon</label>
+                            <label>Phone number</label>
                             <input type="text" name="phone" class="form-control"
                                 value="{{ empty(Auth::user()) ? old('phone') : Auth::user()->phone }}" {{ empty(Auth::user()) ? 'required' : 'readonly' }}>
                         </div>
 
                         <div class="mb-3">
-                            <label>Alamat Lengkap</label>
+                            <label>Complete address</label>
                             <textarea name="address" class="form-control" {{ empty(Auth::user()) ? 'required' : 'readonly' }}>{{ empty(Auth::user()) ? old('address') : Auth::user()->address }}</textarea>
                         </div>
 
-                        <h4>Metode Pembayaran</h4>
+                        <h4>Payment Methods</h4>
                         <div class="mb-3">
                             <select name="payment_method" class="form-control">
-                                <option value="transfer">Transfer Bank</option>
+                                <option value="transfer">Bank Transfer</option>
                                 <option value="ewallet">E-Wallet</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-success">Bayar</button>
+                        <button type="submit" class="btn btn-success">Pay</button>
                     </div>
                 </div>
 

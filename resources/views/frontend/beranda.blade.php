@@ -155,10 +155,10 @@
         </div>
     </section>
 
-    <section class="tw-container tw-mx-auto tw-px-4 tw-py-12">
-        <div class="tw-grid tw-grid-cols-2 lg:tw-grid-cols-4 tw-gap-4 md:tw-gap-6">
+    {{-- <section class="tw-container tw-mx-auto tw-px-4 tw-py-12">
+        <div class="tw-grid tw-grid-cols-2 lg:tw-grid-cols-4 tw-gap-4 md:tw-gap-6"> --}}
             {{-- C-Suite Programs --}}
-            <div class="tw-relative tw-overflow-hidden tw-group tw-h-[90px] md:tw-h-[140px]">
+            {{-- <div class="tw-relative tw-overflow-hidden tw-group tw-h-[90px] md:tw-h-[140px]">
                 <div class="tw-bg-[#4A1B7F] tw-h-full tw-relative" style="border-radius: 34px 40px 80px 5px;">
                     <img src="https://cdn.pixabay.com/photo/2017/08/01/13/36/computer-2565478_1280.jpg"
                         alt="C-Suite Programs" class="tw-w-full tw-h-full tw-object-cover tw-opacity-75"
@@ -168,10 +168,10 @@
                     <h3 class="tw-absolute tw-bottom-4 tw-left-4 tw-text-sm md:tw-text-xl tw-font-bold tw-text-white">
                         Umum</h3>
                 </div>
-            </div>
+            </div> --}}
 
             {{-- Senior Executive Programs --}}
-            <div class="tw-relative tw-overflow-hidden tw-group tw-h-[90px] md:tw-h-[140px]">
+            {{-- <div class="tw-relative tw-overflow-hidden tw-group tw-h-[90px] md:tw-h-[140px]">
                 <div class="tw-bg-[#831843] tw-h-full tw-relative" style="border-radius: 34px 40px 80px 5px;">
                     <img src="https://cdn.pixabay.com/photo/2017/03/28/12/11/chairs-2181960_640.jpg"
                         alt="Senior Executive Programs" class="tw-w-full tw-h-full tw-object-cover tw-opacity-75"
@@ -181,10 +181,10 @@
                     <h3 class="tw-absolute tw-bottom-4 tw-left-4 tw-text-sm md:tw-text-xl tw-font-bold tw-text-white">
                         Pemula</h3>
                 </div>
-            </div>
+            </div> --}}
 
             {{-- Junior Executive Programs --}}
-            <div class="tw-relative tw-overflow-hidden tw-group tw-h-[90px] md:tw-h-[140px]">
+            {{-- <div class="tw-relative tw-overflow-hidden tw-group tw-h-[90px] md:tw-h-[140px]">
                 <div class="tw-bg-[#92400E] tw-h-full tw-relative" style="border-radius: 34px 40px 80px 5px;">
                     <img src="https://cdn.pixabay.com/photo/2017/03/28/12/07/bricks-2181920_640.jpg"
                         alt="Junior Executive Programs" class="tw-w-full tw-h-full tw-object-cover tw-opacity-75"
@@ -194,10 +194,10 @@
                     <h3 class="tw-absolute tw-bottom-4 tw-left-4 tw-text-sm md:tw-text-xl tw-font-bold tw-text-white">
                         Menengah</h3>
                 </div>
-            </div>
+            </div> --}}
 
             {{-- Student Programs --}}
-            <div class="tw-relative tw-overflow-hidden tw-group tw-h-[90px] md:tw-h-[140px]">
+            {{-- <div class="tw-relative tw-overflow-hidden tw-group tw-h-[90px] md:tw-h-[140px]">
                 <div class="tw-bg-[#A21CAF] tw-h-full tw-relative" style="border-radius: 34px 40px 80px 5px;">
                     <img src="https://cdn.pixabay.com/photo/2015/01/08/18/26/man-593333_640.jpg" alt="Student Programs"
                         class="tw-w-full tw-h-full tw-object-cover tw-opacity-75"
@@ -209,7 +209,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <section class="top-news-post-area pt-50 pb-70">
         <div class="container">
@@ -217,11 +217,11 @@
                 <div class="sports-post-wrap">
                     <div class="section-title-wrap mb-30">
                         <div class="section-title section-title-four">
-                            <h2 class="title">Kelas</h2>
+                            <h2 class="title">Class</h2>
                         </div>
                         <div class="section-title-line"></div>
                         <div class="view-all-btn">
-                            <a href="/kelas" class="link-btn">Lihat semua
+                            <a href="/kelas" class="link-btn">See all
                                 <span class="svg-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" fill="none">
                                         <path
@@ -279,12 +279,12 @@
                                             <div class="tw-flex tw-items-center">
                                                 <i class="flaticon-history tw-text-[#4A1B7F] tw-mr-2"></i>
                                                 <span class="tw-text-sm tw-text-gray-600">{{ $dt->video_duration }}
-                                                    Menit</span>
+                                                    Minute</span>
                                             </div>
                                             <div class="tw-flex tw-items-center">
                                                 <i class="flaticon-user tw-text-[#4A1B7F] tw-mr-2"></i>
                                                 <span class="tw-text-sm tw-text-gray-600">{{ $dt->orderitems->count() }}
-                                                    Peserta</span>
+                                                    Member</span>
                                             </div>
                                             <div class="tw-flex tw-items-center">
                                                 <i class="flaticon-thunder tw-text-[#4A1B7F] tw-mr-2"></i>
@@ -315,7 +315,7 @@
 
                                             <button
                                                 class="tw-w-full tw-bg-[#4A1B7F] tw-text-white tw-px-4 tw-py-2.5 tw-rounded-lg tw-text-sm hover:tw-bg-[#3A1560] tw-transition-colors">
-                                                Lihat Detail
+                                                View Details
                                             </button>
                                         </div>
                                     </div>
