@@ -132,20 +132,20 @@
                             </div>
                             <div class="navbar-wrap main-menu d-none d-lg-flex">
                                 <ul class="navigation">
-                                    <li><a href="{{ route('home') }}" title="Beranda">Beranda</a></li>
+                                    <li><a href="{{ route('home') }}" title="Homepage">Homepage</a></li>
                                     @if (cekPage('about')['halaman'])
-                                        <li><a href="{{ route('about') }}" title="Tentang Kami">Tentang Kami</a></li>
+                                        <li><a href="{{ route('about') }}" title="About Us">About Us</a></li>
                                     @endif
                                     @if (cekPage('visimisi')['halaman'])
-                                        <li><a href="{{ route('visimisi') }}" title="Visi Misi">Visi Misi</a></li>
+                                        <li><a href="{{ route('visimisi') }}" title="About Us">About Us</a></li>
                                     @endif
                                     @if (cekPage('kontak')['halaman'])
-                                        <li><a href="{{ route('kontak') }}" title="Kontak">Kontak</a></li>
+                                        <li><a href="{{ route('kontak') }}" title="Contact">Contact</a></li>
                                     @endif
                                     @if (cekPage('galeries')['galeries'])
-                                        <li><a href="/galery" title="Galeri">Galeri</a></li>
+                                        <li><a href="/galery" title="Gallery">Gallery</a></li>
                                     @endif
-                                    <li><a href="/blog/category/berita" title="Beranda">Blog</a></li>
+                                    <li><a href="/blog/category/berita" title="Homepage">Blog</a></li>
                                 </ul>
 
                             </div>
