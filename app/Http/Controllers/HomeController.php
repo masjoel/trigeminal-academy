@@ -180,13 +180,13 @@ class HomeController extends Controller
     }
     public function kontak()
     {
-        $title = 'Kontak';
+        $title = 'Contact';
         $halaman = Halaman::where('jenis', 'page')->where('status', 'published')->where('idkategori', 'kontak')->latest()->first();
         return view('frontend.hlm', compact('title', 'halaman'));
     }
     public function visimisi()
     {
-        $title = 'Visi & Misi';
+        $title = 'Vision & mission';
         $halaman = Halaman::where('jenis', 'page')->where('status', 'published')->where('idkategori', 'visimisi')->latest()->first();
         return view('frontend.hlm', compact('title', 'halaman'));
     }
@@ -195,7 +195,7 @@ class HomeController extends Controller
         $title = '';
         $search = $request->input('search');
         $category = $request->slug;
-        $title = 'Galery Foto & Video';
+        $title = 'Photo & Video Gallery';
         $foto = Artikel::leftJoin('categories', 'categories.id', '=', 'artikels.category_id')
             ->where('artikels.jenis', 'post')->where('artikels.status', 'published')->where('categories.slug', '=', 'galeri-foto')
             ->select('artikels.*')
@@ -249,7 +249,7 @@ class HomeController extends Controller
     }
     public function registrasi()
     {
-        $title = 'Formulir Pendaftaran Anggota';
+        $title = 'Member Registration Form';
         $jenis_kelamin = ['laki-laki', 'perempuan'];
         $pendidikan = ['SD', 'SMP', 'SMA', 'D1', 'D3', 'D4', 'S1', 'S2', 'S3'];
         $pekerjaan = ['PNS', 'TNI', 'POLRI', 'SWASTA', 'WIRAUSAHA'];
@@ -267,7 +267,7 @@ class HomeController extends Controller
     }
     public function detailKelas($slug)
     {
-        $title = 'Detail Kelas';
+        $title = 'Class Details';
         $course = Product::with('productCategory', 'instruktur', 'productContent', 'orderitems')->where('slug', $slug)->where('publish', '1')->limit(3)->firstOrFail();
 
         return view('frontend.detail-kelas', compact('title', 'course'));
