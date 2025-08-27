@@ -176,7 +176,7 @@
 
                         <div>
                             <span class="tw-text-sm tw-text-gray-500">Duration</span>
-                            <p class="tw-font-medium tw-text-gray-900">{{ $course->video_duration }} Minutes</p>
+                            <p class="tw-font-medium tw-text-gray-900">{{ $course->video_duration }} Minute</p>
                         </div>
                         <div>
                             <span class="tw-text-sm tw-text-gray-500">Participant</span>
