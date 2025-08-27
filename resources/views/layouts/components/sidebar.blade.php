@@ -20,30 +20,30 @@
             @if (Str::contains(Auth::user()->getPermissionNames(), 'seting'))
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon ti ti-tool"></i>
-                    <div>Seting</div>
+                    <div>Setting</div>
                 </a>
                 <ul class="menu-sub">
                     @if (Str::contains(Auth::user()->getPermissionNames(), 'seting-profil-bisnis'))
                         <li class="menu-item {{ Request::is('profil-bisnis*', 'link*') ? 'active' : '' }}">
-                            <a href="{{ route('profil-bisnis.index') }}" class="menu-link "><span>Profil Bisnis</span></a>
+                            <a href="{{ route('profil-bisnis.index') }}" class="menu-link "><span>Business Profile</span></a>
                         </li>
                     @endif
                     @if (Str::contains(Auth::user()->getPermissionNames(), 'seting-user'))
                         <li class="menu-item {{ Request::is('user*') ? 'active' : '' }}">
                             <a href="{{ route('user.index') }}" class="menu-link ">
-                                <span>User Pengguna</span></a>
+                                <span>User</span></a>
                         </li>
                     @endif
                     @if (Str::contains(Auth::user()->getPermissionNames(), 'seting-backup'))
                         <li class="menu-item {{ Request::is('backup-data*') ? 'active' : '' }}">
                             <a href="{{ route('backup-data.index') }}" class="menu-link ">
-                                <span>Backup Data</span></a>
+                                <span>Data Backup</span></a>
                         </li>
                     @endif
                     @if (Str::contains(Auth::user()->getPermissionNames(), 'seting-restore'))
                         <li class="menu-item {{ Request::is('restore-data*') ? 'active' : '' }}">
                             <a href="{{ route('restore-data') }}" class="menu-link ">
-                                <span>Restore Data</span></a>
+                                <span>Data Restore</span></a>
                         </li>
                     @endif
                     @if (Str::contains(Auth::user()->getPermissionNames(), 'seting-roles'))

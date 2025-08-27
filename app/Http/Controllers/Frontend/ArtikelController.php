@@ -10,6 +10,7 @@ use App\Models\ImageArticle;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UpdateHalamanRequest;
 use Cviebrock\EloquentSluggable\Services\SlugService;
@@ -60,7 +61,6 @@ class ArtikelController extends Controller
     public function store(UpdateHalamanRequest $request)
     {
         DB::beginTransaction();
-        dd($request->all());
         $validate = $request->validated();
         $title = $request->input('title');
         $deskripsi = $request->input('deskripsi');
@@ -117,7 +117,7 @@ class ArtikelController extends Controller
             }
         }
         $save = Artikel::create([
-            'user_id' => auth()->user()->id,
+            'user_id' => Auth::user()->id,
             'title' => $title,
             'slug' => $slug,
             'category_id' => $request->input('category_id'),

@@ -7,14 +7,14 @@
 @can('student')
     <li class="menu-item {{ Request::is('student*') ? 'active' : '' }}">
         <a href="{{ route('student.index') }}" class="menu-link "><i class="menu-icon ti ti-users"></i>
-            <div>Peserta</div>
+            <div>Students</div>
         </a>
     </li>
 @endcan
 @can('instruktur')
     <li class="menu-item {{ Request::is('instruktur*') ? 'active' : '' }}">
         <a href="{{ route('instruktur.index') }}" class="menu-link "><i class="menu-icon ti ti-users"></i>
-            <div>Instruktur</div>
+            <div>Instructor</div>
         </a>
     </li>
 @endcan
@@ -29,22 +29,21 @@
             @can('halaman')
                 <li class="menu-item {{ Request::is('halaman*') ? 'active' : '' }}">
                     <a href="{{ route('halaman.index') }}" class="menu-link ">
-                        <div>Halaman</div>
+                        <div>Page</div>
                     </a>
                 </li>
             @endcan
             @can('artikel')
                 <li class="menu-item {{ Request::is('artikel*') ? 'active' : '' }}">
                     <a href="{{ route('artikel.index') }}" class="menu-link ">
-                        <div>Artikel</div>
+                        <div>Article</div>
                     </a>
                 </li>
             @endcan
             @can('category-artikel')
                 <li class="menu-item {{ Request::is('category*') ? 'active' : '' }}">
                     <a href="{{ route('category.index') }}" class="menu-link ">
-                        <div>Kategori
-                            Artikel</div>
+                        <div>Article Category</div>
                     </a>
                 </li>
             @endcan
@@ -55,13 +54,13 @@
         Str::contains(Auth::user()->getPermissionNames(), 'galeri-video'))
     <li class="menu-item {{ Request::is('galeri*') ? 'active open' : '' }}">
         <a href="#" class="menu-link menu-toggle"><i class="menu-icon ti ti-camera"></i>
-            <div>Galeri</div>
+            <div>Galery</div>
         </a>
         <ul class="menu-sub">
             @can('galeri-foto')
                 <li class="menu-item {{ Request::is('galeri-foto*') ? 'active' : '' }}">
                     <a href="{{ route('galeri-foto.index') }}" class="menu-link ">
-                        <div>Foto</div>
+                        <div>Photo</div>
                     </a>
                 </li>
             @endcan
@@ -89,14 +88,14 @@
             @can('course')
                 <li class="menu-item {{ Request::is('course*', 'lihat-peserta*') ? 'active' : '' }}">
                     <a href="{{ route('course.index') }}" class="menu-link ">
-                        <div>Kelas</div>
+                        <div>Classroom</div>
                     </a>
                 </li>
             @endcan
             @can('kategori-kursus')
                 <li class="menu-item {{ Request::is('kategori-kursus*') ? 'active' : '' }}">
                     <a href="{{ route('kategori-kursus.index') }}" class="menu-link ">
-                        <div>Kategori </div>
+                        <div>Category </div>
                     </a>
                 </li>
             @endcan
@@ -121,8 +120,7 @@
 @can('slide-banner')
     <li class="menu-item {{ Request::is('slidebanner*') ? 'active' : '' }}">
         <a href="{{ route('slidebanner.index') }}" class="menu-link "><i class="menu-icon ti ti-presentation"></i>
-            <div>Slide
-                Banner</div>
+            <div>Banner Slides</div>
         </a>
     </li>
 @endcan
