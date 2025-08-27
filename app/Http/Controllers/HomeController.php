@@ -174,7 +174,7 @@ class HomeController extends Controller
 
     public function about()
     {
-        $title = 'Tentang ' . klien('nama_client') == null ? 'LMS' : klien('nama_client');;
+        $title = 'About ' . klien('nama_client') == null ? 'LMS' : klien('nama_client');;
         $halaman = Halaman::where('jenis', 'page')->where('status', 'published')->where('idkategori', 'about')->latest()->first();
         return view('frontend.hlm', compact('title', 'halaman'));
     }
