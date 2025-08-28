@@ -77,7 +77,7 @@
                                             class="fas fa-play"></i></a>
                                 </div>
                                 <div class="banner-post-content-five">
-                                    <p style="color:black;font-size:14px">{{ $v->title }}</p>
+                                    <p style="font-size:14px"><a href="{{ $v->excerpt }}" target="blank" class="text-black">{{ $v->title }}</a></p>
                                 </div>
                             </div>
                         </div>
