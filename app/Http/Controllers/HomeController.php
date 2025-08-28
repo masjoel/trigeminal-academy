@@ -217,7 +217,7 @@ class HomeController extends Controller
         $title = '';
         $search = $request->input('search');
         $category = $request->slug;
-        $title = 'Galery Foto & Video';
+        $title = 'Photo & Video Gallery';
         $foto = Artikel::leftJoin('categories', 'categories.id', '=', 'artikels.category_id')
             ->where('artikels.jenis', 'post')->where('artikels.status', 'published')->where('categories.slug', '=', 'galeri-foto')
             ->select('artikels.*')

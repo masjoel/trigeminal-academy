@@ -33,6 +33,7 @@ class BlogController extends Controller
         // }
         // $po = Artikel::where(['jenis' => 'post', 'status' => 'published'])->latest()->filter(request(['search', 'category', 'author']))->paginate(10)->withQueryString();
         $po = Artikel::where('artikels.status', 'published')->where('artikels.jenis', 'post')
+            ->where('categories.slug', 'not like', 'galeri%')
             ->leftJoin('categories', 'artikels.category_id', '=', 'categories.id')
             ->select('artikels.*')
             ->when($search, function ($query, $search) {

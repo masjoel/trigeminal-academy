@@ -140,13 +140,13 @@
                                         <li><a href="{{ route('visimisi') }}" title="Visi Misi">Visi Misi</a></li>
                                     @endif
                                     @if (cekPage('precise')['halaman'])
-                                        <li><a href="{{ route('precise') }}" title="Precise">Precise</a></li>
+                                        <li><a href="{{ route('precise') }}" title="Precise">PRECISE</a></li>
                                     @endif
                                     @if (cekPage('regenerative-pain-school')['halaman'])
-                                        <li><a href="{{ route('regenerative-pain-school') }}" title="Regenerative Pain School">Regenerative Pain School</a></li>
+                                        <li><a href="{{ route('regenerative-pain-school') }}" title="Regenerative Pain School">REGENERATIVE PAIN SCHOOL</a></li>
                                     @endif
                                     @if (cekPage('painscope')['halaman'])
-                                        <li><a href="{{ route('painscope') }}" title="Painscope">Painscope</a></li>
+                                        <li><a href="{{ route('painscope') }}" title="Painscope">PAINSCOPE</a></li>
                                     @endif
                                     @if (cekPage('kontak')['halaman'])
                                         <li><a href="{{ route('kontak') }}" title="Contact Us">Contact Us</a></li>
